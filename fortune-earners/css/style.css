@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #0D1325;
+    color: white;
+    font-family: Arial, sans-serif;
+} .container {
+    width: 90%;
+    max-width: 420px;
+    margin: 40px auto;
+    background-color: #161E35;
+    padding: 25px;
+    border-radius: 16px;
+} 
+h1 {
+    text-align: center;
+    color: #F4C542;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    color: #B8C0D4;
+    font-size: 15px;
+    line-height: 1.6;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #2F6BFF;
+    border-radius: 10px;
+    background-color: #0D1325;
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #2F6BFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #1E56E0;
+}
+a {
+    color: #F4C542;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #FFD966;
+}
+input:focus {
+    outline: none;
+    border-color: #F4C542;
+    box-shadow: 0 0 8px rgba(244, 197, 66, 0.5);
+}
+#menuButton {
+    background: #2F6BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+#menu {
+    background: #161E35;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#menu a:hover {
+    color: #F4C542;
+}

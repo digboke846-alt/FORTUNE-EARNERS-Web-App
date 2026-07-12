@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Fortune Earners - Earn money through referrals, daily tasks and sponsored ads.">
+
+    <title>Sign Up | Fortune Earners</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>FORTUNE EARNERS</h1>
+
+<h2>Create Your Account</h2>
+
+<p>Join Fortune Earners today and start your earning journey.</p>
+
+<form id="signupForm">
+
+    <label for="fullname">Full Name</label><br>
+
+    <input
+        type="text"
+        id="fullname"
+        name="fullname"
+        placeholder="Enter your full name"
+        autocomplete="name"
+        required>
+
+    <br><br>
+
+    <label for="username">Username</label><br>
+
+    <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Choose a username"
+        autocomplete="username"
+        required>
+
+    <br><br>
+
+    <label for="email">Email Address</label><br>
+
+    <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter your email address"
+        autocomplete="email"
+        required>
+
+    <br><br>
+
+    <label for="phone">Phone Number</label><br>
+
+    <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Enter your phone number"
+        autocomplete="tel"
+        required>
+
+    <br><br>
+
+    <label for="password">Password</label><br>
+
+    <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Create a password"
+        autocomplete="new-password"
+        required>
+
+    <br><br>
+
+    <label for="confirmPassword">Confirm Password</label><br>
+
+    <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirm your password"
+        autocomplete="new-password"
+        required>
+
+    <br><br>
+
+    <label for="referredBy">Referred By (Optional)</label><br>
+
+    <input
+        type="text"
+        id="referredBy"
+        name="referredBy"
+        placeholder="Enter referral username or code (Optional)">
+
+    <br><br>
+
+    <input
+        type="checkbox"
+        id="terms"
+        name="terms"
+        required>
+
+    <label for="terms">
+        I agree to the
+        <a href="terms.html">Terms & Conditions</a>
+        and
+        <a href="privacy.html">Privacy Policy</a>.
+    </label>
+
+    <br><br>
+
+    <button type="submit">Create Account</button>
+
+    <p>
+        Already have an account?
+        <a href="login.html">Log In</a>
+    </p>
+
+</form>
+
+</div>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+
+</body>
+</html>
