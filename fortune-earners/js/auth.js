@@ -15,40 +15,58 @@ import {
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+// Get the signup form
 const signupForm = document.getElementById("signupForm");
 
+// Listen for form submission
 signupForm.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
+    // Get form values
     const fullname = document.getElementById("fullname").value.trim();
 
-    const username = document.getElementById("username").value.trim().toLowerCase();
+    const username = document
+        .getElementById("username")
+        .value
+        .trim()
+        .toLowerCase();
 
-    const email = document.getElementById("email").value.trim();
+    const email = document
+        .getElementById("email")
+        .value
+        .trim();
 
-    const phone = document.getElementById("phone").value.trim();
+    const phone = document
+        .getElementById("phone")
+        .value
+        .trim();
 
-    const password = document.getElementById("password").value;
+    const password = document
+        .getElementById("password")
+        .value;
 
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const confirmPassword = document
+        .getElementById("confirmPassword")
+        .value;
 
-    const referredBy = document.getElementById("referredBy").value.trim();
+    const referredBy = document
+        .getElementById("referredBy")
+        .value
+        .trim();
 
-    const terms = document.getElementById("terms").checked;
+    const terms = document
+        .getElementById("terms")
+        .checked;
 
+    // Validation
     if (!terms) {
         alert("You must agree to the Terms & Conditions and Privacy Policy.");
         return;
     }
 
-    if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return;
-    }
-
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters long.");
+    if (fullname.length < 3) {
+        alert("Please enter your full name.");
         return;
     }
 
@@ -67,4 +85,147 @@ signupForm.addEventListener("submit", async (e) => {
     const phonePattern = /^(070|080|081|090|091)\d{8}$/;
 
     if (!phonePattern.test(phone)) {
-        alert("Please
+        alert("Please enter a valid Nigerian phone number.");
+        return;
+    }
+
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    try {
+
+        // Check if username already exists
+        const usernameQuery = query(
+            collection(db, "users"),
+            where("username", "==", username)
+        );
+
+        const usernameSnapshot = await getDocs(usernameQuery);
+
+        if (!usernameSnapshot.empty) {
+            alert("Username already taken.");
+            return;
+                    // Create Firebase Authentication account
+        const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        const user = userCredential.user;
+
+        // Send verification email
+        await sendEmailVerification(user);
+
+        // Save user information to Firestore
+        await setDoc(doc(db, "users", user.uid), {
+
+            fullname: fullname,
+            username: username,
+            email: email,
+            phone: phone,
+
+            plan: "None",
+            memberStatus: "Pending Activation",
+            accountStatus: "Active",
+
+            planActivatedOn: null,
+            lastPlanUpgrade: null,
+            planExpiryDate: null,
+            activationHistory: [],
+
+            affiliateWallet: 0,
+            taskWallet: 0,
+
+            referralEarnings: 0,
+            taskEarnings: 0,
+
+            totalWithdrawals: 0,
+            totalWithdrawalRequests: 0,
+            successfulWithdrawals: 0,
+            pendingWithdrawals: 0,
+            rejectedWithdrawals: 0,
+
+            lastWithdrawalAmount: 0,
+            lastWithdrawalStatus: "",
+            lastWithdrawalWallet: "",
+            lastWithdrawalReference: "",
+            lastWithdrawalDate: null,
+
+            totalReferrals: 0,
+            validReferrals: 0,
+
+            referredBy: referredBy,
+            referralCode: username,
+
+            bankName: "",
+            accountNumber: "",
+            accountName: "",
+
+            withdrawalStatus: "Eligible",
+
+            achievements: [],
+
+            isAdmin: false,
+
+            createdAt: serverTimestamp(),
+            lastLogin: serverTimestamp(),
+
+            emailVerified: false,
+
+            lastTaskCompleted: null,
+            lastSponsoredAdCompleted: null,
+
+            currentStreak: 0,
+            highestStreak: 0,
+
+            profilePhoto: "",
+
+            notificationsEnabled: true
+
+        });
+
+        alert(
+            "Account created successfully!\n\nA verification email has been sent to your email address.\n\nPlease verify your email before logging in."
+        );
+
+        window.location.href = "verify-email.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        switch (error.code) {
+
+            case "auth/email-already-in-use":
+                alert("This email address is already registered.");
+                break;
+
+            case "auth/invalid-email":
+                alert("Please enter a valid email address.");
+                break;
+
+            case "auth/weak-password":
+                alert("Password must be at least 6 characters.");
+                break;
+
+            case "auth/network-request-failed":
+                alert("Network error. Please check your internet connection.");
+                break;
+
+            default:
+                alert("Something went wrong. Please try again.");
+
+        }
+
+    }
+
+});
+        
