@@ -1,7 +1,7 @@
-body {
-    /* =======================================
-   FORTUNE EARNERS THEME
-======================================= */
+/* ===================================================
+   FORTUNE EARNERS
+   MAIN THEME
+=================================================== */
 
 :root{
 
@@ -13,216 +13,272 @@ body {
 
     --success:#28A745;
 
-    --background:#F4F8FF;
+    --background:#0D1325;
 
-    --card:#FFFFFF;
+    --card:#161E35;
 
-    --text:#263238;
+    --text:#FFFFFF;
 
-}
-    margin: 0;
-    padding: 0;
-    background: #0D1325;
-    color: white;
-    font-family: Arial, sans-serif;
-} .container {
-    width: 90%;
-    max-width: 420px;
-    margin: 40px auto;
-    background-color: #161E35;
-    padding: 25px;
-    border-radius: 16px;
-} 
-h1 {
-    text-align: center;
-    color: #F4C542;
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    letter-spacing: 2px;
+    --muted:#B8C0D4;
+
 }
 
-h2 {
-    text-align: center;
-    color: white;
-    margin-bottom: 10px;
-}
+*{
 
-p {
-    text-align: center;
-    color: #B8C0D4;
-    font-size: 15px;
-    line-height: 1.6;
-}
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: white;
-    font-weight: bold;
-}
+    margin:0;
 
-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #2F6BFF;
-    border-radius: 10px;
-    background-color: #0D1325;
-    color: white;
-    font-size: 16px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-}
-button {
-    width: 100%;
-    padding: 14px;
-    background-color: #2F6BFF;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-}
+    padding:0;
 
-button:hover {
-    background-color: #1E56E0;
-}
-a {
-    color: #F4C542;
-    text-decoration: none;
-    font-weight: bold;
-}
+    box-sizing:border-box;
 
-a:hover {
-    color: #FFD966;
 }
-input:focus {
-    outline: none;
-    border-color: #F4C542;
-    box-shadow: 0 0 8px rgba(244, 197, 66, 0.5);
-}
-#menuButton {
-    background: #2F6BFF;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 15px;
-}
-
-#menu {
-    background: #161E35;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-#menu a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#menu a:hover {
-    color: #F4C542;
-}
-/* =======================================
-   DASHBOARD V2 STYLES
-======================================= */
 
 body{
-    margin:0;
-    padding:0;
-    background:#f4f7fb;
-    font-family:Arial, Helvetica, sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    font-family:Arial,Helvetica,sans-serif;
+
 }
 
-/* Fixed Header */
+/* ===================================================
+   CONTAINER
+=================================================== */
+
+.container{
+
+    width:90%;
+
+    max-width:430px;
+
+    margin:40px auto;
+
+    background:var(--card);
+
+    padding:25px;
+
+    border-radius:18px;
+
+}
+
+/* ===================================================
+   HEADINGS
+=================================================== */
+
+h1{
+
+    color:var(--accent);
+
+    text-align:center;
+
+    font-size:32px;
+
+    margin-bottom:10px;
+
+}
+
+h2{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+}
+
+h3{
+
+    color:var(--accent);
+
+    margin-bottom:15px;
+
+}
+
+p{
+
+    color:var(--muted);
+
+    line-height:1.6;
+
+}
+
+/* ===================================================
+   LINKS
+=================================================== */
+
+a{
+
+    color:var(--accent);
+
+    text-decoration:none;
+
+}
+
+a:hover{
+
+    color:white;
+
+}
+
+/* ===================================================
+   INPUTS
+=================================================== */
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    border:1px solid #2F6BFF;
+
+    background:#0D1325;
+
+    color:white;
+
+    margin-bottom:18px;
+
+}
+
+input:focus{
+
+    outline:none;
+
+    border-color:var(--accent);
+
+}
+
+/* ===================================================
+   BUTTONS
+=================================================== */
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+button:hover{
+
+    background:var(--primary-light);
+
+}
+/* ===================================================
+   FIXED HEADER
+=================================================== */
 
 .top-header{
+
     position:fixed;
+
     top:0;
     left:0;
     right:0;
 
     height:60px;
 
-    background:#0d47a1;
-
-    color:#fff;
+    background:var(--primary);
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     padding:0 15px;
 
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
+
     z-index:1000;
 
-    box-shadow:0 2px 10px rgba(0,0,0,.15);
 }
 
 .logo{
-    font-size:18px;
-    margin:0;
+
+    color:white;
+
+    font-size:20px;
+
     font-weight:bold;
+
+    margin:0;
+
 }
 
 .menu-btn{
-    background:none;
-    border:none;
-    color:#fff;
-    font-size:26px;
-    cursor:pointer;
-}
 
-.header-icons{
-    display:flex;
-    gap:15px;
-    align-items:center;
-}
-
-.header-icons a,
-.header-icons button{
+    width:auto;
 
     background:none;
+
     border:none;
 
     color:white;
 
-    text-decoration:none;
-
-    font-size:22px;
+    font-size:28px;
 
     cursor:pointer;
+
+    padding:0;
+
 }
-/* =======================================
+
+/* ===================================================
    SIDE MENU
-======================================= */
+=================================================== */
 
 .side-menu{
 
     position:fixed;
 
     top:60px;
+
     left:-280px;
 
     width:260px;
+
     height:calc(100vh - 60px);
 
-    background:#ffffff;
+    background:var(--card);
 
     overflow-y:auto;
 
-    box-shadow:2px 0 10px rgba(0,0,0,.2);
-
-    transition:.3s;
+    transition:left .3s ease;
 
     z-index:999;
 
     padding:20px;
+
+    box-shadow:2px 0 15px rgba(0,0,0,.35);
 
 }
 
@@ -232,278 +288,168 @@ body{
 
 }
 
-.side-menu h2{
-
-    margin-top:0;
-
-    color:#0d47a1;
-
-}
-
 .side-menu a{
 
     display:block;
 
-    padding:12px 0;
+    color:white;
 
-    text-decoration:none;
+    padding:14px 0;
 
-    color:#333;
+    border-bottom:1px solid rgba(255,255,255,.08);
 
-    border-bottom:1px solid #eee;
-
-    font-weight:500;
+    font-weight:bold;
 
 }
 
 .side-menu a:hover{
 
-    color:#0d47a1;
+    color:var(--accent);
 
 }
 
-/* =======================================
-   DASHBOARD CONTENT
-======================================= */
+.menu-overlay{
+
+    position:fixed;
+
+    top:60px;
+
+    left:0;
+
+    right:0;
+
+    bottom:65px;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    z-index:998;
+
+}
+
+.menu-overlay.active{
+
+    display:block;
+
+}
+
+/* ===================================================
+   PAGE CONTENT
+=================================================== */
 
 .dashboard-content{
 
     margin-top:75px;
+
     margin-bottom:85px;
 
     padding:15px;
 
 }
 
-/* =======================================
-   WELCOME CARD
-======================================= */
+/* ===================================================
+   PROFILE CARD
+=================================================== */
 
-.welcome-card{
+.profile-card{
 
-    background:#0d47a1;
+    background:var(--card);
 
-    color:white;
+    border-radius:18px;
 
-    border-radius:15px;
+    padding:25px;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+
+}
+
+.profile-avatar{
+
+    width:90px;
+
+    height:90px;
+
+    margin:0 auto 15px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:40px;
+
+}
+/* ===================================================
+   DASHBOARD & PROFILE CARDS
+=================================================== */
+
+.dashboard-card{
+
+    background:var(--card);
+
+    border-radius:18px;
 
     padding:20px;
 
     margin-bottom:20px;
 
-}
-
-.welcome-card h2{
-
-    margin-top:0;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
 
 }
 
-.plan-status{
+.dashboard-card h3{
 
-    display:flex;
+    color:var(--accent);
 
-    gap:12px;
-
-    margin-top:20px;
+    margin-bottom:18px;
 
 }
 
-.plan-box,
-.status-box{
+/* ===================================================
+   PROFILE INFORMATION
+=================================================== */
 
-    flex:1;
+.info-item{
 
-    background:rgba(255,255,255,.15);
-
-    border-radius:12px;
-
-    padding:12px;
-
-    text-align:center;
+    margin-bottom:18px;
 
 }
 
-/* =======================================
-   WALLET CARDS
-======================================= */
+.info-item strong{
 
-.wallet-section{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:15px;
-
-}
-
-.wallet-card{
-
-    background:white;
-
-    border-radius:15px;
-
-    padding:18px;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-
-}
-
-.wallet-card h3{
-
-    margin-top:0;
-
-    color:#0d47a1;
-
-}
-
-.wallet-card p{
-
-    font-size:24px;
-
-    font-weight:bold;
-
-    margin-bottom:0;
-
-}
-/* =======================================
-   QUICK ACTIONS
-======================================= */
-
-.quick-actions{
-
-    margin-top:25px;
-
-}
-
-.quick-actions h2{
-
-    color:#0d47a1;
-
-}
-
-.action-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:15px;
-
-}
-
-.action-grid button{
-
-    width:100%;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#0d47a1;
+    display:block;
 
     color:white;
 
+    margin-bottom:6px;
+
     font-size:15px;
 
-    font-weight:bold;
+}
 
-    cursor:pointer;
+.info-item p{
+
+    color:var(--muted);
+
+    font-size:15px;
+
+    word-break:break-word;
 
 }
 
-.action-grid button:hover{
-
-    background:#1565c0;
-
-}
-
-/* =======================================
-   GENERAL CARDS
-======================================= */
-
-.referral-card,
-.statistics-card,
-.leaderboard-card,
-.announcement-card,
-.transactions-card,
-.summary-card{
-
-    background:white;
-
-    margin-top:20px;
-
-    padding:18px;
-
-    border-radius:15px;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-
-}
-
-.referral-card h2,
-.statistics-card h2,
-.leaderboard-card h2,
-.announcement-card h2,
-.transactions-card h2,
-.summary-card h2{
-
-    color:#0d47a1;
-
-    margin-top:0;
-
-}
-
-/* =======================================
-   REFERRAL
-======================================= */
-
-.referral-box{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
-
-}
-
-.referral-box input{
-
-    width:100%;
-
-    padding:12px;
-
-    border:1px solid #ddd;
-
-    border-radius:10px;
-
-}
-
-.referral-box button{
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#ffb300;
-
-    color:#000;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-}
-
-/* =======================================
+/* ===================================================
    STATISTICS
-======================================= */
+=================================================== */
 
 .stats-grid{
 
@@ -515,38 +461,88 @@ body{
 
 }
 
-.stat-item{
+.stat-box{
 
-    background:#f5f7fb;
+    background:#0D1325;
 
-    border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
 
-    padding:15px;
+    border-radius:14px;
+
+    padding:18px 12px;
 
     text-align:center;
 
 }
 
-.stat-item h3{
+.stat-box h4{
 
-    margin-top:0;
+    color:var(--accent);
 
-    font-size:14px;
+    font-size:24px;
 
-    color:#0d47a1;
+    margin-bottom:8px;
 
 }
 
-.stat-item p{
+.stat-box p{
 
-    font-size:22px;
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+/* ===================================================
+   REFERRAL INPUT
+=================================================== */
+
+.referral-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.referral-box input{
+
+    margin:0;
+
+}
+
+.referral-box button{
+
+    margin:0;
+
+}
+
+/* ===================================================
+   BADGES
+=================================================== */
+
+.badge{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:13px;
 
     font-weight:bold;
 
 }
-/* =======================================
+/* ===================================================
    FIXED BOTTOM NAVIGATION
-======================================= */
+=================================================== */
 
 .bottom-nav{
 
@@ -558,7 +554,7 @@ body{
 
     height:65px;
 
-    background:#ffffff;
+    background:var(--card);
 
     display:flex;
 
@@ -566,7 +562,7 @@ body{
 
     align-items:center;
 
-    box-shadow:0 -2px 10px rgba(0,0,0,.12);
+    box-shadow:0 -2px 10px rgba(0,0,0,.25);
 
     z-index:1000;
 
@@ -574,25 +570,31 @@ body{
 
 .bottom-nav a{
 
-    text-decoration:none;
-
-    color:#555;
+    flex:1;
 
     display:flex;
 
     flex-direction:column;
 
+    justify-content:center;
+
     align-items:center;
+
+    color:var(--muted);
+
+    text-decoration:none;
 
     font-size:12px;
 
     font-weight:bold;
 
+    height:100%;
+
 }
 
 .bottom-nav a.active{
 
-    color:#0d47a1;
+    color:var(--accent);
 
 }
 
@@ -602,20 +604,17 @@ body{
 
 }
 
-/* =======================================
-   WELCOME POPUP
-======================================= */
+/* ===================================================
+   POPUP
+=================================================== */
 
 .popup-overlay{
 
     position:fixed;
 
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
+    inset:0;
 
-    background:rgba(0,0,0,.6);
+    background:rgba(0,0,0,.65);
 
     display:none;
 
@@ -631,13 +630,15 @@ body{
 
 .popup-box{
 
-    background:#ffffff;
-
     width:100%;
 
-    max-width:420px;
+    max-width:430px;
 
-    border-radius:18px;
+    background:var(--card);
+
+    color:white;
+
+    border-radius:20px;
 
     padding:25px;
 
@@ -651,73 +652,33 @@ body{
 
 .popup-box h2{
 
-    color:#0d47a1;
+    color:var(--accent);
 
-    margin-top:0;
+}
+
+.popup-box p{
+
+    color:var(--muted);
 
 }
 
 .popup-box button{
 
-    width:100%;
-
     margin-top:12px;
 
-    padding:14px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#0d47a1;
-
-    color:white;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
 }
 
-.popup-box button:hover{
-
-    background:#1565c0;
-
-}
-
-/* =======================================
-   FOOTER
-======================================= */
-
-footer{
-
-    text-align:center;
-
-    padding:30px 15px 90px;
-
-    color:#777;
-
-    font-size:14px;
-
-}
-
-/* =======================================
-   MOBILE RESPONSIVE
-======================================= */
+/* ===================================================
+   RESPONSIVE
+=================================================== */
 
 @media (min-width:768px){
 
-    .wallet-section{
+    .dashboard-content{
 
-        display:grid;
+        max-width:900px;
 
-        grid-template-columns:repeat(3,1fr);
-
-    }
-
-    .action-grid{
-
-        grid-template-columns:repeat(4,1fr);
+        margin:75px auto 90px;
 
     }
 
@@ -726,31 +687,5 @@ footer{
         grid-template-columns:repeat(4,1fr);
 
     }
-
-}
-/* =======================================
-   MENU OVERLAY
-======================================= */
-
-.menu-overlay{
-
-    position:fixed;
-
-    top:60px;
-    left:0;
-    right:0;
-    bottom:65px;
-
-    background:rgba(0,0,0,.35);
-
-    display:none;
-
-    z-index:998;
-
-}
-
-.menu-overlay.active{
-
-    display:block;
 
 }
