@@ -4,6 +4,7 @@ import {
     createUserWithEmailAndPassword,
     sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+alert("auth.js loaded");
 
 import {
     doc,
