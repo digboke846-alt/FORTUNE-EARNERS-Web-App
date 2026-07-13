@@ -1,103 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>My Profile | Fortune Earners</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="css/style.css">
+
 </head>
 
 <body>
 
-<div class="container">
-<h1>FORTUNE EARNERS</h1>
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
 
-<h2>My Profile</h2>
+<header class="top-header">
 
-<p>Manage your account information and settings.</p>
-<h2>Personal Information</h2>
+    <button id="menuButton"
+            class="menu-btn">
+        ☰
+    </button>
 
-<p><strong>Full Name:</strong> Not Available</p>
+    <h1 class="logo">
+        FORTUNE EARNERS
+    </h1>
 
-<p><strong>Username:</strong> Not Available</p>
+</header>
 
-<p><strong>Email:</strong> Not Available</p>
+<!-- SIDE MENU -->
 
-<p><strong>Phone Number:</strong> Not Available</p>
+<nav id="menu"
+     class="side-menu">
 
-<p><strong>User ID:</strong> FE-000001</p>
+    <a href="dashboard.html">🏠 Dashboard</a>
 
-<p><strong>Member Since:</strong> --/--/----</p>
+    <a href="#">🚀 Activate Plan</a>
 
-<p><strong>Current Plan:</strong> Not Activated</p>
-<p><strong>Membership Status:</strong> Pending Activation</p>
-<h2>Bank Details</h2>
+    <a href="#">📋 Daily Tasks</a>
 
-<p><strong>Bank Name:</strong> Not Added</p>
+    <a href="#">📺 Sponsored Ads</a>
 
-<p><strong>Account Number:</strong> Not Added</p>
+    <a href="#">👥 Referrals</a>
 
-<p><strong>Account Name:</strong> Not Added</p>
+    <a href="
+                <div class="info-item">
 
-<a href="#">
-    <button>Add Bank Details</button>
-</a>
-<h2>Account Statistics</h2>
+            <strong>📧 Email</strong>
 
-<p>Total Referrals: 0</p>
+            <p id="profileEmail">
 
-<p>Tasks Completed: 0</p>
+                Loading...
 
-<p>Sponsored Ads Viewed: 0</p>
+            </p>
 
-<p>Total Earnings: ₦0.00</p>
+        </div>
 
-<p>Total Withdrawals: ₦0.00</p>
-<h2>Achievements</h2>
+        <div class="info-item">
 
-<p>No achievements unlocked yet.</p>
-<h2>Security</h2>
+            <strong>📱 Phone Number</strong>
 
-<a href="change-password.html">
-    <button>Change Password</button>
-</a>
+            <p id="profilePhone">
 
-<a href="contact.html">
-    <button>Contact Support</button>
-</a>
-<h2>Account</h2>
+                Loading...
 
-<a href="#">
-    <button>Log Out</button>
-</a>
-<h2>Quick Navigation</h2>
+            </p>
 
-<a href="dashboard.html">
-    <button>🏠 Dashboard</button>
-</a>
+        </div>
 
-<a href="place-ads.html">
-    <button>📢 Place Ads</button>
-</a>
+        <div class="info-item">
 
-<a href="withdraw.html">
-    <button>💸 Withdraw</button>
-</a>
+            <strong>🆔 User ID</strong>
 
-<a href="profile.html">
-    <button>👤 Profile</button>
-</a>
-<hr>
+            <p id="profileUserId">
 
-<p>&copy; 2026 Fortune Earners. All Rights Reserved.</p>
+                Loading...
 
-<p>
-<a href="about.html">About</a> |
-<a href="terms.html">Terms & Conditions</a> |
-<a href="privacy.html">Privacy Policy</a>
-</p>
+            </p>
 
-<p>
-<a href="contact.html">Contact Support</a>
-</p>
+        </div>
+
+        <div class="info-item">
+
+            <strong>📅 Member Since</strong>
+
+            <p id="memberSince">
+
+                Loading...
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- BANK DETAILS -->
+    <!-- ========================= -->
+
+    <section class="dashboard-card">
+
+        <h3>
+
+            🏦 Bank Details
+
+        </h3>
+
+        <div class="info-item">
+
+            <strong>Bank Name</strong>
+
+            <p id="bankName">
+
+                Not Added
+
+            </p>
+
+        </div>
+
+        <div class="info
+                <!-- ========================= -->
+    <!-- ACHIEVEMENTS -->
+    <!-- ========================= -->
+
+    <section class="dashboard-card">
+
+        <h3>
+
+            🏆 Achievements
+
+        </h3>
+
+        <p id="profileAchievements">
+
+            No achievements unlocked yet.
+
+        </p>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- SECURITY -->
+    <!-- ========================= -->
+
+    <section class="dashboard-card">
+
+        <h3>
+
+            🔒 Security
+
+        </h3>
+
+        <button onclick="window.location.href='change-password.html'">
+
+            Change Password
+
+        </button>
+
+        <button onclick="window.location.href='contact.html'">
+
+            Contact Support
+
+        </button>
+
+    </section>
+
+</main>
+
+<!-- ========================= -->
+<!-- BOTTOM NAVIGATION -->
+<!-- ========================= -->
+
+<nav class="bottom-nav">
+
+    <a href="dashboard.html">
+
+        🏠
+
+        <span>Dashboard</span>
+
+    </a>
+
+    <a href="place-ads.html">
+
+        📢
+
+        <span>Place Ads</span>
+
+    </a>
+
+    <a href="withdraw.html">
+
+        💸
+
+        <span>Withdraw</span>
+
+    </a>
+
+    <a href="profile.html"
+       class="active">
+
+        👤
+
+        <span>Profile</span>
+
+    </a>
+
+</nav>
+
+<script type="module"
+        src="js/profile.js"></script>
+
+<script src="js/menu.js"></script>
+
+</body>
+
+    </html>
