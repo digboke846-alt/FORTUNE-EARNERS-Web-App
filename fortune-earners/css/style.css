@@ -1,4 +1,25 @@
 body {
+    /* =======================================
+   FORTUNE EARNERS THEME
+======================================= */
+
+:root{
+
+    --primary:#0D47A1;
+
+    --primary-light:#1565C0;
+
+    --accent:#FFC107;
+
+    --success:#28A745;
+
+    --background:#F4F8FF;
+
+    --card:#FFFFFF;
+
+    --text:#263238;
+
+}
     margin: 0;
     padding: 0;
     background: #0D1325;
@@ -705,5 +726,31 @@ footer{
         grid-template-columns:repeat(4,1fr);
 
     }
+
+}
+/* =======================================
+   MENU OVERLAY
+======================================= */
+
+.menu-overlay{
+
+    position:fixed;
+
+    top:60px;
+    left:0;
+    right:0;
+    bottom:65px;
+
+    background:rgba(0,0,0,.35);
+
+    display:none;
+
+    z-index:998;
+
+}
+
+.menu-overlay.active{
+
+    display:block;
 
 }
