@@ -4,7 +4,6 @@ import {
     createUserWithEmailAndPassword,
     sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-alert("auth.js loaded");
 
 import {
     doc,
@@ -15,7 +14,7 @@ import {
     getDocs,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
+alert("auth.js loaded");
 // Get the signup form
 const signupForm = document.getElementById("signupForm");
 
