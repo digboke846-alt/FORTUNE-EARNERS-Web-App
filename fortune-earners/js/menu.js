@@ -1,12 +1,32 @@
 const menuButton = document.getElementById("menuButton");
 const menu = document.getElementById("menu");
 
-menu.style.display = "none";
+// Toggle menu
+menuButton.addEventListener("click", function (e) {
 
-menuButton.addEventListener("click", function () {
-    if (menu.style.display === "none") {
-        menu.style.display = "block";
-    } else {
-        menu.style.display = "none";
+    e.stopPropagation();
+
+    menu.classList.toggle("active");
+
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", function (e) {
+
+    if (
+        !menu.contains(e.target) &&
+        !menuButton.contains(e.target)
+    ) {
+
+        menu.classList.remove("active");
+
     }
+
+});
+
+// Prevent closing when clicking inside menu
+menu.addEventListener("click", function (e) {
+
+    e.stopPropagation();
+
 });
