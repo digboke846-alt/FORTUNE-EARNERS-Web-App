@@ -112,6 +112,7 @@ signupForm.addEventListener("submit", async (e) => {
         if (!usernameSnapshot.empty) {
             alert("Username already taken.");
             return;
+        }
                     // Create Firebase Authentication account
         const userCredential = await createUserWithEmailAndPassword(
             auth,
