@@ -107,3 +107,603 @@ input:focus {
 #menu a:hover {
     color: #F4C542;
 }
+/* =======================================
+   DASHBOARD V2 STYLES
+======================================= */
+
+body{
+    margin:0;
+    padding:0;
+    background:#f4f7fb;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Fixed Header */
+
+.top-header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    height:60px;
+
+    background:#0d47a1;
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 15px;
+
+    z-index:1000;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:18px;
+    margin:0;
+    font-weight:bold;
+}
+
+.menu-btn{
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:26px;
+    cursor:pointer;
+}
+
+.header-icons{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.header-icons a,
+.header-icons button{
+
+    background:none;
+    border:none;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+/* =======================================
+   SIDE MENU
+======================================= */
+
+.side-menu{
+
+    position:fixed;
+
+    top:60px;
+    left:-280px;
+
+    width:260px;
+    height:calc(100vh - 60px);
+
+    background:#ffffff;
+
+    overflow-y:auto;
+
+    box-shadow:2px 0 10px rgba(0,0,0,.2);
+
+    transition:.3s;
+
+    z-index:999;
+
+    padding:20px;
+
+}
+
+.side-menu.active{
+
+    left:0;
+
+}
+
+.side-menu h2{
+
+    margin-top:0;
+
+    color:#0d47a1;
+
+}
+
+.side-menu a{
+
+    display:block;
+
+    padding:12px 0;
+
+    text-decoration:none;
+
+    color:#333;
+
+    border-bottom:1px solid #eee;
+
+    font-weight:500;
+
+}
+
+.side-menu a:hover{
+
+    color:#0d47a1;
+
+}
+
+/* =======================================
+   DASHBOARD CONTENT
+======================================= */
+
+.dashboard-content{
+
+    margin-top:75px;
+    margin-bottom:85px;
+
+    padding:15px;
+
+}
+
+/* =======================================
+   WELCOME CARD
+======================================= */
+
+.welcome-card{
+
+    background:#0d47a1;
+
+    color:white;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+}
+
+.welcome-card h2{
+
+    margin-top:0;
+
+}
+
+.plan-status{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.plan-box,
+.status-box{
+
+    flex:1;
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:12px;
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+/* =======================================
+   WALLET CARDS
+======================================= */
+
+.wallet-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.wallet-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.wallet-card h3{
+
+    margin-top:0;
+
+    color:#0d47a1;
+
+}
+
+.wallet-card p{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    margin-bottom:0;
+
+}
+/* =======================================
+   QUICK ACTIONS
+======================================= */
+
+.quick-actions{
+
+    margin-top:25px;
+
+}
+
+.quick-actions h2{
+
+    color:#0d47a1;
+
+}
+
+.action-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+}
+
+.action-grid button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#0d47a1;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.action-grid button:hover{
+
+    background:#1565c0;
+
+}
+
+/* =======================================
+   GENERAL CARDS
+======================================= */
+
+.referral-card,
+.statistics-card,
+.leaderboard-card,
+.announcement-card,
+.transactions-card,
+.summary-card{
+
+    background:white;
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.referral-card h2,
+.statistics-card h2,
+.leaderboard-card h2,
+.announcement-card h2,
+.transactions-card h2,
+.summary-card h2{
+
+    color:#0d47a1;
+
+    margin-top:0;
+
+}
+
+/* =======================================
+   REFERRAL
+======================================= */
+
+.referral-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.referral-box input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+}
+
+.referral-box button{
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#ffb300;
+
+    color:#000;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+/* =======================================
+   STATISTICS
+======================================= */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+}
+
+.stat-item{
+
+    background:#f5f7fb;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+.stat-item h3{
+
+    margin-top:0;
+
+    font-size:14px;
+
+    color:#0d47a1;
+
+}
+
+.stat-item p{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+/* =======================================
+   FIXED BOTTOM NAVIGATION
+======================================= */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:65px;
+
+    background:#ffffff;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    box-shadow:0 -2px 10px rgba(0,0,0,.12);
+
+    z-index:1000;
+
+}
+
+.bottom-nav a{
+
+    text-decoration:none;
+
+    color:#555;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+.bottom-nav a.active{
+
+    color:#0d47a1;
+
+}
+
+.bottom-nav span{
+
+    margin-top:4px;
+
+}
+
+/* =======================================
+   WELCOME POPUP
+======================================= */
+
+.popup-overlay{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    background:rgba(0,0,0,.6);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    z-index:2000;
+
+}
+
+.popup-box{
+
+    background:#ffffff;
+
+    width:100%;
+
+    max-width:420px;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+}
+
+.popup-box h2{
+
+    color:#0d47a1;
+
+    margin-top:0;
+
+}
+
+.popup-box button{
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#0d47a1;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.popup-box button:hover{
+
+    background:#1565c0;
+
+}
+
+/* =======================================
+   FOOTER
+======================================= */
+
+footer{
+
+    text-align:center;
+
+    padding:30px 15px 90px;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+/* =======================================
+   MOBILE RESPONSIVE
+======================================= */
+
+@media (min-width:768px){
+
+    .wallet-section{
+
+        display:grid;
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+    .action-grid{
+
+        grid-template-columns:repeat(4,1fr);
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:repeat(4,1fr);
+
+    }
+
+}
