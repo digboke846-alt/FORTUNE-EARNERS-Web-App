@@ -29,12 +29,16 @@
     </button>
 
     <h1 class="logo">
+
         FORTUNE EARNERS
+
     </h1>
 
 </header>
 
+<!-- ========================= -->
 <!-- SIDE MENU -->
+<!-- ========================= -->
 
 <nav id="menu"
      class="side-menu">
@@ -49,8 +53,87 @@
 
     <a href="#">👥 Referrals</a>
 
-    <a href="
-                <div class="info-item">
+    <a href="withdraw.html">💸 Withdraw</a>
+
+    <a href="place-ads.html">📢 Place Ads</a>
+
+    <a href="profile.html">👤 Profile</a>
+
+    <a href="about.html">ℹ️ About</a>
+
+    <a href="contact.html">📞 Contact Support</a>
+
+    <a href="#" id="logoutBtn">🚪 Log Out</a>
+
+</nav>
+
+<div id="menuOverlay"
+     class="menu-overlay"></div>
+
+<!-- ========================= -->
+<!-- MAIN CONTENT -->
+<!-- ========================= -->
+
+<main class="dashboard-content">
+
+    <section class="profile-card">
+
+        <div class="profile-avatar">
+
+            👤
+
+        </div>
+
+        <h2 id="profileFullName">
+
+            Loading...
+
+        </h2>
+
+        <p id="profileUsername">
+
+            @username
+
+        </p>
+
+        <p>
+
+            <strong>Current Plan:</strong>
+
+            <span id="profilePlan">
+
+                Not Activated
+
+            </span>
+
+        </p>
+
+        <p>
+
+            <strong>Status:</strong>
+
+            <span id="profileStatus">
+
+                Active
+
+            </span>
+
+        </p>
+
+    </section>
+        <!-- ========================= -->
+    <!-- PERSONAL INFORMATION -->
+    <!-- ========================= -->
+
+    <section class="dashboard-card">
+
+        <h3>
+
+            👤 Personal Information
+
+        </h3>
+
+        <div class="info-item">
 
             <strong>📧 Email</strong>
 
@@ -99,8 +182,7 @@
         </div>
 
     </section>
-
-    <!-- ========================= -->
+        <!-- ========================= -->
     <!-- BANK DETAILS -->
     <!-- ========================= -->
 
@@ -124,8 +206,87 @@
 
         </div>
 
-        <div class="info
-                <!-- ========================= -->
+        <div class="info-item">
+
+            <strong>Account Number</strong>
+
+            <p id="accountNumber">
+
+                Not Added
+
+            </p>
+
+        </div>
+
+        <div class="info-item">
+
+            <strong>Account Name</strong>
+
+            <p id="accountName">
+
+                Not Added
+
+            </p>
+
+        </div>
+
+        <button id="editBankBtn">
+
+            Edit Bank Details
+
+        </button>
+
+    </section>
+        <!-- ========================= -->
+    <!-- ACCOUNT STATISTICS -->
+    <!-- ========================= -->
+
+    <section class="dashboard-card">
+
+        <h3>
+
+            📊 Account Statistics
+
+        </h3>
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+
+                <h4 id="profileReferrals">0</h4>
+
+                <p>Total Referrals</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h4 id="profileTasks">0</h4>
+
+                <p>Tasks Completed</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h4 id="profileAds">0</h4>
+
+                <p>Ads Viewed</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h4 id="profileWithdrawals">₦0</h4>
+
+                <p>Total Withdrawals</p>
+
+            </div>
+
+        </div>
+
+    </section>
+        <!-- ========================= -->
     <!-- ACHIEVEMENTS -->
     <!-- ========================= -->
 
@@ -203,8 +364,7 @@
 
     </a>
 
-    <a href="profile.html"
-       class="active">
+    <a href="profile.html" class="active">
 
         👤
 
@@ -214,11 +374,10 @@
 
 </nav>
 
-<script type="module"
-        src="js/profile.js"></script>
+<script type="module" src="js/profile.js"></script>
 
 <script src="js/menu.js"></script>
 
 </body>
 
-    </html>
+</html>
