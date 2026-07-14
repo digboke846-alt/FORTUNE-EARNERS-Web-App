@@ -12,12 +12,15 @@ import {
     query,
     where,
     getDocs,
-    serverTimestamp
+    serverTimestamp,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
 // AUTO REFERRAL DETECTION
 // ======================================
+
+let referrerUid = "";
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -28,10 +31,34 @@ const referredByInput =
 
 if (refUsername && referredByInput) {
 
-    referredByInput.value =
-        refUsername.toLowerCase();
+    const refQuery = query(
 
-    referredByInput.readOnly = true;
+        collection(db, "users"),
+
+        where("username", "==", refUsername.toLowerCase())
+
+    );
+
+    const refSnapshot = await getDocs(refQuery);
+
+    if (!refSnapshot.empty) {
+
+        const refDoc = refSnapshot.docs[0];
+
+        referrerUid = refDoc.id;
+
+        referredByInput.value =
+            refUsername.toLowerCase();
+
+        referredByInput.readOnly = true;
+
+    } else {
+
+        referredByInput.value = "";
+
+        alert("Invalid referral link.");
+
+    }
 
 }
 // Get the signup form
