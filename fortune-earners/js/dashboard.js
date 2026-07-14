@@ -234,9 +234,7 @@ onAuthStateChanged(auth, async (user) => {
 // LOG OUT
 // ======================================
 
-const logoutLink = document.querySelector(
-    '#menu a:last-child'
-);
+const logoutLink = document.getElementById("logoutBtn");
 
 if (logoutLink) {
 
