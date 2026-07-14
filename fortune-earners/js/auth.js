@@ -8,6 +8,7 @@ import {
 import {
     doc,
     setDoc,
+    addDoc,
     collection,
     query,
     where,
@@ -239,6 +240,33 @@ signupForm.addEventListener("submit", async (e) => {
             notificationsEnabled: true
 
         });
+        // ======================================
+// CREATE REFERRAL RECORD
+// ======================================
+
+if (referrerUid) {
+
+    await addDoc(collection(db, "referrals"), {
+
+        referrerUid: referrerUid,
+
+        referrerUsername: referredBy,
+
+        referredUid: user.uid,
+
+        referredUsername: username,
+
+        status: "Pending",
+
+        commission: 0,
+
+        activatedPlan: "None",
+
+        createdAt: serverTimestamp()
+
+    });
+
+}
 
         alert(
             "Account created successfully!\n\nA verification email has been sent to your email address.\n\nPlease verify your email before logging in."
