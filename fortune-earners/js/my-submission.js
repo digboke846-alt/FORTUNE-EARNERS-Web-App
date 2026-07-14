@@ -34,8 +34,101 @@ onAuthStateChanged(auth, async (user) => {
         submissionList.innerHTML =
             "<p>Loading submissions...</p>";
 
-        // We will load the user's submissions
-        // in Part 2.
+        /// ======================================
+// LOAD USER SUBMISSIONS
+// ======================================
+
+const submissionsQuery = query(
+
+    collection(db, "taskSubmissions"),
+
+    where("userId", "==", user.uid),
+
+    orderBy("submittedAt", "desc")
+
+);
+
+const querySnapshot = await getDocs(submissionsQuery);
+
+submissionList.innerHTML = "";
+
+if (querySnapshot.empty) {
+
+    submissionList.innerHTML = `
+
+        <div class="dashboard-card">
+
+            <h3>No submissions yet.</h3>
+
+            <p>
+                Complete a task and submit it to see it here.
+            </p>
+
+        </div>
+
+    `;
+
+    return;
+
+}
+
+querySnapshot.forEach((doc) => {
+
+    const submission = doc.data();
+
+    let statusColor = "🟡";
+
+    if (submission.status === "Approved") {
+
+        statusColor = "✅";
+
+    }
+
+    if (submission.status === "Rejected") {
+
+        statusColor = "❌";
+
+    }
+
+    const submittedDate = submission.submittedAt
+        ? submission.submittedAt.toDate().toLocaleDateString()
+        : "Unknown";
+
+    submissionList.innerHTML += `
+
+        <div class="dashboard-card">
+
+            <h3>${submission.taskTitle}</h3>
+
+            <p>
+
+                <strong>Status:</strong>
+
+                ${statusColor} ${submission.status}
+
+            </p>
+
+            <p>
+
+                <strong>Submitted:</strong>
+
+                ${submittedDate}
+
+            </p>
+
+            <p>
+
+                <strong>Admin Remark:</strong>
+
+                ${submission.adminRemark || "No remark yet."}
+
+            </p>
+
+        </div>
+
+    `;
+
+});
 
     }
 
