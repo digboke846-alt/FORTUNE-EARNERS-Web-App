@@ -814,6 +814,14 @@ button:hover{
 
     color:white;
 
+    font-size:30px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    margin-top:20px;
+
 }
 
 /* Better spacing */
@@ -841,5 +849,56 @@ button:hover{
     padding:16px;
 
     border-radius:15px;
+
+}
+/* ======================================
+   DASHBOARD SECTIONS
+====================================== */
+
+.summary-card,
+.referral-card,
+.statistics-card,
+.leaderboard-card,
+.announcement-card,
+.transactions-card{
+
+    background:#161E35;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    margin-top:25px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+
+}
+
+.summary-card h2,
+.referral-card h2,
+.statistics-card h2,
+.leaderboard-card h2,
+.announcement-card h2,
+.transactions-card h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    color:white;
+
+}
+
+.summary-card ul{
+
+    padding-left:22px;
+
+}
+
+.summary-card li{
+
+    margin-bottom:12px;
+
+    color:white;
 
 }
