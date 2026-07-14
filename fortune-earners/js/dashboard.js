@@ -164,7 +164,7 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById("totalWithdrawals").textContent =
             "₦" + Number(data.totalWithdrawals || 0).toLocaleString();
 
-        // ======================================
+                // ======================================
         // TELEGRAM & WHATSAPP LINKS
         // ======================================
 
@@ -178,7 +178,7 @@ onAuthStateChanged(auth, async (user) => {
             "https://chat.whatsapp.com/CKJ2Awq0F5F8xpaq31JJlP?s=cl&p=a&ilr=1";
 
         // ======================================
-        // SHOW WELCOME POPUP
+        // WELCOME POPUP
         // ======================================
 
         const popup =
@@ -190,56 +190,41 @@ onAuthStateChanged(auth, async (user) => {
         const continueBtn =
             document.getElementById("continueDashboard");
 
-        if (localStorage.getItem("hideWelcomePopup") !== "true") {
+        if (
+            popup &&
+            hidePopup &&
+            continueBtn &&
+            localStorage.getItem("hideWelcomePopup") !== "true"
+        ) {
 
             popup.style.display = "flex";
 
         }
 
-        continueBtn.addEventListener("click", () => {
+        if (continueBtn) {
 
-            if (hidePopup.checked) {
+            continueBtn.addEventListener("click", () => {
 
-                localStorage.setItem(
-                    "hideWelcomePopup",
-                    "true"
-                );
+                if (hidePopup.checked) {
 
-            }
+                    localStorage.setItem(
+                        "hideWelcomePopup",
+                        "true"
+                    );
 
-            popup.style.display = "none";
+                }
 
-        });
-              // ======================================
-        // COPY REFERRAL LINK
-        // ======================================
+                popup.style.display = "none";
 
-        const copyBtn =
-            document.getElementById("copyReferralBtn");
+            });
 
-        copyBtn.addEventListener("click", async () => {
-
-            try {
-
-                await navigator.clipboard.writeText(
-                    document.getElementById("referralLink").value
-                );
-
-                alert("✅ Referral link copied successfully!");
-
-            } catch (error) {
-
-                alert("Unable to copy referral link.");
-
-            }
-
-        });
+        }
 
     } catch (error) {
 
         console.error(error);
 
-        alert("Failed to load your dashboard.");
+        alert(error.message);
 
     }
 
