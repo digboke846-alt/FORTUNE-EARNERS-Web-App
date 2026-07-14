@@ -19,14 +19,11 @@ onAuthStateChanged(auth, async (user) => {
     if (!user) {
 
         window.location.href = "login.html";
-
         return;
 
     }
 
     try {
-
-        // Get user document
 
         const userRef = doc(db, "users", user.uid);
 
@@ -45,6 +42,22 @@ onAuthStateChanged(auth, async (user) => {
         }
 
         const data = userSnap.data();
+
+        // ======================================
+        // LOAD USER INFORMATION
+        // ======================================
+
+        document.getElementById("dashboardUsername").textContent =
+            data.fullname || "Member";
+
+        document.getElementById("popupUserName").textContent =
+            data.fullname || "Member";
+
+        document.getElementById("currentPlan").textContent =
+            data.plan || "Not Activated";
+
+        document.getElementById("memberStatus").textContent =
+            data.memberStatus || "Pending Activation";
 
         // ======================================
         // LOAD USER INFORMATION
