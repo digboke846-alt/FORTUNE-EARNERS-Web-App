@@ -834,21 +834,63 @@ button:hover{
 
 .quick-actions{
 
-    margin-top:30px;
+    margin-top:25px;
+
+}
+
+.quick-actions h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
 
 }
 
 .action-grid{
 
-    gap:18px;
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+}
+
+.action-grid a{
+
+    text-decoration:none;
 
 }
 
 .action-grid button{
 
+    width:100%;
+
     padding:16px;
 
-    border-radius:15px;
+    border:none;
+
+    border-radius:16px;
+
+    background:#1F5FD4;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.action-grid button:hover{
+
+    background:#2E73F5;
+
+    transform:translateY(-2px);
 
 }
 /* ======================================
