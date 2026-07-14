@@ -75,7 +75,7 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById("memberStatus").textContent =
             data.memberStatus || "Active";
 
-        // ======================================
+                // ======================================
         // LOAD WALLETS
         // ======================================
 
@@ -85,6 +85,9 @@ onAuthStateChanged(auth, async (user) => {
         const taskWallet =
             Number(data.taskWallet || 0);
 
+        const totalBalance =
+            affiliateWallet + taskWallet;
+
         document.getElementById("affiliateWallet").textContent =
             "₦" + affiliateWallet.toLocaleString();
 
@@ -92,7 +95,23 @@ onAuthStateChanged(auth, async (user) => {
             "₦" + taskWallet.toLocaleString();
 
         document.getElementById("totalBalance").textContent =
-            "₦" + (affiliateWallet + taskWallet).toLocaleString();
+            "₦" + totalBalance.toLocaleString();
+
+        // ======================================
+        // TODAY SUMMARY
+        // ======================================
+
+        document.getElementById("tasksCompletedToday").textContent =
+            (data.tasksCompletedToday || 0) + "/5";
+
+        document.getElementById("adsViewedToday").textContent =
+            (data.adsViewedToday || 0) + "/5";
+
+        document.getElementById("referralsToday").textContent =
+            data.referralsToday || 0;
+
+        document.getElementById("earnedToday").textContent =
+            "₦" + Number(data.earnedToday || 0).toLocaleString();
 
         // ======================================
         // REFERRAL LINK
