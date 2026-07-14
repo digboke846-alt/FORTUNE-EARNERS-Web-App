@@ -210,6 +210,7 @@ signupForm.addEventListener("submit", async (e) => {
             validReferrals: 0,
 
             referredBy: referredBy,
+            referrerUid: referrerUid,
             referralCode: username,
 
             bankName: "",
