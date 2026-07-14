@@ -59,54 +59,25 @@ onAuthStateChanged(auth, async (user) => {
         const memberStatus =
             document.getElementById("memberStatus");
 
-        if (dashboardUsername)
+        if (dashboardUsername) {
             dashboardUsername.textContent =
                 data.fullname || "Member";
+        }
 
-        if (popupUserName)
+        if (popupUserName) {
             popupUserName.textContent =
                 data.fullname || "Member";
+        }
 
-        if (currentPlan)
+        if (currentPlan) {
             currentPlan.textContent =
                 data.plan || "Not Activated";
+        }
 
-        if (memberStatus)
+        if (memberStatus) {
             memberStatus.textContent =
                 data.memberStatus || "Pending Activation";
-
-        // ======================================
-        // LOAD USER INFORMATION
-        // ======================================
-
-        document.getElementById("dashboardUsername").textContent =
-            data.fullname || "Member";
-
-        document.getElementById("popupUserName").textContent =
-            data.fullname || "Member";
-
-        document.getElementById("currentPlan").textContent =
-            data.plan || "Not Activated";
-
-        document.getElementById("memberStatus").textContent =
-            data.memberStatus || "Pending Activation";
-
-        // ======================================
-        // LOAD USER INFORMATION
-        // ======================================
-
-        document.getElementById("userFullName").textContent =
-            data.fullname || "Member";
-
-        document.getElementById("popupUserName").textContent =
-            data.fullname || "Member";
-
-        document.getElementById("currentPlan").textContent =
-            data.plan || "Not Activated";
-
-        document.getElementById("memberStatus").textContent =
-            data.memberStatus || "Active";
-
+        }
                 // ======================================
         // LOAD WALLETS
         // ======================================
