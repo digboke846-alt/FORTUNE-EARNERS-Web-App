@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Task Details | Fortune Earners</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
+<header class="top-header">
+
+    <button id="menuButton"
+            class="menu-btn">
+
+        ☰
+
+    </button>
+
+    <h1 class="logo">
+
+        TASK DETAILS
+
+    </h1>
+
+</header>
+
+<!-- ========================= -->
+<!-- SIDE MENU -->
+<!-- ========================= -->
+
+<nav id="menu"
+     class="side-menu">
+
+    <a href="dashboard.html">🏠 Dashboard</a>
+
+    <a href="daily-tasks.html">📋 Daily Tasks</a>
+
+    <a href="withdraw.html">💸 Withdraw</a>
+
+    <a href="profile.html">👤 Profile</a>
+
+    <a href="#" id="logoutBtn">🚪 Log Out</a>
+
+</nav>
+
+<div id="menuOverlay"
+     class="menu-overlay"></div>
+
+<!-- ========================= -->
+<!-- MAIN CONTENT -->
+<!-- ========================= -->
+
+<main class="dashboard-content">
+  <!-- ========================= -->
+<!-- TASK DETAILS CARD -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+    <h2 id="taskTitle">
+
+        Loading Task...
+
+    </h2>
+
+    <p id="taskDescription">
+
+        Please wait while the task loads.
+
+    </p>
+
+</section>
+
+<!-- ========================= -->
+<!-- TASK INFORMATION -->
+<!-- ========================= -->
+
+<section class="summary-card">
+
+    <h2>
+
+        📋 Task Information
+
+    </h2>
+
+    <ul>
+
+        <li>
+
+            💰 Reward
+
+            <span id="taskReward">
+
+                ₦0
+
+            </span>
+
+        </li>
+
+        <li>
+
+            📌 Status
+
+            <span id="taskStatus">
+
+                🟢 Available
+
+            </span>
+
+        </li>
+
+    </ul>
+
+</section>
+
+<!-- ========================= -->
+<!-- START TASK -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+    <button id="startTaskBtn">
+
+        🚀 Open Task
+
+    </button>
+
+</section>
+
+<!-- ========================= -->
+<!-- SUBMIT PROOF -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+    <h2>
+
+        📸 Submit Screenshot
+
+    </h2>
+
+    <p>
+
+        Upload a clear screenshot showing that you completed this task.
+
+    </p>
+
+    <input
+        type="file"
+        id="taskScreenshot"
+        accept="image/*">
+
+    <button id="submitTaskBtn">
+
+        ✅ Submit for Review
+
+    </button>
+
+</section>
+  <!-- ========================= -->
+<!-- BOTTOM NAVIGATION -->
+<!-- ========================= -->
+
+<nav class="bottom-nav">
+
+    <a href="dashboard.html">
+
+        🏠
+
+        <span>Dashboard</span>
+
+    </a>
+
+    <a href="daily-tasks.html" class="active">
+
+        📋
+
+        <span>Tasks</span>
+
+    </a>
+
+    <a href="withdraw.html">
+
+        💸
+
+        <span>Withdraw</span>
+
+    </a>
+
+    <a href="profile.html">
+
+        👤
+
+        <span>Profile</span>
+
+    </a>
+
+</nav>
+
+</main>
+
+<script src="js/menu.js"></script>
+
+<script type="module" src="js/task-details.js"></script>
+
+</body>
+
+</html>
