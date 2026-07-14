@@ -1,1 +1,191 @@
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
 
+<header class="top-header">
+
+    <button id="menuButton" class="menu-btn">
+        ☰
+    </button>
+
+    <h1 class="logo">
+        DAILY TASKS
+    </h1>
+
+</header>
+
+<!-- ========================= -->
+<!-- SIDE MENU -->
+<!-- ========================= -->
+
+<nav id="menu" class="side-menu">
+
+    <a href="dashboard.html">🏠 Dashboard</a>
+
+    <a href="#">🚀 Activate Plan</a>
+
+    <a href="daily-tasks.html">📋 Daily Tasks</a>
+
+    <a href="#">📺 Sponsored Ads</a>
+
+    <a href="#">👥 Referrals</a>
+
+    <a href="withdraw.html">💸 Withdraw</a>
+
+    <a href="place-ads.html">📢 Place Ads</a>
+
+    <a href="profile.html">👤 Profile</a>
+
+    <a href="contact.html">📞 Contact Support</a>
+
+    <a href="#" id="logoutBtn">🚪 Log Out</a>
+
+</nav>
+
+<div id="menuOverlay" class="menu-overlay"></div>
+
+<!-- ========================= -->
+<!-- MAIN CONTENT -->
+<!-- ========================= -->
+
+<main class="dashboard-content">
+  <!-- ========================= -->
+<!-- PAGE TITLE -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+    <h2>
+        📋 Daily Tasks
+    </h2>
+
+    <p>
+        Complete your daily tasks and submit a screenshot as proof to earn rewards.
+    </p>
+
+</section>
+
+<!-- ========================= -->
+<!-- TODAY'S PROGRESS -->
+<!-- ========================= -->
+
+<section class="summary-card">
+
+    <h2>
+        📊 Today's Progress
+    </h2>
+
+    <ul>
+
+        <li>
+            Tasks Available
+            <span id="availableTasks">
+                5
+            </span>
+        </li>
+
+        <li>
+            Completed
+            <span id="completedTasks">
+                0
+            </span>
+        </li>
+
+        <li>
+            Pending Review
+            <span id="pendingTasks">
+                0
+            </span>
+        </li>
+
+    </ul>
+
+</section>
+
+<!-- ========================= -->
+<!-- TASK LIST -->
+<!-- ========================= -->
+
+<section id="taskList">
+<div class="task-card">
+
+    <h3 id="taskTitle">
+        Join Our Telegram Channel
+    </h3>
+
+    <p id="taskDescription">
+        Join our official Telegram channel and stay updated with the latest earning opportunities.
+    </p>
+
+    <div class="task-info">
+
+        <span class="task-reward">
+            💰 Reward:
+            <strong id="taskReward">
+                ₦100
+            </strong>
+        </span>
+
+        <span class="task-status available">
+            🟢 Available
+        </span>
+
+    </div>
+
+    <button onclick="window.location.href='task-details.html'">
+
+        🚀 Start Task
+
+    </button>
+
+</div>
+
+</section>
+  <!-- ========================= -->
+<!-- BOTTOM NAVIGATION -->
+<!-- ========================= -->
+
+<nav class="bottom-nav">
+
+    <a href="dashboard.html">
+
+        🏠
+
+        <span>Dashboard</span>
+
+    </a>
+
+    <a href="place-ads.html">
+
+        📢
+
+        <span>Place Ads</span>
+
+    </a>
+
+    <a href="withdraw.html">
+
+        💸
+
+        <span>Withdraw</span>
+
+    </a>
+
+    <a href="profile.html">
+
+        👤
+
+        <span>Profile</span>
+
+    </a>
+
+</nav>
+
+<script src="js/menu.js"></script>
+
+<script type="module" src="js/daily-tasks.js"></script>
+
+</body>
+
+</html>
+  
