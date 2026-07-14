@@ -634,7 +634,7 @@ button:hover{
 
 .popup-box{
 
-    background:#ffffff;
+    background:linear-gradient(135deg,#0D47A1,#1565C0);
 
     width:90%;
 
@@ -646,11 +646,11 @@ button:hover{
 
     text-align:center;
 
-    max-height:80vh;
+    max-height:65vh;
 
     overflow-y:auto;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.35);
+    box-shadow:0 5px 15px rgba(0,0,0,.30);
 
 }
 
