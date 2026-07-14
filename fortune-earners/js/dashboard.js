@@ -44,6 +44,38 @@ onAuthStateChanged(auth, async (user) => {
         const data = userSnap.data();
 
         // ======================================
+        // USER INFORMATION
+        // ======================================
+
+        const dashboardUsername =
+            document.getElementById("dashboardUsername");
+
+        const popupUserName =
+            document.getElementById("popupUserName");
+
+        const currentPlan =
+            document.getElementById("currentPlan");
+
+        const memberStatus =
+            document.getElementById("memberStatus");
+
+        if (dashboardUsername)
+            dashboardUsername.textContent =
+                data.fullname || "Member";
+
+        if (popupUserName)
+            popupUserName.textContent =
+                data.fullname || "Member";
+
+        if (currentPlan)
+            currentPlan.textContent =
+                data.plan || "Not Activated";
+
+        if (memberStatus)
+            memberStatus.textContent =
+                data.memberStatus || "Pending Activation";
+
+        // ======================================
         // LOAD USER INFORMATION
         // ======================================
 
