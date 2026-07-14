@@ -14,7 +14,26 @@ import {
     getDocs,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-alert("auth.js loaded");
+
+// ======================================
+// AUTO REFERRAL DETECTION
+// ======================================
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const refUsername = urlParams.get("ref");
+
+const referredByInput =
+    document.getElementById("referredBy");
+
+if (refUsername && referredByInput) {
+
+    referredByInput.value =
+        refUsername.toLowerCase();
+
+    referredByInput.readOnly = true;
+
+}
 // Get the signup form
 const signupForm = document.getElementById("signupForm");
 
