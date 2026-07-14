@@ -630,23 +630,23 @@ button:hover{
 
 .popup-box{
 
-    width:100%;
+    background:#ffffff;
 
-    max-width:430px;
+    width:90%;
 
-    background:var(--card);
-
-    color:white;
+    max-width:360px;
 
     border-radius:20px;
 
-    padding:25px;
+    padding:22px;
 
     text-align:center;
 
-    max-height:90vh;
+    max-height:75vh;
 
     overflow-y:auto;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
 
 }
 
