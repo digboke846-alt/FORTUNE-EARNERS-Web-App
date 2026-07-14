@@ -6,7 +6,9 @@ import {
 
 import {
     doc,
-    getDoc
+    getDoc,
+    setDoc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -231,7 +233,62 @@ screenshotInput.addEventListener("change", () => {
 
     });
 
-});
+// ======================================
+// CHECK FOR EXISTING SUBMISSION
+// ======================================
+
+const submissionId =
+    user.uid + "_" + taskId;
+
+const submissionRef =
+    doc(db, "taskSubmissions", submissionId);
+
+const submissionSnap =
+    await getDoc(submissionRef);
+
+if (submissionSnap.exists()) {
+
+    const submission =
+        submissionSnap.data();
+
+    document.getElementById("taskStatus").textContent =
+        "🟡 " + submission.status;
+
+    submitBtn.disabled = true;
+
+    submitBtn.textContent =
+        "Task Already Submitted";
+
+} else {
+
+    submitBtn.addEventListener("click", async () => {
+
+        await setDoc(submissionRef, {
+
+            userId: user.uid,
+
+            taskId: taskId,
+
+            taskTitle: task.title,
+
+            status: "Pending",
+
+            screenshotURLs: [],
+
+            submittedAt: serverTimestamp()
+
+        });
+
+        alert("✅ Submission created successfully.\n\nImage upload will be connected when Storage is enabled.");
+
+        submitBtn.disabled = true;
+
+        submitBtn.textContent =
+            "Task Submitted";
+
+    });
+
+}
 
     catch(error){
 
