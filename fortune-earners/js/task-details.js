@@ -168,6 +168,70 @@ submitBtn.addEventListener("click", async () => {
 });
 
     }
+        // ======================================
+// IMAGE PREVIEW
+// ======================================
+
+const preview =
+    document.getElementById("imagePreview");
+
+screenshotInput.addEventListener("change", () => {
+
+    preview.innerHTML = "";
+
+    const files =
+        Array.from(screenshotInput.files);
+
+    if (files.length > 3) {
+
+        alert("You can only select a maximum of 3 screenshots.");
+
+        screenshotInput.value = "";
+
+        return;
+
+    }
+
+    files.forEach(file => {
+
+        if (!file.type.startsWith("image/")) {
+
+            return;
+
+        }
+
+        const reader =
+            new FileReader();
+
+        reader.onload = function(e){
+
+            const img =
+                document.createElement("img");
+
+            img.src = e.target.result;
+
+            img.style.width = "100px";
+
+            img.style.height = "100px";
+
+            img.style.objectFit = "cover";
+
+            img.style.borderRadius = "12px";
+
+            img.style.margin = "8px";
+
+            img.style.border =
+                "2px solid #FFC107";
+
+            preview.appendChild(img);
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+});
 
     catch(error){
 
