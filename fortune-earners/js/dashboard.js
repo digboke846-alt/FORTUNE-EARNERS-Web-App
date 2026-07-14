@@ -113,17 +113,42 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById("earnedToday").textContent =
             "₦" + Number(data.earnedToday || 0).toLocaleString();
 
-        // ======================================
+                // ======================================
         // REFERRAL LINK
         // ======================================
 
+        const username =
+            data.username || "USERNAME";
+
         const referralLink =
-            "https://fortunearner.netlify.app/signup?ref=" +
-            data.username;
+            "https://fortunearner.netlify.app/signup?ref=" + username;
 
         document.getElementById("referralLink").value =
             referralLink;
-              // ======================================
+
+        // ======================================
+        // COPY REFERRAL LINK
+        // ======================================
+
+        document
+            .getElementById("copyReferralBtn")
+            .addEventListener("click", async () => {
+
+                try {
+
+                    await navigator.clipboard.writeText(referralLink);
+
+                    alert("✅ Referral link copied successfully!");
+
+                } catch (error) {
+
+                    alert("Unable to copy referral link.");
+
+                }
+
+            });
+
+        // ======================================
         // LOAD STATISTICS
         // ======================================
 
@@ -138,22 +163,6 @@ onAuthStateChanged(auth, async (user) => {
 
         document.getElementById("totalWithdrawals").textContent =
             "₦" + Number(data.totalWithdrawals || 0).toLocaleString();
-
-        // ======================================
-        // TODAY SUMMARY
-        // ======================================
-
-        document.getElementById("tasksCompletedToday").textContent =
-            (data.tasksCompletedToday || 0) + "/5";
-
-        document.getElementById("adsViewedToday").textContent =
-            (data.adsViewedToday || 0) + "/5";
-
-        document.getElementById("referralsToday").textContent =
-            data.referralsToday || 0;
-
-        document.getElementById("earnedToday").textContent =
-            "₦" + Number(data.earnedToday || 0).toLocaleString();
 
         // ======================================
         // TELEGRAM & WHATSAPP LINKS
