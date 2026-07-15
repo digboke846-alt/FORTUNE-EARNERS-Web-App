@@ -49,6 +49,42 @@ onAuthStateChanged(auth, async (user) => {
             userData.plan || "Not Activated";
 
         // ======================================
+// CHECK PLAN ACTIVATION
+// ======================================
+
+if (
+    userData.plan === "None" ||
+    userData.memberStatus !== "Active"
+) {
+
+    document.getElementById("taskList").innerHTML = `
+
+        <div class="dashboard-card">
+
+            <h2>🔒 Daily Tasks Locked</h2>
+
+            <p>
+
+                Activate your membership plan to unlock Daily Tasks and start earning.
+
+            </p>
+
+            <button onclick="location.href='activate-plan.html'">
+
+                💎 Activate Plan
+
+            </button>
+
+        </div>
+
+    `;
+
+    document.getElementById("availableTasks").textContent = "0";
+
+    return;
+
+}
+        // ======================================
 // LOAD TASKS
 // ======================================
 
