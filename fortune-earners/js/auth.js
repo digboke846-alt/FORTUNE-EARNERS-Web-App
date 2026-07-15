@@ -21,10 +21,6 @@ import {
 // AUTO REFERRAL DETECTION
 // ======================================
 
-// ======================================
-// AUTO REFERRAL DETECTION
-// ======================================
-
 let referrerUid = "";
 
 window.addEventListener("load", async () => {
