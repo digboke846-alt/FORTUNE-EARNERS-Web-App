@@ -178,7 +178,35 @@ function calculateWithdrawal() {
 // SUBMIT WITHDRAWAL REQUEST
 // ======================================
 
-const confirmWithdrawBtn =
+// ======================================
+// CHECK EXISTING WITHDRAWAL REQUEST
+// ======================================
+
+const withdrawRequestRef =
+    doc(db, "withdrawRequests", user.uid);
+
+const withdrawRequestSnap =
+    await getDoc(withdrawRequestRef);
+
+if (withdrawRequestSnap.exists()) {
+
+    const request =
+        withdrawRequestSnap.data();
+
+    if (request.status === "Pending") {
+
+        document.getElementById("withdrawStatus").textContent =
+            "Pending Approval";
+
+        confirmWithdrawBtn.disabled = true;
+
+        confirmWithdrawBtn.textContent =
+            "Withdrawal Pending";
+
+    }
+
+}
+        const confirmWithdrawBtn =
     document.getElementById("confirmWithdrawBtn");
 
 confirmWithdrawBtn.addEventListener("click", async (e) => {
@@ -231,7 +259,7 @@ confirmWithdrawBtn.addEventListener("click", async (e) => {
     const receive = amount - fee;
 
     await setDoc(
-        doc(db, "withdrawRequests", user.uid),
+    withdrawRequestRef,
         {
 
             userId: user.uid,
