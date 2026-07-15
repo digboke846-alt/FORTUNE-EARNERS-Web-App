@@ -21,8 +21,6 @@ import {
 // AUTO REFERRAL DETECTION
 // ======================================
 
-let referrerUid = "";
-
 const urlParams = new URLSearchParams(window.location.search);
 
 const refUsername = urlParams.get("ref");
@@ -32,34 +30,12 @@ const referredByInput =
 
 if (refUsername && referredByInput) {
 
-    const refQuery = query(
+    referredByInput.value =
+        refUsername.toLowerCase();
 
-        collection(db, "users"),
+    referredByInput.readOnly = true;
 
-        where("username", "==", refUsername.toLowerCase())
-
-    );
-
-    const refSnapshot = await getDocs(refQuery);
-
-    if (!refSnapshot.empty) {
-
-        const refDoc = refSnapshot.docs[0];
-
-        referrerUid = refDoc.id;
-
-        referredByInput.value =
-            refUsername.toLowerCase();
-
-        referredByInput.readOnly = true;
-
-    } else {
-
-        referredByInput.value = "";
-
-        alert("Invalid referral link.");
-
-    }
+}
 
 }
 // Get the signup form
