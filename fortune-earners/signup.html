@@ -98,11 +98,28 @@
 
     <label for="referredBy">Referred By (Optional)</label><br>
 
-    <input
-        type="text"
-        id="referredBy"
-        name="referredBy"
-        placeholder="Referred by username or code (Optional)">
+const urlParams = new URLSearchParams(window.location.search);
+
+alert("Query String: " + window.location.search);
+
+const refUsername = urlParams.get("ref");
+
+alert("Referral Username: " + refUsername);
+
+const referredByInput =
+    document.getElementById("referredBy");
+
+alert("Input Found: " + (referredByInput !== null));
+
+if (refUsername && referredByInput) {
+
+    referredByInput.value = refUsername;
+
+    referredByInput.readOnly = true;
+
+    alert("Referral inserted successfully!");
+
+}
 
     <br><br>
 
@@ -134,8 +151,6 @@
 
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/auth.js"></script>
-    
-</script>
 
 </body>
 </html>
