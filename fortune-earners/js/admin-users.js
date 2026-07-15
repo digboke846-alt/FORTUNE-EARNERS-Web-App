@@ -8,7 +8,10 @@ import {
     collection,
     getDocs,
     doc,
-    getDoc
+    getDoc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -324,6 +327,61 @@ if(user.memberStatus === "Suspended"){
         alert(error.message);
 
     }
+ 
+}
+    // ======================================
+// SUSPEND USER
+// ======================================
+
+document
+.getElementById("suspendUserBtn")
+.onclick = async function(){
+
+    if(!selectedUserId) return;
+
+    const confirmSuspend = confirm(
+
+        `Suspend ${selectedUserData.fullname}?`
+
+    );
+
+    if(!confirmSuspend) return;
+
+    try{
+
+        await updateDoc(
+
+            doc(db,"users",selectedUserId),
+
+            {
+
+                memberStatus:"Suspended",
+
+                suspendedAt:serverTimestamp(),
+
+                suspendedBy:auth.currentUser.uid
+
+            }
+
+        );
+
+        alert("User suspended successfully.");
+
+        document
+        .getElementById("userModal")
+        .style.display="none";
+
+        loadUsers();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(error.message);
+
+};
 
 }
 // ======================================
