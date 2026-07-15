@@ -36,8 +36,6 @@ if (refUsername && referredByInput) {
     referredByInput.readOnly = true;
 
 }
-
-}
 // Get the signup form
 const signupForm = document.getElementById("signupForm");
 
