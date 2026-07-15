@@ -98,28 +98,11 @@
 
     <label for="referredBy">Referred By (Optional)</label><br>
 
-const urlParams = new URLSearchParams(window.location.search);
-
-alert("Query String: " + window.location.search);
-
-const refUsername = urlParams.get("ref");
-
-alert("Referral Username: " + refUsername);
-
-const referredByInput =
-    document.getElementById("referredBy");
-
-alert("Input Found: " + (referredByInput !== null));
-
-if (refUsername && referredByInput) {
-
-    referredByInput.value = refUsername;
-
-    referredByInput.readOnly = true;
-
-    alert("Referral inserted successfully!");
-
-}
+    <input
+        type="text"
+        id="referredBy"
+        name="referredBy"
+        placeholder="Referred by username or code (Optional)">
 
     <br><br>
 
