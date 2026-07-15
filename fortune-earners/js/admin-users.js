@@ -385,6 +385,61 @@ document
 
 }
 // ======================================
+// REACTIVATE USER
+// ======================================
+
+document
+.getElementById("activateUserBtn")
+.onclick = async function(){
+
+    if(!selectedUserId) return;
+
+    const confirmActivate = confirm(
+
+        `Reactivate ${selectedUserData.fullname}?`
+
+    );
+
+    if(!confirmActivate) return;
+
+    try{
+
+        await updateDoc(
+
+            doc(db,"users",selectedUserId),
+
+            {
+
+                memberStatus:"Activated",
+
+                suspendedAt:null,
+
+                suspendedBy:null
+
+            }
+
+        );
+
+        alert("User reactivated successfully.");
+
+        document
+        .getElementById("userModal")
+        .style.display="none";
+
+        loadUsers();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
+// ======================================
 // CLOSE MODAL
 // ======================================
 
