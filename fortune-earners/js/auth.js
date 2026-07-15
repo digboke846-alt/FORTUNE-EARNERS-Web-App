@@ -21,21 +21,66 @@ import {
 // AUTO REFERRAL DETECTION
 // ======================================
 
-const urlParams = new URLSearchParams(window.location.search);
+// ======================================
+// AUTO REFERRAL DETECTION
+// ======================================
 
-const refUsername = urlParams.get("ref");
+let referrerUid = "";
 
-const referredByInput =
-    document.getElementById("referredBy");
+window.addEventListener("load", async () => {
 
-if (refUsername && referredByInput) {
+    const urlParams = new URLSearchParams(window.location.search);
 
-    referredByInput.value =
-        refUsername.toLowerCase();
+    const refUsername = urlParams.get("ref");
 
-    referredByInput.readOnly = true;
+    const referredByInput =
+        document.getElementById("referredBy");
 
-}
+    if (!refUsername || !referredByInput) return;
+
+    try {
+
+        const refQuery = query(
+
+            collection(db, "users"),
+
+            where("username", "==", refUsername.toLowerCase())
+
+        );
+
+        const refSnapshot =
+            await getDocs(refQuery);
+
+        if (refSnapshot.empty) {
+
+            referredByInput.value = "";
+
+            alert("Invalid referral link.");
+
+            return;
+
+        }
+
+        const refDoc =
+            refSnapshot.docs[0];
+
+        referrerUid =
+            refDoc.id;
+
+        referredByInput.value =
+            refUsername.toLowerCase();
+
+        referredByInput.readOnly = true;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+});
 // Get the signup form
 const signupForm = document.getElementById("signupForm");
 
