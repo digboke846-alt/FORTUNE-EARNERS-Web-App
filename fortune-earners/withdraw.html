@@ -1,162 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdraw | Fortune Earners</title>
 
-    <link rel="stylesheet" href="css/style.css">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Withdraw | Fortune Earners</title>
+
+<link rel="stylesheet"
+href="css/style.css">
+
 </head>
 
 <body>
-    <!-- ========================= -->
+
+<!-- ========================= -->
 <!-- FIXED HEADER -->
 <!-- ========================= -->
 
 <header class="top-header">
 
-    <button id="menuButton" class="menu-btn">
-        ☰
-    </button>
+<button
+id="menuButton"
+class="menu-btn">
 
-    <h1 class="logo">
-        FORTUNE EARNERS
-    </h1>
+☰
 
-    <div class="header-icons">
+</button>
 
-        <button id="notificationButton">
-            🔔
-        </button>
+<h1 class="logo">
 
-        <a href="profile.html">
-            👤
-        </a>
+FORTUNE EARNERS
 
-    </div>
+</h1>
+
+<div class="header-icons">
+
+<button id="notificationButton">
+
+🔔
+
+</button>
+
+<a href="profile.html">
+
+👤
+
+</a>
+
+</div>
 
 </header>
-    <!-- ========================= -->
+
+<!-- ========================= -->
 <!-- HAMBURGER MENU -->
 <!-- ========================= -->
 
-<nav id="menu" class="side-menu">
+<nav
+id="menu"
+class="side-menu">
 
 <h2>Menu</h2>
 
-<a href="dashboard.html">🏠 Dashboard</a>
+<a href="dashboard.html">
 
-<a href="#">🚀 Activate Plan</a>
+🏠 Dashboard
 
-<a href="#">📋 Daily Tasks</a>
+</a>
 
-<a href="#">📺 Sponsored Ads</a>
+<a href="activate-plan.html">
 
-<a href="#">👥 Referrals</a>
+💎 Activate Plan
 
-<a href="withdraw.html">💸 Withdraw</a>
+</a>
 
-<a href="place-ads.html">📢 Place Ads</a>
+<a href="daily-tasks.html">
 
-<a href="profile.html">👤 Profile</a>
+📋 Daily Tasks
 
-<a href="about.html">ℹ️ About</a>
+</a>
 
-<a href="terms.html">📄 Terms & Conditions</a>
+<a href="sponsored-ads.html">
 
-<a href="privacy.html">🔒 Privacy Policy</a>
+📺 Sponsored Ads
 
-<a href="contact.html">📞 Contact Support</a>
+</a>
 
-<a href="#" id="logoutBtn">🚪 Log Out</a>
+<a href="referrals.html">
+
+👥 Referrals
+
+</a>
+
+<a href="withdraw.html">
+
+💸 Withdraw
+
+</a>
+
+<a href="place-ads.html">
+
+📢 Place Ads
+
+</a>
+
+<a href="profile.html">
+
+👤 Profile
+
+</a>
+
+<a href="about.html">
+
+ℹ️ About Fortune Earners
+
+</a>
+
+<a href="terms.html">
+
+📄 Terms & Conditions
+
+</a>
+
+<a href="privacy.html">
+
+🔒 Privacy Policy
+
+</a>
+
+<a href="contact.html">
+
+📞 Contact Support
+
+</a>
+
+<a href="#"
+id="logoutBtn">
+
+🚪 Log Out
+
+</a>
 
 </nav>
-    <div id="menuOverlay" class="menu-overlay"></div>
+
+<div
+id="menuOverlay"
+class="menu-overlay">
+
+</div>
 
 <!-- ========================= -->
 <!-- MAIN CONTENT -->
 <!-- ========================= -->
 
-<div class="container">
+<div
+class="container"
+id="withdrawContainer">
 
-<h1>Withdraw Funds</h1>
+<h1>
+
+Withdraw Funds
+
+</h1>
 
 <p>
+
 Withdraw your earnings safely and securely to your registered bank account.
+
 </p>
-<h2>Select Wallet</h2>
+
+<h2>
+
+Select Wallet
+
+</h2>
 
 <form>
+    <label>
 
-<label>
-<input type="radio" name="wallet">
+<input
+type="radio"
+name="wallet"
+value="affiliate">
+
 Affiliate Wallet
+
 </label>
 
 <label>
-<input type="radio" name="wallet">
-Task Wallet
-</label>
-<label>Withdrawal Amount</label>
 
-<input type="number"
+<input
+type="radio"
+name="wallet"
+value="task">
+
+Task Wallet
+
+</label>
+
+<label>
+
+Withdrawal Amount
+
+</label>
+
+<input
+type="number"
+id="withdrawAmount"
 placeholder="Enter amount">
 
-<button type="button">
+<button
+type="button"
+id="withdrawAllBtn">
+
 Withdraw All
+
 </button>
-<h2>Wallet Information</h2>
 
-<p><strong>Available Balance:</strong> ₦0.00</p>
+<h2>
 
-<p><strong>Minimum Withdrawal:</strong> ₦1,000</p>
-<h2>Bank Details</h2>
+Wallet Information
 
-<p><strong>Bank Name:</strong> Not Added</p>
+</h2>
 
-<p><strong>Account Number:</strong> Not Added</p>
+<p>
 
-<p><strong>Account Name:</strong> Not Added</p>
+<strong>Affiliate Wallet:</strong>
+
+<span id="affiliateBalance">
+
+₦0.00
+
+</span>
+
+</p>
+
+<p>
+
+<strong>Task Wallet:</strong>
+
+<span id="taskBalance">
+
+₦0.00
+
+</span>
+
+</p>
+
+<p>
+
+<strong>Minimum Withdrawal:</strong>
+
+₦1,000
+
+</p>
+
+<h2>
+
+Bank Details
+
+</h2>
+
+<p>
+
+<strong>Bank Name:</strong>
+
+<span id="bankName">
+
+Not Added
+
+</span>
+
+</p>
+
+<p>
+
+<strong>Account Number:</strong>
+
+<span id="accountNumber">
+
+Not Added
+
+</span>
+
+</p>
+
+<p>
+
+<strong>Account Name:</strong>
+
+<span id="accountName">
+
+Not Added
+
+</span>
+
+</p>
 
 <a href="profile.html">
-    <button type="button">Add / Update Bank Details</button>
-</a>
-<h2>Withdrawal Summary</h2>
 
-<p><strong>Withdrawal Amount:</strong> ₦0.00</p>
+<button type="button">
 
-<p><strong>Processing Fee (7%):</strong> ₦0.00</p>
+Add / Update Bank Details
 
-<p><strong>You'll Receive:</strong> ₦0.00</p>
-<h2>Withdrawal Method</h2>
-
-<p>Bank Transfer</p>
-<h2>Withdrawal Status</h2>
-
-<p>Ready to Process</p>
-<button type="submit">
-Confirm Withdrawal
 </button>
+
+</a>
+<h2>
+
+Withdrawal Summary
+
+</h2>
+
 <p>
-By confirming this withdrawal, you agree that a 7% processing fee will be deducted from the withdrawal amount before payment.
+
+<strong>Withdrawal Amount:</strong>
+
+<span id="summaryAmount">
+
+₦0.00
+
+</span>
+
 </p>
+
+<p>
+
+<strong>Processing Fee (7%):</strong>
+
+<span id="processingFee">
+
+₦0.00
+
+</span>
+
+</p>
+
+<p>
+
+<strong>You'll Receive:</strong>
+
+<span id="receiveAmount">
+
+₦0.00
+
+</span>
+
+</p>
+
+<h2>
+
+Withdrawal Method
+
+</h2>
+
+<p>
+
+🏦 Bank Transfer
+
+</p>
+
+<h2>
+
+Withdrawal Status
+
+</h2>
+
+<p id="withdrawStatus">
+
+Ready to Process
+
+</p>
+
+<button
+type="submit"
+id="confirmWithdrawBtn">
+
+Confirm Withdrawal
+
+</button>
+
+<p>
+
+By confirming this withdrawal, you agree that a <strong>7% processing fee</strong> will be deducted before payment is processed.
+
+</p>
+
 </form>
-<h2>Withdrawal History</h2>
-
-<p>No withdrawal history available.</p>
-
-<h2>Quick Navigation</h2>
-
-<!-- Bottom Navigation -->
 
 <hr>
 
-<p>&copy; 2026 Fortune Earners. All Rights Reserved.</p>
+<h2>
 
-...
+Withdrawal History
+
+</h2>
+
+<div id="withdrawHistory">
+
+<p>
+
+No withdrawal history available.
+
+</p>
 
 </div>
-    
-    <script src="js/menu.js"></script>
+<hr>
+
+<footer class="site-footer">
+
+<p>
+
+© 2026 Fortune Earners. All Rights Reserved.
+
+</p>
+
+<div class="footer-links">
+
+<a href="terms.html">
+
+Terms & Conditions
+
+</a>
+
+|
+
+<a href="privacy.html">
+
+Privacy Policy
+
+</a>
+
+|
+
+<a href="contact.html">
+
+Need Help? Contact Support
+
+</a>
+
+</div>
+
+</footer>
+
+</div>
+
+<script src="js/menu.js"></script>
+
+<script type="module" src="js/withdraw.js"></script>
+
 </body>
+
 </html>
