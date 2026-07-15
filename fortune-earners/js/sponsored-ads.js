@@ -8,7 +8,9 @@ import {
     collection,
     query,
     where,
-    getDocs
+    getDocs,
+    doc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -25,7 +27,52 @@ onAuthStateChanged(auth, async (user) => {
 
     }
 
-    try {
+    try { 
+        const userRef = doc(db, "users", user.uid);
+
+const userSnap = await getDoc(userRef);
+
+if (!userSnap.exists()) {
+
+    alert("User account not found.");
+
+    return;
+
+}
+
+const userData = userSnap.data();
+
+// ======================================
+// CHECK PLAN ACTIVATION
+// ======================================
+
+if (userData.memberStatus !== "Active") {
+
+    document.getElementById("adsContainer").innerHTML = `
+
+        <div class="dashboard-card">
+
+            <h2>🔒 Sponsored Ads Locked</h2>
+
+            <p>
+
+                Activate your membership plan to unlock Sponsored Ads and start earning.
+
+            </p>
+
+            <button onclick="location.href='activate-plan.html'">
+
+                💎 Activate Plan
+
+            </button>
+
+        </div>
+
+    `;
+
+    return;
+
+}
 
         const adsContainer =
             document.getElementById("adsContainer");
