@@ -256,6 +256,9 @@ window.viewUser = async function(userId){
 
         const user =
             userSnap.data();
+        selectedUserId = userId;
+
+selectedUserData = user;
 
         userDetails.innerHTML = `
 
@@ -291,6 +294,25 @@ window.viewUser = async function(userId){
 
         `;
 
+    const suspendBtn =
+    document.getElementById("suspendUserBtn");
+
+const activateBtn =
+    document.getElementById("activateUserBtn");
+
+if(user.memberStatus === "Suspended"){
+
+    suspendBtn.style.display = "none";
+
+    activateBtn.style.display = "inline-block";
+
+}else{
+
+    suspendBtn.style.display = "inline-block";
+
+    activateBtn.style.display = "none";
+
+}
         modal.style.display = "block";
 
     }
@@ -330,3 +352,10 @@ window.onclick = function(event){
     }
 
 };
+// ======================================
+// CURRENTLY SELECTED USER
+// ======================================
+
+let selectedUserId = "";
+
+let selectedUserData = {};
