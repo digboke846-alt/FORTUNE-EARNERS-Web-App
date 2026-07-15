@@ -49,11 +49,13 @@ window.addEventListener("load", async () => {
 
         if (refSnapshot.empty) {
 
-            referredByInput.value = "";
+    referredByInput.value = "";
 
-            alert("Invalid referral link.");
+    referredByInput.readOnly = true;
 
-            return;
+    alert("Invalid referral username.");
+
+    return;
 
         }
 
