@@ -110,6 +110,34 @@ planButtons.forEach(button => {
 
 const submitPaymentBtn =
     document.getElementById("submitPaymentBtn");
+        // ======================================
+// CHECK EXISTING ACTIVATION REQUEST
+// ======================================
+
+const activationRef =
+    doc(db, "activationRequests", user.uid);
+
+const activationSnap =
+    await getDoc(activationRef);
+
+if (activationSnap.exists()) {
+
+    const request =
+        activationSnap.data();
+
+    if (request.status === "Pending") {
+
+        submitPaymentBtn.disabled = true;
+
+        submitPaymentBtn.textContent =
+            "Activation Request Pending";
+
+        document.getElementById("proofStatus").textContent =
+            "Your activation request is awaiting admin approval.";
+
+    }
+
+}
 
 submitPaymentBtn.addEventListener("click", async () => {
 
