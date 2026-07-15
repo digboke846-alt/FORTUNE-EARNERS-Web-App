@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Manage Users | Fortune Earners
+
+</title>
+
+<link
+rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+<button
+id="menuButton"
+class="menu-btn">
+
+☰
+
+</button>
+
+<h1 class="logo">
+
+FORTUNE EARNERS
+
+</h1>
+
+<div class="header-icons">
+
+<span>
+
+👑 Admin
+
+</span>
+
+</div>
+
+</header>
+
+<nav
+id="menu"
+class="side-menu">
+
+<h2>
+
+Admin Panel
+
+</h2>
+
+<a href="admin-dashboard.html">
+
+🏠 Dashboard
+
+</a>
+
+<a href="admin-users.html">
+
+👥 Users
+
+</a>
+
+<a href="admin-content.html">
+
+📋 Content Management
+
+</a>
+
+<a href="admin-withdrawals.html">
+
+💸 Withdrawals
+
+</a>
+
+<a href="admin-settings.html">
+
+⚙ Settings
+
+</a>
+
+<hr>
+
+<a href="dashboard.html">
+
+🌐 User Dashboard
+
+</a>
+
+<a href="#" id="logoutBtn">
+
+🚪 Logout
+
+</a>
+
+</nav>
+
+<div
+id="menuOverlay"
+class="menu-overlay">
+
+</div>
+
+<div class="container">
+
+<h1>
+
+👥 Manage Users
+
+</h1>
+
+<p>
+
+Search, manage and monitor all registered users.
+
+</p>
+
+<input
+type="text"
+id="searchUser"
+placeholder="Search by name, username, email or phone...">
+
+<br><br>
+
+<div id="usersContainer">
+
+<p>
+
+Loading users...
+
+</p>
+
+</div>
+<!-- ===================== -->
+<!-- USER DETAILS MODAL -->
+<!-- ===================== -->
+
+<div
+id="userModal"
+class="modal"
+style="display:none;">
+
+<div class="modal-content">
+
+<span
+id="closeModal"
+style="float:right;
+cursor:pointer;
+font-size:28px;">
+
+&times;
+
+</span>
+
+<h2>
+
+👤 User Details
+
+</h2>
+
+<div id="userDetails">
+
+<p>
+
+Loading...
+
+</p>
+
+</div>
+
+<hr>
+
+<div class="dashboard-grid">
+
+<button
+id="suspendUserBtn">
+
+🚫 Suspend User
+
+</button>
+
+<button
+id="activateUserBtn">
+
+✅ Activate User
+
+</button>
+
+<button
+id="deleteUserBtn">
+
+🗑 Delete User
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<footer>
+
+<p>
+
+<a href="terms.html">
+
+Terms & Conditions
+
+</a>
+
+|
+
+<a href="privacy.html">
+
+Privacy Policy
+
+</a>
+
+|
+
+<a href="contact.html">
+
+Need Help? Contact Support
+
+</a>
+
+</p>
+
+<p>
+
+&copy; 2026 Fortune Earners.
+
+All Rights Reserved.
+
+</p>
+
+</footer>
+
+</div>
+
+<script src="js/menu.js"></script>
+
+<script
+type="module"
+src="js/admin-users.js">
+
+</script>
+
+</body>
+
+</html>
