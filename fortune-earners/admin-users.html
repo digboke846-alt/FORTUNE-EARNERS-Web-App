@@ -128,7 +128,7 @@ Search, manage and monitor all registered users.
 
 <input
 type="text"
-id="searchUser"
+id="searchUsers"
 placeholder="Search by name, username, email or phone...">
 
 <br><br>
@@ -151,63 +151,59 @@ id="userModal"
 class="modal"
 style="display:none;">
 
-<div class="modal-content">
+    <div class="modal-content">
 
-<span
-id="closeModal"
-style="float:right;
-cursor:pointer;
-font-size:28px;">
+        <span
+        id="closeModal"
+        style="float:right;
+        cursor:pointer;
+        font-size:28px;">
 
-&times;
+            &times;
 
-</span>
+        </span>
 
-<h2>
+        <h2>
 
-👤 User Details
+            👤 User Details
 
-</h2>
+        </h2>
 
-<div id="userDetails">
+        <div id="userDetails">
 
-<p>
+            <p>
 
-Loading...
+                Loading...
 
-</p>
+            </p>
 
-</div>
+        </div>
 
-<hr>
+        <hr>
 
-<div class="dashboard-grid">
+        <div class="dashboard-grid">
 
-<button id="deactivateUserBtn">
-    🚫 Deactivate User
-</button>
+            <button id="suspendUserBtn">
 
-🚫 Suspend User
+                🚫 Suspend User
 
-</button>
+            </button>
 
-<button
-id="activateUserBtn">
+            <button id="activateUserBtn">
 
-✅ Activate User
+                ✅ Activate User
 
-</button>
+            </button>
 
-<button
-id="deleteUserBtn">
+            <button id="deactivateUserBtn">
 
-🗑 Delete User
+                🚫 Deactivate User
 
-</button>
+            </button>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </div>
 
