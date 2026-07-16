@@ -469,3 +469,69 @@ window.editContent = async function(contentId) {
     }
 
 };
+// ======================================
+// ADMIN AUTHENTICATION
+// ======================================
+
+onAuthStateChanged(auth, async (user) => {
+
+    if (!user) {
+
+        window.location.href = "login.html";
+
+        return;
+
+    }
+
+    try {
+
+        const userRef = doc(db, "users", user.uid);
+
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+
+            window.location.href = "login.html";
+
+            return;
+
+        }
+
+        const userData = userSnap.data();
+
+        if (!userData.isAdmin) {
+
+            alert("Access denied.");
+
+            window.location.href = "dashboard.html";
+
+            return;
+
+        }
+
+        loadContent();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
+
+// ======================================
+// LOGOUT
+// ======================================
+
+document.getElementById("logoutBtn")
+.addEventListener("click", async () => {
+
+    await signOut(auth);
+
+    window.location.href = "login.html";
+
+});
