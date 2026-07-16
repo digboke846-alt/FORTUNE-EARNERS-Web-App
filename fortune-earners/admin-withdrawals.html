@@ -1,0 +1,168 @@
+<div class="container">
+
+<h1>💸 Withdrawal Management</h1>
+
+<p>
+Review, approve and reject user withdrawal requests.
+</p>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+<h3>💸 Pending Requests</h3>
+<h2 id="pendingCount">0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>✅ Approved Today</h3>
+<h2 id="approvedToday">0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>❌ Rejected</h3>
+<h2 id="rejectedCount">0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>💰 Total Pending Amount</h3>
+<h2 id="pendingAmount">₦0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>🏦 Total Paid Amount</h3>
+<h2 id="totalPaid">₦0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>📝 Total Task Payout</h3>
+<h2 id="taskPayout">₦0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>👥 Total Referral Payout</h3>
+<h2 id="referralPayout">₦0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>👑 Highest Single Withdrawal</h3>
+<h2 id="highestWithdrawal">₦0</h2>
+</div>
+
+<div class="dashboard-card">
+<h3>📅 Last Payment</h3>
+<h2 id="lastPayment">None</h2>
+</div>
+
+</div>
+
+<hr>
+
+<input
+type="text"
+id="searchWithdrawal"
+placeholder="Search by username, reference or account name...">
+
+<br><br>
+
+<div class="dashboard-grid">
+
+<button id="showPendingBtn">
+⏳ Pending
+</button>
+
+<button id="showApprovedBtn">
+✅ Approved
+</button>
+
+<button id="showRejectedBtn">
+❌ Rejected
+</button>
+
+<button id="showAllBtn">
+📋 All Requests
+</button>
+
+</div>
+
+<br>
+
+<div id="withdrawalsContainer">
+
+<p>Loading withdrawal requests...</p>
+
+</div>
+
+</div>
+<!-- ===================== -->
+<!-- WITHDRAWAL DETAILS MODAL -->
+<!-- ===================== -->
+
+<div
+id="withdrawalModal"
+class="modal"
+style="display:none;">
+
+<div class="modal-content">
+
+<span
+id="closeWithdrawalModal"
+style="float:right;
+cursor:pointer;
+font-size:28px;">
+
+&times;
+
+</span>
+
+<h2>
+
+💸 Withdrawal Details
+
+</h2>
+
+<div id="withdrawalDetails">
+
+<p>
+
+Loading...
+
+</p>
+
+</div>
+
+<hr>
+
+<label>
+
+Admin Note
+
+</label>
+
+<textarea
+id="adminNote"
+rows="3"
+placeholder="Optional note...">
+
+</textarea>
+
+<br><br>
+
+<div class="dashboard-grid">
+
+<button id="approveWithdrawalBtn">
+
+✅ Approve Payment
+
+</button>
+
+<button id="rejectWithdrawalBtn">
+
+❌ Reject Request
+
+</button>
+
+</div>
+
+</div>
+
+</div>
