@@ -71,12 +71,12 @@ onAuthStateChanged(auth, async (user) => {
 
         if (currentPlan) {
             currentPlan.textContent =
-                data.plan || "Not Daniel";
+                data.plan || "Not Activated";
         }
 
         if (memberStatus) {
             memberStatus.textContent =
-                data.memberStatus || "Pending Daniel";
+                data.memberStatus || "Pending Activation";
         }
                 // ======================================
         // LOAD WALLETS
