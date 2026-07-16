@@ -24,6 +24,7 @@ import {
 let referrerUid = "";
 
 window.addEventListener("load", async () => {
+    alert("Referral detection started");
 
     const urlParams = new URLSearchParams(window.location.search);
 
