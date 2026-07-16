@@ -7,15 +7,24 @@ import {
 import {
     collection,
     getDocs,
-    doc,
     getDoc,
+    doc,
     updateDoc,
     deleteDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
-// CHECK ADMIN ACCESS
+// GLOBAL VARIABLES
+// ======================================
+
+let allUsers = [];
+
+let selectedUserId = "";
+
+let selectedUserData = {};
+// ======================================
+// CHECK ADMIN AUTHENTICATION
 // ======================================
 
 onAuthStateChanged(auth, async (user) => {
@@ -30,42 +39,38 @@ onAuthStateChanged(auth, async (user) => {
 
     try {
 
-        const adminRef =
-            doc(db, "users", user.uid);
+        const adminRef = doc(db, "users", user.uid);
 
-        const adminSnap =
-            await getDoc(adminRef);
+        const adminSnap = await getDoc(adminRef);
 
         if (!adminSnap.exists()) {
 
-            alert("Admin account not found.");
+            alert("User account not found.");
 
-            window.location.href =
-                "dashboard.html";
+            window.location.href = "login.html";
 
             return;
 
         }
 
-        const adminData =
-            adminSnap.data();
+        const adminData = adminSnap.data();
 
-        if (!adminData.isAdmin) {
+        if (adminData.isAdmin !== true) {
 
             alert("Access denied.");
 
-            window.location.href =
-                "dashboard.html";
+            window.location.href = "dashboard.html";
 
             return;
 
         }
 
-        loadUsers();
+        // Admin verified
+        await loadUsers();
 
     }
 
-    catch(error){
+    catch (error) {
 
         console.error(error);
 
@@ -85,142 +90,33 @@ async function loadUsers() {
         const usersContainer =
             document.getElementById("usersContainer");
 
-        usersContainer.innerHTML =
-            "<p>Loading users...</p>";
+        usersContainer.innerHTML = `
+            <p>Loading users...</p>
+        `;
 
         const usersSnapshot =
             await getDocs(collection(db, "users"));
 
-        usersContainer.innerHTML = "";
-
-        if (usersSnapshot.empty) {
-
-            usersContainer.innerHTML = `
-
-                <div class="dashboard-card">
-
-                    <h3>No Users Found</h3>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
+        // Store users in memory
+        allUsers = [];
 
         usersSnapshot.forEach((userDoc) => {
 
-            const user =
-                userDoc.data();
+            allUsers.push({
 
-            const status =
-                user.memberStatus || "Pending Activation";
+                id: userDoc.id,
 
-            const plan =
-                user.plan || "Not Activated";
+                ...userDoc.data()
 
-            const affiliateWallet =
-                user.affiliateWallet || 0;
-
-            const taskWallet =
-                user.taskWallet || 0;
-
-            const referrals =
-                user.validReferrals || 0;
-
-            usersContainer.innerHTML += `
-
-            <div class="dashboard-card">
-
-                <h3>
-
-                    👤 ${user.fullname}
-
-                </h3>
-
-                <p>
-
-                    <strong>Username:</strong>
-
-                    @${user.username}
-
-                </p>
-
-                <p>
-
-                    <strong>Email:</strong>
-
-                    ${user.email}
-
-                </p>
-
-                <p>
-
-                    <strong>Phone:</strong>
-
-                    ${user.phone}
-
-                </p>
-
-                <p>
-
-                    <strong>Status:</strong>
-
-                    ${status}
-
-                </p>
-
-                <p>
-
-                    <strong>Plan:</strong>
-
-                    ${plan}
-
-                </p>
-
-                <p>
-
-                    <strong>Affiliate Wallet:</strong>
-
-                    ₦${affiliateWallet.toLocaleString()}
-
-                </p>
-
-                <p>
-
-                    <strong>Task Wallet:</strong>
-
-                    ₦${taskWallet.toLocaleString()}
-
-                </p>
-
-                <p>
-
-                    <strong>Valid Referrals:</strong>
-
-                    ${referrals}
-
-                </p>
-
-                <br>
-
-                <button
-                    onclick="viewUser('${userDoc.id}')">
-
-                    👁 View
-
-                </button>
-
-            </div>
-
-            `;
+            });
 
         });
 
+        displayUsers(allUsers);
+
     }
 
-    catch(error){
+    catch (error) {
 
         console.error(error);
 
@@ -230,18 +126,143 @@ async function loadUsers() {
 
 }
 // ======================================
+// DISPLAY USERS
+// ======================================
+
+function displayUsers(users) {
+
+    const usersContainer =
+        document.getElementById("usersContainer");
+
+    usersContainer.innerHTML = "";
+
+    if (users.length === 0) {
+
+        usersContainer.innerHTML = `
+
+            <div class="dashboard-card">
+
+                <h3>
+
+                    No users found.
+
+                </h3>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    users.forEach((user) => {
+
+        const planStatus =
+    user.memberStatus || "Pending Activation";
+
+const accountStatus =
+    user.accountStatus || "Active";
+
+        const plan =
+            user.plan || "Not Activated";
+
+        const affiliateWallet =
+            user.affiliateWallet || 0;
+
+        const taskWallet =
+            user.taskWallet || 0;
+
+        const validReferrals =
+            user.validReferrals || 0;
+
+        usersContainer.innerHTML += `
+
+        <div class="dashboard-card">
+
+            <h3>
+
+                👤 ${user.fullname}
+
+            </h3>
+
+            <p>
+
+                <strong>Username:</strong>
+
+                @${user.username}
+
+            </p>
+
+            <p>
+
+<strong>Plan Status:</strong>
+
+${planStatus}
+
+</p>
+
+<p>
+
+<strong>Account Status:</strong>
+
+${accountStatus}
+
+</p>
+
+            <p>
+
+                <strong>Plan:</strong>
+
+                ${plan}
+
+            </p>
+
+            <p>
+
+                <strong>Affiliate Wallet:</strong>
+
+                ₦${affiliateWallet.toLocaleString()}
+
+            </p>
+
+            <p>
+
+                <strong>Task Wallet:</strong>
+
+                ₦${taskWallet.toLocaleString()}
+
+            </p>
+
+            <p>
+
+                <strong>Valid Referrals:</strong>
+
+                ${validReferrals}
+
+            </p>
+
+            <button
+                onclick="viewUser('${user.id}')">
+
+                👁 View Details
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+// ======================================
 // VIEW USER DETAILS
 // ======================================
 
-window.viewUser = async function(userId){
+window.viewUser = async function(userId) {
 
-    try{
-
-        const modal =
-            document.getElementById("userModal");
-
-        const userDetails =
-            document.getElementById("userDetails");
+    try {
 
         const userRef =
             doc(db, "users", userId);
@@ -249,7 +270,7 @@ window.viewUser = async function(userId){
         const userSnap =
             await getDoc(userRef);
 
-        if(!userSnap.exists()){
+        if (!userSnap.exists()) {
 
             alert("User not found.");
 
@@ -257,11 +278,14 @@ window.viewUser = async function(userId){
 
         }
 
-        const user =
-            userSnap.data();
         selectedUserId = userId;
 
-selectedUserData = user;
+        selectedUserData = userSnap.data();
+
+        const user = selectedUserData;
+
+        const userDetails =
+            document.getElementById("userDetails");
 
         userDetails.innerHTML = `
 
@@ -277,8 +301,11 @@ selectedUserData = user;
         <p><strong>Phone:</strong>
         ${user.phone}</p>
 
-        <p><strong>Status:</strong>
-        ${user.memberStatus || "Pending Activation"}</p>
+        <p><strong>Plan Status:</strong>
+${user.memberStatus || "Pending Activation"}</p>
+
+<p><strong>Account Status:</strong>
+${user.accountStatus || "Active"}</p>
 
         <p><strong>Plan:</strong>
         ${user.plan || "Not Activated"}</p>
@@ -297,140 +324,33 @@ selectedUserData = user;
 
         `;
 
-    const suspendBtn =
-    document.getElementById("suspendUserBtn");
+        const suspendBtn =
+            document.getElementById("suspendUserBtn");
 
-const activateBtn =
-    document.getElementById("activateUserBtn");
+        const activateBtn =
+            document.getElementById("activateUserBtn");
 
-if(user.memberStatus === "Suspended"){
+        if (user.accountStatus === "Suspended") {
 
     suspendBtn.style.display = "none";
 
     activateBtn.style.display = "inline-block";
 
-}else{
+} else {
 
     suspendBtn.style.display = "inline-block";
 
     activateBtn.style.display = "none";
 
-}
-        modal.style.display = "block";
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert(error.message);
-
-    }
- 
-}
-    // ======================================
-// SUSPEND USER
-// ======================================
-
-document
-.getElementById("suspendUserBtn")
-.onclick = async function(){
-
-    if(!selectedUserId) return;
-
-    const confirmSuspend = confirm(
-
-        `Suspend ${selectedUserData.fullname}?`
-
-    );
-
-    if(!confirmSuspend) return;
-
-    try{
-
-        await updateDoc(
-
-            doc(db,"users",selectedUserId),
-
-            {
-
-                memberStatus:"Suspended",
-
-                suspendedAt:serverTimestamp(),
-
-                suspendedBy:auth.currentUser.uid
-
-            }
-
-        );
-
-        alert("User suspended successfully.");
+        }
 
         document
-        .getElementById("userModal")
-        .style.display="none";
-
-        loadUsers();
+            .getElementById("userModal")
+            .style.display = "block";
 
     }
 
-    catch(error){
-
-        console.error(error);
-
-        alert(error.message);
-
-};
-
-}
-// ======================================
-// REACTIVATE USER
-// ======================================
-
-document
-.getElementById("activateUserBtn")
-.onclick = async function(){
-
-    if(!selectedUserId) return;
-
-    const confirmActivate = confirm(
-
-        `Reactivate ${selectedUserData.fullname}?`
-
-    );
-
-    if(!confirmActivate) return;
-
-    try{
-
-        await updateDoc(
-
-            doc(db,"users",selectedUserId),
-
-            {
-
-                memberStatus:"Activated",
-
-                suspendedAt:null,
-
-                suspendedBy:null
-
-            }
-
-        );
-
-        alert("User reactivated successfully.");
-
-        document
-        .getElementById("userModal")
-        .style.display="none";
-
-        loadUsers();
-
-    }
-
-    catch(error){
+    catch (error) {
 
         console.error(error);
 
@@ -439,36 +359,3 @@ document
     }
 
 };
-// ======================================
-// CLOSE MODAL
-// ======================================
-
-document
-.getElementById("closeModal")
-.onclick = function(){
-
-    document
-    .getElementById("userModal")
-    .style.display = "none";
-
-};
-
-window.onclick = function(event){
-
-    const modal =
-        document.getElementById("userModal");
-
-    if(event.target === modal){
-
-        modal.style.display = "none";
-
-    }
-
-};
-// ======================================
-// CURRENTLY SELECTED USER
-// ======================================
-
-let selectedUserId = "";
-
-let selectedUserData = {};
