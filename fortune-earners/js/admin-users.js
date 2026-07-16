@@ -521,3 +521,62 @@ document
     }
 
 });
+// ======================================
+// LIVE SEARCH USERS
+// ======================================
+
+const searchInput =
+    document.getElementById("searchUsers");
+
+if (searchInput) {
+
+    searchInput.addEventListener("input", () => {
+
+        const search =
+            searchInput.value
+            .trim()
+            .toLowerCase();
+
+        if (search === "") {
+
+            displayUsers(allUsers);
+
+            return;
+
+        }
+
+        const filteredUsers = allUsers.filter((user) => {
+
+            return (
+
+                (user.fullname || "")
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                (user.username || "")
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                (user.email || "")
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                (user.phone || "")
+                .toLowerCase()
+                .includes(search)
+
+            );
+
+        });
+
+        displayUsers(filteredUsers);
+
+    });
+
+}
