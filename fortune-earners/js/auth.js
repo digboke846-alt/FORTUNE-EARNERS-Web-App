@@ -16,7 +16,7 @@ import {
     serverTimestamp,
     getDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-alert("THIS IS THE NEW AUTH.JS");
+
 // ======================================
 // AUTO REFERRAL DETECTION
 // ======================================
@@ -24,7 +24,6 @@ alert("THIS IS THE NEW AUTH.JS");
 let referrerUid = "";
 
 window.addEventListener("load", async () => {
-    alert("Referral detection started");
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -256,7 +255,7 @@ isAdmin: false,
 
             profilePhoto: "",
 
-            notificationsEnabled: true
+            notificationsEnabled: true,
 
             accountDeleted: false
 
