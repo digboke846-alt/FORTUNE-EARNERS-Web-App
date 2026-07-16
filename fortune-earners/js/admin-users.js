@@ -359,3 +359,165 @@ ${user.accountStatus || "Active"}</p>
     }
 
 };
+// ======================================
+// SUSPEND USER
+// ======================================
+
+document
+.getElementById("suspendUserBtn")
+.addEventListener("click", async () => {
+
+    if (!selectedUserId) return;
+
+    const confirmSuspend = confirm(
+        `Suspend ${selectedUserData.fullname}'s account?`
+    );
+
+    if (!confirmSuspend) return;
+
+    try {
+
+        await updateDoc(
+            doc(db, "users", selectedUserId),
+            {
+
+                accountStatus: "Suspended",
+
+                suspendedAt: serverTimestamp(),
+
+                suspendedBy: auth.currentUser.uid
+
+            }
+        );
+
+        alert("User suspended successfully.");
+
+        document.getElementById("userModal").style.display = "none";
+
+        await loadUsers();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
+// ======================================
+// REACTIVATE USER
+// ======================================
+
+document
+.getElementById("activateUserBtn")
+.addEventListener("click", async () => {
+
+    if (!selectedUserId) return;
+
+    const confirmActivate = confirm(
+        `Reactivate ${selectedUserData.fullname}'s account?`
+    );
+
+    if (!confirmActivate) return;
+
+    try {
+
+        await updateDoc(
+            doc(db, "users", selectedUserId),
+            {
+
+                accountStatus: "Active",
+
+                suspendedAt: null,
+
+                suspendedBy: null
+
+            }
+        );
+
+        alert("User reactivated successfully.");
+
+        document.getElementById("userModal").style.display = "none";
+
+        await loadUsers();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
+// ======================================
+// DEACTIVATE USER
+// ======================================
+
+document
+.getElementById("deactivateUserBtn")
+.addEventListener("click", async () => {
+
+    if (!selectedUserId) return;
+
+    // Prevent admin from deactivating self
+    if (selectedUserId === auth.currentUser.uid) {
+
+        alert("You cannot deactivate your own admin account.");
+
+        return;
+
+    }
+
+    const confirmDeactivate = confirm(
+
+        `Are you sure you want to deactivate ${selectedUserData.fullname}'s account?\n\nThe account will no longer be able to log in, but all records will be kept.`
+
+    );
+
+    if (!confirmDeactivate) return;
+
+    try {
+
+        await updateDoc(
+
+            doc(db, "users", selectedUserId),
+
+            {
+
+                accountStatus: "Deactivated",
+
+                accountDeleted: true,
+
+                deletedAt: serverTimestamp(),
+
+                deletedBy: auth.currentUser.uid
+
+            }
+
+        );
+
+        alert("User account has been deactivated successfully.");
+
+        document
+            .getElementById("userModal")
+            .style.display = "none";
+
+        await loadUsers();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
