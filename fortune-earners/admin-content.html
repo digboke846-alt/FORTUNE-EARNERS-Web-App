@@ -1,0 +1,205 @@
+<div class="container">
+
+<h1>📋 Content Management</h1>
+
+<p>
+Manage Sponsored Ads, Daily Tasks and Announcements.
+</p>
+
+<div class="dashboard-grid">
+
+<button id="addSponsoredAdBtn">
+📢 Add Sponsored Ad
+</button>
+
+<button id="addTaskBtn">
+📝 Add Daily Task
+</button>
+
+<button id="addAnnouncementBtn">
+📣 Add Announcement
+</button>
+
+</div>
+
+<hr>
+
+<h2>Sponsored Ads</h2>
+
+<div id="adsContainer">
+
+<p>Loading sponsored ads...</p>
+
+</div>
+
+<hr>
+
+<h2>Daily Tasks</h2>
+
+<div id="tasksContainer">
+
+<p>Loading daily tasks...</p>
+
+</div>
+
+<hr>
+
+<h2>Announcements</h2>
+
+<div id="announcementsContainer">
+
+<p>Loading announcements...</p>
+
+</div>
+
+</div>
+<!-- ===================== -->
+<!-- CONTENT MANAGEMENT MODAL -->
+<!-- ===================== -->
+
+<div id="contentModal"
+class="modal"
+style="display:none;">
+
+<div class="modal-content">
+
+<span
+id="closeContentModal"
+style="float:right;
+cursor:pointer;
+font-size:28px;">
+
+&times;
+
+</span>
+
+<h2 id="modalTitle">
+
+Add Content
+
+</h2>
+  <label>
+
+Content Type
+
+</label>
+
+<select id="contentType">
+
+<option value="ad">
+
+📢 Sponsored Ad
+
+</option>
+
+<option value="task">
+
+📝 Daily Task
+
+</option>
+
+<option value="announcement">
+
+📣 Announcement
+
+</option>
+
+</select>
+
+<br>
+
+<form id="contentForm">
+
+<label>
+
+Title
+
+</label>
+
+<input
+type="text"
+id="contentTitle"
+required>
+
+<label>
+
+Description
+
+</label>
+
+<textarea
+id="contentDescription"
+rows="4"
+required>
+
+</textarea>
+
+<label>
+
+Link (Optional)
+
+</label>
+
+<input
+type="text"
+id="contentLink">
+
+<label>
+
+Reward Amount (₦)
+
+</label>
+
+<input
+type="number"
+id="contentReward"
+value="0">
+
+<label>
+
+Maximum Users
+
+</label>
+
+<input
+type="number"
+id="maxUsers"
+placeholder="Example: 100">
+
+<label>
+
+Status
+
+</label>
+
+<select id="contentStatus">
+
+<option value="Active">
+
+Active
+
+</option>
+
+<option value="Paused">
+
+Paused
+
+</option>
+
+</select>
+
+<br><br>
+
+<button
+type="submit"
+id="saveContentBtn">
+
+💾 Save
+
+</button>
+
+</form>
+
+</div>
+
+</div>
