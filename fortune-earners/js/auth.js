@@ -16,7 +16,7 @@ import {
     serverTimestamp,
     getDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-alert(THIS IS THE NEW AUTH.JS);
+alert("THIS IS THE NEW AUTH.JS");
 // ======================================
 // AUTO REFERRAL DETECTION
 // ======================================
