@@ -238,11 +238,9 @@ isAdmin: false,
             accountNumber: "",
             accountName: "",
 
-            withdrawalStatus: "Eligible",
+            withdrawalStatus: "No Pending Request",
 
             achievements: [],
-
-            isAdmin: false,
 
             createdAt: serverTimestamp(),
             lastLogin: serverTimestamp(),
@@ -258,6 +256,8 @@ isAdmin: false,
             profilePhoto: "",
 
             notificationsEnabled: true
+
+            accountDeleted: false
 
         });
         // ======================================
