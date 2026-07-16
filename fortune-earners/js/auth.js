@@ -197,9 +197,12 @@ signupForm.addEventListener("submit", async (e) => {
             email: email,
             phone: phone,
 
-            plan: "None",
+            plan: "Not Activated",
             memberStatus: "Pending Activation",
             accountStatus: "Active",
+            role: "user",
+
+isAdmin: false,
 
             planActivatedOn: null,
             lastPlanUpgrade: null,
