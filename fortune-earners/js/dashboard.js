@@ -403,12 +403,6 @@ onAuthStateChanged(auth, async (user) => {
 
                 }
 
-            } catch (error) {
-
-                console.error(error);
-
-            }
-
         }
             } catch (error) {
 
