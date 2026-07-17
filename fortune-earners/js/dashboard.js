@@ -427,9 +427,7 @@ onAuthStateChanged(auth, async (user) => {
 
                 };
 
-            }
-
-            catch (error) {
+            } catch (error) {
 
                 console.error(error);
 
