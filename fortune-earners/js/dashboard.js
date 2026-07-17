@@ -300,7 +300,20 @@ if (announcementBox) {
 
 }
 
-    } catch (error) {
+    } 
+        // ======================================
+// SHOW ANNOUNCEMENT DIRECTLY
+// ======================================
+
+if (
+    !popup ||
+    localStorage.getItem("hideWelcomePopup") === "true"
+) {
+
+    showAnnouncementPopup();
+
+}
+    catch (error) {
 
         console.error(error);
 
