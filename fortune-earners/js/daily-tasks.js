@@ -95,8 +95,13 @@ taskList.innerHTML = "";
 
 const tasksQuery =
     query(
-        collection(db, "tasks"),
-        where("active", "==", true)
+
+        collection(db, "content"),
+
+        where("type", "==", "task"),
+
+        where("status", "==", "Active")
+
     );
 
 const taskSnapshot =
