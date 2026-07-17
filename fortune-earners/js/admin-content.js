@@ -250,8 +250,6 @@ else {
 
     );
 
-    alert("Content added successfully.");
-
 }
 
         alert("Content added successfully.");
