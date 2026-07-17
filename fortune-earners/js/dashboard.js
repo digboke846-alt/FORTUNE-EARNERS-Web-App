@@ -418,6 +418,7 @@ async function showAnnouncementPopup() {
     }
 
 }
+    });
 
 // ======================================
 // LOG OUT
