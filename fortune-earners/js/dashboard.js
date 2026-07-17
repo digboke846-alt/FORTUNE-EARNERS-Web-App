@@ -213,20 +213,20 @@ onAuthStateChanged(auth, async (user) => {
 
             continueBtn.addEventListener("click", () => {
 
-                if (hidePopup.checked) {
+    if (hidePopup.checked) {
 
-                    localStorage.setItem(
-                        "hideWelcomePopup",
-                        "true"
-                    );
+        localStorage.setItem(
+            "hideWelcomePopup",
+            "true"
+        );
 
-                }
+    }
 
-                popup.style.display = "none";
+    popup.style.display = "none";
 
-            });
+    showAnnouncementPopup();
 
-        }
+});
         // ======================================
 // LOAD ANNOUNCEMENTS
 // ======================================
