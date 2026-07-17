@@ -199,41 +199,39 @@ onAuthStateChanged(auth, async (user) => {
             document.getElementById("continueDashboard");
 
         if (
-            welcomePopup &&
-            hidePopup &&
-            continueBtn
-        ) {
+    welcomePopup &&
+    hidePopup &&
+    continueBtn
+) {
 
-            if (
-                localStorage.getItem("hideWelcomePopup") !== "true"
-            ) {
+    if (
+        localStorage.getItem("hideWelcomePopup") !== "true"
+    ) {
 
-                welcomePopup.style.display = "flex";
+        welcomePopup.style.display = "flex";
+
+        continueBtn.onclick = () => {
+
+            if (hidePopup.checked) {
+
+                localStorage.setItem(
+                    "hideWelcomePopup",
+                    "true"
+                );
 
             }
 
-            continueBtn.onclick = () => {
-
-                if (hidePopup.checked) {
-
-                    localStorage.setItem(
-                        "hideWelcomePopup",
-                        "true"
-                    );
-
-                }
-
-                welcomePopup.style.display = "none";
-
-                showAnnouncementPopup();
-
-            };
-
-        }
-
-        else {
+            welcomePopup.style.display = "none";
 
             showAnnouncementPopup();
+
+        };
+
+    } else {
+
+        showAnnouncementPopup();
+
+    }
 
         }
                 // ======================================
@@ -361,8 +359,6 @@ async function showAnnouncementPopup() {
 
         const announcement =
             latestDoc.data();
-        console.log(announcement);
-alert(JSON.stringify(announcement));
 
         // Already shown today?
 
