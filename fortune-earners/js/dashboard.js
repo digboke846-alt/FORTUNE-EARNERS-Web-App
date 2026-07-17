@@ -340,108 +340,84 @@ onAuthStateChanged(auth, async (user) => {
 
         }
                 // ======================================
-        // DAILY ANNOUNCEMENT POPUP
-        // ======================================
+// DAILY ANNOUNCEMENT POPUP
+// ======================================
 
-        async function showAnnouncementPopup() {
+async function showAnnouncementPopup() {
 
-            const popup =
-                document.getElementById("announcementPopup");
+    const popup = document.getElementById("announcementPopup");
 
-            const title =
-                document.getElementById("popupAnnouncementTitle");
+    const title = document.getElementById("popupAnnouncementTitle");
 
-            const message =
-                document.getElementById("popupAnnouncementMessage");
+    const message = document.getElementById("popupAnnouncementMessage");
 
-            const closeBtn =
-                document.getElementById("closeAnnouncementPopup");
+    const closeBtn = document.getElementById("closeAnnouncementPopup");
 
-            if (!popup || !title || !message || !closeBtn) return;
+    if (!popup || !title || !message || !closeBtn) return;
 
-            try {
+    const today = new Date().toISOString().split("T")[0];
 
-                const today =
-                    new Date().toISOString().split("T")[0];
+    try {
 
-                const latestAnnouncementQuery = query(
+        const latestAnnouncementQuery = query(
 
-                    collection(db, "content"),
+            collection(db, "content"),
 
-                    where("type", "==", "announcement"),
+            where("type", "==", "announcement"),
 
-                    where("status", "==", "Active"),
+            where("status", "==", "Active"),
 
-                    orderBy("createdAt", "desc"),
+            orderBy("createdAt", "desc"),
 
-                    limit(1)
+            limit(1)
 
-                );
+        );
 
-                const snapshot =
-                    await getDocs(latestAnnouncementQuery);
+        const snapshot = await getDocs(latestAnnouncementQuery);
 
-                if (snapshot.empty) return;
+        if (snapshot.empty) return;
 
-                const latestDoc =
-                    snapshot.docs[0];
+        const latestDoc = snapshot.docs[0];
 
-                const announcement =
-                    latestDoc.data();
+        const announcement = latestDoc.data();
 
-                // Already shown today?
+        if (
 
-                if (
+            localStorage.getItem("lastAnnouncementDate") === today &&
 
-                    localStorage.getItem("lastAnnouncementDate") === today &&
+            localStorage.getItem("lastAnnouncementId") === latestDoc.id
 
-                    localStorage.getItem("lastAnnouncementId") === latestDoc.id
+        ) {
 
-                ) {
+            return;
 
-                    return;
-
-                }
-
-                title.textContent =
-                    announcement.title;
-
-                message.textContent =
-                    announcement.description;
-
-                popup.style.display = "flex";
-
-                closeBtn.onclick = () => {
-
-                    popup.style.display = "none";
-
-                    localStorage.setItem(
-                        "lastAnnouncementDate",
-                        today
-                    );
-
-                    localStorage.setItem(
-                        "lastAnnouncementId",
-                        latestDoc.id
-                    );
-
-                };
-} 
-catch (error) {
-
-                console.error(error);
-
-}
         }
-            } catch (error) {
 
-        console.error(error);
+        title.textContent = announcement.title;
 
-        alert(error.message);
+        message.textContent = announcement.description;
+
+        popup.style.display = "flex";
+
+        closeBtn.addEventListener("click", () => {
+
+            popup.style.display = "none";
+
+            localStorage.setItem("lastAnnouncementDate", today);
+
+            localStorage.setItem("lastAnnouncementId", latestDoc.id);
+
+        }, { once: true });
 
     }
 
-});
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
 
 // ======================================
 // LOG OUT
