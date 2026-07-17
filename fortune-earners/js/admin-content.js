@@ -335,7 +335,19 @@ async function loadContent() {
 
 <p><strong>Status:</strong> ${data.status}</p>
 
-${data.reward ? `<p><strong>Reward:</strong> ₦${data.reward.toLocaleString()}</p>` : ""}
+${data.type !== "announcement" ? `
+
+<p><strong>NEWBIE:</strong> ₦${(data.rewardNewbie || 0).toLocaleString()}</p>
+
+<p><strong>SILVER:</strong> ₦${(data.rewardSilver || 0).toLocaleString()}</p>
+
+<p><strong>GOLD:</strong> ₦${(data.rewardGold || 0).toLocaleString()}</p>
+
+<p><strong>DIAMOND:</strong> ₦${(data.rewardDiamond || 0).toLocaleString()}</p>
+
+<p><strong>PREMIUM:</strong> ₦${(data.rewardPremium || 0).toLocaleString()}</p>
+
+` : ""}
 
 ${data.type === "task"
 ? `<p><strong>Completed:</strong> ${data.completedUsers || 0}/${data.maxUsers ?? "Unlimited"}</p>`
