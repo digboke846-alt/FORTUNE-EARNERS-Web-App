@@ -675,7 +675,7 @@ button:hover{
 /* ANNOUNCEMENT POPUP */
 /* ====================================== */
 
-.popup-overlay{
+.announcement-popup-overlay{
 
 position:fixed;
 
@@ -687,7 +687,7 @@ width:100%;
 
 height:100%;
 
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.75);
 
 display:flex;
 
@@ -697,35 +697,103 @@ align-items:center;
 
 z-index:9999;
 
-}
-
-.popup-box{
-
-background:#fff;
-
 padding:20px;
 
-border-radius:12px;
+}
+
+.announcement-popup-box{
+
+background:#0D1325;
+
+color:#ffffff;
 
 width:90%;
 
-max-width:400px;
+max-width:420px;
+
+padding:25px;
+
+border-radius:18px;
+
+border:2px solid #FFD700;
+
+box-shadow:0 0 20px rgba(255,215,0,.25);
 
 text-align:center;
 
+animation:popupFade .25s ease;
+
 }
 
-.popup-box h2{
+.announcement-popup-box h2{
+
+color:#FFD700;
 
 margin-bottom:10px;
 
 }
 
-.popup-box button{
+.announcement-popup-box h3{
 
-margin-top:20px;
+color:#ffffff;
+
+margin-bottom:15px;
+
+}
+
+.announcement-popup-box p{
+
+line-height:1.6;
+
+margin-bottom:20px;
+
+}
+
+.announcement-popup-box button{
 
 width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+background:#28A745;
+
+color:#fff;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.announcement-popup-box button:hover{
+
+background:#218838;
+
+}
+
+@keyframes popupFade{
+
+from{
+
+transform:scale(.9);
+
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+
+opacity:1;
+
+}
 
 }
 
