@@ -322,7 +322,78 @@ if (
     }
 
 });
+// ======================================
+// DAILY ANNOUNCEMENT POPUP
+// ======================================
 
+async function showAnnouncementPopup() {
+
+    const popup =
+        document.getElementById("announcementPopup");
+
+    const title =
+        document.getElementById("popupAnnouncementTitle");
+
+    const message =
+        document.getElementById("popupAnnouncementMessage");
+
+    const closeBtn =
+        document.getElementById("closeAnnouncementPopup");
+
+    if (!popup || !title || !message || !closeBtn) return;
+
+    const today = new Date().toISOString().split("T")[0];
+
+    if (localStorage.getItem("lastAnnouncementPopup") === today) {
+
+        return;
+
+    }
+
+    try {
+
+        const announcementQuery = query(
+
+            collection(db, "content"),
+
+            where("type", "==", "announcement"),
+
+            where("status", "==", "Active")
+
+        );
+
+        const snapshot = await getDocs(announcementQuery);
+
+        if (snapshot.empty) return;
+
+        const announcement = snapshot.docs[0].data();
+
+        title.textContent = announcement.title;
+
+        message.textContent = announcement.description;
+
+        popup.style.display = "flex";
+
+        closeBtn.onclick = () => {
+
+            popup.style.display = "none";
+
+            localStorage.setItem(
+                "lastAnnouncementPopup",
+                today
+            );
+
+        };
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
 // ======================================
 // LOG OUT
 // ======================================
