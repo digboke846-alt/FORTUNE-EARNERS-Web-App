@@ -7,7 +7,12 @@ import {
 
 import {
     doc,
-    getDoc
+    getDoc,
+    collection,
+    getDocs,
+    query,
+    where,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -222,6 +227,78 @@ onAuthStateChanged(auth, async (user) => {
             });
 
         }
+        // ======================================
+// LOAD ANNOUNCEMENTS
+// ======================================
+
+const announcementBox =
+    document.getElementById("announcementBox");
+
+if (announcementBox) {
+
+    announcementBox.innerHTML = "";
+
+    const announcementQuery = query(
+        collection(db, "content"),
+        where("type", "==", "announcement"),
+        where("status", "==", "Active")
+    );
+
+    const announcementSnapshot =
+        await getDocs(announcementQuery);
+
+    if (announcementSnapshot.empty) {
+
+        announcementBox.innerHTML =
+            "<p>No announcements available.</p>";
+
+    } else {
+
+        for (const announcementDoc of announcementSnapshot.docs) {
+
+            const announcement =
+                announcementDoc.data();
+
+            // ==========================
+            // UNIQUE VIEW COUNT
+            // ==========================
+
+            const viewedBy =
+                announcement.viewedBy || {};
+
+            if (!viewedBy[user.uid]) {
+
+                viewedBy[user.uid] = true;
+
+                await updateDoc(
+                    announcementDoc.ref,
+                    {
+                        viewedBy: viewedBy,
+                        viewCount:
+                            Object.keys(viewedBy).length
+                    }
+                );
+
+            }
+
+            const card =
+                document.createElement("div");
+
+            card.className = "dashboard-card";
+
+            card.innerHTML = `
+                <h3>📢 ${announcement.title}</h3>
+
+                <p>${announcement.description}</p>
+            `;
+
+            announcementBox.appendChild(card);
+
+        }
+
+    }
+
+}
 
     } catch (error) {
 
