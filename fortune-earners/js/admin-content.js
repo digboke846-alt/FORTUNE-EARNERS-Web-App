@@ -198,7 +198,21 @@ contentForm.addEventListener("submit", async (e) => {
                 ? Number(document.getElementById("maxUsers").value) || null
                 : null,
 
-            completedUsers: 0,
+            completedUsers:
+    contentType.value === "task" ||
+    contentType.value === "ad"
+        ? 0
+        : null,
+
+viewCount:
+    contentType.value === "announcement"
+        ? 0
+        : null,
+
+viewedBy:
+    contentType.value === "announcement"
+        ? {}
+        : null,
 
             status:
                 document.getElementById("contentStatus").value,
@@ -311,6 +325,10 @@ ${data.reward ? `<p><strong>Reward:</strong> ₦${data.reward.toLocaleString()}<
 
 ${data.type === "task"
 ? `<p><strong>Completed:</strong> ${data.completedUsers || 0}/${data.maxUsers ?? "Unlimited"}</p>`
+: ""}
+
+${data.type === "announcement"
+? `<p><strong>Views:</strong> ${data.viewCount || 0}</p>`
 : ""}
 
 <div class="dashboard-grid">
