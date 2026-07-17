@@ -224,7 +224,17 @@ onAuthStateChanged(auth, async (user) => {
 
     popup.style.display = "none";
 
+    try {
+
     showAnnouncementPopup();
+
+} catch (error) {
+
+    alert(error.message);
+
+    console.error(error);
+
+    }
 
 });
         // ======================================
