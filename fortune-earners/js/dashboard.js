@@ -403,6 +403,35 @@ onAuthStateChanged(auth, async (user) => {
 
                 }
 
+                title.textContent =
+                    announcement.title;
+
+                message.textContent =
+                    announcement.description;
+
+                popup.style.display = "flex";
+
+                closeBtn.onclick = () => {
+
+                    popup.style.display = "none";
+
+                    localStorage.setItem(
+                        "lastAnnouncementDate",
+                        today
+                    );
+
+                    localStorage.setItem(
+                        "lastAnnouncementId",
+                        latestDoc.id
+                    );
+
+                };
+} 
+catch (error) {
+
+                console.error(error);
+
+}
         }
             } catch (error) {
 
