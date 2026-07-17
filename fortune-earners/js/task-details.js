@@ -12,12 +12,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
-// GET TASK ID FROM URL
+// GET TASK ID
 // ======================================
 
-const params = new URLSearchParams(window.location.search);
+const params =
+    new URLSearchParams(window.location.search);
 
-const taskId = params.get("id");
+const taskId =
+    params.get("id");
 
 // ======================================
 // CHECK LOGIN
@@ -35,6 +37,10 @@ onAuthStateChanged(auth, async (user) => {
 
     try {
 
+        // ======================================
+        // LOAD USER
+        // ======================================
+
         const userRef =
             doc(db, "users", user.uid);
 
@@ -51,246 +57,251 @@ onAuthStateChanged(auth, async (user) => {
 
         const userData =
             userSnap.data();
-
+                // ======================================
+        // LOAD TASK
         // ======================================
-// LOAD TASK
-// ======================================
 
-const taskRef =
-    doc(db, "tasks", taskId);
+        const taskRef =
+            doc(db, "content", taskId);
 
-const taskSnap =
-    await getDoc(taskRef);
+        const taskSnap =
+            await getDoc(taskRef);
 
-if (!taskSnap.exists()) {
+        if (!taskSnap.exists()) {
 
-    alert("Task not found.");
+            alert("Task not found.");
 
-    window.location.href =
-        "daily-tasks.html";
-
-    return;
-
-}
-
-const task =
-    taskSnap.data();
-
-// ======================================
-// DISPLAY TASK
-// ======================================
-
-document.getElementById("taskTitle").textContent =
-    task.title;
-
-document.getElementById("taskDescription").textContent =
-    task.description;
-
-document.getElementById("taskStatus").textContent =
-    task.active ? "🟢 Available" : "🔴 Closed";
-
-// ======================================
-// REWARD BASED ON USER PLAN
-// ======================================
-
-let reward = 0;
-
-switch (userData.plan) {
-
-    case "NEWBIE":
-        reward = task.rewardNewbie || 0;
-        break;
-
-    case "SILVER":
-        reward = task.rewardSilver || 0;
-        break;
-
-    case "GOLD":
-        reward = task.rewardGold || 0;
-        break;
-
-    case "DIAMOND":
-        reward = task.rewardDiamond || 0;
-        break;
-
-    case "PREMIUM":
-        reward = task.rewardPremium || 0;
-        break;
-
-    default:
-        reward = 0;
-
-}
-
-document.getElementById("taskReward").textContent =
-    "₦" + reward.toLocaleString();
-
-// ======================================
-// OPEN TASK BUTTON
-// ======================================
-
-document.getElementById("startTaskBtn")
-.addEventListener("click", () => {
-
-    window.open(task.link, "_blank");
-
-});
-      // ======================================
-// SUBMIT TASK
-// ======================================
-
-const submitBtn =
-    document.getElementById("submitTaskBtn");
-
-const screenshotInput =
-    document.getElementById("taskScreenshot");
-
-submitBtn.addEventListener("click", async () => {
-
-    if (screenshotInput.files.length === 0) {
-
-        alert("Please select at least one screenshot.");
-
-        return;
-
-    }
-
-    if (screenshotInput.files.length > 3) {
-
-        alert("You can upload a maximum of 3 screenshots.");
-
-        return;
-
-    }
-
-    alert(
-        "✅ Screenshots selected successfully.\n\nUpload to Firebase Storage will be added in the next part."
-    );
-
-});
-
-    }
-        // ======================================
-// IMAGE PREVIEW
-// ======================================
-
-const preview =
-    document.getElementById("imagePreview");
-
-screenshotInput.addEventListener("change", () => {
-
-    preview.innerHTML = "";
-
-    const files =
-        Array.from(screenshotInput.files);
-
-    if (files.length > 3) {
-
-        alert("You can only select a maximum of 3 screenshots.");
-
-        screenshotInput.value = "";
-
-        return;
-
-    }
-
-    files.forEach(file => {
-
-        if (!file.type.startsWith("image/")) {
+            window.location.href =
+                "daily-tasks.html";
 
             return;
 
         }
 
-        const reader =
-            new FileReader();
+        const task =
+            taskSnap.data();
 
-        reader.onload = function(e){
+        // ======================================
+        // DISPLAY TASK
+        // ======================================
 
-            const img =
-                document.createElement("img");
+        document.getElementById("taskTitle").textContent =
+            task.title;
 
-            img.src = e.target.result;
+        document.getElementById("taskDescription").textContent =
+            task.description;
 
-            img.style.width = "100px";
+        document.getElementById("taskStatus").textContent =
+            "🟢 Available";
+                // ======================================
+        // REWARD BASED ON USER PLAN
+        // ======================================
 
-            img.style.height = "100px";
+        let reward = 0;
 
-            img.style.objectFit = "cover";
+        switch (userData.plan) {
 
-            img.style.borderRadius = "12px";
+            case "NEWBIE":
 
-            img.style.margin = "8px";
+                reward = task.rewardNewbie || 0;
 
-            img.style.border =
-                "2px solid #FFC107";
+                break;
 
-            preview.appendChild(img);
+            case "SILVER":
 
-        };
+                reward = task.rewardSilver || 0;
 
-        reader.readAsDataURL(file);
+                break;
 
-    });
+            case "GOLD":
 
-// ======================================
-// CHECK FOR EXISTING SUBMISSION
-// ======================================
+                reward = task.rewardGold || 0;
 
-const submissionId =
-    user.uid + "_" + taskId;
+                break;
 
-const submissionRef =
-    doc(db, "taskSubmissions", submissionId);
+            case "DIAMOND":
 
-const submissionSnap =
-    await getDoc(submissionRef);
+                reward = task.rewardDiamond || 0;
 
-if (submissionSnap.exists()) {
+                break;
 
-    const submission =
-        submissionSnap.data();
+            case "PREMIUM":
 
-    document.getElementById("taskStatus").textContent =
-        "🟡 " + submission.status;
+                reward = task.rewardPremium || 0;
 
-    submitBtn.disabled = true;
+                break;
 
-    submitBtn.textContent =
-        "Task Already Submitted";
+            default:
 
-} else {
+                reward = 0;
 
-    submitBtn.addEventListener("click", async () => {
+        }
 
-        await setDoc(submissionRef, {
+        document.getElementById("taskReward").textContent =
+            "₦" + reward.toLocaleString();
 
-            userId: user.uid,
+        // ======================================
+        // OPEN TASK BUTTON
+        // ======================================
 
-            taskId: taskId,
+        document.getElementById("startTaskBtn")
+        .addEventListener("click", () => {
 
-            taskTitle: task.title,
+            if (task.link) {
 
-            status: "Pending",
+                window.open(task.link, "_blank");
 
-            screenshotURLs: [],
+            } else {
 
-            submittedAt: serverTimestamp()
+                alert("No task link available.");
+
+            }
 
         });
+                // ======================================
+        // IMAGE PREVIEW
+        // ======================================
 
-        alert("✅ Submission created successfully.\n\nImage upload will be connected when Storage is enabled.");
+        const screenshotInput =
+            document.getElementById("taskScreenshot");
 
-        submitBtn.disabled = true;
+        const preview =
+            document.getElementById("imagePreview");
 
-        submitBtn.textContent =
-            "Task Submitted";
+        screenshotInput.addEventListener("change", () => {
 
-    });
+            preview.innerHTML = "";
 
-}
+            const files =
+                Array.from(screenshotInput.files);
 
-    catch(error){
+            if (files.length > 3) {
+
+                alert("You can only upload a maximum of 3 screenshots.");
+
+                screenshotInput.value = "";
+
+                return;
+
+            }
+
+            files.forEach(file => {
+
+                if (!file.type.startsWith("image/")) {
+
+                    return;
+
+                }
+
+                const reader =
+                    new FileReader();
+
+                reader.onload = (e) => {
+
+                    const img =
+                        document.createElement("img");
+
+                    img.src = e.target.result;
+
+                    img.style.width = "100px";
+
+                    img.style.height = "100px";
+
+                    img.style.objectFit = "cover";
+
+                    img.style.margin = "8px";
+
+                    img.style.borderRadius = "12px";
+
+                    img.style.border =
+                        "2px solid #FFD700";
+
+                    preview.appendChild(img);
+
+                };
+
+                reader.readAsDataURL(file);
+
+            });
+
+        });
+                // ======================================
+        // CHECK EXISTING SUBMISSION
+        // ======================================
+
+        const submissionId =
+            user.uid + "_" + taskId;
+
+        const submissionRef =
+            doc(db, "taskSubmissions", submissionId);
+
+        const submissionSnap =
+            await getDoc(submissionRef);
+
+        const submitBtn =
+            document.getElementById("submitTaskBtn");
+
+        if (submissionSnap.exists()) {
+
+            const submission =
+                submissionSnap.data();
+
+            document.getElementById("taskStatus").textContent =
+                "🟡 " + submission.status;
+
+            submitBtn.disabled = true;
+
+            submitBtn.textContent =
+                "✅ Already Submitted";
+
+        }
+
+        else {
+
+            submitBtn.addEventListener("click", async () => {
+
+                if (screenshotInput.files.length === 0) {
+
+                    alert("Please select at least one screenshot.");
+
+                    return;
+
+                }
+
+                await setDoc(submissionRef, {
+
+                    userId: user.uid,
+
+                    taskId: taskId,
+
+                    taskTitle: task.title,
+
+                    reward: reward,
+
+                    status: "Pending",
+
+                    screenshotURLs: [],
+
+                    submittedAt: serverTimestamp()
+
+                });
+
+                alert("✅ Task submitted successfully and is awaiting admin review.");
+
+                submitBtn.disabled = true;
+
+                submitBtn.textContent =
+                    "✅ Submitted";
+
+                document.getElementById("taskStatus").textContent =
+                    "🟡 Pending";
+
+            });
+
+        }
+           }
+
+    catch (error) {
 
         console.error(error);
 
@@ -298,5 +309,4 @@ if (submissionSnap.exists()) {
 
     }
 
-});
-
+}); 
