@@ -112,6 +112,21 @@ let availableCount = 0;
 taskSnapshot.forEach((taskDoc) => {
 
     const task = taskDoc.data();
+    // Hide tasks that have reached maximum users
+
+if (
+
+    task.maxUsers !== null &&
+
+    task.maxUsers !== undefined &&
+
+    (task.completedUsers || 0) >= task.maxUsers
+
+) {
+
+    return;
+
+}
 
     availableCount++;
 
