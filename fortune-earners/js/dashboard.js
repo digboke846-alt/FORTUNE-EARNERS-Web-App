@@ -12,9 +12,9 @@ import {
     getDocs,
     query,
     where,
-    updateDoc,
     orderBy,
-    limit
+    limit,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -50,7 +50,8 @@ onAuthStateChanged(auth, async (user) => {
         }
 
         const data = userSnap.data();
-                // ======================================
+
+        // ======================================
         // USER INFORMATION
         // ======================================
 
@@ -66,33 +67,21 @@ onAuthStateChanged(auth, async (user) => {
         const memberStatus =
             document.getElementById("memberStatus");
 
-        if (dashboardUsername) {
-
+        if (dashboardUsername)
             dashboardUsername.textContent =
                 data.fullname || "Member";
 
-        }
-
-        if (popupUserName) {
-
+        if (popupUserName)
             popupUserName.textContent =
                 data.fullname || "Member";
 
-        }
-
-        if (currentPlan) {
-
+        if (currentPlan)
             currentPlan.textContent =
                 data.plan || "Not Activated";
 
-        }
-
-        if (memberStatus) {
-
+        if (memberStatus)
             memberStatus.textContent =
                 data.memberStatus || "Pending Activation";
-
-        }
 
         // ======================================
         // LOAD WALLETS
@@ -115,8 +104,7 @@ onAuthStateChanged(auth, async (user) => {
 
         document.getElementById("totalBalance").textContent =
             "₦" + totalBalance.toLocaleString();
-
-        // ======================================
+                // ======================================
         // TODAY SUMMARY
         // ======================================
 
@@ -131,7 +119,8 @@ onAuthStateChanged(auth, async (user) => {
 
         document.getElementById("earnedToday").textContent =
             "₦" + Number(data.earnedToday || 0).toLocaleString();
-                // ======================================
+
+        // ======================================
         // REFERRAL LINK
         // ======================================
 
@@ -150,7 +139,7 @@ onAuthStateChanged(auth, async (user) => {
 
         document
             .getElementById("copyReferralBtn")
-            .addEventListener("click", async () => {
+            ?.addEventListener("click", async () => {
 
                 try {
 
@@ -160,7 +149,7 @@ onAuthStateChanged(auth, async (user) => {
 
                 }
 
-                catch (error) {
+                catch {
 
                     alert("Unable to copy referral link.");
 
@@ -185,7 +174,7 @@ onAuthStateChanged(auth, async (user) => {
             "₦" + Number(data.totalWithdrawals || 0).toLocaleString();
 
         // ======================================
-        // TELEGRAM & WHATSAPP LINKS
+        // TELEGRAM & WHATSAPP
         // ======================================
 
         document.getElementById("telegramChannelBtn").href =
@@ -196,7 +185,7 @@ onAuthStateChanged(auth, async (user) => {
 
         document.getElementById("whatsappChannelBtn").href =
             "https://chat.whatsapp.com/CKJ2Awq0F5F8xpaq31JJlP?s=cl&p=a&ilr=1";
-              // ======================================
+                // ======================================
         // WELCOME POPUP
         // ======================================
 
@@ -212,17 +201,18 @@ onAuthStateChanged(auth, async (user) => {
         if (
             welcomePopup &&
             hidePopup &&
-            continueBtn &&
-            localStorage.getItem("hideWelcomePopup") !== "true"
+            continueBtn
         ) {
 
-            welcomePopup.style.display = "flex";
+            if (
+                localStorage.getItem("hideWelcomePopup") !== "true"
+            ) {
 
-        }
+                welcomePopup.style.display = "flex";
 
-        if (continueBtn) {
+            }
 
-            continueBtn.addEventListener("click", () => {
+            continueBtn.onclick = () => {
 
                 if (hidePopup.checked) {
 
@@ -237,18 +227,11 @@ onAuthStateChanged(auth, async (user) => {
 
                 showAnnouncementPopup();
 
-            });
+            };
 
         }
 
-        // ======================================
-        // SHOW ANNOUNCEMENT DIRECTLY
-        // ======================================
-
-        if (
-            !welcomePopup ||
-            localStorage.getItem("hideWelcomePopup") === "true"
-        ) {
+        else {
 
             showAnnouncementPopup();
 
@@ -293,10 +276,6 @@ onAuthStateChanged(auth, async (user) => {
                     const announcement =
                         announcementDoc.data();
 
-                    // ==========================
-                    // UNIQUE VIEW COUNT
-                    // ==========================
-
                     const viewedBy =
                         announcement.viewedBy || {};
 
@@ -307,12 +286,9 @@ onAuthStateChanged(auth, async (user) => {
                         await updateDoc(
                             announcementDoc.ref,
                             {
-
                                 viewedBy,
-
                                 viewCount:
                                     Object.keys(viewedBy).length
-
                             }
                         );
 
@@ -325,11 +301,8 @@ onAuthStateChanged(auth, async (user) => {
                         "dashboard-card";
 
                     card.innerHTML = `
-
 <h3>📢 ${announcement.title}</h3>
-
 <p>${announcement.description}</p>
-
 `;
 
                     announcementBox.appendChild(card);
@@ -339,23 +312,28 @@ onAuthStateChanged(auth, async (user) => {
             }
 
         }
-                // ======================================
+        // ======================================
 // DAILY ANNOUNCEMENT POPUP
 // ======================================
 
 async function showAnnouncementPopup() {
 
-    const popup = document.getElementById("announcementPopup");
+    const popup =
+        document.getElementById("announcementPopup");
 
-    const title = document.getElementById("popupAnnouncementTitle");
+    const title =
+        document.getElementById("popupAnnouncementTitle");
 
-    const message = document.getElementById("popupAnnouncementMessage");
+    const message =
+        document.getElementById("popupAnnouncementMessage");
 
-    const closeBtn = document.getElementById("closeAnnouncementPopup");
+    const continueBtn =
+        document.getElementById("closeAnnouncementPopup");
 
-    if (!popup || !title || !message || !closeBtn) return;
+    if (!popup || !title || !message || !continueBtn) return;
 
-    const today = new Date().toISOString().split("T")[0];
+    const today =
+        new Date().toISOString().split("T")[0];
 
     try {
 
@@ -373,13 +351,18 @@ async function showAnnouncementPopup() {
 
         );
 
-        const snapshot = await getDocs(latestAnnouncementQuery);
+        const snapshot =
+            await getDocs(latestAnnouncementQuery);
 
         if (snapshot.empty) return;
 
-        const latestDoc = snapshot.docs[0];
+        const latestDoc =
+            snapshot.docs[0];
 
-        const announcement = latestDoc.data();
+        const announcement =
+            latestDoc.data();
+
+        // Already shown today?
 
         if (
 
@@ -393,21 +376,29 @@ async function showAnnouncementPopup() {
 
         }
 
-        title.textContent = announcement.title;
+        title.textContent =
+            announcement.title;
 
-        message.textContent = announcement.description;
+        message.textContent =
+            announcement.description;
 
         popup.style.display = "flex";
 
-        closeBtn.addEventListener("click", () => {
+        continueBtn.onclick = () => {
 
             popup.style.display = "none";
 
-            localStorage.setItem("lastAnnouncementDate", today);
+            localStorage.setItem(
+                "lastAnnouncementDate",
+                today
+            );
 
-            localStorage.setItem("lastAnnouncementId", latestDoc.id);
+            localStorage.setItem(
+                "lastAnnouncementId",
+                latestDoc.id
+            );
 
-        }, { once: true });
+        };
 
     }
 
@@ -418,6 +409,21 @@ async function showAnnouncementPopup() {
     }
 
 }
+                // ======================================
+        // END OF onAuthStateChanged
+        // ======================================
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
 
 // ======================================
 // LOG OUT
@@ -444,7 +450,9 @@ if (logoutLink) {
 
             window.location.href = "login.html";
 
-        } catch (error) {
+        }
+
+        catch (error) {
 
             console.error(error);
 
@@ -455,4 +463,3 @@ if (logoutLink) {
     });
 
 }
-        });
