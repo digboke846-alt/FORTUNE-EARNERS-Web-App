@@ -12,7 +12,9 @@ import {
     getDocs,
     query,
     where,
-    updateDoc
+    updateDoc,
+    orderBy,
+    limit
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -24,6 +26,7 @@ onAuthStateChanged(auth, async (user) => {
     if (!user) {
 
         window.location.href = "login.html";
+
         return;
 
     }
@@ -47,8 +50,7 @@ onAuthStateChanged(auth, async (user) => {
         }
 
         const data = userSnap.data();
-
-        // ======================================
+                // ======================================
         // USER INFORMATION
         // ======================================
 
@@ -65,25 +67,34 @@ onAuthStateChanged(auth, async (user) => {
             document.getElementById("memberStatus");
 
         if (dashboardUsername) {
+
             dashboardUsername.textContent =
                 data.fullname || "Member";
+
         }
 
         if (popupUserName) {
+
             popupUserName.textContent =
                 data.fullname || "Member";
+
         }
 
         if (currentPlan) {
+
             currentPlan.textContent =
                 data.plan || "Not Activated";
+
         }
 
         if (memberStatus) {
+
             memberStatus.textContent =
                 data.memberStatus || "Pending Activation";
+
         }
-                // ======================================
+
+        // ======================================
         // LOAD WALLETS
         // ======================================
 
@@ -120,7 +131,6 @@ onAuthStateChanged(auth, async (user) => {
 
         document.getElementById("earnedToday").textContent =
             "₦" + Number(data.earnedToday || 0).toLocaleString();
-
                 // ======================================
         // REFERRAL LINK
         // ======================================
@@ -148,7 +158,9 @@ onAuthStateChanged(auth, async (user) => {
 
                     alert("✅ Referral link copied successfully!");
 
-                } catch (error) {
+                }
+
+                catch (error) {
 
                     alert("Unable to copy referral link.");
 
@@ -172,7 +184,7 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById("totalWithdrawals").textContent =
             "₦" + Number(data.totalWithdrawals || 0).toLocaleString();
 
-                // ======================================
+        // ======================================
         // TELEGRAM & WHATSAPP LINKS
         // ======================================
 
@@ -184,12 +196,11 @@ onAuthStateChanged(auth, async (user) => {
 
         document.getElementById("whatsappChannelBtn").href =
             "https://chat.whatsapp.com/CKJ2Awq0F5F8xpaq31JJlP?s=cl&p=a&ilr=1";
-
-        // ======================================
+              // ======================================
         // WELCOME POPUP
         // ======================================
 
-        const popup =
+        const welcomePopup =
             document.getElementById("welcomePopup");
 
         const hidePopup =
@@ -199,13 +210,13 @@ onAuthStateChanged(auth, async (user) => {
             document.getElementById("continueDashboard");
 
         if (
-            popup &&
+            welcomePopup &&
             hidePopup &&
             continueBtn &&
             localStorage.getItem("hideWelcomePopup") !== "true"
         ) {
 
-            popup.style.display = "flex";
+            welcomePopup.style.display = "flex";
 
         }
 
@@ -213,117 +224,219 @@ onAuthStateChanged(auth, async (user) => {
 
             continueBtn.addEventListener("click", () => {
 
-    if (hidePopup.checked) {
+                if (hidePopup.checked) {
 
-        localStorage.setItem(
-            "hideWelcomePopup",
-            "true"
-        );
+                    localStorage.setItem(
+                        "hideWelcomePopup",
+                        "true"
+                    );
 
-    }
+                }
 
-    popup.style.display = "none";
+                welcomePopup.style.display = "none";
 
-    try {
+                showAnnouncementPopup();
 
-    showAnnouncementPopup();
-
-} catch (error) {
-
-    alert(error.message);
-
-    console.error(error);
-
-    }
-
-});
-        // ======================================
-// LOAD ANNOUNCEMENTS
-// ======================================
-
-const announcementBox =
-    document.getElementById("announcementBox");
-
-if (announcementBox) {
-
-    announcementBox.innerHTML = "";
-
-    const announcementQuery = query(
-        collection(db, "content"),
-        where("type", "==", "announcement"),
-        where("status", "==", "Active")
-    );
-
-    const announcementSnapshot =
-        await getDocs(announcementQuery);
-
-    if (announcementSnapshot.empty) {
-
-        announcementBox.innerHTML =
-            "<p>No announcements available.</p>";
-
-    } else {
-
-        for (const announcementDoc of announcementSnapshot.docs) {
-
-            const announcement =
-                announcementDoc.data();
-
-            // ==========================
-            // UNIQUE VIEW COUNT
-            // ==========================
-
-            const viewedBy =
-                announcement.viewedBy || {};
-
-            if (!viewedBy[user.uid]) {
-
-                viewedBy[user.uid] = true;
-
-                await updateDoc(
-                    announcementDoc.ref,
-                    {
-                        viewedBy: viewedBy,
-                        viewCount:
-                            Object.keys(viewedBy).length
-                    }
-                );
-
-            }
-
-            const card =
-                document.createElement("div");
-
-            card.className = "dashboard-card";
-
-            card.innerHTML = `
-                <h3>📢 ${announcement.title}</h3>
-
-                <p>${announcement.description}</p>
-            `;
-
-            announcementBox.appendChild(card);
+            });
 
         }
 
-    }
-
-}
-
-    } 
         // ======================================
-// SHOW ANNOUNCEMENT DIRECTLY
-// ======================================
+        // SHOW ANNOUNCEMENT DIRECTLY
+        // ======================================
 
-if (
-    !popup ||
-    localStorage.getItem("hideWelcomePopup") === "true"
-) {
+        if (
+            !welcomePopup ||
+            localStorage.getItem("hideWelcomePopup") === "true"
+        ) {
 
-    showAnnouncementPopup();
+            showAnnouncementPopup();
 
-}
-    catch (error) {
+        }
+                // ======================================
+        // LOAD ANNOUNCEMENTS
+        // ======================================
+
+        const announcementBox =
+            document.getElementById("announcementBox");
+
+        if (announcementBox) {
+
+            announcementBox.innerHTML = "";
+
+            const announcementQuery = query(
+
+                collection(db, "content"),
+
+                where("type", "==", "announcement"),
+
+                where("status", "==", "Active"),
+
+                orderBy("createdAt", "desc")
+
+            );
+
+            const announcementSnapshot =
+                await getDocs(announcementQuery);
+
+            if (announcementSnapshot.empty) {
+
+                announcementBox.innerHTML =
+                    "<p>No announcements available.</p>";
+
+            }
+
+            else {
+
+                for (const announcementDoc of announcementSnapshot.docs) {
+
+                    const announcement =
+                        announcementDoc.data();
+
+                    // ==========================
+                    // UNIQUE VIEW COUNT
+                    // ==========================
+
+                    const viewedBy =
+                        announcement.viewedBy || {};
+
+                    if (!viewedBy[user.uid]) {
+
+                        viewedBy[user.uid] = true;
+
+                        await updateDoc(
+                            announcementDoc.ref,
+                            {
+
+                                viewedBy,
+
+                                viewCount:
+                                    Object.keys(viewedBy).length
+
+                            }
+                        );
+
+                    }
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "dashboard-card";
+
+                    card.innerHTML = `
+
+<h3>📢 ${announcement.title}</h3>
+
+<p>${announcement.description}</p>
+
+`;
+
+                    announcementBox.appendChild(card);
+
+                }
+
+            }
+
+        }
+                // ======================================
+        // DAILY ANNOUNCEMENT POPUP
+        // ======================================
+
+        async function showAnnouncementPopup() {
+
+            const popup =
+                document.getElementById("announcementPopup");
+
+            const title =
+                document.getElementById("popupAnnouncementTitle");
+
+            const message =
+                document.getElementById("popupAnnouncementMessage");
+
+            const closeBtn =
+                document.getElementById("closeAnnouncementPopup");
+
+            if (!popup || !title || !message || !closeBtn) return;
+
+            try {
+
+                const today =
+                    new Date().toISOString().split("T")[0];
+
+                const latestAnnouncementQuery = query(
+
+                    collection(db, "content"),
+
+                    where("type", "==", "announcement"),
+
+                    where("status", "==", "Active"),
+
+                    orderBy("createdAt", "desc"),
+
+                    limit(1)
+
+                );
+
+                const snapshot =
+                    await getDocs(latestAnnouncementQuery);
+
+                if (snapshot.empty) return;
+
+                const latestDoc =
+                    snapshot.docs[0];
+
+                const announcement =
+                    latestDoc.data();
+
+                // Already shown today?
+
+                if (
+
+                    localStorage.getItem("lastAnnouncementDate") === today &&
+
+                    localStorage.getItem("lastAnnouncementId") === latestDoc.id
+
+                ) {
+
+                    return;
+
+                }
+
+                title.textContent =
+                    announcement.title;
+
+                message.textContent =
+                    announcement.description;
+
+                popup.style.display = "flex";
+
+                closeBtn.onclick = () => {
+
+                    popup.style.display = "none";
+
+                    localStorage.setItem(
+                        "lastAnnouncementDate",
+                        today
+                    );
+
+                    localStorage.setItem(
+                        "lastAnnouncementId",
+                        latestDoc.id
+                    );
+
+                };
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+            }
+
+        }
+            } catch (error) {
 
         console.error(error);
 
@@ -332,83 +445,13 @@ if (
     }
 
 });
-// ======================================
-// DAILY ANNOUNCEMENT POPUP
-// ======================================
 
-async function showAnnouncementPopup() {
-
-    const popup =
-        document.getElementById("announcementPopup");
-
-    const title =
-        document.getElementById("popupAnnouncementTitle");
-
-    const message =
-        document.getElementById("popupAnnouncementMessage");
-
-    const closeBtn =
-        document.getElementById("closeAnnouncementPopup");
-
-    if (!popup || !title || !message || !closeBtn) return;
-
-    const today = new Date().toISOString().split("T")[0];
-
-    if (localStorage.getItem("lastAnnouncementPopup") === today) {
-
-        return;
-
-    }
-
-    try {
-
-        const announcementQuery = query(
-
-            collection(db, "content"),
-
-            where("type", "==", "announcement"),
-
-            where("status", "==", "Active")
-
-        );
-
-        const snapshot = await getDocs(announcementQuery);
-
-        if (snapshot.empty) return;
-
-        const announcement = snapshot.docs[0].data();
-
-        title.textContent = announcement.title;
-
-        message.textContent = announcement.description;
-
-        popup.style.display = "flex";
-
-        closeBtn.onclick = () => {
-
-            popup.style.display = "none";
-
-            localStorage.setItem(
-                "lastAnnouncementPopup",
-                today
-            );
-
-        };
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-    }
-
-}
 // ======================================
 // LOG OUT
 // ======================================
 
-const logoutLink = document.getElementById("logoutBtn");
+const logoutLink =
+    document.getElementById("logoutBtn");
 
 if (logoutLink) {
 
@@ -430,9 +473,9 @@ if (logoutLink) {
 
         } catch (error) {
 
-            alert("Logout failed.");
-
             console.error(error);
+
+            alert("Logout failed.");
 
         }
 
