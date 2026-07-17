@@ -189,9 +189,25 @@ contentForm.addEventListener("submit", async (e) => {
 
             link: document.getElementById("contentLink").value.trim(),
 
-            reward: Number(
-                document.getElementById("contentReward").value
-            ) || 0,
+            rewardNewbie: Number(
+    document.getElementById("rewardNewbie").value
+) || 0,
+
+rewardSilver: Number(
+    document.getElementById("rewardSilver").value
+) || 0,
+
+rewardGold: Number(
+    document.getElementById("rewardGold").value
+) || 0,
+
+rewardDiamond: Number(
+    document.getElementById("rewardDiamond").value
+) || 0,
+
+rewardPremium: Number(
+    document.getElementById("rewardPremium").value
+) || 0,
 
             maxUsers:
                 contentType.value === "task"
