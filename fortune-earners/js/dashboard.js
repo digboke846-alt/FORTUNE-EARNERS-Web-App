@@ -361,6 +361,8 @@ async function showAnnouncementPopup() {
 
         const announcement =
             latestDoc.data();
+        console.log(announcement);
+alert(JSON.stringify(announcement));
 
         // Already shown today?
 
