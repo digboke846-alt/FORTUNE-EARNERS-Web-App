@@ -418,7 +418,6 @@ async function showAnnouncementPopup() {
     }
 
 }
-    });
 
 // ======================================
 // LOG OUT
@@ -456,3 +455,4 @@ if (logoutLink) {
     });
 
 }
+        });
