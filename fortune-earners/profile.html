@@ -204,60 +204,143 @@
 
     </section>
         <!-- ========================= -->
-    <!-- BANK DETAILS -->
-    <!-- ========================= -->
+<!-- BANK DETAILS -->
+<!-- ========================= -->
 
-    <section class="dashboard-card">
+<section class="dashboard-card">
 
-        <h3>
+<h3>
 
-            🏦 Bank Details
+🏦 Bank Details
 
-        </h3>
+</h3>
 
-        <div class="info-item">
+<p>
 
-            <strong>Bank Name</strong>
+Your withdrawal payments will be sent to the account below.
 
-            <p id="bankName">
+</p>
 
-                Not Added
+<div class="dashboard-grid">
 
-            </p>
+<div>
 
-        </div>
+<label>
 
-        <div class="info-item">
+Bank Name
 
-            <strong>Account Number</strong>
+</label>
 
-            <p id="accountNumber">
+<select id="bankName">
 
-                Not Added
+<option value="">
 
-            </p>
+Select Bank
 
-        </div>
+</option>
 
-        <div class="info-item">
+<option>Access Bank</option>
 
-            <strong>Account Name</strong>
+<option>Citibank Nigeria</option>
 
-            <p id="accountName">
+<option>Ecobank Nigeria</option>
 
-                Not Added
+<option>FCMB</option>
 
-            </p>
+<option>Fidelity Bank</option>
 
-        </div>
+<option>First Bank</option>
 
-        <button id="editBankBtn">
+<option>Globus Bank</option>
 
-            Edit Bank Details
+<option>GTBank</option>
 
-        </button>
+<option>Jaiz Bank</option>
 
-    </section>
+<option>Keystone Bank</option>
+
+<option>Lotus Bank</option>
+
+<option>Moniepoint MFB</option>
+
+<option>Opay</option>
+
+<option>PalmPay</option>
+
+<option>Parallex Bank</option>
+
+<option>Polaris Bank</option>
+
+<option>Premium Trust Bank</option>
+
+<option>Providus Bank</option>
+
+<option>Stanbic IBTC</option>
+
+<option>Sterling Bank</option>
+
+<option>SunTrust Bank</option>
+
+<option>Titan Trust Bank</option>
+
+<option>UBA</option>
+
+<option>Union Bank</option>
+
+<option>Unity Bank</option>
+
+<option>Wema Bank</option>
+
+<option>Zenith Bank</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+Account Number
+
+</label>
+
+<input
+type="text"
+id="accountNumber"
+maxlength="10"
+placeholder="Enter 10-digit account number">
+
+</div>
+
+<div>
+
+<label>
+
+Account Name
+
+</label>
+
+<input
+type="text"
+id="accountName"
+placeholder="Account name">
+
+</div>
+
+</div>
+
+<button id="saveBankBtn">
+
+💾 Save Bank Details
+
+</button>
+
+<p id="bankSaveStatus">
+
+</p>
+
+</section>
         <!-- ========================= -->
     <!-- ACCOUNT STATISTICS -->
     <!-- ========================= -->
