@@ -130,3 +130,117 @@ onclick="rejectSubmission('${docSnap.id}')">
 
         });
         
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
+// ======================================
+// APPROVE SUBMISSION
+// ======================================
+
+window.approveSubmission = async function(submissionId) {
+
+    try {
+
+        const submissionRef =
+            doc(db, "taskSubmissions", submissionId);
+
+        const submissionSnap =
+            await getDoc(submissionRef);
+
+        if (!submissionSnap.exists()) {
+
+            alert("Submission not found.");
+
+            return;
+
+        }
+
+        const submission =
+            submissionSnap.data();
+
+        const userRef =
+            doc(db, "users", submission.userId);
+
+        const userSnap =
+            await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+
+            alert("User not found.");
+
+            return;
+
+        }
+
+        const userData =
+            userSnap.data();
+
+        await updateDoc(userRef, {
+
+            taskWallet:
+                Number(userData.taskWallet || 0) +
+                Number(submission.reward || 0)
+
+        });
+
+        await updateDoc(submissionRef, {
+
+            status: "Approved"
+
+        });
+
+        alert("✅ Task approved successfully.");
+
+        location.reload();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
+// ======================================
+// REJECT SUBMISSION
+// ======================================
+
+window.rejectSubmission = async function(submissionId) {
+
+    try {
+
+        const submissionRef =
+            doc(db, "taskSubmissions", submissionId);
+
+        await updateDoc(submissionRef, {
+
+            status: "Rejected"
+
+        });
+
+        alert("❌ Submission rejected.");
+
+        location.reload();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
