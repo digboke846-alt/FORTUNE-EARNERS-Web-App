@@ -8,7 +8,11 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Withdraw | Fortune Earners</title>
+<title>
+
+Withdraw | Fortune Earners
+
+</title>
 
 <link rel="stylesheet"
 href="css/style.css">
@@ -16,10 +20,6 @@ href="css/style.css">
 </head>
 
 <body>
-
-<!-- ========================= -->
-<!-- FIXED HEADER -->
-<!-- ========================= -->
 
 <header class="top-header">
 
@@ -33,116 +33,27 @@ class="menu-btn">
 
 <h1 class="logo">
 
-FORTUNE EARNERS
+💸 WITHDRAW
 
 </h1>
 
-<div class="header-icons">
-
-<button id="notificationButton">
-
-🔔
-
-</button>
-
-<a href="profile.html">
-
-👤
-
-</a>
-
-</div>
-
 </header>
-
-<!-- ========================= -->
-<!-- HAMBURGER MENU -->
-<!-- ========================= -->
 
 <nav
 id="menu"
 class="side-menu">
 
-<h2>Menu</h2>
+<a href="dashboard.html">🏠 Dashboard</a>
 
-<a href="dashboard.html">
+<a href="daily-tasks.html">📋 Daily Tasks</a>
 
-🏠 Dashboard
+<a href="sponsored-ads.html">📺 Sponsored Ads</a>
 
-</a>
+<a href="withdraw.html">💸 Withdraw</a>
 
-<a href="activate-plan.html">
+<a href="profile.html">👤 Profile</a>
 
-💎 Activate Plan
-
-</a>
-
-<a href="daily-tasks.html">
-
-📋 Daily Tasks
-
-</a>
-
-<a href="sponsored-ads.html">
-
-📺 Sponsored Ads
-
-</a>
-
-<a href="referrals.html">
-
-👥 Referrals
-
-</a>
-
-<a href="withdraw.html">
-
-💸 Withdraw
-
-</a>
-
-<a href="place-ads.html">
-
-📢 Place Ads
-
-</a>
-
-<a href="profile.html">
-
-👤 Profile
-
-</a>
-
-<a href="about.html">
-
-ℹ️ About Fortune Earners
-
-</a>
-
-<a href="terms.html">
-
-📄 Terms & Conditions
-
-</a>
-
-<a href="privacy.html">
-
-🔒 Privacy Policy
-
-</a>
-
-<a href="contact.html">
-
-📞 Contact Support
-
-</a>
-
-<a href="#"
-id="logoutBtn">
-
-🚪 Log Out
-
-</a>
+<a href="#" id="logoutBtn">🚪 Log Out</a>
 
 </nav>
 
@@ -152,58 +63,163 @@ class="menu-overlay">
 
 </div>
 
-<!-- ========================= -->
-<!-- MAIN CONTENT -->
-<!-- ========================= -->
+<main class="dashboard-content">
 
-<div
-class="container"
-id="withdrawContainer">
-
-<h1>
-
-Withdraw Funds
-
-</h1>
-
-<p>
-
-Withdraw your earnings safely and securely to your registered bank account.
-
-</p>
+<section class="dashboard-card">
 
 <h2>
 
-Select Wallet
+💰 Wallet Overview
 
 </h2>
 
-<form>
-    <label>
+<div class="wallet-grid">
 
-<input
-type="radio"
-name="wallet"
-value="affiliate">
+<div class="wallet-card">
 
-Affiliate Wallet
+<h3>
 
-</label>
+📋 Task Wallet
+
+</h3>
+
+<p id="taskWallet">
+
+₦0
+
+</p>
+
+</div>
+
+<div class="wallet-card">
+
+<h3>
+
+👥 Affiliate Wallet
+
+</h3>
+
+<p id="affiliateWallet">
+
+₦0
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="dashboard-card">
+
+<h2>
+
+Select Withdrawal Type
+
+</h2>
+
+<select id="withdrawType">
+
+<option value="task">
+
+📋 Task Wallet (10% Fee)
+
+</option>
+
+<option value="affiliate">
+
+👥 Affiliate Wallet (7% Fee)
+
+</option>
+
+</select>
+
+</section>
+<!-- ========================= -->
+<!-- BANK DETAILS -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+<h2>
+
+🏦 Payment Details
+
+</h2>
+
+<p>
+
+These details are automatically loaded from your Profile.
+
+</p>
+
+<div class="dashboard-grid">
+
+<div>
 
 <label>
 
-<input
-type="radio"
-name="wallet"
-value="task">
-
-Task Wallet
+Bank Name
 
 </label>
 
+<input
+type="text"
+id="bankName"
+readonly>
+
+</div>
+
+<div>
+
 <label>
 
-Withdrawal Amount
+Account Name
+
+</label>
+
+<input
+type="text"
+id="accountName"
+readonly>
+
+</div>
+
+<div>
+
+<label>
+
+Account Number
+
+</label>
+
+<input
+type="text"
+id="accountNumber"
+readonly>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- WITHDRAWAL FORM -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+<h2>
+
+💵 Withdrawal Request
+
+</h2>
+
+<label>
+
+Amount to Withdraw
 
 </label>
 
@@ -212,190 +228,95 @@ type="number"
 id="withdrawAmount"
 placeholder="Enter amount">
 
-<button
-type="button"
-id="withdrawAllBtn">
+<p>
 
-Withdraw All
+Minimum Withdrawal:
+<strong id="minimumWithdrawal">
+
+₦0
+
+</strong>
+
+</p>
+
+</section>
+
+<!-- ========================= -->
+<!-- WITHDRAWAL SUMMARY -->
+<!-- ========================= -->
+
+<section class="summary-card">
+
+<h2>
+
+🧮 Withdrawal Summary
+
+</h2>
+
+<ul>
+
+<li>
+
+Withdrawal Fee
+
+<span id="withdrawFee">
+
+₦0
+
+</span>
+
+</li>
+
+<li>
+
+You Will Receive
+
+<span id="amountToReceive">
+
+₦0
+
+</span>
+
+</li>
+
+</ul>
+
+</section>
+<!-- ========================= -->
+<!-- SUBMIT WITHDRAWAL -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+<h2>
+
+✅ Submit Withdrawal
+
+</h2>
+
+<p>
+
+Please confirm your withdrawal details before submitting.
+
+</p>
+
+<button id="submitWithdrawalBtn">
+
+💸 Submit Withdrawal Request
 
 </button>
 
-<h2>
+</section>
 
-Wallet Information
+<!-- ========================= -->
+<!-- WITHDRAWAL HISTORY -->
+<!-- ========================= -->
 
-</h2>
-
-<p>
-
-<strong>Affiliate Wallet:</strong>
-
-<span id="affiliateBalance">
-
-₦0.00
-
-</span>
-
-</p>
-
-<p>
-
-<strong>Task Wallet:</strong>
-
-<span id="taskBalance">
-
-₦0.00
-
-</span>
-
-</p>
-
-<p>
-
-<strong>Minimum Withdrawal:</strong>
-
-₦1,000
-
-</p>
+<section class="dashboard-card">
 
 <h2>
 
-Bank Details
-
-</h2>
-
-<p>
-
-<strong>Bank Name:</strong>
-
-<span id="bankName">
-
-Not Added
-
-</span>
-
-</p>
-
-<p>
-
-<strong>Account Number:</strong>
-
-<span id="accountNumber">
-
-Not Added
-
-</span>
-
-</p>
-
-<p>
-
-<strong>Account Name:</strong>
-
-<span id="accountName">
-
-Not Added
-
-</span>
-
-</p>
-
-<a href="profile.html">
-
-<button type="button">
-
-Add / Update Bank Details
-
-</button>
-
-</a>
-<h2>
-
-Withdrawal Summary
-
-</h2>
-
-<p>
-
-<strong>Withdrawal Amount:</strong>
-
-<span id="summaryAmount">
-
-₦0.00
-
-</span>
-
-</p>
-
-<p>
-
-<strong>Processing Fee (7%):</strong>
-
-<span id="processingFee">
-
-₦0.00
-
-</span>
-
-</p>
-
-<p>
-
-<strong>You'll Receive:</strong>
-
-<span id="receiveAmount">
-
-₦0.00
-
-</span>
-
-</p>
-
-<h2>
-
-Withdrawal Method
-
-</h2>
-
-<p>
-
-🏦 Bank Transfer
-
-</p>
-
-<h2>
-
-Withdrawal Status
-
-</h2>
-
-<p id="withdrawStatus">
-
-Ready to Process
-
-</p>
-
-<button
-type="submit"
-id="confirmWithdrawBtn">
-
-Confirm Withdrawal
-
-</button>
-
-<p>
-
-By confirming this withdrawal, you agree that a <strong>7% processing fee</strong> will be deducted before payment is processed.
-
-</p>
-
-</form>
-
-<hr>
-
-<h2>
-
-Withdrawal History
+📜 Withdrawal History
 
 </h2>
 
@@ -408,38 +329,52 @@ No withdrawal history available.
 </p>
 
 </div>
-    <!-- Bottom Navigation Starts Here -->
-    <!-- ========================= -->
-<!-- FIXED BOTTOM NAVIGATION -->
-<!-- ========================= -->
 
-</main>
+</section>
+
+<!-- ========================= -->
+<!-- BOTTOM NAVIGATION -->
+<!-- ========================= -->
 
 <nav class="bottom-nav">
 
-<a href="dashboard.html" class="active">
+<a href="dashboard.html">
+
 🏠
+
 <span>Dashboard</span>
+
 </a>
 
 <a href="place-ads.html">
+
 📢
+
 <span>Place Ads</span>
+
 </a>
 
-<a href="withdraw.html">
+<a href="withdraw.html" class="active">
+
 💸
+
 <span>Withdraw</span>
+
 </a>
 
 <a href="profile.html">
+
 👤
+
 <span>Profile</span>
+
 </a>
 
 </nav>
 
-  <br>
+</main>
+
+    <br>
 <hr>
 <!-- ===================== -->
 <!-- FOOTER -->
@@ -486,11 +421,10 @@ All Rights Reserved.
 
 </footer>
 
-</div>
-
 <script src="js/menu.js"></script>
 
-<script type="module" src="js/withdraw.js"></script>
+<script type="module"
+src="js/withdraw.js"></script>
 
 </body>
 
