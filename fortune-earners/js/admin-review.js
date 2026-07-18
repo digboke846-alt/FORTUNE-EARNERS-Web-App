@@ -225,3 +225,141 @@ onAuthStateChanged(auth, (user) => {
     loadSubmissions("task");
 
 });
+// ======================================
+// APPROVE SUBMISSION
+// ======================================
+
+window.approveSubmission = async function(submissionId, type) {
+
+    try {
+
+        const collectionName =
+            type === "task"
+                ? "taskSubmissions"
+                : "adSubmissions";
+
+        const idField =
+            type === "task"
+                ? "taskId"
+                : "adId";
+
+        const submissionRef =
+            doc(db, collectionName, submissionId);
+
+        const submissionSnap =
+            await getDoc(submissionRef);
+
+        if (!submissionSnap.exists()) {
+
+            alert("Submission not found.");
+
+            return;
+
+        }
+
+        const submission =
+            submissionSnap.data();
+
+        const userRef =
+            doc(db, "users", submission.userId);
+
+        const userSnap =
+            await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+
+            alert("User not found.");
+
+            return;
+
+        }
+
+        const userData =
+            userSnap.data();
+
+        await updateDoc(userRef, {
+
+            taskWallet:
+                Number(userData.taskWallet || 0) +
+                Number(submission.reward || 0)
+
+        });
+
+        await updateDoc(submissionRef, {
+
+            status: "Approved"
+
+        });
+
+        const contentRef =
+            doc(db, "content", submission[idField]);
+
+        const contentSnap =
+            await getDoc(contentRef);
+
+        if (contentSnap.exists()) {
+
+            await updateDoc(contentRef, {
+
+                completedUsers: increment(1)
+
+            });
+
+        }
+
+        alert(
+            `✅ ${type === "task" ? "Task" : "Sponsored Ad"} approved successfully.`
+        );
+
+        loadSubmissions(currentReviewType);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
+// ======================================
+// REJECT SUBMISSION
+// ======================================
+
+window.rejectSubmission = async function(submissionId, type) {
+
+    try {
+
+        const collectionName =
+            type === "task"
+                ? "taskSubmissions"
+                : "adSubmissions";
+
+        const submissionRef =
+            doc(db, collectionName, submissionId);
+
+        await updateDoc(submissionRef, {
+
+            status: "Rejected"
+
+        });
+
+        alert(
+            `❌ ${type === "task" ? "Task" : "Sponsored Ad"} rejected successfully.`
+        );
+
+        loadSubmissions(currentReviewType);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
