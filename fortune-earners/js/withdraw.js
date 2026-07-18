@@ -217,3 +217,110 @@ function calculateWithdrawal() {
 withdrawType.addEventListener("change", updateWithdrawalSettings);
 
 withdrawAmount.addEventListener("input", calculateWithdrawal);
+// ======================================
+// SUBMIT WITHDRAWAL
+// ======================================
+
+document.getElementById("submitWithdrawalBtn")
+.addEventListener("click", async () => {
+
+    try {
+
+        const amount =
+            Number(withdrawAmount.value);
+
+        if (!amount || amount <= 0) {
+
+            alert("Enter a valid withdrawal amount.");
+
+            return;
+
+        }
+
+        if (amount < minimumWithdrawal) {
+
+            alert(
+                `Minimum withdrawal is ₦${minimumWithdrawal.toLocaleString()}`
+            );
+
+            return;
+
+        }
+
+        const walletBalance =
+            selectedWallet === "task"
+                ? Number(currentUserData.taskWallet || 0)
+                : Number(currentUserData.affiliateWallet || 0);
+
+        if (amount > walletBalance) {
+
+            alert("Insufficient wallet balance.");
+
+            return;
+
+        }
+
+        const fee =
+            amount * feePercentage / 100;
+
+        const receive =
+            amount - fee;
+
+        const status =
+            selectedWallet === "task"
+                ? "Pending"
+                : "Auto Paid";
+
+        await addDoc(collection(db, "withdrawals"), {
+
+            userId: auth.currentUser.uid,
+
+            username: currentUserData.username || "",
+
+            fullName: currentUserData.fullName || "",
+
+            walletType: selectedWallet,
+
+            amountRequested: amount,
+
+            feePercentage: feePercentage,
+
+            feeAmount: fee,
+
+            amountToReceive: receive,
+
+            bankName: currentUserData.bankName || "",
+
+            accountName: currentUserData.accountName || "",
+
+            accountNumber: currentUserData.accountNumber || "",
+
+            status: status,
+
+            submittedAt: serverTimestamp()
+
+        });
+
+        alert(
+            selectedWallet === "task"
+            ? "✅ Withdrawal request submitted successfully."
+            : "✅ Affiliate withdrawal processed successfully."
+        );
+
+        withdrawAmount.value = "";
+
+        calculateWithdrawal();
+
+        loadWithdrawalHistory(auth.currentUser.uid);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
