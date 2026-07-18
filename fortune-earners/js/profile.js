@@ -199,3 +199,87 @@ document.getElementById("accountName").value =
     }
 
 });
+// ======================================
+// SAVE BANK DETAILS
+// ======================================
+
+document.getElementById("saveBankBtn")
+.addEventListener("click", async () => {
+
+    try {
+
+        const user = auth.currentUser;
+
+        if (!user) {
+
+            alert("Please log in again.");
+
+            return;
+
+        }
+
+        const bankName =
+            document.getElementById("bankName").value;
+
+        const accountNumber =
+            document.getElementById("accountNumber").value.trim();
+
+        const accountName =
+            document.getElementById("accountName").value.trim();
+
+        if (!bankName) {
+
+            alert("Please select your bank.");
+
+            return;
+
+        }
+
+        if (accountNumber.length !== 10) {
+
+            alert("Account number must be exactly 10 digits.");
+
+            return;
+
+        }
+
+        if (!/^\d{10}$/.test(accountNumber)) {
+
+            alert("Account number must contain only numbers.");
+
+            return;
+
+        }
+
+        if (!accountName) {
+
+            alert("Please enter your account name.");
+
+            return;
+
+        }
+
+        await updateDoc(doc(db, "users", user.uid), {
+
+            bankName,
+
+            accountNumber,
+
+            accountName
+
+        });
+
+        document.getElementById("bankSaveStatus").textContent =
+            "✅ Bank details saved successfully.";
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
