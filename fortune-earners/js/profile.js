@@ -43,6 +43,18 @@ onAuthStateChanged(auth, async (user) => {
         }
 
         const data = userSnap.data();
+        // ======================================
+// LOAD BANK DETAILS
+// ======================================
+
+document.getElementById("bankName").value =
+    userData.bankName || "";
+
+document.getElementById("accountNumber").value =
+    userData.accountNumber || "";
+
+document.getElementById("accountName").value =
+    userData.accountName || "";
 
         // ======================================
         // PROFILE INFORMATION
