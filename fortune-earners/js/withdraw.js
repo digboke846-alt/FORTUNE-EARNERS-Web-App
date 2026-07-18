@@ -7,10 +7,50 @@ import {
 import {
     doc,
     getDoc,
-    setDoc,
+    collection,
+    query,
+    where,
+    getDocs,
+    addDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+// ======================================
+// GLOBAL VARIABLES
+// ======================================
+
+let currentUserData = null;
+
+let selectedWallet = "task";
+
+let feePercentage = 10;
+
+let minimumWithdrawal = 0;
+
+// ======================================
+// ELEMENTS
+// ======================================
+
+const withdrawType =
+    document.getElementById("withdrawType");
+
+const withdrawAmount =
+    document.getElementById("withdrawAmount");
+
+const feeDisplay =
+    document.getElementById("withdrawFee");
+
+const receiveDisplay =
+    document.getElementById("amountToReceive");
+
+const minimumDisplay =
+    document.getElementById("minimumWithdrawal");
+
+const taskWallet =
+    document.getElementById("taskWallet");
+
+const affiliateWallet =
+    document.getElementById("affiliateWallet");
 // ======================================
 // CHECK LOGIN
 // ======================================
@@ -27,9 +67,11 @@ onAuthStateChanged(auth, async (user) => {
 
     try {
 
-        const userRef = doc(db, "users", user.uid);
+        const userRef =
+            doc(db, "users", user.uid);
 
-        const userSnap = await getDoc(userRef);
+        const userSnap =
+            await getDoc(userRef);
 
         if (!userSnap.exists()) {
 
@@ -39,270 +81,47 @@ onAuthStateChanged(auth, async (user) => {
 
         }
 
-        const userData = userSnap.data();
+        currentUserData =
+            userSnap.data();
 
-        // ======================================
-        // CHECK PLAN ACTIVATION
-        // ======================================
+        // =========================
+        // LOAD WALLETS
+        // =========================
 
-        if (userData.memberStatus !== "Active") {
+        taskWallet.textContent =
+            "₦" + Number(
+                currentUserData.taskWallet || 0
+            ).toLocaleString();
 
-            document.getElementById("withdrawContainer").innerHTML = `
+        affiliateWallet.textContent =
+            "₦" + Number(
+                currentUserData.affiliateWallet || 0
+            ).toLocaleString();
 
-                <div class="dashboard-card">
+        // =========================
+        // LOAD BANK DETAILS
+        // =========================
 
-                    <h2>🔒 Withdrawals Locked</h2>
+        document.getElementById("bankName").value =
+            currentUserData.bankName || "";
 
-                    <p>
+        document.getElementById("accountName").value =
+            currentUserData.accountName || "";
 
-                        Activate your membership plan before requesting withdrawals.
+        document.getElementById("accountNumber").value =
+            currentUserData.accountNumber || "";
 
-                    </p>
+        // =========================
+        // SET DEFAULT MINIMUM
+        // =========================
 
-                    <button onclick="location.href='activate-plan.html'">
+        updateWithdrawalSettings();
 
-                        💎 Activate Plan
+        // =========================
+        // LOAD HISTORY
+        // =========================
 
-                    </button>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-        // ======================================
-        // LOAD USER DATA
-        // ======================================
-
-        document.getElementById("affiliateBalance").textContent =
-            "₦" + Number(userData.affiliateWallet || 0).toLocaleString();
-
-        document.getElementById("taskBalance").textContent =
-            "₦" + Number(userData.taskWallet || 0).toLocaleString();
-
-        document.getElementById("bankName").textContent =
-            userData.bankName || "Not Added";
-
-        document.getElementById("accountNumber").textContent =
-            userData.accountNumber || "Not Added";
-
-        document.getElementById("accountName").textContent =
-            userData.accountName || "Not Added";
-
-        // ======================================
-// WITHDRAWAL CALCULATOR
-// ======================================
-
-const walletRadios =
-    document.querySelectorAll("input[name='wallet']");
-
-const amountInput =
-    document.getElementById("withdrawAmount");
-
-const summaryAmount =
-    document.getElementById("summaryAmount");
-
-const processingFee =
-    document.getElementById("processingFee");
-
-const receiveAmount =
-    document.getElementById("receiveAmount");
-
-const withdrawAllBtn =
-    document.getElementById("withdrawAllBtn");
-
-let selectedWallet = "";
-
-let availableBalance = 0;
-
-// Wallet Selection
-walletRadios.forEach((radio) => {
-
-    radio.addEventListener("change", () => {
-
-        selectedWallet = radio.value;
-
-        if (selectedWallet === "affiliate") {
-
-            availableBalance =
-                Number(userData.affiliateWallet || 0);
-
-        } else {
-
-            availableBalance =
-                Number(userData.taskWallet || 0);
-
-        }
-
-    });
-
-});
-
-// Withdraw All
-withdrawAllBtn.addEventListener("click", () => {
-
-    amountInput.value = availableBalance;
-
-    calculateWithdrawal();
-
-});
-
-// Live Calculation
-amountInput.addEventListener("input", calculateWithdrawal);
-
-function calculateWithdrawal() {
-
-    const amount =
-        Number(amountInput.value) || 0;
-
-    const fee =
-        amount * 0.07;
-
-    const receive =
-        amount - fee;
-
-    summaryAmount.textContent =
-        "₦" + amount.toLocaleString();
-
-    processingFee.textContent =
-        "₦" + fee.toLocaleString();
-
-    receiveAmount.textContent =
-        "₦" + receive.toLocaleString();
-
-}
-        // ======================================
-// SUBMIT WITHDRAWAL REQUEST
-// ======================================
-
-// ======================================
-// CHECK EXISTING WITHDRAWAL REQUEST
-// ======================================
-
-const withdrawRequestRef =
-    doc(db, "withdrawRequests", user.uid);
-
-const withdrawRequestSnap =
-    await getDoc(withdrawRequestRef);
-
-if (withdrawRequestSnap.exists()) {
-
-    const request =
-        withdrawRequestSnap.data();
-
-    if (request.status === "Pending") {
-
-        document.getElementById("withdrawStatus").textContent =
-            "Pending Approval";
-
-        confirmWithdrawBtn.disabled = true;
-
-        confirmWithdrawBtn.textContent =
-            "Withdrawal Pending";
-
-    }
-
-}
-        const confirmWithdrawBtn =
-    document.getElementById("confirmWithdrawBtn");
-
-confirmWithdrawBtn.addEventListener("click", async (e) => {
-
-    e.preventDefault();
-
-    if (!selectedWallet) {
-
-        alert("Please select a wallet.");
-
-        return;
-
-    }
-
-    const amount =
-        Number(amountInput.value);
-
-    if (!amount || amount < 1000) {
-
-        alert("Minimum withdrawal is ₦1,000.");
-
-        return;
-
-    }
-
-    if (amount > availableBalance) {
-
-        alert("Insufficient wallet balance.");
-
-        return;
-
-    }
-
-    if (
-        !userData.bankName ||
-        !userData.accountNumber ||
-        !userData.accountName
-    ) {
-
-        alert("Please add your bank details before requesting a withdrawal.");
-
-        window.location.href = "profile.html";
-
-        return;
-
-    }
-
-    const fee = amount * 0.07;
-
-    const receive = amount - fee;
-
-    await setDoc(
-    withdrawRequestRef,
-        {
-
-            userId: user.uid,
-
-            fullname: userData.fullname,
-
-            username: userData.username,
-
-            wallet: selectedWallet,
-
-            amount: amount,
-
-            processingFee: fee,
-
-            amountToReceive: receive,
-
-            bankName: userData.bankName,
-
-            accountNumber: userData.accountNumber,
-
-            accountName: userData.accountName,
-
-            status: "Pending",
-
-            requestedAt: serverTimestamp()
-
-        }
-
-    );
-
-    document.getElementById("withdrawStatus").textContent =
-        "Pending Approval";
-
-    confirmWithdrawBtn.disabled = true;
-
-    confirmWithdrawBtn.textContent =
-        "Withdrawal Submitted";
-
-    alert(
-        "✅ Withdrawal request submitted successfully.\n\nOur admin will review and process it."
-    );
-
-});
+        loadWithdrawalHistory(user.uid);
 
     }
 
