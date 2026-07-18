@@ -217,3 +217,14 @@ onclick="location.href='ad-details.html?id=${adDoc.id}'">
 
         document.getElementById("availableAds").textContent =
             availableCount;
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
