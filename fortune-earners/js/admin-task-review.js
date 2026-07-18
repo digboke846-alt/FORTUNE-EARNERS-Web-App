@@ -191,11 +191,25 @@ window.approveSubmission = async function(submissionId) {
 
         });
 
-        await updateDoc(submissionRef, {
+                // ======================================
+        // INCREASE TASK COMPLETION COUNT
+        // ======================================
 
-            status: "Approved"
+        const taskRef =
+            doc(db, "content", submission.taskId);
 
-        });
+        const taskSnap =
+            await getDoc(taskRef);
+
+        if (taskSnap.exists()) {
+
+            await updateDoc(taskRef, {
+
+                completedUsers: increment(1)
+
+            });
+
+        }
 
         alert("✅ Task approved successfully.");
 
