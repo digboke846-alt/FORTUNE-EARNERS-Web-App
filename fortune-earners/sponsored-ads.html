@@ -17,10 +17,6 @@ href="css/style.css">
 
 <body>
 
-<!-- ========================= -->
-<!-- HEADER -->
-<!-- ========================= -->
-
 <header class="top-header">
 
 <button id="menuButton"
@@ -48,28 +44,22 @@ SPONSORED ADS
 
 </header>
 
-<!-- ========================= -->
-<!-- SIDE MENU -->
-<!-- ========================= -->
-
 <nav id="menu"
 class="side-menu">
 
-<h2>Menu</h2>
-
 <a href="dashboard.html">🏠 Dashboard</a>
+
+<a href="activate-plan.html">🚀 Activate Plan</a>
 
 <a href="daily-tasks.html">📋 Daily Tasks</a>
 
 <a href="sponsored-ads.html">📺 Sponsored Ads</a>
 
-<a href="my-submission.html">📄 My Task Submissions</a>
-
-<a href="my-sponsored-submissions.html">🎥 My Sponsored Submissions</a>
-
 <a href="withdraw.html">💸 Withdraw</a>
 
 <a href="profile.html">👤 Profile</a>
+
+<a href="contact.html">📞 Contact Support</a>
 
 <a href="#" id="logoutBtn">🚪 Log Out</a>
 
@@ -78,11 +68,9 @@ class="side-menu">
 <div id="menuOverlay"
 class="menu-overlay"></div>
 
-<!-- ========================= -->
-<!-- MAIN CONTENT -->
-<!-- ========================= -->
-
 <main class="dashboard-content">
+
+<section class="dashboard-card">
 
 <h2>
 
@@ -92,22 +80,65 @@ class="menu-overlay"></div>
 
 <p>
 
-Watch or complete sponsored promotions and earn rewards after approval.
+Watch or complete sponsored advertisements and earn rewards.
 
 </p>
 
-<div id="adsContainer">
+</section>
 
-<p>
+<section class="summary-card">
 
-Loading sponsored ads...
+<h2>
 
-</p>
+📊 Today's Progress
 
-</div>
-  <!-- ========================= -->
-<!-- BOTTOM NAVIGATION -->
-<!-- ========================= -->
+</h2>
+
+<ul>
+
+<li>
+
+Ads Available
+
+<span id="availableAds">
+
+5
+
+</span>
+
+</li>
+
+<li>
+
+Completed
+
+<span id="completedAds">
+
+0
+
+</span>
+
+</li>
+
+<li>
+
+Pending Review
+
+<span id="pendingAds">
+
+0
+
+</span>
+
+</li>
+
+</ul>
+
+</section>
+
+<section id="adsList">
+
+</section>
 
 </main>
 
@@ -121,19 +152,19 @@ Loading sponsored ads...
 
 </a>
 
-<a href="daily-tasks.html">
+<a href="place-ads.html">
 
-📋
+📢
 
-<span>Tasks</span>
+<span>Place Ads</span>
 
 </a>
 
-<a href="sponsored-ads.html" class="active">
+<a href="withdraw.html">
 
-📺
+💸
 
-<span>Ads</span>
+<span>Withdraw</span>
 
 </a>
 
@@ -147,7 +178,9 @@ Loading sponsored ads...
 
 </nav>
 
-<footer>
+  <br>
+  <hr>
+  <footer>
 
 <p>
 
@@ -156,11 +189,12 @@ All Rights Reserved.
 
 </p>
 
-</footer>
+  </footer>
 
 <script src="js/menu.js"></script>
 
-<script type="module" src="js/sponsored-ads.js"></script>
+<script type="module"
+src="js/sponsored-ads.js"></script>
 
 </body>
 
