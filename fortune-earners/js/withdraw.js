@@ -134,3 +134,86 @@ onAuthStateChanged(auth, async (user) => {
     }
 
 });
+// ======================================
+// UPDATE WITHDRAWAL SETTINGS
+// ======================================
+
+function updateWithdrawalSettings() {
+
+    selectedWallet =
+        withdrawType.value;
+
+    if (selectedWallet === "task") {
+
+        feePercentage = 10;
+
+        switch (currentUserData.plan) {
+
+            case "NEWBIE":
+                minimumWithdrawal = 9000;
+                break;
+
+            case "SILVER":
+                minimumWithdrawal = 15000;
+                break;
+
+            case "GOLD":
+                minimumWithdrawal = 25000;
+                break;
+
+            case "DIAMOND":
+                minimumWithdrawal = 35000;
+                break;
+
+            case "PREMIUM":
+                minimumWithdrawal = 50000;
+                break;
+
+            default:
+                minimumWithdrawal = 0;
+
+        }
+
+    }
+
+    else {
+
+        feePercentage = 7;
+
+        minimumWithdrawal = 1000;
+
+    }
+
+    minimumDisplay.textContent =
+        "₦" + minimumWithdrawal.toLocaleString();
+
+    calculateWithdrawal();
+
+}
+
+// ======================================
+// CALCULATE WITHDRAWAL
+// ======================================
+
+function calculateWithdrawal() {
+
+    const amount =
+        Number(withdrawAmount.value) || 0;
+
+    const fee =
+        amount * feePercentage / 100;
+
+    const receive =
+        amount - fee;
+
+    feeDisplay.textContent =
+        "₦" + fee.toLocaleString();
+
+    receiveDisplay.textContent =
+        "₦" + receive.toLocaleString();
+
+}
+
+withdrawType.addEventListener("change", updateWithdrawalSettings);
+
+withdrawAmount.addEventListener("input", calculateWithdrawal);
