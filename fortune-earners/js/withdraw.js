@@ -324,3 +324,104 @@ document.getElementById("submitWithdrawalBtn")
     }
 
 });
+// ======================================
+// LOAD WITHDRAWAL HISTORY
+// ======================================
+
+async function loadWithdrawalHistory(userId) {
+
+    try {
+
+        const historyContainer =
+            document.getElementById("withdrawHistory");
+
+        historyContainer.innerHTML = "";
+
+        const q = query(
+
+            collection(db, "withdrawals"),
+
+            where("userId", "==", userId)
+
+        );
+
+        const snapshot =
+            await getDocs(q);
+
+        if (snapshot.empty) {
+
+            historyContainer.innerHTML = `
+
+<p>
+
+No withdrawal history available.
+
+</p>
+
+`;
+
+            return;
+
+        }
+
+        snapshot.forEach(docSnap => {
+
+            const data = docSnap.data();
+
+            historyContainer.innerHTML += `
+
+<div class="dashboard-card">
+
+<h3>
+
+${data.walletType === "task" ? "📋 Task Withdrawal" : "👥 Affiliate Withdrawal"}
+
+</h3>
+
+<p>
+
+<strong>Requested:</strong>
+
+₦${Number(data.amountRequested).toLocaleString()}
+
+</p>
+
+<p>
+
+<strong>Fee:</strong>
+
+${data.feePercentage}%
+
+</p>
+
+<p>
+
+<strong>You'll Receive:</strong>
+
+₦${Number(data.amountToReceive).toLocaleString()}
+
+</p>
+
+<p>
+
+<strong>Status:</strong>
+
+${data.status}
+
+</p>
+
+</div>
+
+`;
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
