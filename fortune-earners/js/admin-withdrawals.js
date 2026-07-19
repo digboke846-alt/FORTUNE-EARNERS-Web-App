@@ -423,3 +423,110 @@ async function markAsPaid(withdrawalId, adminComment) {
     }
 
 }
+// ======================================
+// REJECT & REFUND
+// ======================================
+
+async function rejectAndRefund(withdrawalId, comment) {
+
+    try {
+
+        const adminEmail =
+            auth.currentUser?.email || "Admin";
+
+        const withdrawRef =
+            doc(db, "withdrawals", withdrawalId);
+
+        const withdrawSnap =
+            await getDoc(withdrawRef);
+
+        if (!withdrawSnap.exists()) {
+
+            alert("Withdrawal not found.");
+
+            return;
+
+        }
+
+        const withdraw =
+            withdrawSnap.data();
+
+        const userRef =
+            doc(db, "users", withdraw.userId);
+
+        await updateDoc(userRef, {
+
+            taskWallet:
+                increment(Number(withdraw.amount || 0))
+
+        });
+
+        await updateDoc(withdrawRef, {
+
+            status: "Rejected - Refunded",
+
+            adminComment: comment || "",
+
+            processedBy: adminEmail,
+
+            processedAt: serverTimestamp()
+
+        });
+
+        alert("💛 Withdrawal rejected and wallet refunded.");
+
+        loadWithdrawals();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+}
+
+// ======================================
+// REJECT PERMANENTLY
+// ======================================
+
+async function rejectPermanent(withdrawalId, comment) {
+
+    try {
+
+        const adminEmail =
+            auth.currentUser?.email || "Admin";
+
+        const withdrawRef =
+            doc(db, "withdrawals", withdrawalId);
+
+        await updateDoc(withdrawRef, {
+
+            status: "Rejected",
+
+            adminComment: comment || "",
+
+            processedBy: adminEmail,
+
+            processedAt: serverTimestamp()
+
+        });
+
+        alert("❤️ Withdrawal permanently rejected.");
+
+        loadWithdrawals();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+}
