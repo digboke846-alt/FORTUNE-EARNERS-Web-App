@@ -51,12 +51,12 @@ onAuthStateChanged(auth, async (user) => {
 // PERSONAL INFORMATION
 // ======================================
 
-document.getElementById("profileFullName").textContent =
-    data.fullName || "Member";
+document.getElementById("profileTopUsername").textContent =
+    "@" + (data.username || "username");
 
-document.getElementById("profileUsername").textContent =
-    data.username || "Not Available";
-
+        document.getElementById("profileFullName").textContent =
+    data.fullName || "profileFullName";
+    
 document.getElementById("profileEmail").textContent =
     data.email || "Not Available";
 
