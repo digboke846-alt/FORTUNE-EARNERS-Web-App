@@ -262,3 +262,105 @@ container.appendChild(card);
     }
 
 }
+// ======================================
+// ACTION MODAL
+// ======================================
+
+let selectedWithdrawalId = null;
+let selectedAction = null;
+
+window.openActionModal = function(action, withdrawalId) {
+
+    selectedWithdrawalId = withdrawalId;
+    selectedAction = action;
+
+    const modal =
+        document.getElementById("actionModal");
+
+    const title =
+        document.getElementById("actionTitle");
+
+    const comment =
+        document.getElementById("adminComment");
+
+    comment.value = "";
+
+    if (action === "paid") {
+
+        title.textContent =
+            "💚 Mark Withdrawal as Paid";
+
+    }
+
+    if (action === "refund") {
+
+        title.textContent =
+            "💛 Reject & Refund";
+
+    }
+
+    if (action === "reject") {
+
+        title.textContent =
+            "❤️ Reject Permanently";
+
+    }
+
+    modal.style.display = "block";
+
+};
+
+// ======================================
+// CANCEL
+// ======================================
+
+document.getElementById("cancelActionBtn")
+.addEventListener("click", () => {
+
+    document.getElementById("actionModal")
+    .style.display = "none";
+
+});
+
+// ======================================
+// CONFIRM
+// ======================================
+
+document.getElementById("confirmActionBtn")
+.addEventListener("click", async () => {
+
+    const comment =
+        document.getElementById("adminComment")
+        .value.trim();
+
+    document.getElementById("actionModal")
+    .style.display = "none";
+
+    if (selectedAction === "paid") {
+
+        await markAsPaid(
+            selectedWithdrawalId,
+            comment
+        );
+
+    }
+
+    if (selectedAction === "refund") {
+
+        await rejectAndRefund(
+            selectedWithdrawalId,
+            comment
+        );
+
+    }
+
+    if (selectedAction === "reject") {
+
+        await rejectPermanent(
+            selectedWithdrawalId,
+            comment
+        );
+
+    }
+
+});
