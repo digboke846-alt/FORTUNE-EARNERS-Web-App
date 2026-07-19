@@ -8,7 +8,12 @@ import {
     collection,
     getDocs,
     query,
-    orderBy
+    orderBy,
+    doc,
+    getDoc,
+    updateDoc,
+    increment,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -364,3 +369,57 @@ document.getElementById("confirmActionBtn")
     }
 
 });
+// ======================================
+// MARK AS PAID
+// ======================================
+
+async function markAsPaid(withdrawalId, adminComment) {
+
+    try {
+
+        const withdrawalRef =
+            doc(db, "withdrawals", withdrawalId);
+
+        const withdrawalSnap =
+            await getDoc(withdrawalRef);
+
+        if (!withdrawalSnap.exists()) {
+
+            alert("Withdrawal not found.");
+
+            return;
+
+        }
+
+        const withdrawal =
+            withdrawalSnap.data();
+
+        await updateDoc(withdrawalRef, {
+
+            status: "Paid",
+
+            adminComment: adminComment || "",
+
+            processedBy:
+                auth.currentUser.email,
+
+            processedAt:
+                serverTimestamp()
+
+        });
+
+        alert("✅ Withdrawal marked as Paid.");
+
+        loadWithdrawals();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+}
