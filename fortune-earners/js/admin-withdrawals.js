@@ -97,7 +97,145 @@ async function loadWithdrawals() {
 
             }
 
-            // Card comes in Part 3
+            const fee =
+    Math.round(Number(withdraw.amount || 0) * 0.10);
+
+const amountToPay =
+    Number(withdraw.amount || 0) - fee;
+
+const card =
+    document.createElement("div");
+
+card.className =
+    "dashboard-card";
+
+card.innerHTML = `
+
+<h3>
+
+🧾 ${withdraw.reference || "Generating..."}
+
+</h3>
+
+<p>
+
+<strong>👤 Full Name:</strong><br>
+
+${withdraw.fullName || "Not Available"}
+
+</p>
+
+<p>
+
+<strong>@ Username:</strong><br>
+
+@${withdraw.username || "username"}
+
+</p>
+
+<p>
+
+<strong>🆔 User ID:</strong><br>
+
+${withdraw.userId}
+
+</p>
+
+<p>
+
+<strong>💰 Withdrawal Amount:</strong><br>
+
+₦${Number(withdraw.amount || 0).toLocaleString()}
+
+</p>
+
+<p>
+
+<strong>💸 Withdrawal Fee (10%)</strong><br>
+
+₦${fee.toLocaleString()}
+
+</p>
+
+<p>
+
+<strong>✅ Amount To Pay</strong><br>
+
+₦${amountToPay.toLocaleString()}
+
+</p>
+
+<p>
+
+<strong>🏦 Bank</strong><br>
+
+${withdraw.bankName || "-"}
+
+</p>
+
+<p>
+
+<strong>🔢 Account Number</strong><br>
+
+${withdraw.accountNumber || "-"}
+
+</p>
+
+<p>
+
+<strong>👤 Account Name</strong><br>
+
+${withdraw.accountName || "-"}
+
+</p>
+
+<p>
+
+<strong>📅 Date Requested</strong><br>
+
+${withdraw.requestDate || "-"}
+
+</p>
+
+<p>
+
+<strong>Status:</strong>
+
+🟡 ${withdraw.status}
+
+</p>
+
+<div class="dashboard-grid">
+
+<button
+class="approve-btn"
+onclick="openActionModal('paid','${docSnap.id}')">
+
+💚 Mark as Paid
+
+</button>
+
+<button
+class="warning-btn"
+onclick="openActionModal('refund','${docSnap.id}')">
+
+💛 Reject & Refund
+
+</button>
+
+<button
+class="delete-btn"
+onclick="openActionModal('reject','${docSnap.id}')">
+
+❤️ Reject Permanently
+
+</button>
+
+</div>
+
+`;
+
+container.appendChild(card);
 
         });
 
