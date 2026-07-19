@@ -52,7 +52,7 @@ onAuthStateChanged(auth, async (user) => {
 // ======================================
 
 document.getElementById("profileFullName").textContent =
-    data.fullname || "Member";
+    data.fullName || "Member";
 
 document.getElementById("profileUsername").textContent =
     data.username || "Not Available";
