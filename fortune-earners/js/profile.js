@@ -7,7 +7,7 @@ import {
 
 import {
     doc,
-    getDoc
+    getDoc,
     updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
@@ -27,9 +27,11 @@ onAuthStateChanged(auth, async (user) => {
 
     try {
 
-        const userRef = doc(db, "users", user.uid);
+        const userRef =
+            doc(db, "users", user.uid);
 
-        const userSnap = await getDoc(userRef);
+        const userSnap =
+            await getDoc(userRef);
 
         if (!userSnap.exists()) {
 
@@ -43,234 +45,242 @@ onAuthStateChanged(auth, async (user) => {
 
         }
 
-        const data = userSnap.data();
+        const data =
+            userSnap.data();
+        // ======================================
+// PERSONAL INFORMATION
+// ======================================
+
+document.getElementById("profileFullName").textContent =
+    data.fullname || "Member";
+
+document.getElementById("profileUsername").textContent =
+    data.username || "Not Available";
+
+document.getElementById("profileEmail").textContent =
+    data.email || "Not Available";
+
+document.getElementById("profilePhone").textContent =
+    data.phone || "Not Available";
+
+// ======================================
+// USER ID
+// ======================================
+
+document.getElementById("profileUserId").textContent =
+    "FE-" + user.uid.substring(0, 8).toUpperCase();
+
+// ======================================
+// MEMBER SINCE
+// ======================================
+
+if (data.createdAt?.toDate) {
+
+    document.getElementById("memberSince").textContent =
+        data.createdAt.toDate().toLocaleDateString();
+
+} else {
+
+    document.getElementById("memberSince").textContent =
+        "Not Available";
+
+}
+
+// ======================================
+// PLAN & STATUS
+// ======================================
+
+if (document.getElementById("profilePlan")) {
+
+    document.getElementById("profilePlan").textContent =
+        data.plan || "Not Activated";
+
+}
+
+if (document.getElementById("profileStatus")) {
+
+    document.getElementById("profileStatus").textContent =
+        data.memberStatus || "Active";
+
+}
+
+// ======================================
+// ACCOUNT STATISTICS
+// ======================================
+
+if (document.getElementById("profileReferrals")) {
+
+    document.getElementById("profileReferrals").textContent =
+        data.totalReferrals || 0;
+
+}
+
+if (document.getElementById("profileTasks")) {
+
+    document.getElementById("profileTasks").textContent =
+        data.tasksCompleted || 0;
+
+}
+
+if (document.getElementById("profileAds")) {
+
+    document.getElementById("profileAds").textContent =
+        data.sponsoredAdsViewed || 0;
+
+}
+
+if (document.getElementById("profileWithdrawals")) {
+
+    document.getElementById("profileWithdrawals").textContent =
+        "₦" + Number(
+            data.totalWithdrawals || 0
+        ).toLocaleString();
+
+}
         // ======================================
 // LOAD BANK DETAILS
 // ======================================
 
-document.getElementById("bankName").value =
-    userData.bankName || "";
+const bankName =
+    document.getElementById("bankName");
 
-document.getElementById("accountNumber").value =
-    userData.accountNumber || "";
+const accountNumber =
+    document.getElementById("accountNumber");
 
-document.getElementById("accountName").value =
-    userData.accountName || "";
+const accountName =
+    document.getElementById("accountName");
 
+if (bankName) {
+
+    bankName.value =
+        data.bankName || "";
+
+}
+
+if (accountNumber) {
+
+    accountNumber.value =
+        data.accountNumber || "";
+
+}
+
+if (accountName) {
+
+    accountName.value =
+        data.accountName || "";
+
+}
         // ======================================
-        // PROFILE INFORMATION
-        // ======================================
-
-        document.getElementById("profileFullName").textContent =
-            data.fullname || "Member";
-
-        document.getElementById("profileUsername").textContent =
-            "@" + (data.username || "username");
-
-        document.getElementById("profileEmail").textContent =
-            data.email || "Not Available";
-
-        document.getElementById("profilePhone").textContent =
-            data.phone || "Not Available";
-
-        document.getElementById("profilePlan").textContent =
-            data.plan || "Not Activated";
-
-        document.getElementById("profileStatus").textContent =
-            data.memberStatus || "Active";
-              // ======================================
-        // USER ID & MEMBER SINCE
-        // ======================================
-
-        document.getElementById("profileUserId").textContent =
-            "FE-" + user.uid.substring(0, 8).toUpperCase();
-
-        if (data.createdAt?.toDate) {
-
-            const joinedDate = data.createdAt
-                .toDate()
-                .toLocaleDateString();
-
-            document.getElementById("memberSince").textContent =
-                joinedDate;
-
-        } else {
-
-            document.getElementById("memberSince").textContent =
-                "Not Available";
-
-        }
-
-        // ======================================
-        // BANK DETAILS
-        // ======================================
-
-        document.getElementById("bankName").textContent =
-            data.bankName || "Not Added";
-
-        document.getElementById("accountNumber").textContent =
-            data.accountNumber || "Not Added";
-
-        document.getElementById("accountName").textContent =
-            data.accountName || "Not Added";
-
-        // ======================================
-        // ACCOUNT STATISTICS
-        // ======================================
-
-        document.getElementById("profileReferrals").textContent =
-            data.totalReferrals || 0;
-
-        document.getElementById("profileTasks").textContent =
-            data.tasksCompleted || 0;
-
-        document.getElementById("profileAds").textContent =
-            data.sponsoredAdsViewed || 0;
-
-        document.getElementById("profileWithdrawals").textContent =
-            "₦" +
-            Number(data.totalWithdrawals || 0).toLocaleString();
-
-        // ======================================
-        // ACHIEVEMENTS
-        // ======================================
-
-        if (
-            data.achievements &&
-            data.achievements.length > 0
-        ) {
-
-            document.getElementById("profileAchievements").textContent =
-                data.achievements.join(", ");
-
-        }
-              // ======================================
-        // EDIT BANK DETAILS
-        // ======================================
-
-        const editBankBtn =
-            document.getElementById("editBankBtn");
-
-        if (editBankBtn) {
-
-            editBankBtn.addEventListener("click", () => {
-
-                alert(
-                    "Bank Details editing will be available in the next update."
-                );
-
-            });
-
-        }
-
-        // ======================================
-        // LOG OUT BUTTON
-        // ======================================
-
-        const logoutBtn =
-            document.getElementById("logoutBtn");
-
-        if (logoutBtn) {
-
-            logoutBtn.addEventListener("click", async (e) => {
-
-                e.preventDefault();
-
-                const confirmLogout = confirm(
-                    "Are you sure you want to log out?"
-                );
-
-                if (!confirmLogout) return;
-
-                await signOut(auth);
-
-                window.location.href = "login.html";
-
-            });
-
-        }
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert("Failed to load profile.");
-
-    }
-
-});
-// ======================================
 // SAVE BANK DETAILS
 // ======================================
 
-document.getElementById("saveBankBtn")
-.addEventListener("click", async () => {
+const saveBankBtn =
+    document.getElementById("saveBankBtn");
 
-    try {
+if (saveBankBtn) {
 
-        const user = auth.currentUser;
+    saveBankBtn.addEventListener("click", async () => {
 
-        if (!user) {
+        try {
 
-            alert("Please log in again.");
+            const bank =
+                bankName.value;
 
-            return;
+            const accountNo =
+                accountNumber.value.trim();
+
+            const accountHolder =
+                accountName.value.trim();
+
+            if (!bank) {
+
+                alert("Please select your bank.");
+
+                return;
+
+            }
+
+            if (!/^\d{10}$/.test(accountNo)) {
+
+                alert("Account number must be exactly 10 digits.");
+
+                return;
+
+            }
+
+            if (!accountHolder) {
+
+                alert("Please enter the account name.");
+
+                return;
+
+            }
+
+            await updateDoc(doc(db, "users", user.uid), {
+
+                bankName: bank,
+
+                accountNumber: accountNo,
+
+                accountName: accountHolder
+
+            });
+
+            const status =
+                document.getElementById("bankSaveStatus");
+
+            if (status) {
+
+                status.textContent =
+                    "✅ Bank details saved successfully.";
+
+                setTimeout(() => {
+
+                    status.textContent = "";
+
+                }, 3000);
+
+            }
 
         }
 
-        const bankName =
-            document.getElementById("bankName").value;
+        catch (error) {
 
-        const accountNumber =
-            document.getElementById("accountNumber").value.trim();
+            console.error(error);
 
-        const accountName =
-            document.getElementById("accountName").value.trim();
-
-        if (!bankName) {
-
-            alert("Please select your bank.");
-
-            return;
+            alert(error.message);
 
         }
 
-        if (accountNumber.length !== 10) {
+    });
 
-            alert("Account number must be exactly 10 digits.");
+                }
+        // ======================================
+// LOG OUT
+// ======================================
 
-            return;
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-        }
+if (logoutBtn) {
 
-        if (!/^\d{10}$/.test(accountNumber)) {
+    logoutBtn.addEventListener("click", async (e) => {
 
-            alert("Account number must contain only numbers.");
+        e.preventDefault();
 
-            return;
+        const confirmLogout = confirm(
+            "Are you sure you want to log out?"
+        );
 
-        }
+        if (!confirmLogout) return;
 
-        if (!accountName) {
+        await signOut(auth);
 
-            alert("Please enter your account name.");
+        window.location.href = "login.html";
 
-            return;
+    });
 
-        }
-
-        await updateDoc(doc(db, "users", user.uid), {
-
-            bankName,
-
-            accountNumber,
-
-            accountName
-
-        });
-
-        document.getElementById("bankSaveStatus").textContent =
-            "✅ Bank details saved successfully.";
+}
 
     }
 
@@ -278,7 +288,7 @@ document.getElementById("saveBankBtn")
 
         console.error(error);
 
-        alert(error.message);
+        alert("Failed to load profile.");
 
     }
 
