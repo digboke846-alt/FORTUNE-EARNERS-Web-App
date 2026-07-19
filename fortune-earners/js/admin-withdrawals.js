@@ -1,59 +1,18 @@
-// ======================================
-// IMPORTS
-// ======================================
-
 import { auth, db } from "./firebase.js";
 
 import {
-
-    collection,
-    getDocs,
-    getDoc,
-    updateDoc,
-    doc,
-    query,
-    where,
-    serverTimestamp
-
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
-import {
-
-    onAuthStateChanged,
-    signOut
-
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
+import {
+    collection,
+    getDocs,
+    query,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
 // ======================================
-// GLOBAL VARIABLES
-// ======================================
-
-let selectedWithdrawalId = null;
-
-let selectedWithdrawalData = null;
-
-const withdrawalsContainer =
-    document.getElementById("withdrawalsContainer");
-
-const withdrawalModal =
-    document.getElementById("withdrawalModal");
-
-const withdrawalDetails =
-    document.getElementById("withdrawalDetails");
-
-const adminNote =
-    document.getElementById("adminNote");
-
-const approveBtn =
-    document.getElementById("approveWithdrawalBtn");
-
-const rejectBtn =
-    document.getElementById("rejectWithdrawalBtn");
-
-const closeModal =
-    document.getElementById("closeWithdrawalModal");
-// ======================================
-// ADMIN AUTHENTICATION
+// CHECK LOGIN
 // ======================================
 
 onAuthStateChanged(auth, async (user) => {
@@ -66,193 +25,93 @@ onAuthStateChanged(auth, async (user) => {
 
     }
 
-    try {
-
-        const userRef = doc(db, "users", user.uid);
-
-        const userSnap = await getDoc(userRef);
-
-        if (!userSnap.exists()) {
-
-            window.location.href = "login.html";
-
-            return;
-
-        }
-
-        const userData = userSnap.data();
-
-        if (!userData.isAdmin) {
-
-            alert("Access denied.");
-
-            window.location.href = "dashboard.html";
-
-            return;
-
-        }
-
-        loadWithdrawals();
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        alert(error.message);
-
-    }
+    loadWithdrawals();
 
 });
 
-// ======================================
-// LOGOUT
-// ======================================
-
-document.getElementById("logoutBtn")
-.addEventListener("click", async () => {
-
-    await signOut(auth);
-
-    window.location.href = "login.html";
-
-});
-
-// ======================================
-// CLOSE MODAL
-// ======================================
-
-closeModal.addEventListener("click", () => {
-
-    withdrawalModal.style.display = "none";
-
-});
-
-window.addEventListener("click", (e) => {
-
-    if (e.target === withdrawalModal) {
-
-        withdrawalModal.style.display = "none";
-
-    }
-
-});
 // ======================================
 // LOAD WITHDRAWALS
 // ======================================
 
 async function loadWithdrawals() {
 
-    withdrawalsContainer.innerHTML =
-        "<p>Loading withdrawal requests...</p>";
-
     try {
 
+        const container =
+            document.getElementById("withdrawalContainer");
+
+        container.innerHTML = "";
+
+        const withdrawQuery = query(
+
+            collection(db, "withdrawals"),
+
+            orderBy("requestedAt", "desc")
+
+        );
+
         const snapshot =
-            await getDocs(collection(db, "withdrawals"));
-
-        withdrawalsContainer.innerHTML = "";
-
-        let pending = 0;
-        let approvedToday = 0;
-        let rejected = 0;
-
-        let pendingAmount = 0;
-        let totalPaid = 0;
-        let taskPayout = 0;
-        let referralPayout = 0;
-
-        let highestWithdrawal = 0;
-
-        let lastPayment = "None";
+            await getDocs(withdrawQuery);
 
         if (snapshot.empty) {
 
-            withdrawalsContainer.innerHTML =
-                "<p>No withdrawal requests found.</p>";
+            container.innerHTML = `
+
+<div class="dashboard-card">
+
+<h3>
+
+📭 No Withdrawal Requests Yet
+
+</h3>
+
+</div>
+
+`;
+
+            return;
 
         }
 
-        snapshot.forEach(docSnap => {
+        let total = 0;
+        let pending = 0;
+        let paid = 0;
+        let rejected = 0;
 
-            const data = docSnap.data();
+        snapshot.forEach((docSnap) => {
 
-            const amount = Number(data.amount) || 0;
+            const withdraw = docSnap.data();
 
-            if (amount > highestWithdrawal) {
+            total++;
 
-                highestWithdrawal = amount;
+            if (withdraw.status === "Pending") pending++;
 
-            }
+            if (withdraw.status === "Paid") paid++;
 
-            switch (data.status) {
+            if (
+                withdraw.status === "Rejected" ||
+                withdraw.status === "Rejected - Refunded"
+            ) {
 
-                case "Pending":
-
-                    pending++;
-
-                    pendingAmount += amount;
-
-                    break;
-
-                case "Approved":
-
-                    totalPaid += amount;
-
-                    lastPayment =
-                        data.reference || "Paid";
-
-                    if (data.walletType === "Task") {
-
-                        taskPayout += amount;
-
-                    }
-
-                    else if (data.walletType === "Affiliate") {
-
-                        referralPayout += amount;
-
-                    }
-
-                    break;
-
-                case "Rejected":
-
-                    rejected++;
-
-                    break;
+                rejected++;
 
             }
+
+            // Card comes in Part 3
 
         });
 
-        document.getElementById("pendingCount").textContent =
+        document.getElementById("totalWithdrawals").textContent =
+            total;
+
+        document.getElementById("pendingWithdrawals").textContent =
             pending;
 
-        document.getElementById("approvedToday").textContent =
-            approvedToday;
+        document.getElementById("paidWithdrawals").textContent =
+            paid;
 
-        document.getElementById("rejectedCount").textContent =
+        document.getElementById("rejectedWithdrawals").textContent =
             rejected;
-
-        document.getElementById("pendingAmount").textContent =
-            "₦" + pendingAmount.toLocaleString();
-
-        document.getElementById("totalPaid").textContent =
-            "₦" + totalPaid.toLocaleString();
-
-        document.getElementById("taskPayout").textContent =
-            "₦" + taskPayout.toLocaleString();
-
-        document.getElementById("referralPayout").textContent =
-            "₦" + referralPayout.toLocaleString();
-
-        document.getElementById("highestWithdrawal").textContent =
-            "₦" + highestWithdrawal.toLocaleString();
-
-        document.getElementById("lastPayment").textContent =
-            lastPayment;
 
     }
 
