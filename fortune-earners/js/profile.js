@@ -55,7 +55,7 @@ document.getElementById("profileTopUsername").textContent =
     "@" + (data.username || "username");
 
         document.getElementById("profileFullName").textContent =
-    data.fullName || "profileFullName";
+    data.fullName || "Not Available";
     
 document.getElementById("profileEmail").textContent =
     data.email || "Not Available";
