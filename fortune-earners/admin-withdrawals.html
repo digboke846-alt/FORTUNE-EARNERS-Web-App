@@ -1,170 +1,189 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>💸 Withdrawal Management</h1>
+<head>
 
-<p>
-Review, approve and reject user withdrawal requests.
-</p>
+<meta charset="UTF-8">
 
-<div class="dashboard-grid">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<div class="dashboard-card">
-<h3>💸 Pending Requests</h3>
-<h2 id="pendingCount">0</h2>
-</div>
+<title>
 
-<div class="dashboard-card">
-<h3>✅ Approved Today</h3>
-<h2 id="approvedToday">0</h2>
-</div>
+Withdrawal Center | Fortune Earners Admin
 
-<div class="dashboard-card">
-<h3>❌ Rejected</h3>
-<h2 id="rejectedCount">0</h2>
-</div>
+</title>
 
-<div class="dashboard-card">
-<h3>💰 Total Pending Amount</h3>
-<h2 id="pendingAmount">₦0</h2>
-</div>
+<link rel="stylesheet"
+href="css/style.css">
 
-<div class="dashboard-card">
-<h3>🏦 Total Paid Amount</h3>
-<h2 id="totalPaid">₦0</h2>
-</div>
+</head>
 
-<div class="dashboard-card">
-<h3>📝 Total Task Payout</h3>
-<h2 id="taskPayout">₦0</h2>
-</div>
+<body>
 
-<div class="dashboard-card">
-<h3>👥 Total Referral Payout</h3>
-<h2 id="referralPayout">₦0</h2>
-</div>
+<header class="top-header">
 
-<div class="dashboard-card">
-<h3>👑 Highest Single Withdrawal</h3>
-<h2 id="highestWithdrawal">₦0</h2>
-</div>
+<h1 class="logo">
 
-<div class="dashboard-card">
-<h3>📅 Last Payment</h3>
-<h2 id="lastPayment">None</h2>
-</div>
+💳 WITHDRAWAL CENTER
 
-</div>
+</h1>
 
-<hr>
+</header>
 
-<input
-type="text"
-id="searchWithdrawal"
-placeholder="Search by username, reference or account name...">
+<main class="dashboard-content">
 
-<br><br>
-
-<div class="dashboard-grid">
-
-<button id="showPendingBtn">
-⏳ Pending
-</button>
-
-<button id="showApprovedBtn">
-✅ Approved
-</button>
-
-<button id="showRejectedBtn">
-❌ Rejected
-</button>
-
-<button id="showAllBtn">
-📋 All Requests
-</button>
-
-</div>
-
-<br>
-
-<div id="withdrawalsContainer">
-
-<p>Loading withdrawal requests...</p>
-
-</div>
-
-</div>
-<!-- ===================== -->
-<!-- WITHDRAWAL DETAILS MODAL -->
-<!-- ===================== -->
-
-<div
-id="withdrawalModal"
-class="modal"
-style="display:none;">
-
-<div class="modal-content">
-
-<span
-id="closeWithdrawalModal"
-style="float:right;
-cursor:pointer;
-font-size:28px;">
-
-&times;
-
-</span>
+<section class="dashboard-card">
 
 <h2>
 
-💸 Withdrawal Details
+Task Withdrawal Management
 
 </h2>
 
-<div id="withdrawalDetails">
-
 <p>
 
-Loading...
+Review, search, approve, refund or permanently reject withdrawal requests.
+
+</p>
+
+</section>
+
+<!-- ========================= -->
+<!-- SEARCH -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+<input
+type="text"
+id="withdrawSearch"
+placeholder="🔍 Search by Full Name, Username, User ID or Withdrawal Reference">
+
+</section>
+
+<!-- ========================= -->
+<!-- FILTERS -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+<div class="dashboard-grid">
+
+<button id="filterAll">
+
+📋 All
+
+</button>
+
+<button id="filterPending">
+
+🟡 Pending
+
+</button>
+
+<button id="filterPaid">
+
+✅ Paid
+
+</button>
+
+<button id="filterRejected">
+
+❌ Rejected
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- SUMMARY -->
+<!-- ========================= -->
+
+<section class="dashboard-card">
+
+<div class="dashboard-grid">
+
+<div>
+
+<strong>Total Requests</strong>
+
+<p id="totalWithdrawals">
+
+0
 
 </p>
 
 </div>
 
-<hr>
+<div>
 
-<label>
+<strong>Pending</strong>
 
-Admin Note
+<p id="pendingWithdrawals">
 
-</label>
+0
 
-<textarea
-id="adminNote"
-rows="3"
-placeholder="Optional note...">
+</p>
 
-</textarea>
+</div>
 
-<br><br>
+<div>
 
-<div class="dashboard-grid">
+<strong>Paid</strong>
 
-<button id="approveWithdrawalBtn">
+<p id="paidWithdrawals">
 
-✅ Approve Payment
+0
 
-</button>
+</p>
 
-<button id="rejectWithdrawalBtn">
+</div>
 
-❌ Reject Request
+<div>
 
-</button>
+<strong>Rejected</strong>
+
+<p id="rejectedWithdrawals">
+
+0
+
+</p>
 
 </div>
 
 </div>
 
+</section>
+
+<!-- ========================= -->
+<!-- WITHDRAWAL LIST -->
+<!-- ========================= -->
+
+<div id="withdrawalContainer">
+
+<p>
+
+Loading withdrawal requests...
+
+</p>
+
 </div>
 
-<script type="module" src="js/admin-auth.js"></script>
+</main>
+
+<script type="module"
+src="js/admin-auth.js">
+
+</script>
+
+<script type="module"
+src="js/admin-withdrawals.js">
+
+</script>
+
+</body>
+
+</html>
