@@ -54,8 +54,11 @@ onAuthStateChanged(auth, async (user) => {
 document.getElementById("profileTopUsername").textContent =
     "@" + (data.username || "username");
 
-        document.getElementById("profileFullName").textContent =
+document.getElementById("profileFullName").textContent =
     data.fullname || "Not Available";
+
+document.getElementById("profileUsername").textContent =
+    "@" + (data.username || "Not Available");
     
 document.getElementById("profileEmail").textContent =
     data.email || "Not Available";
