@@ -293,33 +293,43 @@ const withdrawalReference =
 
         await addDoc(collection(db, "withdrawals"), {
 
-            userId: auth.currentUser.uid,
+    reference: withdrawalReference,
 
-            username: currentUserData.username || "",
+    userId: auth.currentUser.uid,
 
-            fullName: currentUserData.fullName || "",
+    username: currentUserData.username || "",
 
-            walletType: selectedWallet,
+    fullName: currentUserData.fullName || "",
 
-            amountRequested: amount,
+    walletType: selectedWallet,
 
-            feePercentage: feePercentage,
+    amountRequested: amount,
 
-            feeAmount: fee,
+    feePercentage: feePercentage,
 
-            amountToReceive: receive,
+    feeAmount: fee,
 
-            bankName: currentUserData.bankName || "",
+    amountToReceive: receive,
 
-            accountName: currentUserData.accountName || "",
+    bankName: currentUserData.bankName || "",
 
-            accountNumber: currentUserData.accountNumber || "",
+    accountName: currentUserData.accountName || "",
 
-            status: status,
+    accountNumber: currentUserData.accountNumber || "",
 
-            submittedAt: serverTimestamp()
+    status: status,
 
-        });
+    submittedAt: serverTimestamp(),
+
+    requestDate: new Date().toLocaleString(),
+
+    adminComment: "",
+
+    processedBy: "",
+
+    processedAt: null
+
+});
 
         alert(
             selectedWallet === "task"
