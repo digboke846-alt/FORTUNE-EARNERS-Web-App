@@ -576,3 +576,13 @@ refundStatus: "Not Refunded",
     }
 
 }
+// ======================================
+// SEARCH BAR
+// ======================================
+
+document.getElementById("withdrawSearch")
+.addEventListener("input", () => {
+
+    loadWithdrawals();
+
+});
