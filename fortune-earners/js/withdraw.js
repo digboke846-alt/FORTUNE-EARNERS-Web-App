@@ -428,11 +428,31 @@ ${data.reference || "Not Available"}
 
 <p>
 
+<strong>📅 Date:</strong>
+
+${data.requestDate || "-"}
+
+</p>
+
+<p>
+
 <strong>Status:</strong>
 
 ${data.status}
 
 </p>
+
+${data.adminComment ?
+
+`<p>
+
+<strong>📝 Admin Comment:</strong>
+
+${data.adminComment}
+
+</p>`
+
+: ""}
 
 </div>
 
