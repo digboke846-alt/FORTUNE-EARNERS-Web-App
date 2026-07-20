@@ -35,6 +35,12 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 // ======================================
+// CURRENT FILTER
+// ======================================
+
+let currentFilter = "All";
+
+// ======================================
 // LOAD WITHDRAWALS
 // ======================================
 
@@ -126,7 +132,22 @@ if (
     return;
 
 }
+// ======================================
+// FILTER
+// ======================================
 
+if (
+
+    currentFilter !== "All" &&
+
+    withdraw.status !== currentFilter
+
+) {
+
+    return;
+
+}
+    
             total++;
 
             if (withdraw.status === "Pending") pending++;
@@ -582,6 +603,45 @@ refundStatus: "Not Refunded",
 
 document.getElementById("withdrawSearch")
 .addEventListener("input", () => {
+
+    loadWithdrawals();
+
+});
+// ======================================
+// FILTER BUTTONS
+// ======================================
+
+document.getElementById("filterAll")
+.addEventListener("click", () => {
+
+    currentFilter = "All";
+
+    loadWithdrawals();
+
+});
+
+document.getElementById("filterPending")
+.addEventListener("click", () => {
+
+    currentFilter = "Pending";
+
+    loadWithdrawals();
+
+});
+
+document.getElementById("filterPaid")
+.addEventListener("click", () => {
+
+    currentFilter = "Paid";
+
+    loadWithdrawals();
+
+});
+
+document.getElementById("filterRejected")
+.addEventListener("click", () => {
+
+    currentFilter = "Rejected";
 
     loadWithdrawals();
 
