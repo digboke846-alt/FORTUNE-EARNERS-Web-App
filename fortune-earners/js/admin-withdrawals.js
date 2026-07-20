@@ -83,7 +83,13 @@ async function loadWithdrawals() {
         let paid = 0;
         let rejected = 0;
 
-        snapshot.forEach((docSnap) => {
+        const searchValue =
+    document.getElementById("withdrawSearch")
+    .value
+    .trim()
+    .toLowerCase();
+
+snapshot.forEach((docSnap) => {
 
             const withdraw = docSnap.data();
 
