@@ -420,17 +420,9 @@ ${data.walletType === "task" ? "📋 Task Withdrawal" : "👥 Affiliate Withdraw
 
 <p>
 
-<strong>Fee:</strong>
+<strong>🧾 Reference:</strong>
 
-${data.feePercentage}%
-
-</p>
-
-<p>
-
-<strong>You'll Receive:</strong>
-
-₦${Number(data.amountToReceive).toLocaleString()}
+${data.reference || "Not Available"}
 
 </p>
 
