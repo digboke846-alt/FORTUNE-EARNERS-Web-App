@@ -398,6 +398,8 @@ async function markAsPaid(withdrawalId, adminComment) {
 
             status: "Paid",
 
+            refundStatus: "Not Applicable",
+
             adminComment: adminComment || "",
 
             processedBy:
@@ -507,7 +509,9 @@ async function rejectPermanent(withdrawalId, comment) {
 
         await updateDoc(withdrawRef, {
 
-            status: "Rejected",
+            status: "Rejected - No Refund",
+
+refundStatus: "Not Refunded",
 
             adminComment: comment || "",
 
@@ -517,7 +521,7 @@ async function rejectPermanent(withdrawalId, comment) {
 
         });
 
-        alert("❤️ Withdrawal permanently rejected.");
+        alert("❌ Withdrawal permanently rejected.");
 
         loadWithdrawals();
 
