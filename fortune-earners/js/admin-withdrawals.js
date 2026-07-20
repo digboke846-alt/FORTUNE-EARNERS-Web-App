@@ -93,6 +93,40 @@ snapshot.forEach((docSnap) => {
 
             const withdraw = docSnap.data();
 
+    // ======================================
+// SEARCH
+// ======================================
+
+const fullName =
+    (withdraw.fullName || "").toLowerCase();
+
+const username =
+    (withdraw.username || "").toLowerCase();
+
+const userId =
+    (withdraw.userId || "").toLowerCase();
+
+const reference =
+    (withdraw.reference || "").toLowerCase();
+
+if (
+
+    searchValue &&
+
+    !fullName.includes(searchValue) &&
+
+    !username.includes(searchValue) &&
+
+    !userId.includes(searchValue) &&
+
+    !reference.includes(searchValue)
+
+) {
+
+    return;
+
+}
+
             total++;
 
             if (withdraw.status === "Pending") pending++;
