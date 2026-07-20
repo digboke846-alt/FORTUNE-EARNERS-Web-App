@@ -271,6 +271,26 @@ document.getElementById("submitWithdrawalBtn")
                 ? "Pending"
                 : "Auto Paid";
 
+        // ======================================
+// GENERATE WITHDRAWAL REFERENCE
+// ======================================
+
+const now = new Date();
+
+const datePart =
+    now.getFullYear().toString() +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    String(now.getDate()).padStart(2, "0");
+
+const randomPart =
+    Math.random()
+        .toString(36)
+        .substring(2, 8)
+        .toUpperCase();
+
+const withdrawalReference =
+    `FEW-${datePart}-${randomPart}`;
+
         await addDoc(collection(db, "withdrawals"), {
 
             userId: auth.currentUser.uid,
