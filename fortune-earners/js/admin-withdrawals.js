@@ -463,7 +463,9 @@ async function rejectAndRefund(withdrawalId, comment) {
 
         await updateDoc(withdrawRef, {
 
-            status: "Rejected - Refunded",
+            status: "Rejected",
+
+refundStatus: "Refunded",
 
             adminComment: comment || "",
 
