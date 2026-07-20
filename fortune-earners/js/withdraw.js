@@ -317,17 +317,19 @@ const withdrawalReference =
 
     accountNumber: currentUserData.accountNumber || "",
 
-    status: status,
+    status: "Pending",
 
-    submittedAt: serverTimestamp(),
-
-    requestDate: new Date().toLocaleString(),
+    refundStatus: "Not Applicable",
 
     adminComment: "",
 
     processedBy: "",
 
-    processedAt: null
+    processedAt: null,
+
+    submittedAt: serverTimestamp(),
+
+    requestDate: new Date().toLocaleString()
 
 });
 
