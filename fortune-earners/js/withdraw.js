@@ -436,9 +436,29 @@ ${data.requestDate || "-"}
 
 <p>
 
-<strong>Status:</strong>
+<strong>📌 Status:</strong>
+
+<span class="status-badge ${
+
+data.status === "Pending"
+
+? "pending"
+
+: data.status === "Paid"
+
+? "paid"
+
+: data.status === "Rejected"
+
+? "rejected"
+
+: "rejected-no-refund"
+
+}">
 
 ${data.status}
+
+</span>
 
 </p>
 
