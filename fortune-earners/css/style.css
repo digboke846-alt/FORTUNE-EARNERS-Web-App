@@ -1069,3 +1069,46 @@ opacity:1;
     color:white;
 
 }
+/* ========================= */
+/* WITHDRAWAL STATUS BADGES */
+/* ========================= */
+
+.status-badge{
+
+display:inline-block;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:bold;
+
+color:#fff;
+
+}
+
+.pending{
+
+background:#f4b400;
+
+}
+
+.paid{
+
+background:#34a853;
+
+}
+
+.rejected{
+
+background:#ea4335;
+
+}
+
+.rejected-no-refund{
+
+background:#8b0000;
+
+}
