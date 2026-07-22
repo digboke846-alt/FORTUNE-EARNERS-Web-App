@@ -1112,3 +1112,54 @@ background:#ea4335;
 background:#8b0000;
 
 }
+/* ========================= */
+/* NOTIFICATION BADGE */
+/* ========================= */
+
+.notification-link{
+
+position:relative;
+
+text-decoration:none;
+
+font-size:24px;
+
+}
+
+.notification-badge{
+
+position:absolute;
+
+top:-8px;
+
+right:-10px;
+
+background:#ea4335;
+
+color:#fff;
+
+font-size:11px;
+
+font-weight:bold;
+
+min-width:18px;
+
+height:18px;
+
+padding:2px 5px;
+
+border-radius:50px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.notification-badge.hidden{
+
+display:none;
+
+}
