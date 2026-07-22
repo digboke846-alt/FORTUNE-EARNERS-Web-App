@@ -48,6 +48,7 @@ onAuthStateChanged(auth, async (user) => {
             return;
 
         }
+        loadNotificationBadge(user.uid);
 
         const data = userSnap.data();
 
@@ -459,5 +460,61 @@ if (logoutLink) {
         }
 
     });
+
+}
+// ======================================
+// LOAD NOTIFICATION BADGE
+// ======================================
+
+async function loadNotificationBadge(userId) {
+
+    try {
+
+        const badge =
+            document.getElementById("notificationBadge");
+
+        if (!badge) return;
+
+        const q = query(
+
+            collection(db, "notifications"),
+
+            where("userId", "==", userId),
+
+            where("isRead", "==", false)
+
+        );
+
+        const snapshot =
+            await getDocs(q);
+
+        const unreadCount =
+            snapshot.size;
+
+        if (unreadCount === 0) {
+
+            badge.classList.add("hidden");
+
+            return;
+
+        }
+
+        badge.classList.remove("hidden");
+
+        badge.textContent =
+
+            unreadCount > 99
+
+            ? "99+"
+
+            : unreadCount;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
 
 }
