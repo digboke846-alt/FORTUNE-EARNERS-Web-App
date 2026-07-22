@@ -172,3 +172,112 @@ document.addEventListener("click", async (e) => {
     }
 
 });
+// ======================================
+// MARK ALL AS READ
+// ======================================
+
+document
+.getElementById("markAllReadBtn")
+.addEventListener("click", async () => {
+
+    const user = auth.currentUser;
+
+    if (!user) return;
+
+    try {
+
+        const q = query(
+
+            collection(db, "notifications"),
+
+            where("userId", "==", user.uid),
+
+            where("isRead", "==", false)
+
+        );
+
+        const snapshot = await getDocs(q);
+
+        for (const notification of snapshot.docs) {
+
+            await updateDoc(
+
+                doc(db, "notifications", notification.id),
+
+                {
+
+                    isRead: true
+
+                }
+
+            );
+
+        }
+
+        loadNotifications(user.uid);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+});
+
+// ======================================
+// CLEAR READ NOTIFICATIONS
+// ======================================
+
+document
+.getElementById("clearReadBtn")
+.addEventListener("click", async () => {
+
+    const user = auth.currentUser;
+
+    if (!user) return;
+
+    const confirmDelete = confirm(
+
+        "Delete all read notifications?"
+
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+
+        const q = query(
+
+            collection(db, "notifications"),
+
+            where("userId", "==", user.uid),
+
+            where("isRead", "==", true)
+
+        );
+
+        const snapshot = await getDocs(q);
+
+        for (const notification of snapshot.docs) {
+
+            await deleteDoc(
+
+                doc(db, "notifications", notification.id)
+
+            );
+
+        }
+
+        loadNotifications(user.uid);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+});
