@@ -261,6 +261,26 @@ isAdmin: false,
 
         });
         // ======================================
+// CREATE WELCOME NOTIFICATION
+// ======================================
+
+await addDoc(collection(db, "notifications"), {
+
+    userId: user.uid,
+
+    title: "🎉 Welcome to Fortune Earners!",
+
+    message:
+        "Congratulations on joining Fortune Earners.\n\nActivate a membership plan to start earning daily.\n\nWe're happy to have you! 💙💚❤️",
+
+    type: "welcome",
+
+    isRead: false,
+
+    createdAt: serverTimestamp()
+
+});
+        // ======================================
 // CREATE REFERRAL RECORD
 // ======================================
 
