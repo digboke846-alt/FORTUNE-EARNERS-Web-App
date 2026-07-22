@@ -1,0 +1,159 @@
+/* ========================= */
+/* NOTIFICATION ACTIONS */
+/* ========================= */
+
+.notification-actions{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+}
+
+.notification-actions button{
+
+padding:10px 18px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+transition:0.3s;
+
+}
+
+#markAllReadBtn{
+
+background:#2563eb;
+
+color:#fff;
+
+}
+
+#clearReadBtn{
+
+background:#dc2626;
+
+color:#fff;
+
+}
+
+.notification-actions button:hover{
+
+opacity:0.9;
+
+transform:translateY(-2px);
+
+}
+
+/* ========================= */
+/* NOTIFICATION CARD */
+/* ========================= */
+
+.notification-card{
+
+background:#fff;
+
+border-left:5px solid #2563eb;
+
+border-radius:10px;
+
+padding:15px;
+
+margin-bottom:15px;
+
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
+
+transition:0.3s;
+
+}
+
+.notification-card:hover{
+
+transform:translateY(-2px);
+
+}
+
+.notification-title{
+
+font-size:17px;
+
+font-weight:bold;
+
+margin-bottom:8px;
+
+}
+
+.notification-message{
+
+font-size:15px;
+
+line-height:1.6;
+
+margin-bottom:10px;
+
+}
+
+.notification-date{
+
+font-size:13px;
+
+color:#666;
+
+margin-top:8px;
+
+}
+
+/* ========================= */
+/* UNREAD */
+/* ========================= */
+
+.notification-unread{
+
+border-left-color:#f59e0b;
+
+background:#fffdf5;
+
+}
+
+/* ========================= */
+/* READ */
+/* ========================= */
+
+.notification-read{
+
+opacity:0.85;
+
+}
+
+/* ========================= */
+/* STATUS BADGE */
+/* ========================= */
+
+.notification-status{
+
+display:inline-block;
+
+padding:4px 10px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:bold;
+
+background:#2563eb;
+
+color:#fff;
+
+margin-bottom:8px;
+
+}
