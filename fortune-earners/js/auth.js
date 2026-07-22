@@ -280,6 +280,30 @@ await addDoc(collection(db, "notifications"), {
     createdAt: serverTimestamp()
 
 });
+    // ======================================
+// NOTIFY REFERRER OF NEW REFERRAL
+// ======================================
+
+if (referrerUid) {
+
+    await addDoc(collection(db, "notifications"), {
+
+        userId: referrerUid,
+
+        title: "👥 New Referral",
+
+        message:
+            `🎉 ${fullname} just joined Fortune Earners using your referral link.\n\nEncourage them to activate a plan and start earning 'n get your reward!🎉`,
+
+        type: "referral",
+
+        isRead: false,
+
+        createdAt: serverTimestamp()
+
+    });
+
+}
         // ======================================
 // CREATE REFERRAL RECORD
 // ======================================
