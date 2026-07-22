@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications | Fortune Earners</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/notifications.css">
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
+<header class="dashboard-header">
+
+    <div>
+
+        <h2>🔔 Notifications</h2>
+
+        <p>Stay updated with everything happening on your account.</p>
+
+    </div>
+
+    <a href="dashboard.html" class="back-btn">
+
+        ← Dashboard
+
+    </a>
+
+</header>
+
+<!-- ========================= -->
+<!-- MAIN CONTENT -->
+<!-- ========================= -->
+
+<main class="dashboard-content">
+
+    <!-- Notification Actions -->
+
+    <section class="dashboard-card">
+
+        <div class="notification-actions">
+
+            <button id="markAllReadBtn">
+
+                ✓ Mark All as Read
+
+            </button>
+
+            <button id="clearReadBtn">
+
+                🗑 Clear Read Notifications
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- Notification List -->
+
+    <section class="dashboard-card">
+
+        <h3>📬 Your Notifications</h3>
+
+        <div id="notificationList">
+
+            <p>No notifications available.</p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script type="module" src="js/notifications.js"></script>
+
+</body>
+
+</html>
