@@ -1,4 +1,4 @@
-/* ========================= */
+* ========================= */
 /* NOTIFICATION ACTIONS */
 /* ========================= */
 
@@ -11,6 +11,8 @@ justify-content:space-between;
 gap:10px;
 
 flex-wrap:wrap;
+
+margin-bottom:20px;
 
 }
 
@@ -60,17 +62,19 @@ transform:translateY(-2px);
 
 .notification-card{
 
-background:#fff;
+background:#1E293B;
+
+color:#fff;
 
 border-left:5px solid #2563eb;
 
-border-radius:10px;
+border-radius:12px;
 
-padding:15px;
+padding:18px;
 
-margin-bottom:15px;
+margin-bottom:16px;
 
-box-shadow:0 2px 8px rgba(0,0,0,0.08);
+box-shadow:0 4px 12px rgba(0,0,0,0.25);
 
 transition:0.3s;
 
@@ -78,9 +82,14 @@ transition:0.3s;
 
 .notification-card:hover{
 
-transform:translateY(-2px);
+transform:translateY(-3px);
+
+box-shadow:0 8px 18px rgba(0,0,0,0.35);
 
 }
+/* ========================= */
+/* TITLE */
+/* ========================= */
 
 .notification-title{
 
@@ -90,23 +99,35 @@ font-weight:bold;
 
 margin-bottom:8px;
 
+color:#ffffff;
+
 }
+
+/* ========================= */
+/* MESSAGE */
+/* ========================= */
 
 .notification-message{
 
 font-size:15px;
 
-line-height:1.6;
+line-height:1.7;
 
-margin-bottom:10px;
+margin-bottom:12px;
+
+color:#E5E7EB;
 
 }
+
+/* ========================= */
+/* DATE */
+/* ========================= */
 
 .notification-date{
 
 font-size:13px;
 
-color:#666;
+color:#94A3B8;
 
 margin-top:8px;
 
@@ -118,9 +139,9 @@ margin-top:8px;
 
 .notification-unread{
 
-border-left-color:#f59e0b;
+background:#273549;
 
-background:#fffdf5;
+border-left-color:#F59E0B;
 
 }
 
@@ -130,7 +151,9 @@ background:#fffdf5;
 
 .notification-read{
 
-opacity:0.85;
+background:#1E293B;
+
+opacity:0.92;
 
 }
 
@@ -142,7 +165,7 @@ opacity:0.85;
 
 display:inline-block;
 
-padding:4px 10px;
+padding:5px 10px;
 
 border-radius:20px;
 
@@ -154,6 +177,6 @@ background:#2563eb;
 
 color:#fff;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
 }
