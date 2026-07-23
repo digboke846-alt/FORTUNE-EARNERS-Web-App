@@ -304,6 +304,25 @@ window.approveSubmission = async function(submissionId, type) {
                 completedUsers: increment(1)
 
             });
+            // ======================================
+// TASK APPROVED NOTIFICATION
+// ======================================
+
+await addDoc(collection(db, "notifications"), {
+
+    userId: submission.userId,
+
+    type: "Task",
+
+    title: "🎉 Great Job!",
+
+    message: "Your task was approved successfully. Keep completing tasks to grow your earnings! 🚀",
+
+    isRead: false,
+
+    createdAt: serverTimestamp()
+
+});
 
         }
 
