@@ -128,7 +128,9 @@ ${data.createdAt?.toDate
 
     catch (error) {
 
-        console.error(error);
+    alert(error.message);
+
+    console.error(error);
 
     }
 
