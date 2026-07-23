@@ -266,6 +266,37 @@ else {
 
     );
 
+    // ======================================
+// CREATE NOTIFICATION FOR ALL USERS
+// ======================================
+
+if (data.type === "announcement") {
+
+    const usersSnapshot =
+        await getDocs(collection(db, "users"));
+
+    for (const userDoc of usersSnapshot.docs) {
+
+        await addDoc(collection(db, "notifications"), {
+
+            userId: userDoc.id,
+
+            title: "📢 New Announcement",
+
+            message: data.title,
+
+            type: "Announcement",
+
+            isRead: false,
+
+            createdAt: serverTimestamp()
+
+        });
+
+    }
+
+}
+
 }
 
         alert("Content added successfully.");
