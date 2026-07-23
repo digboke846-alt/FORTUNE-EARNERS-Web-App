@@ -305,6 +305,33 @@ if (referrerUid) {
 
 }
         // ======================================
+// UPDATE REFERRER TOTAL REFERRALS
+// ======================================
+
+if (referrerUid) {
+
+    const referrerRef =
+        doc(db, "users", referrerUid);
+
+    const referrerSnap =
+        await getDoc(referrerRef);
+
+    if (referrerSnap.exists()) {
+
+        const referrerData =
+            referrerSnap.data();
+
+        await updateDoc(referrerRef, {
+
+            totalReferrals:
+                (referrerData.totalReferrals || 0) + 1
+
+        });
+
+    }
+
+}
+        // ======================================
 // CREATE REFERRAL RECORD
 // ======================================
 
