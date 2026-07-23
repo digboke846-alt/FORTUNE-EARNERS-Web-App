@@ -51,6 +51,7 @@ async function loadNotifications(userId) {
 
             where("userId", "==", userId),
 
+            orderBy("createdAt", "desc")
 
         );
 
