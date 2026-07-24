@@ -10,7 +10,9 @@ import {
     doc,
     getDoc,
     query,
-    where
+    where,
+    updateDoc,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -505,3 +507,51 @@ document.addEventListener("click", async (e) => {
     }
 
 });
+// ======================================
+// ACTIVATE USER PLAN
+// ======================================
+
+async function activatePlan(userId, selectedPlan) {
+
+    try {
+
+        const userRef =
+            doc(db, "users", userId);
+
+        const userSnap =
+            await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+
+            throw new Error("User not found.");
+
+        }
+
+        const userData =
+            userSnap.data();
+
+        await updateDoc(userRef, {
+
+            plan: selectedPlan,
+
+            memberStatus: "Activated",
+
+            accountStatus: "Active",
+
+            planActivatedOn: serverTimestamp(),
+
+            lastPlanUpgrade: serverTimestamp()
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        throw error;
+
+    }
+
+}
