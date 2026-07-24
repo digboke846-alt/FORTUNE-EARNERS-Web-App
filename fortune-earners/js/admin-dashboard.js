@@ -558,6 +558,98 @@ async function activatePlan(userId, selectedPlan) {
 
 });
 
+       // ======================================
+// CREDIT REFERRER
+// ======================================
+
+if (userData.referredBy) {
+
+    const referrerQuery =
+        query(
+
+            collection(db, "users"),
+
+            where(
+                "username",
+                "==",
+                userData.referredBy
+            )
+
+        );
+
+    const referrerSnapshot =
+        await getDocs(referrerQuery);
+
+    if (!referrerSnapshot.empty) {
+
+        const referrerDoc =
+            referrerSnapshot.docs[0];
+
+        const referrerData =
+            referrerDoc.data();
+
+        let commission = 0;
+
+        switch (selectedPlan) {
+
+            case "NEWBIE":
+
+                commission = 400;
+
+                break;
+
+            case "SILVER":
+
+                commission = 700;
+
+                break;
+
+            case "GOLD":
+
+                commission = 1050;
+
+                break;
+
+            case "DIAMOND":
+
+                commission = 2100;
+
+                break;
+
+            case "PREMIUM":
+
+                commission = 3300;
+
+                break;
+
+        }
+
+        await updateDoc(referrerDoc.ref, {
+
+            affiliateWallet:
+
+                Number(
+                    referrerData.affiliateWallet || 0
+                ) + commission,
+
+            referralEarnings:
+
+                Number(
+                    referrerData.referralEarnings || 0
+                ) + commission,
+
+            validReferrals:
+
+                Number(
+                    referrerData.validReferrals || 0
+                ) + 1
+
+        });
+
+    }
+
+} 
+
     }
 
     catch (error) {
