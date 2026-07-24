@@ -727,6 +727,18 @@ document.addEventListener("click", async (e) => {
         const request =
             requestSnap.data();
 
+        // ======================================
+// PREVENT DOUBLE APPROVAL
+// ======================================
+
+if (request.status === "Approved") {
+
+    alert("✅ This activation request has already been approved.");
+
+    return;
+
+}
+
         // Activate user's account
         await activatePlan(
 
