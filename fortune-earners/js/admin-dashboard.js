@@ -307,3 +307,201 @@ async function loadDashboard() {
     }
 
 }
+// ======================================
+// LOAD ACTIVATION REQUESTS
+// ======================================
+
+async function loadActivationRequests() {
+
+    try {
+
+        const activationContainer =
+            document.getElementById(
+                "activationRequestsList"
+            );
+
+        activationContainer.innerHTML =
+            "<p>Loading activation requests...</p>";
+
+        const activationQuery =
+            query(
+
+                collection(db, "activationRequests"),
+
+                where(
+                    "status",
+                    "==",
+                    "Pending"
+                )
+
+            );
+
+        const activationSnapshot =
+            await getDocs(
+                activationQuery
+            );
+
+        activationContainer.innerHTML = "";
+
+        if (activationSnapshot.empty) {
+
+            activationContainer.innerHTML = `
+
+            <p>
+
+            ✅ No pending activation requests.
+
+            </p>
+
+            `;
+
+            return;
+
+        }
+
+        activationSnapshot.forEach((requestDoc) => {
+
+            const request =
+                requestDoc.data();
+
+            activationContainer.innerHTML += `
+
+            <div class="dashboard-card">
+
+                <h3>
+
+                👤 ${request.fullname}
+
+                </h3>
+
+                <p>
+
+                Username:
+                @${request.username}
+
+                </p>
+
+                <p>
+
+                Plan:
+                ${request.selectedPlan}
+
+                </p>
+
+                <p>
+
+                Amount:
+                ₦${Number(request.amount).toLocaleString()}
+
+                </p>
+
+                <p>
+
+                Status:
+                ${request.status}
+
+                </p>
+
+                <button
+
+                class="viewProofBtn"
+
+                data-id="${requestDoc.id}">
+
+                📷 View Proof
+
+                </button>
+
+                <button
+
+                class="approveActivationBtn"
+
+                data-id="${requestDoc.id}">
+
+                ✅ Approve
+
+                </button>
+
+                <button
+
+                class="rejectActivationBtn"
+
+                data-id="${requestDoc.id}">
+
+                ❌ Reject
+
+                </button>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+// ======================================
+// VIEW PAYMENT PROOF
+// ======================================
+
+document.addEventListener("click", async (e) => {
+
+    if (!e.target.classList.contains("viewProofBtn")) {
+
+        return;
+
+    }
+
+    try {
+
+        const requestId =
+            e.target.dataset.id;
+
+        const requestRef =
+            doc(db, "activationRequests", requestId);
+
+        const requestSnap =
+            await getDoc(requestRef);
+
+        if (!requestSnap.exists()) {
+
+            alert("Activation request not found.");
+
+            return;
+
+        }
+
+        const request =
+            requestSnap.data();
+
+        if (!request.paymentProofURL) {
+
+            alert("No payment proof uploaded.");
+
+            return;
+
+        }
+
+        window.open(
+            request.paymentProofURL,
+            "_blank"
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
