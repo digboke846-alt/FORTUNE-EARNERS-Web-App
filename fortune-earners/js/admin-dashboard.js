@@ -646,6 +646,39 @@ if (userData.referredBy) {
 
         });
 
+        // ======================================
+// CREATE REFERRAL NOTIFICATION
+// ======================================
+
+await addDoc(
+
+    collection(db, "notifications"),
+
+    {
+
+        userId: referrerDoc.id,
+
+        title: "🎉 Referral Bonus Received!",
+
+        message:
+            `🎉 Congratulations!
+
+Your referral ${userData.fullname} has activated a plan.
+
+₦${commission.toLocaleString()} has been credited to your Affiliate Wallet.
+
+Keep encouraging your team to activate their accounts. 🚀`,
+
+        type: "Referral Bonus",
+
+        isRead: false,
+
+        createdAt: serverTimestamp()
+
+    }
+
+);
+
     }
 
 } 
