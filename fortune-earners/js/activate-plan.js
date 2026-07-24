@@ -101,6 +101,56 @@ planButtons.forEach(button => {
 
         });
 
+        // ======================================
+// PAYMENT MODE (PAYSTACK READY)
+// ======================================
+
+setPaymentMode("manual");
+
+function setPaymentMode(mode) {
+
+    const paymentMode =
+        document.getElementById("paymentMode");
+
+    const paymentNotice =
+        document.getElementById("paymentNotice");
+
+    const accountExpiry =
+        document.getElementById("accountExpiry");
+
+    const paymentReference =
+        document.getElementById("paymentReference");
+
+    if (mode === "manual") {
+
+        paymentMode.innerHTML =
+            "🟡 Manual Payment Mode";
+
+        paymentNotice.innerHTML =
+            "⚠️ <strong>Manual Payment:</strong> Send payment only to the account details below and upload your payment proof after a successful transfer.";
+
+        accountExpiry.style.display = "none";
+
+        paymentReference.style.display = "none";
+
+    }
+
+    else if (mode === "paystack") {
+
+        paymentMode.innerHTML =
+            "🟢 Secure Virtual Account";
+
+        paymentNotice.innerHTML =
+            "⚠️ <strong>Use this account for THIS TRANSACTION ONLY.</strong><br><br>This virtual account expires automatically after 1 hour. Do not save or reuse it.";
+
+        accountExpiry.style.display = "block";
+
+        paymentReference.style.display = "block";
+
+    }
+
+}
+
     });
 
 });
