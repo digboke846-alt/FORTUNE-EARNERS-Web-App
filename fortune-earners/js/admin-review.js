@@ -12,7 +12,9 @@ import {
     doc,
     getDoc,
     updateDoc,
-    increment
+    increment,
+    addDoc,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -364,6 +366,27 @@ window.rejectSubmission = async function(submissionId, type) {
             status: "Rejected"
 
         });
+
+        // ======================================
+// CREATE TASK REJECTED NOTIFICATION
+// ======================================
+
+await addDoc(collection(db, "notifications"), {
+
+    userId: submission.userId,
+
+    type: "task",
+
+    title: "❌ Task Rejected",
+
+    message:
+        "Unfortunately, your submitted task was rejected. Please review the task requirements and try again. 💪",
+
+    isRead: false,
+
+    createdAt: serverTimestamp()
+
+});
 
         alert(
             `❌ ${type === "task" ? "Task" : "Sponsored Ad"} rejected successfully.`
