@@ -680,6 +680,40 @@ Keep encouraging your team to activate their accounts. 🚀`,
 
 );
 
+    // ======================================
+// USER ACTIVATION NOTIFICATION
+// ======================================
+
+await addDoc(
+
+    collection(db, "notifications"),
+
+    {
+
+        userId: userId,
+
+        title: "🎉 Plan Activated Successfully!",
+
+        message:
+
+`🎉 Congratulations!
+
+Your ${selectedPlan} plan has been activated successfully.
+
+You can now start completing Daily Tasks and Sponsored Ads to earn money.
+
+Welcome to Fortune Earners! 🚀`,
+
+        type: "Plan Activation",
+
+        isRead: false,
+
+        createdAt: serverTimestamp()
+
+    }
+
+);
+
     }
 
 } 
