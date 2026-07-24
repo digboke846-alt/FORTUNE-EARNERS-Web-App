@@ -215,25 +215,68 @@ submitPaymentBtn.addEventListener("click", async () => {
 
     await setDoc(activationRef, {
 
-        userId: user.uid,
+    // =========================
+    // USER DETAILS
+    // =========================
 
-        fullname: userData.fullname,
+    userId: user.uid,
 
-        username: userData.username,
+    fullname: userData.fullname,
 
-        email: userData.email,
+    username: userData.username,
 
-        selectedPlan: chosenPlan,
+    email: userData.email,
 
-        amount: chosenAmount,
+    // =========================
+    // PLAN DETAILS
+    // =========================
 
-        status: "Pending",
+    selectedPlan: chosenPlan,
 
-        paymentProofUploaded: true,
+    amount: chosenAmount,
 
-        submittedAt: serverTimestamp()
+    // =========================
+    // PAYMENT DETAILS
+    // =========================
 
-    });
+    paymentMethod: "Manual",
+
+    paymentStatus: "Pending",
+
+    paymentReference: "",
+
+    bankName:
+        document.getElementById("bankName").textContent,
+
+    accountNumber:
+        document.getElementById("accountNumber").textContent,
+
+    accountName:
+        document.getElementById("accountName").textContent,
+
+    virtualAccountExpiresAt: null,
+
+    paymentProofUploaded: true,
+
+    // =========================
+    // ACTIVATION STATUS
+    // =========================
+
+    status: "Pending",
+
+    reviewedBy: "",
+
+    reviewedAt: null,
+
+    rejectionReason: "",
+
+    // =========================
+    // TIMESTAMPS
+    // =========================
+
+    submittedAt: serverTimestamp()
+
+});
 
     alert(
         "✅ Your activation request has been submitted successfully.\n\nOur admin will review your payment and activate your account."
