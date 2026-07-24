@@ -511,16 +511,13 @@ document.addEventListener("click", async (e) => {
 // ======================================
 // ACTIVATE USER PLAN
 // ======================================
-
 async function activatePlan(userId, selectedPlan) {
 
     try {
 
-        const userRef =
-            doc(db, "users", userId);
+        const userRef = doc(db, "users", userId);
 
-        const userSnap =
-            await getDoc(userRef);
+        const userSnap = await getDoc(userRef);
 
         if (!userSnap.exists()) {
 
@@ -528,141 +525,120 @@ async function activatePlan(userId, selectedPlan) {
 
         }
 
-        const userData =
-            userSnap.data();
+        const userData = userSnap.data();
+
+        // ======================================
+        // ACTIVATE USER
+        // ======================================
 
         await updateDoc(userRef, {
 
-    plan: selectedPlan,
-
-    memberStatus: "Activated",
-
-    accountStatus: "Active",
-
-    planActivatedOn: serverTimestamp(),
-
-    lastPlanUpgrade: serverTimestamp(),
-
-    activationHistory: [
-
-        ...(userData.activationHistory || []),
-
-        {
-
             plan: selectedPlan,
 
-            activatedAt: new Date().toISOString()
+            memberStatus: "Activated",
 
-        }
+            accountStatus: "Active",
 
-    ]
+            planActivatedOn: serverTimestamp(),
 
-});
+            lastPlanUpgrade: serverTimestamp(),
 
-       // ======================================
-// CREDIT REFERRER
-// ======================================
+            activationHistory: [
 
-if (userData.referredBy) {
+                ...(userData.activationHistory || []),
 
-    const referrerQuery =
-        query(
+                {
 
-            collection(db, "users"),
+                    plan: selectedPlan,
 
-            where(
-                "username",
-                "==",
-                userData.referredBy
-            )
+                    activatedAt: new Date().toISOString()
 
-        );
+                }
 
-    const referrerSnapshot =
-        await getDocs(referrerQuery);
-
-    if (!referrerSnapshot.empty) {
-
-        const referrerDoc =
-            referrerSnapshot.docs[0];
-
-        const referrerData =
-            referrerDoc.data();
-
-        let commission = 0;
-
-        switch (selectedPlan) {
-
-            case "NEWBIE":
-
-                commission = 400;
-
-                break;
-
-            case "SILVER":
-
-                commission = 700;
-
-                break;
-
-            case "GOLD":
-
-                commission = 1050;
-
-                break;
-
-            case "DIAMOND":
-
-                commission = 2100;
-
-                break;
-
-            case "PREMIUM":
-
-                commission = 3300;
-
-                break;
-
-        }
-
-        await updateDoc(referrerDoc.ref, {
-
-            affiliateWallet:
-
-                Number(
-                    referrerData.affiliateWallet || 0
-                ) + commission,
-
-            referralEarnings:
-
-                Number(
-                    referrerData.referralEarnings || 0
-                ) + commission,
-
-            validReferrals:
-
-                Number(
-                    referrerData.validReferrals || 0
-                ) + 1
+            ]
 
         });
 
         // ======================================
-// CREATE REFERRAL NOTIFICATION
-// ======================================
+        // CREDIT REFERRER
+        // ======================================
 
-await addDoc(
+        if (userData.referredBy) {
 
-    collection(db, "notifications"),
+            const referrerQuery = query(
 
-    {
+                collection(db, "users"),
 
-        userId: referrerDoc.id,
+                where("username", "==", userData.referredBy)
 
-        title: "🎉 Referral Bonus Received!",
+            );
 
-        message:
-            `🎉 Congratulations!
+            const referrerSnapshot = await getDocs(referrerQuery);
+
+            if (!referrerSnapshot.empty) {
+
+                const referrerDoc = referrerSnapshot.docs[0];
+
+                const referrerData = referrerDoc.data();
+
+                let commission = 0;
+
+                switch (selectedPlan) {
+
+                    case "NEWBIE":
+                        commission = 400;
+                        break;
+
+                    case "SILVER":
+                        commission = 700;
+                        break;
+
+                    case "GOLD":
+                        commission = 1050;
+                        break;
+
+                    case "DIAMOND":
+                        commission = 2100;
+                        break;
+
+                    case "PREMIUM":
+                        commission = 3300;
+                        break;
+
+                }
+
+                await updateDoc(referrerDoc.ref, {
+
+                    affiliateWallet:
+
+                        Number(referrerData.affiliateWallet || 0) + commission,
+
+                    referralEarnings:
+
+                        Number(referrerData.referralEarnings || 0) + commission,
+
+                    validReferrals:
+
+                        Number(referrerData.validReferrals || 0) + 1
+
+                });
+
+                // ======================================
+                // CREATE REFERRAL NOTIFICATION
+                // ======================================
+
+                await addDoc(
+
+                    collection(db, "notifications"),
+
+                    {
+
+                        userId: referrerDoc.id,
+
+                        title: "🎉 Referral Bonus Received!",
+
+                        message:
+`🎉 Congratulations!
 
 Your referral ${userData.fullname} has activated a plan.
 
@@ -670,32 +646,35 @@ Your referral ${userData.fullname} has activated a plan.
 
 Keep encouraging your team to activate their accounts. 🚀`,
 
-        type: "Referral Bonus",
+                        type: "Referral Bonus",
 
-        isRead: false,
+                        isRead: false,
 
-        createdAt: serverTimestamp()
+                        createdAt: serverTimestamp()
 
-    }
+                    }
 
-);
+                );
 
-    // ======================================
-// USER ACTIVATION NOTIFICATION
-// ======================================
+            }
 
-await addDoc(
+        }
 
-    collection(db, "notifications"),
+        // ======================================
+        // USER ACTIVATION NOTIFICATION
+        // ======================================
 
-    {
+        await addDoc(
 
-        userId: userId,
+            collection(db, "notifications"),
 
-        title: "🎉 Plan Activated Successfully!",
+            {
 
-        message:
+                userId: userId,
 
+                title: "🎉 Plan Activated Successfully!",
+
+                message:
 `🎉 Congratulations!
 
 Your ${selectedPlan} plan has been activated successfully.
@@ -704,19 +683,15 @@ You can now start completing Daily Tasks and Sponsored Ads to earn money.
 
 Welcome to Fortune Earners! 🚀`,
 
-        type: "Plan Activation",
+                type: "Plan Activation",
 
-        isRead: false,
+                isRead: false,
 
-        createdAt: serverTimestamp()
+                createdAt: serverTimestamp()
 
-    }
+            }
 
-);
-
-    }
-
-} 
+        );
 
     }
 
@@ -727,6 +702,9 @@ Welcome to Fortune Earners! 🚀`,
         throw error;
 
     }
+
+}
+
 // ======================================
 // APPROVE ACTIVATION
 // ======================================
@@ -741,14 +719,11 @@ document.addEventListener("click", async (e) => {
 
     try {
 
-        const requestId =
-            e.target.dataset.id;
+        const requestId = e.target.dataset.id;
 
-        const requestRef =
-            doc(db, "activationRequests", requestId);
+        const requestRef = doc(db, "activationRequests", requestId);
 
-        const requestSnap =
-            await getDoc(requestRef);
+        const requestSnap = await getDoc(requestRef);
 
         if (!requestSnap.exists()) {
 
@@ -758,22 +733,24 @@ document.addEventListener("click", async (e) => {
 
         }
 
-        const request =
-            requestSnap.data();
+        const request = requestSnap.data();
 
         // ======================================
-// PREVENT DOUBLE APPROVAL
-// ======================================
+        // PREVENT DOUBLE APPROVAL
+        // ======================================
 
-if (request.status === "Approved") {
+        if (request.status === "Approved") {
 
-    alert("✅ This activation request has already been approved.");
+            alert("✅ This activation request has already been approved.");
 
-    return;
+            return;
 
-}
+        }
 
-        // Activate user's account
+        // ======================================
+        // ACTIVATE USER
+        // ======================================
+
         await activatePlan(
 
             request.userId,
@@ -782,7 +759,9 @@ if (request.status === "Approved") {
 
         );
 
-        // Update activation request
+        // ======================================
+        // UPDATE REQUEST
+        // ======================================
 
         await updateDoc(requestRef, {
 
@@ -798,9 +777,9 @@ if (request.status === "Approved") {
 
         alert("✅ Plan activated successfully.");
 
-        loadActivationRequests();
+        await loadActivationRequests();
 
-        loadDashboard();
+        await loadDashboard();
 
     }
 
@@ -813,5 +792,116 @@ if (request.status === "Approved") {
     }
 
 });
-    
-}
+
+// ======================================
+// REJECT ACTIVATION
+// ======================================
+
+document.addEventListener("click", async (e) => {
+
+    if (!e.target.classList.contains("rejectActivationBtn")) {
+
+        return;
+
+    }
+
+    try {
+
+        const requestId = e.target.dataset.id;
+
+        const requestRef = doc(db, "activationRequests", requestId);
+
+        const requestSnap = await getDoc(requestRef);
+
+        if (!requestSnap.exists()) {
+
+            alert("Activation request not found.");
+
+            return;
+
+        }
+
+        const request = requestSnap.data();
+
+        // ======================================
+        // PREVENT DOUBLE REJECTION
+        // ======================================
+
+        if (request.status === "Rejected") {
+
+            alert("❌ This activation request has already been rejected.");
+
+            return;
+
+        }
+
+        if (!confirm("Are you sure you want to reject this activation request?")) {
+
+            return;
+
+        }
+
+        // ======================================
+        // UPDATE REQUEST
+        // ======================================
+
+        await updateDoc(requestRef, {
+
+            status: "Rejected",
+
+            paymentStatus: "Rejected",
+
+            reviewedAt: serverTimestamp(),
+
+            reviewedBy: auth.currentUser.uid
+
+        });
+
+        // ======================================
+        // CREATE USER NOTIFICATION
+        // ======================================
+
+        await addDoc(
+
+            collection(db, "notifications"),
+
+            {
+
+                userId: request.userId,
+
+                title: "❌ Plan Activation Rejected",
+
+                message:
+`Unfortunately, your ${request.selectedPlan} plan activation request was rejected.
+
+Please verify your payment proof and submit a new activation request if necessary.
+
+If you believe this was a mistake, contact Fortune Earners support.`,
+
+                type: "Plan Rejection",
+
+                isRead: false,
+
+                createdAt: serverTimestamp()
+
+            }
+
+        );
+
+        alert("❌ Activation request rejected successfully.");
+
+        await loadActivationRequests();
+
+        await loadDashboard();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
