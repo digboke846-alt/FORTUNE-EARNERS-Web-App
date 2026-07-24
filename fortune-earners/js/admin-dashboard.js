@@ -553,5 +553,79 @@ async function activatePlan(userId, selectedPlan) {
         throw error;
 
     }
+// ======================================
+// APPROVE ACTIVATION
+// ======================================
 
+document.addEventListener("click", async (e) => {
+
+    if (!e.target.classList.contains("approveActivationBtn")) {
+
+        return;
+
+    }
+
+    try {
+
+        const requestId =
+            e.target.dataset.id;
+
+        const requestRef =
+            doc(db, "activationRequests", requestId);
+
+        const requestSnap =
+            await getDoc(requestRef);
+
+        if (!requestSnap.exists()) {
+
+            alert("Activation request not found.");
+
+            return;
+
+        }
+
+        const request =
+            requestSnap.data();
+
+        // Activate user's account
+        await activatePlan(
+
+            request.userId,
+
+            request.selectedPlan
+
+        );
+
+        // Update activation request
+
+        await updateDoc(requestRef, {
+
+            status: "Approved",
+
+            paymentStatus: "Approved",
+
+            reviewedAt: serverTimestamp(),
+
+            reviewedBy: auth.currentUser.uid
+
+        });
+
+        alert("✅ Plan activated successfully.");
+
+        loadActivationRequests();
+
+        loadDashboard();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
+    
 }
