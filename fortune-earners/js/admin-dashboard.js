@@ -532,17 +532,31 @@ async function activatePlan(userId, selectedPlan) {
 
         await updateDoc(userRef, {
 
+    plan: selectedPlan,
+
+    memberStatus: "Activated",
+
+    accountStatus: "Active",
+
+    planActivatedOn: serverTimestamp(),
+
+    lastPlanUpgrade: serverTimestamp(),
+
+    activationHistory: [
+
+        ...(userData.activationHistory || []),
+
+        {
+
             plan: selectedPlan,
 
-            memberStatus: "Activated",
+            activatedAt: new Date().toISOString()
 
-            accountStatus: "Active",
+        }
 
-            planActivatedOn: serverTimestamp(),
+    ]
 
-            lastPlanUpgrade: serverTimestamp()
-
-        });
+});
 
     }
 
