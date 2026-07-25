@@ -115,7 +115,7 @@ async function loadDashboard() {
             const user =
                 userDoc.data();
 
-            if (user.memberStatus === "Activated") {
+            if (user.memberStatus === "Active") {
 
                 activeUsers++;
 
@@ -129,31 +129,31 @@ async function loadDashboard() {
 
             switch (user.plan) {
 
-                case "NEWBIE":
+                case "🟢 NEWBIE":
 
                     totalRevenue += 750;
 
                     break;
 
-                case "SILVER":
+                case "⚪ SILVER":
 
                     totalRevenue += 1500;
 
                     break;
 
-                case "GOLD":
+                case "🟡 GOLD":
 
                     totalRevenue += 3000;
 
                     break;
 
-                case "DIAMOND":
+                case "🔷 DIAMOND":
 
                     totalRevenue += 5000;
 
                     break;
 
-                case "PREMIUM":
+                case "👑 PREMIUM":
 
                     totalRevenue += 7000;
 
@@ -535,9 +535,9 @@ async function activatePlan(userId, selectedPlan) {
 
             plan: selectedPlan,
 
-            memberStatus: "Activated",
+            memberStatus: "Active",
 
-            accountStatus: "Active",
+            accountStatus: "Activated",
 
             planActivatedOn: serverTimestamp(),
 
