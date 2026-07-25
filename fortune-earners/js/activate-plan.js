@@ -44,17 +44,64 @@ onAuthStateChanged(auth, async (user) => {
         const userData =
             userSnap.data();
 
-        // If already activated
-        if (userData.plan !== "Not Activated") {
+        // ======================================
+// MEMBERSHIP PAGE MODE
+// ======================================
 
-            alert("Your account is already activated.");
+const pageTitle =
+    document.getElementById("pageTitle");
 
-            window.location.href =
-                "dashboard.html";
+const pageDescription =
+    document.getElementById("pageDescription");
 
-            return;
+const currentPlanContainer =
+    document.getElementById("currentPlanContainer");
 
-        }
+const currentPlanDisplay =
+    document.getElementById("currentPlanDisplay");
+
+const planIcons = {
+
+    "NEWBIE": "🟢 NEWBIE",
+
+    "SILVER": "⚪ SILVER",
+
+    "GOLD": "🟡 GOLD",
+
+    "DIAMOND": "🔷 DIAMOND",
+
+    "PREMIUM": "👑 PREMIUM"
+
+};
+
+if (userData.memberStatus === "Pending Activation") {
+
+    pageTitle.textContent =
+        "💎 Choose Your Membership Plan";
+
+    pageDescription.textContent =
+        "Activate a membership plan to start earning from Daily Tasks, Sponsored Ads, Referral Commissions and Withdrawals.";
+
+    currentPlanContainer.style.display =
+        "none";
+
+}
+
+else {
+
+    pageTitle.textContent =
+        "🚀 Upgrade Membership Plan";
+
+    pageDescription.textContent =
+        "Upgrade your membership plan to unlock higher daily earnings, bigger referral commissions and more rewards.";
+
+    currentPlanContainer.style.display =
+        "block";
+
+    currentPlanDisplay.textContent =
+        planIcons[userData.plan] || userData.plan;
+
+}
 
        // ======================================
 // PLAN SELECTION
