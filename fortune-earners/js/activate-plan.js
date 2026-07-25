@@ -45,7 +45,7 @@ onAuthStateChanged(auth, async (user) => {
             userSnap.data();
 
         // If already activated
-        if (userData.plan !== "None") {
+        if (userData.plan !== "Not Activated") {
 
             alert("Your account is already activated.");
 
