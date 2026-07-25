@@ -53,7 +53,7 @@ onAuthStateChanged(auth, async (user) => {
 // ======================================
 
 if (
-    userData.plan === "None" ||
+    userData.plan === "Not Activated" ||
     userData.memberStatus !== "Active"
 ) {
 
