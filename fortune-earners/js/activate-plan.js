@@ -103,6 +103,86 @@ else {
 
 }
 
+        // ======================================
+// MEMBERSHIP LADDER
+// ======================================
+
+const planOrder = [
+    "NEWBIE",
+    "SILVER",
+    "GOLD",
+    "DIAMOND",
+    "PREMIUM"
+];
+
+const currentIndex =
+    planOrder.indexOf(userData.plan);
+
+planOrder.forEach((plan, index) => {
+
+    const button =
+        document.querySelector(
+            `.activatePlanBtn[data-plan="${plan}"]`
+        );
+
+    if (!button) return;
+
+    // User has not activated any plan
+    if (userData.memberStatus === "Pending Activation") {
+
+        button.textContent = "Activate Plan";
+
+        button.disabled = false;
+
+        button.style.opacity = "1";
+
+        button.style.cursor = "pointer";
+
+        return;
+
+    }
+
+    // Completed plans
+    if (index < currentIndex) {
+
+        button.textContent = "✔ Completed";
+
+        button.disabled = true;
+
+        button.style.opacity = "0.6";
+
+        button.style.cursor = "not-allowed";
+
+    }
+
+    // Current plan
+    else if (index === currentIndex) {
+
+        button.textContent = "⭐ Current";
+
+        button.disabled = true;
+
+        button.style.opacity = "1";
+
+        button.style.cursor = "default";
+
+    }
+
+    // Upgrade plans
+    else {
+
+        button.textContent = "🚀 Upgrade";
+
+        button.disabled = false;
+
+        button.style.opacity = "1";
+
+        button.style.cursor = "pointer";
+
+    }
+
+});
+
        // ======================================
 // PLAN SELECTION
 // ======================================
