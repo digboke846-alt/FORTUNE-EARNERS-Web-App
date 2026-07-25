@@ -296,3 +296,19 @@ if (logoutBtn) {
     }
 
 });
+// ======================================
+// OPEN NOTIFICATIONS PAGE
+// ======================================
+
+const notificationButton =
+    document.getElementById("notificationButton");
+
+if (notificationButton) {
+
+    notificationButton.addEventListener("click", () => {
+
+        window.location.href = "notifications.html";
+
+    });
+
+}
