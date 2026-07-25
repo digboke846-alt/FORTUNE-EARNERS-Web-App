@@ -147,11 +147,10 @@ planOrder.forEach((plan, index) => {
 
         button.textContent = "✔ Completed";
 
-        button.disabled = true;
+button.disabled = true;
 
-        button.style.opacity = "0.6";
-
-        button.style.cursor = "not-allowed";
+button.className =
+    "activatePlanBtn plan-completed";
 
     }
 
@@ -160,11 +159,10 @@ planOrder.forEach((plan, index) => {
 
         button.textContent = "⭐ Current Plan";
 
-        button.disabled = true;
+button.disabled = true;
 
-        button.style.opacity = "1";
-
-        button.style.cursor = "default";
+button.className =
+    "activatePlanBtn plan-current";
 
     }
 
@@ -173,11 +171,10 @@ planOrder.forEach((plan, index) => {
 
         button.textContent = "🚀 Upgrade Plan";
 
-        button.disabled = false;
+button.disabled = false;
 
-        button.style.opacity = "1";
-
-        button.style.cursor = "pointer";
+button.className =
+    "activatePlanBtn plan-upgrade";
 
     }
 
