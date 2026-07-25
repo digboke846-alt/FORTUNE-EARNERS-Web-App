@@ -158,7 +158,7 @@ planOrder.forEach((plan, index) => {
     // Current plan
     else if (index === currentIndex) {
 
-        button.textContent = "⭐ Current";
+        button.textContent = "⭐ Current Plan";
 
         button.disabled = true;
 
@@ -171,7 +171,7 @@ planOrder.forEach((plan, index) => {
     // Upgrade plans
     else {
 
-        button.textContent = "🚀 Upgrade";
+        button.textContent = "🚀 Upgrade Plan";
 
         button.disabled = false;
 
