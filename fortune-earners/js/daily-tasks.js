@@ -162,6 +162,22 @@ let availableCount = 0;
 taskSnapshot.forEach((taskDoc) => {
 
     const task = taskDoc.data();
+
+    // ======================================
+// SKIP COMPLETED & PENDING TASKS
+// ======================================
+
+if (approvedTasks.has(taskDoc.id)) {
+
+    return;
+
+}
+
+if (pendingTasks.has(taskDoc.id)) {
+
+    return;
+
+}
     // Hide tasks that have reached maximum users
 
 if (
