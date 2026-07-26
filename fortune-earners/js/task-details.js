@@ -270,31 +270,70 @@ onAuthStateChanged(auth, async (user) => {
 
                 await setDoc(submissionRef, {
 
-                    userId: user.uid,
+    // =========================
+    // USER
+    // =========================
 
-                    taskId: taskId,
+    userId: user.uid,
 
-                    taskTitle: task.title,
+    fullname: userData.fullname,
 
-                    reward: reward,
+    username: userData.username,
 
-                    status: "Pending",
+    // =========================
+    // TASK
+    // =========================
 
-                    screenshotURLs: [],
+    taskId: taskId,
 
-                    submittedAt: serverTimestamp()
+    taskTitle: task.title,
 
-                });
+    reward: reward,
+
+    // =========================
+    // STATUS
+    // =========================
+
+    status: "Pending",
+
+    reviewedAt: null,
+
+    reviewedBy: "",
+
+    rejectionReason: "",
+
+    // =========================
+    // PROOF
+    // =========================
+
+    screenshotURLs: [],
+
+    // =========================
+    // TIME
+    // =========================
+
+    submittedAt: serverTimestamp()
+
+});
 
                 alert("✅ Task submitted successfully and is awaiting admin review.");
 
-                submitBtn.disabled = true;
+submitBtn.disabled = true;
 
-                submitBtn.textContent =
-                    "✅ Submitted";
+submitBtn.textContent =
+    "⏳ Waiting for Approval";
 
-                document.getElementById("taskStatus").textContent =
-                    "🟡 Pending";
+submitBtn.style.background =
+    "#f59e0b";
+
+submitBtn.style.cursor =
+    "not-allowed";
+
+document.getElementById("taskStatus").textContent =
+    "🟡 Pending Review";
+
+document.getElementById("taskStatus").style.color =
+    "#f59e0b";
 
             });
 
