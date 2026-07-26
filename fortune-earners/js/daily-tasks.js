@@ -159,6 +159,46 @@ taskSnapshot.forEach((taskDoc) => {
 
     const task = taskDoc.data();
 
+    let reward = 0;
+
+switch(currentPlan){
+
+    case "NEWBIE":
+
+        reward = task.rewardNewbie || 0;
+
+        break;
+
+    case "SILVER":
+
+        reward = task.rewardSilver || 0;
+
+        break;
+
+    case "GOLD":
+
+        reward = task.rewardGold || 0;
+
+        break;
+
+    case "DIAMOND":
+
+        reward = task.rewardDiamond || 0;
+
+        break;
+
+    case "PREMIUM":
+
+        reward = task.rewardPremium || 0;
+
+        break;
+
+    default:
+
+        reward = 0;
+
+}
+
     // ======================================
 // SKIP COMPLETED & PENDING TASKS
 // ======================================
@@ -239,45 +279,6 @@ if (
 
     availableCount++;
 
-    let reward = 0;
-
-    switch(currentPlan){
-
-        case "NEWBIE":
-
-            reward = task.rewardNewbie || 0;
-
-            break;
-
-        case "SILVER":
-
-            reward = task.rewardSilver || 0;
-
-            break;
-
-        case "GOLD":
-
-            reward = task.rewardGold || 0;
-
-            break;
-
-        case "DIAMOND":
-
-            reward = task.rewardDiamond || 0;
-
-            break;
-
-        case "PREMIUM":
-
-            reward = task.rewardPremium || 0;
-
-            break;
-
-        default:
-
-            reward = 0;
-
-    }
 
     taskList.innerHTML += `
 
