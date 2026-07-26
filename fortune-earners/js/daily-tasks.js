@@ -167,13 +167,60 @@ taskSnapshot.forEach((taskDoc) => {
 // SKIP COMPLETED & PENDING TASKS
 // ======================================
 
+// ======================================
+// COMPLETED TASK
+// ======================================
+
 if (approvedTasks.has(taskDoc.id)) {
+
+    completedCount++;
 
     return;
 
 }
 
+// ======================================
+// PENDING TASK
+// ======================================
+
 if (pendingTasks.has(taskDoc.id)) {
+
+    pendingCount++;
+
+    taskList.innerHTML += `
+
+    <div class="task-card">
+
+        <h3>${task.title}</h3>
+
+        <p>${task.description}</p>
+
+        <div class="task-info">
+
+            <span>
+
+                💰 Reward:
+                <strong>₦${reward}</strong>
+
+            </span>
+
+            <span class="task-status pending">
+
+                🟡 Pending Review
+
+            </span>
+
+        </div>
+
+        <button disabled>
+
+            ⏳ Waiting for Approval
+
+        </button>
+
+    </div>
+
+    `;
 
     return;
 
