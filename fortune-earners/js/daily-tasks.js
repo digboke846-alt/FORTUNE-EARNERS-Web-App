@@ -5,12 +5,15 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 import {
+
     collection,
     getDocs,
     doc,
     getDoc,
     query,
-    where
+    where,
+    documentId
+
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -47,6 +50,53 @@ onAuthStateChanged(auth, async (user) => {
 
         const currentPlan =
             userData.plan || "Not Activated";
+
+        // ======================================
+// LOAD USER SUBMISSIONS
+// ======================================
+
+const submissionsQuery =
+    query(
+
+        collection(db, "taskSubmissions"),
+
+        where("userId", "==", user.uid)
+
+    );
+
+const submissionsSnapshot =
+    await getDocs(submissionsQuery);
+
+const approvedTasks = new Set();
+
+const pendingTasks = new Set();
+
+let completedCount = 0;
+
+let pendingCount = 0;
+
+submissionsSnapshot.forEach((submissionDoc) => {
+
+    const submission =
+        submissionDoc.data();
+
+    if (submission.status === "Approved") {
+
+        approvedTasks.add(submission.taskId);
+
+        completedCount++;
+
+    }
+
+    else if (submission.status === "Pending") {
+
+        pendingTasks.add(submission.taskId);
+
+        pendingCount++;
+
+    }
+
+});
 
         // ======================================
 // CHECK PLAN ACTIVATION
