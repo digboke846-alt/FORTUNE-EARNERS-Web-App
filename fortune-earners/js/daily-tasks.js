@@ -82,19 +82,15 @@ submissionsSnapshot.forEach((submissionDoc) => {
 
     if (submission.status === "Approved") {
 
-        approvedTasks.add(submission.taskId);
+    approvedTasks.add(submission.taskId);
 
-        completedCount++;
+}
 
-    }
+else if (submission.status === "Pending") {
 
-    else if (submission.status === "Pending") {
+    pendingTasks.add(submission.taskId);
 
-        pendingTasks.add(submission.taskId);
-
-        pendingCount++;
-
-    }
+}
 
 });
 
