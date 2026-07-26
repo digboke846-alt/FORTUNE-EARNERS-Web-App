@@ -277,6 +277,12 @@ if (
 document.getElementById("availableTasks").textContent =
     availableCount;
 
+document.getElementById("pendingTasks").textContent =
+    pendingCount;
+
+document.getElementById("completedTasks").textContent =
+    completedCount;
+
     }
 
     catch(error){
