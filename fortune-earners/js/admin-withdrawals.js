@@ -55,11 +55,11 @@ async function loadWithdrawals() {
 
         const withdrawQuery = query(
 
-            collection(db, "withdrawals"),
+    collection(db, "withdrawals"),
 
-            orderBy("requestedAt", "desc")
+    orderBy("submittedAt", "desc")
 
-        );
+);
 
         const snapshot =
             await getDocs(withdrawQuery);
