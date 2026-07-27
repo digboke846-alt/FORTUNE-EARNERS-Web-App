@@ -187,7 +187,7 @@ card.innerHTML = `
 
 <strong>👤 Full Name:</strong><br>
 
-${withdraw.fullname || "Not Available"}
+${withdraw.fullName || "Not Available"}
 
 </p>
 
