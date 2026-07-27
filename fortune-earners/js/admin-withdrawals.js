@@ -374,6 +374,15 @@ window.openActionModal = function(action, withdrawalId) {
 
     modal.style.display = "block";
 
+    document.getElementById("actionModal")
+.scrollIntoView({
+
+    behavior: "smooth",
+
+    block: "center"
+
+});
+
 };
 
 // ======================================
