@@ -572,14 +572,14 @@ async function rejectAndRefund(withdrawalId, comment) {
 
         await updateDoc(userRef, {
 
-            taskWallet:
-                increment(Number(withdraw.amount || 0))
+    taskWallet:
+        increment(Number(withdraw.amountRequested || 0))
 
-        });
+});
 
         await updateDoc(withdrawRef, {
 
-            status: "Rejected",
+            status: "Rejected & Fully Refunded",
 
 refundStatus: "Refunded",
 
