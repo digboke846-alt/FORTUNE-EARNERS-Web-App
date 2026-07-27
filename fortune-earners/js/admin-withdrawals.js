@@ -301,6 +301,8 @@ onclick="openActionModal('reject','${docSnap.id}')">
 
 </div>
 
+<hr>
+
 ` : `
 
 <div class="dashboard-card">
@@ -410,7 +412,7 @@ window.openActionModal = function(action, withdrawalId) {
     if (action === "reject") {
 
         title.textContent =
-            "❤️ Reject Permanently";
+            "❌ Reject Permanently";
 
     }
 
