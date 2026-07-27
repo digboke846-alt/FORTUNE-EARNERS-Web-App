@@ -377,9 +377,23 @@ else {
 
         withdrawAmount.value = "";
 
-        calculateWithdrawal();
+calculateWithdrawal();
 
-        loadWithdrawalHistory(auth.currentUser.uid);
+// ======================================
+// REFRESH WALLET DISPLAY
+// ======================================
+
+taskWallet.textContent =
+    "₦" + Number(
+        currentUserData.taskWallet || 0
+    ).toLocaleString();
+
+affiliateWallet.textContent =
+    "₦" + Number(
+        currentUserData.affiliateWallet || 0
+    ).toLocaleString();
+
+loadWithdrawalHistory(auth.currentUser.uid);
 
     }
 
