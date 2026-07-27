@@ -567,6 +567,20 @@ async function rejectAndRefund(withdrawalId, comment) {
         const withdraw =
             withdrawSnap.data();
 
+        // ======================================
+// DO NOT REFUND AFFILIATE WITHDRAWALS
+// ======================================
+
+if (withdraw.walletType === "Affiliate Wallet") {
+
+    alert(
+        "Affiliate withdrawals are processed automatically by Paystack and cannot be manually refunded."
+    );
+
+    return;
+
+}
+
         const userRef =
             doc(db, "users", withdraw.userId);
 
