@@ -187,13 +187,13 @@ card.innerHTML = `
 
 <strong>👤 Full Name:</strong><br>
 
-${withdraw.fullName || "Not Available"}
+${withdraw.fullname || "Not Available"}
 
 </p>
 
 <p>
 
-<strong>@ Username:</strong><br>
+<strong>Username:</strong><br>
 
 @${withdraw.username || "username"}
 
