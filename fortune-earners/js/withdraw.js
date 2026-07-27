@@ -334,6 +334,41 @@ const withdrawalReference =
 
 });
 
+        // ======================================
+// DEDUCT WALLET IMMEDIATELY
+// ======================================
+
+const userRef =
+    doc(db, "users", auth.currentUser.uid);
+
+if (selectedWallet === "task") {
+
+    await updateDoc(userRef, {
+
+        taskWallet:
+            Number(currentUserData.taskWallet || 0) - amount
+
+    });
+
+    currentUserData.taskWallet =
+        Number(currentUserData.taskWallet || 0) - amount;
+
+}
+
+else {
+
+    await updateDoc(userRef, {
+
+        affiliateWallet:
+            Number(currentUserData.affiliateWallet || 0) - amount
+
+    });
+
+    currentUserData.affiliateWallet =
+        Number(currentUserData.affiliateWallet || 0) - amount;
+
+}
+
         alert(
             selectedWallet === "task"
             ? "✅ Withdrawal request submitted successfully."
