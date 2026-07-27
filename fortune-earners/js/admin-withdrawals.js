@@ -164,10 +164,10 @@ if (
             }
 
             const fee =
-    Math.round(Number(withdraw.amount || 0) * 0.10);
+    Number(withdraw.feeAmount || 0);
 
 const amountToPay =
-    Number(withdraw.amount || 0) - fee;
+    Number(withdraw.amountToReceive || 0);
 
 const card =
     document.createElement("div");
