@@ -211,7 +211,7 @@ ${withdraw.userId}
 
 <strong>💰 Withdrawal Amount:</strong><br>
 
-₦${Number(withdraw.amount || 0).toLocaleString()}
+₦${Number(withdraw.amountRequested || 0).toLocaleString()}
 
 </p>
 
