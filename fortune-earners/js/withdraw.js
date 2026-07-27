@@ -300,7 +300,7 @@ const withdrawalReference =
 
     username: currentUserData.username || "",
 
-    fullName: currentUserData.fullName || "",
+    fullName: currentUserData.fullname || "",
 
     walletType: selectedWallet,
 
