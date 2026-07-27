@@ -271,6 +271,8 @@ ${withdraw.requestDate || "-"}
 
 </p>
 
+${withdraw.status === "Pending" ? `
+
 <div class="dashboard-grid">
 
 <button
@@ -282,7 +284,7 @@ onclick="openActionModal('paid','${docSnap.id}')">
 </button>
 
 <button
-class="warning-btn"
+class="refund-btn"
 onclick="openActionModal('refund','${docSnap.id}')">
 
 💛 Reject & Refund
@@ -290,14 +292,54 @@ onclick="openActionModal('refund','${docSnap.id}')">
 </button>
 
 <button
-class="delete-btn"
+class="reject-btn"
 onclick="openActionModal('reject','${docSnap.id}')">
 
-❤️ Reject Permanently
+❌ Reject Permanently
 
 </button>
 
 </div>
+
+` : `
+
+<div class="dashboard-card">
+
+<p><strong>✅ Already Processed</strong></p>
+
+<p>
+
+<strong>Processed by:</strong><br>
+
+${withdraw.processedBy || "-"}
+
+</p>
+
+<p>
+
+<strong>Processed on:</strong><br>
+
+${withdraw.processedAt
+? new Date(withdraw.processedAt.seconds * 1000).toLocaleString()
+: "-"}
+
+</p>
+
+${withdraw.status === "Rejected" && withdraw.adminComment ? `
+
+<p>
+
+<strong>Reason:</strong><br>
+
+${withdraw.adminComment}
+
+</p>
+
+` : ""}
+
+</div>
+
+`}
 
 `;
 
