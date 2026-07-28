@@ -245,6 +245,11 @@ window.location.href = "profile.html";
 
 }
 
+    submitWithdrawBtn.disabled = true;
+
+submitWithdrawBtn.textContent =
+    "⏳ Processing...";
+
     try {
 
         const amount =
