@@ -373,6 +373,8 @@ document.getElementById("submitWithdrawalBtn")
     requestDate: new Date().toLocaleString()
 
 });
+        submitWithdrawBtn.textContent =
+    "✅ Withdrawal Submitted";
 
         // ======================================
 // DEDUCT WALLET IMMEDIATELY
@@ -438,6 +440,11 @@ loadWithdrawalHistory(auth.currentUser.uid);
     }
 
     catch (error) {
+
+        submitWithdrawBtn.disabled = false;
+
+submitWithdrawBtn.textContent =
+    "💸 Submit Withdrawal";
 
         console.error(error);
 
