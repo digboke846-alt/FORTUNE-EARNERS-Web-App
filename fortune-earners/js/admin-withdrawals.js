@@ -510,7 +510,7 @@ async function markAsPaid(withdrawalId, adminComment) {
 
         await updateDoc(withdrawalRef, {
 
-            status: "Paid",
+            status: "Successful",
 
             refundStatus: "Not Applicable",
 
