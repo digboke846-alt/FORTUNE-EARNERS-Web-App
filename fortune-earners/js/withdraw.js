@@ -226,29 +226,29 @@ document.getElementById("submitWithdrawalBtn")
 .addEventListener("click", async () => {
 
     // ======================================
-// CHECK BANK DETAILS
-// ======================================
+    // CHECK BANK DETAILS
+    // ======================================
 
-if (
-    !currentUserData.bankName ||
-    !currentUserData.accountName ||
-    !currentUserData.accountNumber
-) {
+    if (
+        !currentUserData.bankName ||
+        !currentUserData.accountName ||
+        !currentUserData.accountNumber
+    ) {
 
-    alert(
-    "⚠️ Please add your bank details before requesting a withdrawal.\n\nYou will now be redirected to your profile to add your bank details."
-);
+        alert(
+            "⚠️ Please add your bank details before requesting a withdrawal.\n\nYou will now be redirected to your profile to add your bank details."
+        );
 
-window.location.href = "profile.html";
+        window.location.href = "profile.html";
 
-    return;
+        return;
 
-}
+    }
 
     submitWithdrawBtn.disabled = true;
 
-submitWithdrawBtn.textContent =
-    "⏳ Processing...";
+    submitWithdrawBtn.textContent =
+        "⏳ Processing...";
 
     try {
 
@@ -257,6 +257,11 @@ submitWithdrawBtn.textContent =
 
         if (!amount || amount <= 0) {
 
+            submitWithdrawBtn.disabled = false;
+
+            submitWithdrawBtn.textContent =
+                "💸 Submit Withdrawal";
+
             alert("Enter a valid withdrawal amount.");
 
             return;
@@ -264,6 +269,11 @@ submitWithdrawBtn.textContent =
         }
 
         if (amount < minimumWithdrawal) {
+
+            submitWithdrawBtn.disabled = false;
+
+            submitWithdrawBtn.textContent =
+                "💸 Submit Withdrawal";
 
             alert(
                 `Minimum withdrawal is ₦${minimumWithdrawal.toLocaleString()}`
@@ -279,6 +289,11 @@ submitWithdrawBtn.textContent =
                 : Number(currentUserData.affiliateWallet || 0);
 
         if (amount > walletBalance) {
+
+            submitWithdrawBtn.disabled = false;
+
+            submitWithdrawBtn.textContent =
+                "💸 Submit Withdrawal";
 
             alert("Insufficient wallet balance.");
 
@@ -298,24 +313,24 @@ submitWithdrawBtn.textContent =
                 : "Auto Paid";
 
         // ======================================
-// GENERATE WITHDRAWAL REFERENCE
-// ======================================
+        // GENERATE WITHDRAWAL REFERENCE
+        // ======================================
 
-const now = new Date();
+        const now = new Date();
 
-const datePart =
-    now.getFullYear().toString() +
-    String(now.getMonth() + 1).padStart(2, "0") +
-    String(now.getDate()).padStart(2, "0");
+        const datePart =
+            now.getFullYear().toString() +
+            String(now.getMonth() + 1).padStart(2, "0") +
+            String(now.getDate()).padStart(2, "0");
 
-const randomPart =
-    Math.random()
-        .toString(36)
-        .substring(2, 8)
-        .toUpperCase();
+        const randomPart =
+            Math.random()
+                .toString(36)
+                .substring(2, 8)
+                .toUpperCase();
 
-const withdrawalReference =
-    `FEW-${datePart}-${randomPart}`;
+        const withdrawalReference =
+            `FEW-${datePart}-${randomPart}`;
 
         await addDoc(collection(db, "withdrawals"), {
 
