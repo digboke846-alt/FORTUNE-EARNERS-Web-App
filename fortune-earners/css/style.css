@@ -1221,9 +1221,9 @@ display:none;
 /* EYE ICON */
 .password-wrapper .toggle-password{
     position: absolute;
-    top: 46%;
+    top: 40%;
     right: 18px;
-    transform: translateY(-54%);
+    transform: translateY(-60%);
     font-size: 22px;
     cursor: pointer;
     color: #BDBDBD;
@@ -1236,6 +1236,14 @@ display:none;
     color: #FFD700;
 }
 
-.centered-text {
+.centered-texts {
   text-align: center;
+   
+font-weight:bold;
+
+border-radius:15px;
+
+    padding:15px;
+
+    text-align:center;
 }
