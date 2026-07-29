@@ -28,6 +28,8 @@ let feePercentage = 10;
 
 let minimumWithdrawal = 0;
 
+let isSubmittingWithdrawal = false;
+
 // ======================================
 // ELEMENTS
 // ======================================
@@ -101,8 +103,6 @@ onAuthStateChanged(auth, async (user) => {
 
         const submitWithdrawBtn =
     document.getElementById("submitWithdrawalBtn");
-
-        let isSubmittingWithdrawal = false;
 
         // =========================
         // LOAD BANK DETAILS
@@ -528,7 +528,7 @@ ${data.walletType === "task" ? "📋 Task Withdrawal" : "👥 Affiliate Withdraw
 
 <p>
 
-<strong>Requested:</strong>
+<strong>💸Amount Withdrawn:</strong>
 
 ₦${Number(data.amountRequested).toLocaleString()}
 
