@@ -51,6 +51,13 @@ async function loadWithdrawals() {
         const container =
             document.getElementById("withdrawalContainer");
 
+         // 🛡️ SAFEGUARD: Move modal back to body before clearing container
+        const modal = document.getElementById("actionModal");
+        if (modal && container.contains(modal)) {
+            document.body.appendChild(modal);
+            modal.style.display = "none";
+        }
+
         container.innerHTML = "";
 
         const withdrawQuery = query(
