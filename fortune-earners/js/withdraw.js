@@ -231,7 +231,26 @@ document.getElementById("submitWithdrawalBtn")
     // ======================================
     // CHECK BANK DETAILS
     // ======================================
+const latestUserSnap =
+    await getDoc(doc(db, "users", auth.currentUser.uid));
 
+const latestUser =
+    latestUserSnap.data();
+
+if (
+    !latestUser.bankName ||
+    !latestUser.accountName ||
+    !latestUser.accountNumber
+) {
+
+    alert(
+        "⚠️ Please add your bank details before requesting a withdrawal.\n\nYou will now be redirected to your profile to update your bank details."
+    );
+
+    window.location.href = "profile.html";
+
+    return;
+}
     
     document.getElementById("submitWithdrawalBtn").disabled = true;
 
