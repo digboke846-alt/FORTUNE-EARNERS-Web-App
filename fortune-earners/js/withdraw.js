@@ -491,7 +491,7 @@ async function loadWithdrawalHistory(userId) {
 
             where("userId", "==", userId),
 
-        orderBy("submittedAt", "desc"),
+        orderBy("submittedAt", "desc")
 
             );
 
@@ -548,7 +548,7 @@ ${data.reference || "Not Available"}
 
 <strong>📅 Date:</strong>
 
-${data.submittedAt: serverTimestamp() || "-"}
+${data.requestedDate || "-"}
 
 </p>
 
