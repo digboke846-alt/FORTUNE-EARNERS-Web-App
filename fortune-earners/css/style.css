@@ -1202,3 +1202,32 @@ display:none;
     font-weight:bold;
 
 }
+
+
+/* --- Password Toggle Styling --- */
+.pass-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Adapts to your input width */
+    max-width: 100%; 
+}
+
+.pass-wrapper input {
+    width: 100%;
+    padding-right: 40px !important; /* Forces blank space on the right for the eye icon */
+    box-sizing: border-box;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    z-index: 10;
+}
