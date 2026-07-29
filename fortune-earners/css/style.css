@@ -1221,7 +1221,7 @@ display:none;
 /* EYE ICON */
 .password-wrapper .toggle-password{
     position: absolute;
-    top: 50%;
+    top: 48%;
     right: 18px;
     transform: translateY(-50%);
     font-size: 22px;
