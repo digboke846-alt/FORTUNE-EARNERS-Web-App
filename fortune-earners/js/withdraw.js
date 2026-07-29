@@ -230,7 +230,7 @@ document.getElementById("submitWithdrawalBtn")
     // ======================================
 
     
-    submitWithdrawBtn.disabled = true;
+    submitWithdrawBtn.disabled = false;
 
     alert("Withdraw button clicked again NOW");
 
