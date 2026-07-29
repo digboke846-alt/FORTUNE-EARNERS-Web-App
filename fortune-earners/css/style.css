@@ -1236,3 +1236,6 @@ display:none;
     color: #FFD700;
 }
 
+.centered-text {
+  text-align: center;
+}
