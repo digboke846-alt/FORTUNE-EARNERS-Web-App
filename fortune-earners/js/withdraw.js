@@ -489,9 +489,11 @@ async function loadWithdrawalHistory(userId) {
 
             collection(db, "withdrawals"),
 
-            where("userId", "==", userId)
+            where("userId", "==", userId),
 
-        );
+        orderBy("submittedAt", "desc"),
+
+            );
 
         const snapshot =
             await getDocs(q);
@@ -546,7 +548,7 @@ ${data.reference || "Not Available"}
 
 <strong>📅 Date:</strong>
 
-${data.requestDate || "-"}
+${data.submittedAt: serverTimestamp() || "-"}
 
 </p>
 
