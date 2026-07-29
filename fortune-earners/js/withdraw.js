@@ -548,7 +548,7 @@ ${data.reference || "Not Available"}
 
 <strong>📅 Date:</strong>
 
-${data.requestedDate || "-"}
+${data.requestDate || "-"}
 
 </p>
 
