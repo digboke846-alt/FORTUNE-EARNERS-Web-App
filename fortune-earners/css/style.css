@@ -1204,34 +1204,35 @@ display:none;
 }
 
 
-/* ==========================
-   PASSWORD INPUT
-========================== */
-
+/* PASSWORD WRAPPER */
 .password-wrapper{
-    position:relative;
-    width:100%;
+    position: relative;
+    width: 100%;
+    display: block;
 }
 
+/* PASSWORD INPUT */
 .password-wrapper input{
-    width:100%;
-    padding-right:55px;
-    box-sizing:border-box;
+    width: 100%;
+    padding-right: 60px;
+    box-sizing: border-box;
 }
 
-.toggle-password{
-    position:absolute;
-    top:50%;
-    right:18px;
-    transform:translateY(-50%);
-    cursor:pointer;
-    font-size:22px;
-    color:#BDBDBD;
-    user-select:none;
-    transition:.25s;
+/* EYE ICON */
+.password-wrapper .toggle-password{
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    cursor: pointer;
+    color: #BDBDBD;
+    line-height: 1;
+    z-index: 999;
+    user-select: none;
 }
 
-.toggle-password:hover{
-    color:#FFD700;
+.password-wrapper .toggle-password:hover{
+    color: #FFD700;
 }
 
