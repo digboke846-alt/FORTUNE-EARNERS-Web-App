@@ -247,7 +247,7 @@ document.getElementById("submitWithdrawalBtn")
 
     }
 
-    submitWithdrawBtn.disabled = false;
+    submitWithdrawBtn.disabled = true;
 
     submitWithdrawBtn.textContent =
         "⏳ Processing...";
