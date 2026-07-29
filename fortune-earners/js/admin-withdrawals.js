@@ -277,7 +277,7 @@ ${withdraw.status === "Pending" ? `
 
 <button
 class="approve-btn"
-onclick="openActionModal('paid','${docSnap.id}')">
+onclick="openActionModal('paid','${docSnap.id}', this)">
 
 💚 Mark as Paid
 
@@ -285,7 +285,7 @@ onclick="openActionModal('paid','${docSnap.id}')">
 
 <button
 class="refund-btn"
-onclick="openActionModal('refund','${docSnap.id}')">
+onclick="openActionModal('refund','${docSnap.id}', this)">
 
 💛 Reject & Refund
 
@@ -293,7 +293,7 @@ onclick="openActionModal('refund','${docSnap.id}')">
 
 <button
 class="reject-btn"
-onclick="openActionModal('reject','${docSnap.id}')">
+onclick="openActionModal('reject','${docSnap.id}', this)">
 
 ❌ Reject Permanently
 
@@ -379,7 +379,7 @@ container.appendChild(card);
 let selectedWithdrawalId = null;
 let selectedAction = null;
 
-window.openActionModal = function(action, withdrawalId) {
+window.openActionModal = function(action, withdrawalId, buttonElement) {
 
     selectedWithdrawalId = withdrawalId;
     selectedAction = action;
@@ -416,16 +416,23 @@ window.openActionModal = function(action, withdrawalId) {
 
     }
 
+    // Move the modal element dynamically under the selected card
+    if (buttonElement) {
+        const card = buttonElement.closest(".dashboard-card");
+        if (card) {
+            card.insertAdjacentElement("afterend", modal);
+        }
+    }
+
     modal.style.display = "block";
 
-    document.getElementById("actionModal")
-.scrollIntoView({
+    modal.scrollIntoView({
 
-    behavior: "smooth",
+        behavior: "smooth",
 
-    block: "center"
+        block: "center"
 
-});
+    });
 
 };
 
