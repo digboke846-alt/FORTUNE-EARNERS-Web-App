@@ -355,8 +355,6 @@ if (
         const withdrawalRef =
     doc(collection(db, "withdrawals"));
 
-        await addDoc(collection(db, "withdrawals"), {
-
     await runTransaction(db, async (transaction) => {
 
     const userRef =
