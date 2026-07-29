@@ -375,9 +375,7 @@ container.appendChild(card);
 // ======================================
 // ACTION MODAL
 // ======================================
-const actionModal = query(
-    where("withdrawalId", "==", withdrawalId)
-    );
+
 let selectedWithdrawalId = null;
 let selectedAction = null;
 
