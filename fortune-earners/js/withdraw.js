@@ -380,7 +380,7 @@ if (
     requestDate: new Date().toLocaleString()
 
 });
-        submitWithdrawBtn.textContent =
+        document.getElementById("submitWithdrawalBtn").textContent =
     "✅ Withdrawal Submitted";
 
         // ======================================
@@ -448,9 +448,9 @@ loadWithdrawalHistory(auth.currentUser.uid);
 
     catch (error) {
 
-        submitWithdrawBtn.disabled = false;
+        document.getElementById("submitWithdrawalBtn").disabled = false;
 
-submitWithdrawBtn.textContent =
+document.getElementById("submitWithdrawalBtn").textContent =
     "💸 Submit Withdrawal";
 
         console.error(error);
