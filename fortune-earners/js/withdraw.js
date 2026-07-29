@@ -14,7 +14,8 @@ import {
     addDoc,
     serverTimestamp,
     updateDoc,
-    orderBy
+    orderBy,
+    runTransaction
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -351,84 +352,126 @@ if (
         const withdrawalReference =
             `FEW-${datePart}-${randomPart}`;
 
+        const withdrawalRef =
+    doc(collection(db, "withdrawals"));
+
         await addDoc(collection(db, "withdrawals"), {
 
-    reference: withdrawalReference,
+    await runTransaction(db, async (transaction) => {
 
-    userId: auth.currentUser.uid,
+    const userRef =
+        doc(db, "users", auth.currentUser.uid);
 
-    username: currentUserData.username || "",
+    const userSnap =
+        await transaction.get(userRef);
 
-    fullName: currentUserData.fullname || "",
+    if (!userSnap.exists()) {
 
-    walletType: selectedWallet,
+        throw new Error("User account not found.");
 
-    amountRequested: amount,
+    }
 
-    feePercentage: feePercentage,
+    const latestUser =
+        userSnap.data();
 
-    feeAmount: fee,
+    const currentBalance =
+        selectedWallet === "task"
+            ? Number(latestUser.taskWallet || 0)
+            : Number(latestUser.affiliateWallet || 0);
 
-    amountToReceive: receive,
+    if (currentBalance < amount) {
 
-    bankName: currentUserData.bankName || "",
+        throw new Error("Insufficient wallet balance.");
 
-    accountName: currentUserData.accountName || "",
+    }
 
-    accountNumber: currentUserData.accountNumber || "",
+    transaction.update(userRef, {
 
-    status: "Pending",
+        ...(selectedWallet === "task"
 
-    refundStatus: "Not Applicable",
+            ? {
 
-    adminComment: "",
+                taskWallet:
+                    currentBalance - amount
 
-    processedBy: "",
+            }
 
-    processedAt: null,
+            : {
 
-    submittedAt: serverTimestamp(),
+                affiliateWallet:
+                    currentBalance - amount
 
-    requestDate: new Date().toLocaleString()
+            })
+
+    });
+
+    transaction.set(withdrawalRef, {
+
+        reference: withdrawalReference,
+
+        userId: auth.currentUser.uid,
+
+        username: latestUser.username || "",
+
+        fullName: latestUser.fullname || "",
+
+        walletType: selectedWallet,
+
+        amountRequested: amount,
+
+        feePercentage: feePercentage,
+
+        feeAmount: fee,
+
+        amountToReceive: receive,
+
+        bankName: latestUser.bankName || "",
+
+        accountName: latestUser.accountName || "",
+
+        accountNumber: latestUser.accountNumber || "",
+
+        status: "Pending",
+
+        refundStatus: "Not Applicable",
+
+        adminComment: "",
+
+        processedBy: "",
+
+        processedAt: null,
+
+        submittedAt: serverTimestamp(),
+
+        requestDate: new Date().toLocaleString()
+
+    });
+
+    currentUserData = {
+
+        ...latestUser,
+
+        ...(selectedWallet === "task"
+
+            ? {
+
+                taskWallet:
+                    currentBalance - amount
+
+            }
+
+            : {
+
+                affiliateWallet:
+                    currentBalance - amount
+
+            })
+
+    };
 
 });
         document.getElementById("submitWithdrawalBtn").textContent =
     "✅ Withdrawal Submitted";
-
-        // ======================================
-// DEDUCT WALLET IMMEDIATELY
-// ======================================
-
-const userRef =
-    doc(db, "users", auth.currentUser.uid);
-
-if (selectedWallet === "task") {
-
-    await updateDoc(userRef, {
-
-        taskWallet:
-            Number(currentUserData.taskWallet || 0) - amount
-
-    });
-
-    currentUserData.taskWallet =
-        Number(currentUserData.taskWallet || 0) - amount;
-
-}
-
-else {
-
-    await updateDoc(userRef, {
-
-        affiliateWallet:
-            Number(currentUserData.affiliateWallet || 0) - amount
-
-    });
-
-    currentUserData.affiliateWallet =
-        Number(currentUserData.affiliateWallet || 0) - amount;
-
-}
 
         alert(
             selectedWallet === "task"
