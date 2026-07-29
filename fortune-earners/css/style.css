@@ -1204,48 +1204,34 @@ display:none;
 }
 
 
-/* --- Password Wrapper Setup --- */
-.pass-wrapper {
-    position: relative;
-    display: block; /* Changes to block to span full width */
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+/* ==========================
+   PASSWORD INPUT
+========================== */
+
+.password-wrapper{
+    position:relative;
+    width:100%;
 }
 
-/* Forces your input inputs to fill the container and accept the inner padding */
-.pass-wrapper input {
-    display: block;
-    width: 100% !important;
-    padding-right: 45px !important; /* Locks structural gap inside input for the icon */
-    box-sizing: border-box !important;
+.password-wrapper input{
+    width:100%;
+    padding-right:55px;
+    box-sizing:border-box;
 }
 
-/* Positions the toggle perfectly inside the right boundary */
-.toggle-pass {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.toggle-password{
+    position:absolute;
+    top:50%;
+    right:18px;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:22px;
+    color:#BDBDBD;
+    user-select:none;
+    transition:.25s;
 }
 
-/* SVG Size & Styling Rules */
-.eye-icon {
-    width: 20px;
-    height: 20px;
-    color: #666; /* Match this to your text/placeholder color */
-    transition: color 0.2s ease;
-}
-
-.toggle-pass:hover .eye-icon {
-    color: #000; /* Darkens icon color when hovering */
+.toggle-password:hover{
+    color:#FFD700;
 }
 
