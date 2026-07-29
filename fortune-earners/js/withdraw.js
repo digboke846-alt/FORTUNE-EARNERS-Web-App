@@ -245,9 +245,9 @@ document.getElementById("submitWithdrawalBtn")
 
     }
 
-    alert("Withdraw button clicked again")
-
     submitWithdrawBtn.disabled = true;
+
+    alert("Withdraw button clicked again NOW");
 
     submitWithdrawBtn.textContent =
         "⏳ Processing...";
