@@ -99,6 +99,9 @@ onAuthStateChanged(auth, async (user) => {
                 currentUserData.affiliateWallet || 0
             ).toLocaleString();
 
+        const submitWithdrawBtn =
+    document.getElementById("submitWithdrawalBtn");
+
         // =========================
         // LOAD BANK DETAILS
         // =========================
@@ -230,12 +233,10 @@ document.getElementById("submitWithdrawalBtn")
     // ======================================
 
     
-    submitWithdrawBtn.disabled = false;
+    document.getElementById("submitWithdrawalBtn").disabled = true;
 
-    alert("Withdraw button clicked again NOW");
-
-    submitWithdrawBtn.textContent =
-        "⏳ Processing...";
+    document.getElementById("submitWithdrawalBtn").textContent =
+    "⏳ Processing...";
 
     try {
 
@@ -244,10 +245,10 @@ document.getElementById("submitWithdrawalBtn")
 
         if (!amount || amount <= 0) {
 
-            submitWithdrawBtn.disabled = false;
+            document.getElementById("submitWithdrawalBtn").disabled = false;
 
-            submitWithdrawBtn.textContent =
-                "💸 Submit Withdrawal";
+            document.getElementById("submitWithdrawalBtn").textContent =
+    "💸 Submit Withdrawal";
 
             alert("Enter a valid withdrawal amount.");
 
@@ -257,10 +258,10 @@ document.getElementById("submitWithdrawalBtn")
 
         if (amount < minimumWithdrawal) {
 
-            submitWithdrawBtn.disabled = false;
+            document.getElementById("submitWithdrawalBtn").disabled = false;
 
-            submitWithdrawBtn.textContent =
-                "💸 Submit Withdrawal";
+            document.getElementById("submitWithdrawalBtn").textContent =
+    "💸 Submit Withdrawal";
 
             alert(
                 `Minimum withdrawal is ₦${minimumWithdrawal.toLocaleString()}`
@@ -277,10 +278,10 @@ document.getElementById("submitWithdrawalBtn")
 
         if (amount > walletBalance) {
 
-            submitWithdrawBtn.disabled = false;
+            document.getElementById("submitWithdrawalBtn").disabled = false;
 
-            submitWithdrawBtn.textContent =
-                "💸 Submit Withdrawal";
+            document.getElementById("submitWithdrawalBtn").textContent =
+    "💸 Submit Withdrawal";
 
             alert("Insufficient wallet balance.");
 
