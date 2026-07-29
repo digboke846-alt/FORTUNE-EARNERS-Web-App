@@ -57,6 +57,32 @@
     Don't have an account yet?
     <a href="signup.html">Sign Up</a>
 </p>
+                    <script>
+function togglePassword(inputId, icon){
+
+    const input =
+        document.getElementById(inputId);
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+        icon.textContent = "👁️";
+
+        icon.style.color = "#FFD700";
+
+    }else{
+
+        input.type = "password";
+
+        icon.textContent = "👁️‍🗨️";
+
+        icon.style.color = "#BDBDBD";
+
+    }
+
+}
+                    </script>
 
             </div>
 </form>
