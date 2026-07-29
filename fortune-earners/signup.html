@@ -74,7 +74,9 @@
 
     <label for="password">Password</label><br>
 
-    <div class="pass-wrapper">
+    <label for="password">Password</label><br>
+
+<div class="password-wrapper">
     <input
         type="password"
         id="password"
@@ -82,17 +84,19 @@
         placeholder="Create a password"
         autocomplete="new-password"
         required>
-    <button type="button" class="toggle-pass" onclick="toggleVisibility('password', this)" aria-label="Show password">
-        <!-- Open Eye SVG -->
-        <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-    </button>
+
+    <span
+        class="toggle-password"
+        onclick="togglePassword('password', this)">
+        👁️‍🗨️
+    </span>
 </div>
 
 <br><br>
 
 <label for="confirmPassword">Confirm Password</label><br>
 
-<div class="pass-wrapper">
+<div class="password-wrapper">
     <input
         type="password"
         id="confirmPassword"
@@ -100,13 +104,14 @@
         placeholder="Confirm your password"
         autocomplete="new-password"
         required>
-    <button type="button" class="toggle-pass" onclick="toggleVisibility('confirmPassword', this)" aria-label="Show password">
-        <!-- Open Eye SVG -->
-        <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-    </button>
+
+    <span
+        class="toggle-password"
+        onclick="togglePassword('confirmPassword', this)">
+        👁️‍🗨️
+    </span>
 </div>
     
-
     <br><br>
 
     <label for="referredBy">Referred By (Optional)</label><br>
@@ -142,22 +147,29 @@
     </p>
 
     <script>
-function toggleVisibility(inputId, buttonEl) {
-    const input = document.getElementById(inputId);
-    
-    // SVG strings for look switches
-    const openEyeSVG = `<svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>`;
-    const slashedEyeSVG = `<svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>`;
+function togglePassword(inputId, icon){
 
-    if (input.type === "password") {
+    const input =
+        document.getElementById(inputId);
+
+    if(input.type === "password"){
+
         input.type = "text";
-        buttonEl.innerHTML = slashedEyeSVG;
-        buttonEl.setAttribute("aria-label", "Hide password");
-    } else {
+
+        icon.textContent = "👁️";
+
+        icon.style.color = "#FFD700";
+
+    }else{
+
         input.type = "password";
-        buttonEl.innerHTML = openEyeSVG;
-        buttonEl.setAttribute("aria-label", "Show password");
+
+        icon.textContent = "👁️‍🗨️";
+
+        icon.style.color = "#BDBDBD";
+
     }
+
 }
     </script>
     
