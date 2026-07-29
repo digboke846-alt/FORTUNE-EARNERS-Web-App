@@ -489,9 +489,7 @@ async function loadWithdrawalHistory(userId) {
 
             collection(db, "withdrawals"),
 
-            where("userId", "==", userId),
-
-        orderBy("submittedAt", "desc")
+            where("userId", "==", userId)
 
             );
 
