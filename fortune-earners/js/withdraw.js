@@ -102,6 +102,8 @@ onAuthStateChanged(auth, async (user) => {
         const submitWithdrawBtn =
     document.getElementById("submitWithdrawalBtn");
 
+        let isSubmittingWithdrawal = false;
+
         // =========================
         // LOAD BANK DETAILS
         // =========================
@@ -228,6 +230,12 @@ withdrawAmount.addEventListener("input", calculateWithdrawal);
 document.getElementById("submitWithdrawalBtn")
 .addEventListener("click", async () => {
 
+    if (isSubmittingWithdrawal) {
+    return;
+}
+
+isSubmittingWithdrawal = true;
+
     // ======================================
     // CHECK BANK DETAILS
     // ======================================
@@ -268,6 +276,7 @@ if (
 
             document.getElementById("submitWithdrawalBtn").textContent =
     "💸 Submit Withdrawal";
+            isSubmittingWithdrawal = false;
 
             alert("Enter a valid withdrawal amount.");
 
@@ -281,6 +290,7 @@ if (
 
             document.getElementById("submitWithdrawalBtn").textContent =
     "💸 Submit Withdrawal";
+            isSubmittingWithdrawal = false;
 
             alert(
                 `Minimum withdrawal is ₦${minimumWithdrawal.toLocaleString()}`
@@ -301,6 +311,7 @@ if (
 
             document.getElementById("submitWithdrawalBtn").textContent =
     "💸 Submit Withdrawal";
+            isSubmittingWithdrawal = false;
 
             alert("Insufficient wallet balance.");
 
@@ -452,6 +463,7 @@ loadWithdrawalHistory(auth.currentUser.uid);
 
 document.getElementById("submitWithdrawalBtn").textContent =
     "💸 Submit Withdrawal";
+        isSubmittingWithdrawal = false;
 
         console.error(error);
 
