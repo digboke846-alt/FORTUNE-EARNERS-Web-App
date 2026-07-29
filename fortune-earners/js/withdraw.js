@@ -229,23 +229,10 @@ document.getElementById("submitWithdrawalBtn")
     // CHECK BANK DETAILS
     // ======================================
 
-    if (
-        !currentUserData.bankName ||
-        !currentUserData.accountName ||
-        !currentUserData.accountNumber
-    ) {
+    
+    submitWithdrawBtn.disabled = true;
 
-        alert(
-            "⚠️ Please add your bank details before requesting a withdrawal.\n\nYou will now be redirected to your profile to add your bank details."
-        );
-
-        window.location.href = "profile.html";
-
-        return;
-
-    }
-
-    submitWithdrawBtn.disabled = false;
+    alert("Withdraw button clicked again NOW");
 
     submitWithdrawBtn.textContent =
         "⏳ Processing...";
