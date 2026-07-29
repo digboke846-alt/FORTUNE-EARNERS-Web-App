@@ -225,6 +225,8 @@ withdrawAmount.addEventListener("input", calculateWithdrawal);
 document.getElementById("submitWithdrawalBtn")
 .addEventListener("click", async () => {
 
+    alert("Withdraw button clicked");
+
     // ======================================
     // CHECK BANK DETAILS
     // ======================================
