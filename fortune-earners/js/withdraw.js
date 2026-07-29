@@ -528,7 +528,7 @@ ${data.walletType === "task" ? "📋 Task Withdrawal" : "👥 Affiliate Withdraw
 
 <p>
 
-<strong>💸Amount Withdrawn:</strong>
+<strong>💸 Amount Withdrawn:</strong>
 
 ₦${Number(data.amountRequested).toLocaleString()}
 
