@@ -13,7 +13,8 @@ import {
     getDocs,
     addDoc,
     serverTimestamp,
-    updateDoc
+    updateDoc,
+    orderBy
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -489,7 +490,9 @@ async function loadWithdrawalHistory(userId) {
 
             collection(db, "withdrawals"),
 
-            where("userId", "==", userId)
+            where("userId", "==", userId),
+
+            orderBy("submittedAt", "desc")
 
             );
 
