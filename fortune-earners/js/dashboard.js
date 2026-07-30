@@ -477,13 +477,15 @@ function loadNotificationBadge(userId) {
 
     const q = query(
 
-        collection(db, "notifications"),
+    collection(db, "notifications"),
 
-        where("userId", "==", userId),
+    where("userId", "==", userId),
 
-        where("isRead", "==", false)
+    where("isRead", "==", false),
 
-    );
+    orderBy("createdAt", "desc")
+
+);
 
     onSnapshot(q, (snapshot) => {
 
