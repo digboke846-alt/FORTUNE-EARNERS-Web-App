@@ -31,9 +31,57 @@ onAuthStateChanged(auth, async (user) => {
 
     }
 
-    loadNotifications(user.uid);
+    await markAllNotificationsAsRead(user.uid);
+
+loadNotifications(user.uid);
 
 });
+
+// ======================================
+// MARK ALL AS READ AUTOMATICALLY
+// ======================================
+
+async function markAllNotificationsAsRead(userId) {
+
+    try {
+
+        const q = query(
+
+            collection(db, "notifications"),
+
+            where("userId", "==", userId),
+
+            where("isRead", "==", false)
+
+        );
+
+        const snapshot = await getDocs(q);
+
+        for (const notification of snapshot.docs) {
+
+            await updateDoc(
+
+                doc(db, "notifications", notification.id),
+
+                {
+
+                    isRead: true
+
+                }
+
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
 // ======================================
 // LOAD NOTIFICATIONS
 // ======================================
