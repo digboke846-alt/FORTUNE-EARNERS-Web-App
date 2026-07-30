@@ -510,13 +510,6 @@ function loadNotificationBadge(userId) {
 
 }
 
-    catch (error) {
-
-        console.error(error);
-
-    }
-
-}
 // ======================================
 // OPEN NOTIFICATIONS PAGE
 // ======================================
