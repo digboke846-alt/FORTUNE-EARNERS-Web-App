@@ -466,6 +466,7 @@ if (logoutLink) {
 // ======================================
 // LOAD NOTIFICATION BADGE
 // ======================================
+let previousUnreadCount = 0;
 
 function loadNotificationBadge(userId) {
 
@@ -488,6 +489,26 @@ function loadNotificationBadge(userId) {
 
         const unreadCount = snapshot.size;
 
+        if (unreadCount > previousUnreadCount && unreadCount > 0) {
+
+    const newestNotification = snapshot.docs[0]?.data();
+
+    if (newestNotification) {
+
+        showNotificationToast(
+
+            newestNotification.title,
+
+            newestNotification.message
+
+        );
+
+    }
+
+}
+
+previousUnreadCount = unreadCount;
+
         if (unreadCount === 0) {
 
             badge.classList.add("hidden");
@@ -507,6 +528,41 @@ function loadNotificationBadge(userId) {
                 : unreadCount;
 
     });
+
+}
+
+function showNotificationToast(title, message) {
+
+    const toast =
+        document.getElementById("notificationToast");
+
+    const toastTitle =
+        document.getElementById("toastTitle");
+
+    const toastMessage =
+        document.getElementById("toastMessage");
+
+    if (!toast) return;
+
+    toastTitle.textContent = title;
+
+    toastMessage.textContent = message;
+
+    toast.classList.remove("hidden");
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+
+            toast.classList.add("hidden");
+
+        }, 350);
+
+    }, 5000);
 
 }
 
