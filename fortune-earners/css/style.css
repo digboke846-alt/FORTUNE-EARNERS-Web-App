@@ -1269,3 +1269,60 @@ display:none;
 .security-title::after{
     right: 10px;
 }
+.notification-toast{
+
+    position:fixed;
+
+    top:20px;
+
+    right:20px;
+
+    width:300px;
+
+    background:#1A4FA3;
+
+    color:white;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.35);
+
+    z-index:99999;
+
+    transform:translateX(120%);
+
+    transition:.35s;
+
+}
+
+.notification-toast.show{
+
+    transform:translateX(0);
+
+}
+
+.toast-title{
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    margin-bottom:6px;
+
+}
+
+.toast-message{
+
+    font-size:13px;
+
+    opacity:.95;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
