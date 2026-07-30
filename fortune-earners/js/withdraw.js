@@ -18,6 +18,8 @@ import {
     runTransaction
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+import { createNotification } from "./notifications.js";
+
 // ======================================
 // GLOBAL VARIABLES
 // ======================================
@@ -512,6 +514,18 @@ document.getElementById("submitWithdrawalBtn").textContent =
         alert(error.message);
 
     }
+
+});
+
+await createNotification({
+
+    userId: auth.currentUser.uid,
+
+    title: "💸 Withdrawal Submitted",
+
+    message: `Your ₦${amount.toLocaleString()} withdrawal request has been submitted successfully and is awaiting admin review.`,
+
+    type: "Withdrawal"
 
 });
 // ======================================
