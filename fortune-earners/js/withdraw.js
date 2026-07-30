@@ -515,7 +515,7 @@ document.getElementById("submitWithdrawalBtn").textContent =
 
     }
 
-});
+}
 
 await createNotification({
 
