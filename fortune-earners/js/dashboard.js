@@ -554,6 +554,17 @@ function showNotificationToast(title, message) {
 
     toast.classList.add("show");
 
+    const sound =
+    document.getElementById("notificationSound");
+
+if (sound) {
+
+    sound.currentTime = 0;
+
+    sound.play().catch(() => {});
+
+}
+
     setTimeout(() => {
 
         toast.classList.remove("show");
