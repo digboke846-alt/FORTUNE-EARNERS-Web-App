@@ -18,7 +18,7 @@ import {
     runTransaction
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-import { createNotification } from "./notifications.js";
+import { createNotification } from "./notification-utils.js";
 
 // ======================================
 // GLOBAL VARIABLES
@@ -523,7 +523,8 @@ await createNotification({
 
     title: "💸 Withdrawal Submitted",
 
-    message: `Your ₦${amount.toLocaleString()} withdrawal request has been submitted successfully and is awaiting admin review.`,
+    message:
+        `Your ₦${amount.toLocaleString()} withdrawal request has been submitted successfully and is awaiting admin review.`,
 
     type: "Withdrawal"
 
