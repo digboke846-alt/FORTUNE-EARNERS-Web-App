@@ -10,6 +10,9 @@
     <title>Sign Up | Fortune Earners</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css
+    
 </head>
 
 <body>
@@ -82,22 +85,23 @@
     
     <h3 class="security-title">🔐 Security</h3>
     
-    <label for="password">Password</label>
+    <label for="password">🔑 Password</label>
 
 <div class="password-wrapper">
+
     <input
         type="password"
         id="password"
         name="password"
-        placeholder="Create a password"
+        placeholder="Create a password with at least 6 characters"
         autocomplete="new-password"
         required>
 
-    <span
-        class="toggle-password"
+    <i
+        class="fa-regular fa-eye-slash toggle-password"
         onclick="togglePassword('password', this)">
-        👁️‍🗨️
-    </span>
+    </i>
+
 </div>
 
 <br>
@@ -105,6 +109,7 @@
 <label for="confirmPassword">Confirm Password</label>
 
 <div class="password-wrapper">
+
     <input
         type="password"
         id="confirmPassword"
@@ -113,11 +118,11 @@
         autocomplete="new-password"
         required>
 
-    <span
-        class="toggle-password"
+    <i
+        class="fa-regular fa-eye-slash toggle-password"
         onclick="togglePassword('confirmPassword', this)">
-        👁️‍🗨️
-    </span>
+    </i>
+
 </div>
     
     <br>
@@ -153,7 +158,9 @@ function togglePassword(inputId, icon){
 
         input.type = "text";
 
-        icon.textContent = "👁️";
+        icon.classList.remove("fa-eye-slash");
+
+        icon.classList.add("fa-eye");
 
         icon.style.color = "#FFD700";
 
@@ -161,9 +168,11 @@ function togglePassword(inputId, icon){
 
         input.type = "password";
 
-        icon.textContent = "👁️‍🗨️";
+        icon.classList.remove("fa-eye");
 
-        icon.style.color = "#BDBDBD";
+        icon.classList.add("fa-eye-slash");
+
+        icon.style.color = "#AFAFAF";
 
     }
 
