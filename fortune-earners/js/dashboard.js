@@ -14,7 +14,8 @@ import {
     where,
     orderBy,
     limit,
-    updateDoc
+    updateDoc,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -466,30 +467,26 @@ if (logoutLink) {
 // LOAD NOTIFICATION BADGE
 // ======================================
 
-async function loadNotificationBadge(userId) {
+function loadNotificationBadge(userId) {
 
-    try {
+    const badge =
+        document.getElementById("notificationBadge");
 
-        const badge =
-            document.getElementById("notificationBadge");
+    if (!badge) return;
 
-        if (!badge) return;
+    const q = query(
 
-        const q = query(
+        collection(db, "notifications"),
 
-            collection(db, "notifications"),
+        where("userId", "==", userId),
 
-            where("userId", "==", userId),
+        where("isRead", "==", false)
 
-            where("isRead", "==", false)
+    );
 
-        );
+    onSnapshot(q, (snapshot) => {
 
-        const snapshot =
-            await getDocs(q);
-
-        const unreadCount =
-            snapshot.size;
+        const unreadCount = snapshot.size;
 
         if (unreadCount === 0) {
 
@@ -505,11 +502,13 @@ async function loadNotificationBadge(userId) {
 
             unreadCount > 99
 
-            ? "99+"
+                ? "99+"
 
-            : unreadCount;
+                : unreadCount;
 
-    }
+    });
+
+}
 
     catch (error) {
 
