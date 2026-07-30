@@ -282,6 +282,8 @@ button:hover{
 
     padding:20px;
 
+    -webkit-overflow-scrolling: touch;
+
     box-shadow:2px 0 15px rgba(0,0,0,.35);
 
 }
