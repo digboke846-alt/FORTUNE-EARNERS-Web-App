@@ -515,19 +515,9 @@ document.getElementById("submitWithdrawalBtn").textContent =
 
     }
 
-}
-
-await createNotification({
-
-    userId: auth.currentUser.uid,
-
-    title: "💸 Withdrawal Submitted",
-
-    message: `Your ₦${amount.toLocaleString()} withdrawal request has been submitted successfully and is awaiting admin review.`,
-
-    type: "Withdrawal"
-
 });
+
+
 // ======================================
 // LOAD WITHDRAWAL HISTORY
 // ======================================
