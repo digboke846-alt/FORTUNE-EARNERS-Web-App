@@ -68,6 +68,24 @@ p {
     line-height: 1.6;
 }
 
+/* Centers all card titles and section headings */
+.dashboard-card h2,
+.dashboard-card h3,
+.summary-card h2,
+.referral-card h2,
+.statistics-card h2,
+.leaderboard-card h2,
+.announcement-card h2,
+.transactions-card h2,
+.security-title {
+    text-align: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Adds nice spacing between the emoji icon and text */
+}
+
+
 /* ===================================================
    LINKS
 =================================================== */
