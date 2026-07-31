@@ -18,6 +18,33 @@ import {
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+let notificationSoundUnlocked = false;
+
+document.addEventListener("click", () => {
+
+    if (notificationSoundUnlocked) return;
+
+    const sound =
+        document.getElementById("notificationSound");
+
+    if (sound) {
+
+        sound.play()
+            .then(() => {
+
+                sound.pause();
+
+                sound.currentTime = 0;
+
+                notificationSoundUnlocked = true;
+
+            })
+            .catch(() => {});
+
+    }
+
+}, { once: true });
+
 // ======================================
 // CHECK LOGIN
 // ======================================
@@ -84,33 +111,6 @@ onAuthStateChanged(auth, async (user) => {
         if (memberStatus)
             memberStatus.textContent =
                 data.memberStatus || "Pending Activation";
-
-        let notificationSoundUnlocked = false;
-
-document.addEventListener("click", () => {
-
-    if (notificationSoundUnlocked) return;
-
-    const sound =
-        document.getElementById("notificationSound");
-
-    if (sound) {
-
-        sound.play()
-            .then(() => {
-
-                sound.pause();
-
-                sound.currentTime = 0;
-
-                notificationSoundUnlocked = true;
-
-            })
-            .catch(() => {});
-
-    }
-
-}, { once: true });
 
         // ======================================
         // LOAD WALLETS
