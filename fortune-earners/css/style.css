@@ -1328,7 +1328,24 @@ display:none;
 }
 
 footer {
+  width: 90%;
   box-sizing: border-box;
-  width: 80%;
-  max-width: 80%;
+  padding: 15px 20px; /* Gives nice breathing room on left and right */
+  
+  /* Centers all text inside */
+  text-align: center; 
+  
+  /* Ensures flex children (if any) are centered */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Fixes any stray pipe characters or broken line breaks */
+footer p, footer div {
+  width: 85%;
+  text-align: center;
+  margin: 4px 0;
+}
+
