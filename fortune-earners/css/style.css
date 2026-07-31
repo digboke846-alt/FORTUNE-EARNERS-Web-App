@@ -1326,3 +1326,9 @@ display:none;
     display:none;
 
 }
+
+footer {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
