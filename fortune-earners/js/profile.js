@@ -259,7 +259,7 @@ if (saveBankBtn) {
 
                 }
         // ======================================
-// LOG OUT
+// LOG OUT 1
 // ======================================
 
 const logoutBtn =
@@ -287,6 +287,33 @@ if (logoutBtn) {
 
     }
 
+        // ======================================
+// LOG OUT 2
+// ======================================
+
+const logoutBtn =
+    document.getElementById("logoutBtn2");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", async (e) => {
+
+        e.preventDefault();
+
+        const confirmLogout = confirm(
+            "Are you sure you want to log out?"
+        );
+
+        if (!confirmLogout) return;
+
+        await signOut(auth);
+
+        window.location.href = "login.html";
+
+    });
+
+}
+    
     catch (error) {
 
         console.error(error);
