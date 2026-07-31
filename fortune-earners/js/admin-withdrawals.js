@@ -538,6 +538,19 @@ async function markAsPaid(withdrawalId, adminComment) {
 
         });
 
+        await createNotification({
+
+    userId: withdrawal.userId,
+
+    title: "💸 Withdrawal Successful",
+
+    message:
+        `Your ₦${Number(withdrawal.amountRequested).toLocaleString()} ${withdrawal.walletType} withdrawal has been paid successfully.`,
+
+    type: "Withdrawal"
+
+});
+
         alert("✅ Withdrawal marked as Paid.");
 
         loadWithdrawals();
@@ -619,6 +632,19 @@ refundStatus: "Refunded",
 
         });
 
+        await createNotification({
+
+    userId: withdraw.userId,
+
+    title: "❌ Withdrawal Rejected",
+
+    message:
+        `Your ₦${Number(withdraw.amountRequested).toLocaleString()} withdrawal request was rejected.\n\nReason: ${comment || "No reason provided."}\n\nThe amount has been refunded to your Task Wallet.`,
+
+    type: "Withdrawal"
+
+});
+
         alert("💛 Withdrawal rejected and wallet refunded.");
 
         loadWithdrawals();
@@ -662,6 +688,19 @@ refundStatus: "Not Refunded",
             processedAt: serverTimestamp()
 
         });
+
+        await createNotification({
+
+    userId: withdraw.userId,
+
+    title: "❌ Withdrawal Rejected",
+
+    message:
+        `Your ₦${Number(withdraw.amountRequested).toLocaleString()} withdrawal request was rejected permanently.\n\nReason: ${comment || "No reason provided."}\n\nNo refund has been issued.`,
+
+    type: "Withdrawal"
+
+});
 
         alert("❌ Withdrawal permanently rejected.");
 
