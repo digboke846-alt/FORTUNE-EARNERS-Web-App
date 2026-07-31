@@ -413,7 +413,32 @@ submitPaymentBtn.addEventListener("click", async () => {
 
 });
     }
+// ======================================
+// LOG OUT
+// ======================================
 
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", async (e) => {
+
+        e.preventDefault();
+
+        const confirmLogout = confirm(
+            "Are you sure you want to log out?"
+        );
+
+        if (!confirmLogout) return;
+
+        await signOut(auth);
+
+        window.location.href = "login.html";
+
+    });
+
+}
     catch (error) {
 
         console.error(error);
