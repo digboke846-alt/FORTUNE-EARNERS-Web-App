@@ -85,6 +85,33 @@ onAuthStateChanged(auth, async (user) => {
             memberStatus.textContent =
                 data.memberStatus || "Pending Activation";
 
+        let notificationSoundUnlocked = false;
+
+document.addEventListener("click", () => {
+
+    if (notificationSoundUnlocked) return;
+
+    const sound =
+        document.getElementById("notificationSound");
+
+    if (sound) {
+
+        sound.play()
+            .then(() => {
+
+                sound.pause();
+
+                sound.currentTime = 0;
+
+                notificationSoundUnlocked = true;
+
+            })
+            .catch(() => {});
+
+    }
+
+}, { once: true });
+
         // ======================================
         // LOAD WALLETS
         // ======================================
@@ -557,14 +584,14 @@ function showNotificationToast(title, message) {
     const sound =
     document.getElementById("notificationSound");
 
-if (sound) {
+if (sound && notificationSoundUnlocked) {
 
     sound.currentTime = 0;
 
-    sound.play().catch(() => {});
+    sound.play();
 
 }
-
+    
     setTimeout(() => {
 
         toast.classList.remove("show");
