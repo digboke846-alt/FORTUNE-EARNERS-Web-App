@@ -286,33 +286,6 @@ if (logoutBtn) {
 }
 
     }
-
-        // ======================================
-// LOG OUT 2
-// ======================================
-
-const logoutBtn =
-    document.getElementById("logoutBtn2");
-
-if (logoutBtn) {
-
-    logoutBtn.addEventListener("click", async (e) => {
-
-        e.preventDefault();
-
-        const confirmLogout = confirm(
-            "Are you sure you want to log out?"
-        );
-
-        if (!confirmLogout) return;
-
-        await signOut(auth);
-
-        window.location.href = "login.html";
-
-    });
-
-}
     
     catch (error) {
 
@@ -335,6 +308,32 @@ if (notificationButton) {
     notificationButton.addEventListener("click", () => {
 
         window.location.href = "notifications.html";
+
+    });
+
+}
+// ======================================
+// LOG OUT
+// ======================================
+
+const logoutBtn2 =
+    document.getElementById("logoutBtn2");
+
+if (logoutBtn2) {
+
+    logoutBtn2.addEventListener("click", async (e) => {
+
+        e.preventDefault();
+
+        const confirmLogout = confirm(
+            "Are you sure you want to log out?"
+        );
+
+        if (!confirmLogout) return;
+
+        await signOut(auth);
+
+        window.location.href = "login.html";
 
     });
 
