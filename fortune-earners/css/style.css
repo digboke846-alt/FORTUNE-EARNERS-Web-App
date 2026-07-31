@@ -1328,24 +1328,58 @@ display:none;
 }
 
 footer {
-  width: 90%;
+  width: 100%;
   box-sizing: border-box;
-  padding: 15px 20px; /* Gives nice breathing room on left and right */
+  padding: 20px 15px 30px; /* Gives nice breathing room above and below */
   
-  /* Centers all text inside */
-  text-align: center; 
-  
-  /* Ensures flex children (if any) are centered */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  
+  background-color: #0d1b2a; /* Adjust to match your exact dark blue background */
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider line above footer */
 }
 
-/* Fixes any stray pipe characters or broken line breaks */
-footer p, footer div {
-  width: 85%;
-  text-align: center;
-  margin: 4px 0;
+/* Container for all the links */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap; /* Allows links to wrap smoothly on tiny screens */
+  justify-content: center;
+  align-items: center;
+  gap: 8px 10px; /* Space between links and lines */
+  margin-bottom: 12px;
+  font-size: 14px;
 }
+
+/* Styling the links */
+.footer-links a {
+  color: #fca311; /* Gold accent color to match your design */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* The vertical separator lines (|) */
+.divider {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* "Need Help?" text */
+.help-text {
+  color: #ffffff;
+}
+
+/* Copyright text at the bottom */
+.copyright {
+  color: #a0aab8;
+  font-size: 13px;
+  margin: 0;
+  text-align: center;
+}
+
 
