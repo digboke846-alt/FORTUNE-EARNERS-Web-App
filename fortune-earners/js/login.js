@@ -38,35 +38,6 @@ loginForm.addEventListener("submit", async (e) => {
         return;
     }
 
-    function togglePassword(inputId, icon){
-
-    const input =
-        document.getElementById(inputId);
-
-    if(input.type === "password"){
-
-        input.type = "text";
-
-        icon.classList.remove("fa-eye-slash");
-
-        icon.classList.add("fa-eye");
-
-        icon.style.color = "#FFD700";
-
-    }else{
-
-        input.type = "password";
-
-        icon.classList.remove("fa-eye");
-
-        icon.classList.add("fa-eye-slash");
-
-        icon.style.color = "#AFAFAF";
-
-    }
-
-    }
-
     try {        // Check if user entered a username instead of an email
         if (!emailOrUsername.includes("@")) {
 
