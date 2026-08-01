@@ -1252,3 +1252,15 @@ footer {
     color: #555;
     line-height: 1.3;
 }
+
+.password-strength {
+
+    font-size: 13px;
+
+    margin-top: 6px;
+
+    margin-bottom: 12px;
+
+    font-weight: bold;
+
+}
