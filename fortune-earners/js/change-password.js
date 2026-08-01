@@ -16,6 +16,14 @@ form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
+    const submitBtn =
+    form.querySelector("button[type='submit']");
+
+submitBtn.disabled = true;
+
+submitBtn.textContent =
+    "⏳ Changing Password...";
+
     const currentPassword =
         document.getElementById("current-password").value;
 
@@ -77,6 +85,9 @@ form.addEventListener("submit", async (e) => {
 
         );
 
+        submitBtn.textContent =
+    "✅ Password Changed";
+
         status.style.color = "#16a34a";
 
         status.innerHTML =
@@ -119,6 +130,11 @@ form.addEventListener("submit", async (e) => {
 
                 status.textContent =
                     error.message;
+
+                submitBtn.disabled = false;
+
+submitBtn.textContent =
+    "Change Password";
 
         }
 
