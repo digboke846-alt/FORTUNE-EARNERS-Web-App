@@ -1375,3 +1375,35 @@ transform:scale(1.25);
 
 }
 
+
+
+.dashboard-avatar{
+
+width:38px;
+
+height:38px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:26px;
+
+cursor:pointer;
+
+border-radius:50%;
+
+background:#ffffff20;
+
+transition:.25s;
+
+}
+
+.dashboard-avatar:hover{
+
+transform:scale(1.08);
+
+}
+
