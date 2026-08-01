@@ -1167,3 +1167,50 @@ footer {
     transform: translateY(0);
 }
 
+
+
+
+
+
+/* Modal backdrop/overlay */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    overflow-y: auto; /* Enables vertical scroll if content is too tall */
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+
+/* Modal box content */
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    
+    /* Screen width constraints */
+    width: 100%;
+    max-width: 500px; /* Adjust max width as needed */
+    box-sizing: border-box;
+    
+    /* Prevents horizontal overflow */
+    word-wrap: break-word;
+    overflow-x: hidden; 
+}
+
+/* Ensure all inputs fit nicely inside the modal container */
+.modal-content input,
+.modal-content textarea,
+.modal-content select,
+.modal-content button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
