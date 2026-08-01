@@ -945,3 +945,72 @@ footer {
     right: 10px;
 }
 
+
+/* ===================================================
+   DASHBOARD SECTION CARDS (POLISHED & COMPACT)
+=================================================== */
+
+.summary-card,
+.referral-card,
+.statistics-card,
+.leaderboard-card,
+.announcement-card,
+.transactions-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.20);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-card:hover,
+.referral-card:hover,
+.statistics-card:hover,
+.leaderboard-card:hover,
+.announcement-card:hover,
+.transactions-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+}
+
+/* Crisp & Centered Section Card Headings */
+.summary-card h2,
+.referral-card h2,
+.statistics-card h2,
+.leaderboard-card h2,
+.announcement-card h2,
+.transactions-card h2 {
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Polished Compact Lists for Summary Cards */
+.summary-card ul {
+    padding-left: 18px;
+    margin: 0;
+}
+
+.summary-card li {
+    margin-bottom: 8px;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.95;
+    -webkit-font-smoothing: antialiased;
+}
+
+.summary-card li:last-child {
+    margin-bottom: 0;
+}
