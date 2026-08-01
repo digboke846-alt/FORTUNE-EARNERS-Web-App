@@ -51,6 +51,21 @@ onAuthStateChanged(auth, async (user) => {
 // PERSONAL INFORMATION
 // ======================================
 
+    const avatarModal =
+    document.getElementById("avatarModal");
+
+const chooseAvatarBtn =
+    document.getElementById("chooseAvatarBtn");
+
+const closeAvatarModal =
+    document.getElementById("closeAvatarModal");
+
+const avatarGrid =
+    document.getElementById("avatarGrid");
+
+const profileAvatar =
+    document.getElementById("profileAvatar");
+
 document.getElementById("profileTopUsername").textContent =
     "@" + (data.username || "username");
 
@@ -338,3 +353,60 @@ if (logoutBtn2) {
     });
 
 }
+
+// =============================
+// AVATAR PICKER
+// =============================
+
+chooseAvatarBtn.addEventListener("click", () => {
+
+    avatarModal.classList.remove("hidden");
+
+});
+
+closeAvatarModal.addEventListener("click", () => {
+
+    avatarModal.classList.add("hidden");
+
+});
+
+avatarGrid.addEventListener("click", async (e) => {
+
+    if (e.target.tagName !== "SPAN") return;
+
+    const avatar =
+        e.target.textContent;
+
+    try {
+
+        await updateDoc(
+
+            doc(db, "users", auth.currentUser.uid),
+
+            {
+
+                profileAvatar: avatar
+
+            }
+
+        );
+
+        profileAvatar.textContent =
+            avatar;
+
+        avatarModal.classList.add("hidden");
+
+        alert("✅ Avatar updated successfully.");
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+});
+
