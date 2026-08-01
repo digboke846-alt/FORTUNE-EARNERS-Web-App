@@ -1014,3 +1014,51 @@ footer {
 .summary-card li:last-child {
     margin-bottom: 0;
 }
+
+/* ===================================================
+   WITHDRAWAL STATUS BADGES (POLISHED & CRISP)
+=================================================== */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    line-height: 1.4;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ⏳ Pending: Yellow-Green Accent */
+.pending {
+    background: rgba(162, 224, 20, 0.15);
+    color: #A2E014;
+    border: 1px solid rgba(162, 224, 20, 0.4);
+}
+
+/* ✅ Paid: Vibrant Green */
+.paid {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28A745;
+    border: 1px solid rgba(40, 167, 69, 0.4);
+}
+
+/* ❌ Rejected: Bright Red */
+.rejected {
+    background: rgba(220, 53, 69, 0.15);
+    color: #DC3545;
+    border: 1px solid rgba(220, 53, 69, 0.4);
+}
+
+/* 🔄 Rejected & Refunded: Warm Gold / Yellow */
+.rejected-refunded,
+.rejected-no-refund {
+    background: rgba(255, 193, 7, 0.15);
+    color: #FFC107;
+    border: 1px solid rgba(255, 193, 7, 0.4);
+}
