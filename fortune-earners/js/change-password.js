@@ -18,6 +18,12 @@ const newPasswordInput =
 const strength =
     document.getElementById("passwordStrength");
 
+const confirmPasswordInput =
+    document.getElementById("confirm-password");
+
+const passwordMatch =
+    document.getElementById("passwordMatch");
+
 newPasswordInput.addEventListener("input", () => {
 
     const password =
@@ -78,6 +84,42 @@ newPasswordInput.addEventListener("input", () => {
     if (!password) {
 
         strength.textContent = "";
+
+    }
+
+});
+
+confirmPasswordInput.addEventListener("input", () => {
+
+    const newPassword =
+        newPasswordInput.value;
+
+    const confirmPassword =
+        confirmPasswordInput.value;
+
+    if (!confirmPassword) {
+
+        passwordMatch.textContent = "";
+
+        return;
+
+    }
+
+    if (newPassword === confirmPassword) {
+
+        passwordMatch.style.color = "#16a34a";
+
+        passwordMatch.textContent =
+            "✅ Passwords match";
+
+    }
+
+    else {
+
+        passwordMatch.style.color = "#dc2626";
+
+        passwordMatch.textContent =
+            "❌ Passwords do not match";
 
     }
 
