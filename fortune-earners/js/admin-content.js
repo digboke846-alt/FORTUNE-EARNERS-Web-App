@@ -315,7 +315,9 @@ window.editContent = async function(contentId) {
         const saveBtn = document.getElementById("saveContentBtn");
         if (saveBtn) saveBtn.textContent = "💾 Update";
 
-        contentModal.style.display = "block";
+        // DISPLAY MODAL & AUTO-SCROLL INTO VIEW
+contentModal.style.display = "block";
+contentModal.scrollIntoView({ behavior: "smooth", block: "center" });
 
     } catch (error) {
         console.error(error);
