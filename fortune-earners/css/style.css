@@ -1105,3 +1105,65 @@ footer {
     display: none !important;
 }
 
+/* ===================================================
+   PLAN BUTTON STATES (POLISHED & MODERN)
+=================================================== */
+
+/* Shared base styling for plan buttons */
+.plan-completed,
+.plan-current,
+.plan-upgrade {
+    width: 100%;
+    padding: 13px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 🔒 Completed / Expired Plan (Clean disabled look) */
+.plan-completed {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* 🌟 Current Active Plan (Frosted Blur Effect) */
+.plan-current {
+    background: rgba(13, 71, 161, 0.35); /* Translucent theme blue */
+    color: #64B5F6;                       /* Soft crisp blue text */
+    border: 1px solid rgba(100, 181, 246, 0.4);
+    backdrop-filter: blur(6px);            /* Soft blur effect */
+    -webkit-backdrop-filter: blur(6px);    /* Safari support */
+    box-shadow: inset 0 0 12px rgba(13, 71, 161, 0.25), 
+                0 4px 15px rgba(0, 0, 0, 0.20);
+    cursor: default;
+}
+
+/* 🚀 Upgrade Plan (High-action vibrant call-to-action) */
+.plan-upgrade {
+    background: linear-gradient(135deg, #28A745, #218838);
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(40, 167, 69, 0.35);
+}
+
+.plan-upgrade:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(40, 167, 69, 0.45);
+}
+
+.plan-upgrade:active {
+    transform: translateY(0);
+}
+
