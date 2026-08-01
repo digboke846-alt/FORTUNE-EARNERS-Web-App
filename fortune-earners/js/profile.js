@@ -47,6 +47,16 @@ onAuthStateChanged(auth, async (user) => {
 
         const data =
             userSnap.data();
+
+        // ======================================
+// PROFILE AVATAR
+// ======================================
+
+profileAvatar.textContent =
+    data.profileAvatar || "👤";
+
+document.getElementById("profileTopName").textContent =
+    data.fullName || "User";
         // ======================================
 // PERSONAL INFORMATION
 // ======================================
