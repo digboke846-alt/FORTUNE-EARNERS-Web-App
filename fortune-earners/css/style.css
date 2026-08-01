@@ -1264,3 +1264,40 @@ footer {
     font-weight: bold;
 
 }
+
+.profile-actions{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+margin:15px 0;
+
+}
+
+.profile-actions button{
+
+width:100%;
+
+}
+
+#profileAvatar{
+
+font-size:60px;
+
+cursor:pointer;
+
+user-select:none;
+
+transition:0.25s;
+
+}
+
+#profileAvatar:hover{
+
+transform:scale(1.08);
+
+}
+
