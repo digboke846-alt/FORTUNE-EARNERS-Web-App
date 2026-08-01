@@ -88,6 +88,12 @@ if (dashboardAvatar) {
     dashboardAvatar.textContent =
         data.profileAvatar || "👤";
 
+    dashboardAvatar.onclick = () => {
+
+        window.location.href = "profile.html";
+
+    };
+
 }
 
         // ======================================
