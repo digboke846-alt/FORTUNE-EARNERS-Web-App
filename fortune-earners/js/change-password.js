@@ -3,7 +3,8 @@ import { auth } from "./firebase.js";
 import {
     EmailAuthProvider,
     reauthenticateWithCredential,
-    updatePassword
+    updatePassword,
+    signOut
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 const form =
@@ -119,7 +120,7 @@ confirmPasswordInput.addEventListener("input", () => {
         passwordMatch.style.color = "#dc2626";
 
         passwordMatch.textContent =
-            "❌ Passwords do not match";
+            "Passwords do not match";
 
     }
 
@@ -203,10 +204,19 @@ submitBtn.textContent =
 
         status.style.color = "#16a34a";
 
-        status.innerHTML =
-            `✅ Your password has been changed successfully.`;
+status.innerHTML =
+`✅ Password changed successfully.<br>
+Redirecting to Login...`;
 
-        form.reset();
+form.reset();
+
+setTimeout(async () => {
+
+    await signOut(auth);
+
+    window.location.href = "login.html";
+
+}, 2000);
 
     }
 
