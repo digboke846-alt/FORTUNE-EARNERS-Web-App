@@ -1062,3 +1062,46 @@ footer {
     color: #FFC107;
     border: 1px solid rgba(255, 193, 7, 0.4);
 }
+
+/* ===================================================
+   NOTIFICATION BELL & COUNTER BADGE
+=================================================== */
+
+/* Parent container holding the bell icon */
+.notification-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 24px;
+    color: var(--text);
+}
+
+/* Red counter badge anchored to the top-right corner of the bell */
+.notification-badge {
+    position: absolute;
+    top: -2px;          /* Positions badge slightly overlapping the top */
+    right: -6px;        /* Positions badge slightly overlapping the right side */
+    background: #DC3545; /* Vibrant red */
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 50px;
+    border: 2px solid var(--primary); /* Outer ring matching header background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    pointer-events: none; /* Allows clicking through directly to the bell */
+    -webkit-font-smoothing: antialiased;
+}
+
+.notification-badge.hidden {
+    display: none !important;
+}
+
