@@ -12,6 +12,12 @@ const form =
 const status =
     document.getElementById("passwordStatus");
 
+const newPasswordInput =
+    document.getElementById("new-password");
+
+const strength =
+    document.getElementById("passwordStrength");
+
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
