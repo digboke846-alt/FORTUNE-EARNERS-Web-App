@@ -885,3 +885,63 @@ footer {
     text-align: center;
 }
 
+
+
+/* ===================================================
+   PASSWORD FIELD & EYE TOGGLE
+=================================================== */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 60px;
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 20px;
+    top: 40%;
+    transform: translateY(-60%);
+    font-size: 18px;
+    color: #AFAFAF;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.toggle-password:hover {
+    color: #FFD700;
+}
+
+/* Security Title */
+.security-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 900;
+    color: #FFD700;
+    margin: 25px 0 20px;
+    position: relative;
+}
+
+.security-title::before,
+.security-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 70px;
+    height: 2px;
+    background: rgba(255, 215, 0, 0.45);
+}
+
+.security-title::before {
+    left: 10px;
+}
+
+.security-title::after {
+    right: 10px;
+}
+
