@@ -1231,7 +1231,7 @@ footer {
 }
 
 .faq-item[open] {
-    background-color: #ffffff;
+    background-color: var(--accent);
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
@@ -1239,12 +1239,12 @@ footer {
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    color: #333;
+    color: black;
     outline: none;
 }
 
 .faq-question:hover {
-    color: #007bff;
+    color: 4F46E5;
 }
 
 .faq-answer {
