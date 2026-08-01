@@ -18,6 +18,71 @@ const newPasswordInput =
 const strength =
     document.getElementById("passwordStrength");
 
+newPasswordInput.addEventListener("input", () => {
+
+    const password =
+        newPasswordInput.value;
+
+    let score = 0;
+
+    if (password.length >= 8) score++;
+
+    if (/[A-Z]/.test(password)) score++;
+
+    if (/[0-9]/.test(password)) score++;
+
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    switch (score) {
+
+        case 0:
+
+        case 1:
+
+            strength.style.color = "#ef4444";
+
+            strength.textContent =
+                "🔴 Weak Password";
+
+            break;
+
+        case 2:
+
+            strength.style.color = "#f59e0b";
+
+            strength.textContent =
+                "🟡 Medium Password";
+
+            break;
+
+        case 3:
+
+            strength.style.color = "#22c55e";
+
+            strength.textContent =
+                "🟢 Strong Password";
+
+            break;
+
+        case 4:
+
+            strength.style.color = "#16a34a";
+
+            strength.textContent =
+                "🟢 Very Strong Password";
+
+            break;
+
+    }
+
+    if (!password) {
+
+        strength.textContent = "";
+
+    }
+
+});
+
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
