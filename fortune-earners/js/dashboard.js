@@ -80,6 +80,16 @@ onAuthStateChanged(auth, async (user) => {
 
         const data = userSnap.data();
 
+        const dashboardAvatar =
+    document.getElementById("dashboardAvatar");
+
+if (dashboardAvatar) {
+
+    dashboardAvatar.textContent =
+        data.profileAvatar || "👤";
+
+}
+
         // ======================================
         // USER INFORMATION
         // ======================================
