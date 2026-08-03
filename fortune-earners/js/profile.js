@@ -73,6 +73,26 @@ profileAvatar.textContent =
 
 document.getElementById("profileTopName").textContent =
     data.fullName || "User";
+
+        profileAvatar.animate(
+
+    [
+
+        { transform: "scale(0.7)" },
+
+        { transform: "scale(1.25)" },
+
+        { transform: "scale(1)" }
+
+    ],
+
+    {
+
+        duration: 300
+
+    }
+
+);
         // ======================================
 // PERSONAL INFORMATION
 // ======================================
@@ -423,3 +443,23 @@ avatarGrid.addEventListener("click", async (e) => {
 
 });
 
+const uploadPhotoBtn =
+    document.getElementById("uploadPhotoBtn");
+
+if (uploadPhotoBtn) {
+
+    uploadPhotoBtn.addEventListener("click", () => {
+
+        alert(
+            "🚧 Profile photo upload is coming in the next feature.\n\nFor now, you can personalize your account by choosing an avatar. 😀"
+        );
+
+    });
+
+}
+
+profileAvatar.addEventListener("click", () => {
+
+    avatarModal.classList.remove("hidden");
+
+});
