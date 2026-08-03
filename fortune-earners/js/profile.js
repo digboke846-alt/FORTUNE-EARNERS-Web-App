@@ -11,6 +11,22 @@ import {
     updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+
+const avatarModal =
+    document.getElementById("avatarModal");
+
+const chooseAvatarBtn =
+    document.getElementById("chooseAvatarBtn");
+
+const closeAvatarModal =
+    document.getElementById("closeAvatarModal");
+
+const avatarGrid =
+    document.getElementById("avatarGrid");
+
+const profileAvatar =
+    document.getElementById("profileAvatar");
+
 // ======================================
 // CHECK LOGIN
 // ======================================
@@ -61,20 +77,7 @@ document.getElementById("profileTopName").textContent =
 // PERSONAL INFORMATION
 // ======================================
 
-    const avatarModal =
-    document.getElementById("avatarModal");
-
-const chooseAvatarBtn =
-    document.getElementById("chooseAvatarBtn");
-
-const closeAvatarModal =
-    document.getElementById("closeAvatarModal");
-
-const avatarGrid =
-    document.getElementById("avatarGrid");
-
-const profileAvatar =
-    document.getElementById("profileAvatar");
+    
 
 document.getElementById("profileTopUsername").textContent =
     "@" + (data.username || "username");
