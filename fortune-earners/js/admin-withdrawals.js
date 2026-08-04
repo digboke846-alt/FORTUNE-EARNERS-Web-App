@@ -540,14 +540,14 @@ async function markAsPaid(withdrawalId, adminComment) {
 
         });
 
-        await createNotification({
+      await createNotification({
 
     userId: withdrawal.userId,
 
-    title: "💸 Withdrawal Successful",
+    title: "✅ Withdrawal Approved",
 
     message:
-        `Your ₦${Number(withdrawal.amountRequested).toLocaleString()} ${withdrawal.walletType} withdrawal has been paid successfully.`,
+        `Your withdrawal of ₦${Number(withdrawal.amountRequested).toLocaleString()} has been approved successfully. The funds should reflect in your bank account shortly.`,
 
     type: "Withdrawal"
 
