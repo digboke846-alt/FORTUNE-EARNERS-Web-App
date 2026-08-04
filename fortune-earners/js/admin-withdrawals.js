@@ -638,10 +638,10 @@ refundStatus: "Refunded",
 
     userId: withdraw.userId,
 
-    title: "❌ Withdrawal Rejected",
+    title: "💛 Withdrawal Refunded",
 
     message:
-        `Your ₦${Number(withdraw.amountRequested).toLocaleString()} withdrawal request was rejected.\n\nReason: ${comment || "No reason provided."}\n\nThe amount has been refunded to your Task Wallet.`,
+        `Your withdrawal request of ₦${Number(withdraw.amountRequested).toLocaleString()} was rejected.\n\nThe full amount has been refunded to your Task Wallet.\n\nReason: ${comment || "No reason provided."}`,
 
     type: "Withdrawal"
 
@@ -698,7 +698,7 @@ refundStatus: "Not Refunded",
     title: "❌ Withdrawal Rejected",
 
     message:
-        `Your ₦${Number(withdraw.amountRequested).toLocaleString()} withdrawal request was rejected permanently.\n\nReason: ${comment || "No reason provided."}\n\nNo refund has been issued.`,
+        `Your withdrawal request of ₦${Number(withdraw.amountRequested).toLocaleString()} has been permanently rejected.\n\nReason: ${comment || "No reason provided."}`,
 
     type: "Withdrawal"
 
