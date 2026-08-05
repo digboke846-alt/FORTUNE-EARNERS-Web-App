@@ -534,3 +534,27 @@ export async function createNotification({
     }
 
 }
+const notificationSearch =
+document.getElementById("notificationSearch");
+
+notificationSearch.addEventListener("input",()=>{
+
+const search=
+notificationSearch.value
+.toLowerCase();
+
+document
+.querySelectorAll(".notification-card")
+.forEach(card=>{
+
+const text=
+card.textContent.toLowerCase();
+
+card.style.display=
+text.includes(search)
+? ""
+: "none";
+
+});
+
+});
