@@ -161,7 +161,7 @@ if (dashboardAvatar) {
 
         if (memberStatus)
             memberStatus.textContent =
-                data.memberStatus || "Pending Activation";
+                data.memberStatus || "🟢 Active";
 
         // ======================================
         // LOAD WALLETS
