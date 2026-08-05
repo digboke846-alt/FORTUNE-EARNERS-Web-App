@@ -17,184 +17,85 @@ href="css/style.css">
 
 <body>
 
-<header class="top-header">
+<div class="container">
 
-<button id="menuButton"
-class="menu-btn">
+<h1>📺 Sponsored Ads</h1>
 
-☰
+<p class="page-subtitle">
 
-</button>
+Watch sponsored advertisements and earn rewards instantly.
 
-<h1 class="logo">
+</p>
 
-SPONSORED ADS
+<div class="dashboard-card">
 
-</h1>
+<h3>
 
-<div class="header-icons">
+📢 Available Sponsored Ads
 
-<a href="profile.html">
+</h3>
 
-👤
+<p>
 
-</a>
+Available Ads:
+
+<strong id="availableAds">
+
+0
+
+</strong>
+
+</p>
 
 </div>
 
-</header>
+<div id="adsList">
 
-<nav id="menu"
-class="side-menu">
+<div class="loading-card">
 
-<a href="dashboard.html">🏠 Dashboard</a>
+Loading Sponsored Ads...
 
-<a href="activate-plan.html">🚀 Activate Plan</a>
+</div>
 
-<a href="daily-tasks.html">📋 Daily Tasks</a>
+</div>
 
-<a href="sponsored-ads.html">📺 Sponsored Ads</a>
+<hr>
 
-<a href="withdraw.html">💸 Withdraw</a>
+<div class="dashboard-card">
 
-<a href="profile.html">👤 Profile</a>
+<h3>
 
-<a href="contact.html">📞 Contact Support</a>
+✅ Completed Sponsored Ads
 
-<a href="#" id="logoutBtn">🚪 Log Out</a>
-
-</nav>
-
-<div id="menuOverlay"
-class="menu-overlay"></div>
-
-<main class="dashboard-content">
-
-<section class="dashboard-card">
-
-<h2>
-
-📺 Sponsored Ads
-
-</h2>
+</h3>
 
 <p>
 
-Watch or complete sponsored advertisements and earn rewards.
+Already rewarded advertisements will appear here.
 
 </p>
 
-</section>
+<div id="completedAdsList">
 
-<section class="summary-card">
+<p class="empty-state">
 
-<h2>
-
-📊 Today's Progress
-
-</h2>
-
-<ul>
-
-<li>
-
-Ads Available
-
-<span id="availableAds">
-
-5
-
-</span>
-
-</li>
-
-<li>
-
-Completed
-
-<span id="completedAds">
-
-0
-
-</span>
-
-</li>
-
-<li>
-
-Pending Review
-
-<span id="pendingAds">
-
-0
-
-</span>
-
-</li>
-
-</ul>
-
-</section>
-
-<section id="adsList">
-
-</section>
-
-</main>
-
-<nav class="bottom-nav">
-
-<a href="dashboard.html">
-
-🏠
-
-<span>Dashboard</span>
-
-</a>
-
-<a href="place-ads.html">
-
-📢
-
-<span>Place Ads</span>
-
-</a>
-
-<a href="withdraw.html">
-
-💸
-
-<span>Withdraw</span>
-
-</a>
-
-<a href="profile.html">
-
-👤
-
-<span>Profile</span>
-
-</a>
-
-</nav>
-
-  <br>
-  <hr>
-  <footer>
-
-<p>
-
-© 2026 Fortune Earners.
-All Rights Reserved.
+No completed sponsored ads yet.
 
 </p>
 
-  </footer>
+</div>
 
-<script src="js/menu.js"></script>
+</div>
 
-<script type="module"
-src="js/sponsored-ads.js"></script>
+<div class="bottom-space"></div>
+
+</div>
+
+<script
+type="module"
+src="js/sponsored-ads.js">
+
+</script>
 
 </body>
 
