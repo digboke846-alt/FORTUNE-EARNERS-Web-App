@@ -121,6 +121,42 @@ async function markAllNotificationsAsRead(userId) {
 
 }
 
+function getNotificationIcon(type){
+
+    switch(type){
+
+        case "Welcome":
+
+            return "🎉";
+
+        case "Referral":
+
+            return "👥";
+
+        case "Bonus":
+
+            return "💰";
+
+        case "Withdrawal":
+
+            return "💸";
+
+        case "Task":
+
+            return "📋";
+
+        case "Announcement":
+
+            return "📢";
+
+        default:
+
+            return "🔔";
+
+    }
+
+}
+
 function getNotificationTypeClass(type){
 
     switch(type){
@@ -216,42 +252,6 @@ No notifications available.
             card.dataset.id = docSnap.id;
 
             card.innerHTML = `
-
-            function getNotificationIcon(type){
-
-    switch(type){
-
-        case "Welcome":
-
-            return "🎉";
-
-        case "Referral":
-
-            return "👥";
-
-        case "Bonus":
-
-            return "💰";
-
-        case "Withdrawal":
-
-            return "💸";
-
-        case "Task":
-
-            return "📋";
-
-        case "Announcement":
-
-            return "📢";
-
-        default:
-
-            return "🔔";
-
-    }
-
-}
 
 <div class="notification-type ${getNotificationTypeClass(data.type)}">
 
