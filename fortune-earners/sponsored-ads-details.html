@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Sponsored Ad Details | Fortune Earners</title>
+<title>Sponsored Ads</title>
 
 <link rel="stylesheet"
 href="css/style.css">
@@ -17,233 +17,132 @@ href="css/style.css">
 
 <body>
 
-<!-- ========================= -->
-<!-- HEADER -->
-<!-- ========================= -->
+<div class="container">
 
-<header class="top-header">
+<div class="card">
 
-<button id="menuButton"
-class="menu-btn">
+<h1>
 
-☰
-
-</button>
-
-<h1 class="logo">
-
-SPONSORED AD
+📺 Sponsored Advertisement
 
 </h1>
 
-</header>
-
-<!-- ========================= -->
-<!-- SIDE MENU -->
-<!-- ========================= -->
-
-<nav id="menu"
-class="side-menu">
-
-<a href="dashboard.html">🏠 Dashboard</a>
-
-<a href="daily-tasks.html">📋 Daily Tasks</a>
-
-<a href="sponsored-ads.html">📺 Sponsored Ads</a>
-
-<a href="withdraw.html">💸 Withdraw</a>
-
-<a href="profile.html">👤 Profile</a>
-
-<a href="#" id="logoutBtn">🚪 Log Out</a>
-
-</nav>
-
-<div id="menuOverlay"
-class="menu-overlay"></div>
-
-<!-- ========================= -->
-<!-- MAIN CONTENT -->
-<!-- ========================= -->
-
-<main class="dashboard-content">
-
-<section class="dashboard-card">
-
 <h2 id="adTitle">
 
-Loading Sponsored Ad...
+Loading Advertisement...
 
 </h2>
 
 <p id="adDescription">
 
-Please wait while the advertisement loads.
+Please wait...
 
 </p>
 
-</section>
+<div class="reward-box">
 
-<!-- ========================= -->
-<!-- AD INFORMATION -->
-<!-- ========================= -->
+<h3>
 
-<section class="summary-card">
+Reward
 
-<h2>
+</h3>
 
-📺 Advertisement Information
-
-</h2>
-
-<ul>
-
-<li>
-
-💰 Reward
-
-<span id="adReward">
+<p id="rewardAmount">
 
 ₦0
 
-</span>
+</p>
 
-</li>
+</div>
 
-<li>
-
-📌 Status
-
-<span id="adStatus">
-
-🟢 Available
-
-</span>
-
-</li>
-
-</ul>
-
-</section>
-
-<!-- ========================= -->
-<!-- OPEN AD -->
-<!-- ========================= -->
-
-<section class="dashboard-card">
+<hr>
 
 <button id="openAdBtn">
 
-📺 Open Advertisement
+📺 Open Sponsored Ad
 
 </button>
 
-</section>
-  <!-- ========================= -->
-<!-- SUBMIT PROOF -->
-<!-- ========================= -->
+<div
+id="countdownSection"
 
-<section class="dashboard-card">
+class="hidden">
+
+<p>
+
+Advertisement opened successfully.
+
+</p>
+
+<p>
+
+Please view the advertisement.
+
+Reward will become available after successfully completing this Ads.
+
+</p>
+
+<div class="countdown-card">
 
 <h2>
 
-📸 Submit Screenshot
+⏳
+
+<span id="countdown">
+
+60
+
+</span>
+
+Seconds
+
+</h2>
+
+</div>
+
+</div>
+
+<button
+
+id="claimRewardBtn"
+
+class="hidden"
+
+disabled>
+
+🎁 Claim Reward
+
+</button>
+
+<div
+
+id="claimedMessage"
+
+class="hidden">
+
+<h2>
+
+🎉 Reward Claimed
 
 </h2>
 
 <p>
 
-Upload a clear screenshot showing that you completed this Sponsored Advertisement.
+You have already completed this sponsored advertisement today.
 
 </p>
-
-<input
-type="file"
-id="adScreenshot"
-accept="image/*"
-multiple>
-
-<p>
-
-Maximum:
-<strong>3 screenshots</strong>
-
-</p>
-
-<div id="imagePreview">
 
 </div>
 
-<p id="uploadStatus">
+</div>
 
-</p>
+</div>
 
-<button id="submitAdBtn">
+<script
+type="module"
+src="js/sponsored-ad-details.js">
 
-📤 Submit Advertisement
-
-</button>
-
-</section>
-
-<!-- ========================= -->
-<!-- BOTTOM NAVIGATION -->
-<!-- ========================= -->
-
-<nav class="bottom-nav">
-
-<a href="dashboard.html">
-
-🏠
-
-<span>Dashboard</span>
-
-</a>
-
-<a href="sponsored-ads.html" class="active">
-
-📺
-
-<span>Ads</span>
-
-</a>
-
-<a href="withdraw.html">
-
-💸
-
-<span>Withdraw</span>
-
-</a>
-
-<a href="profile.html">
-
-👤
-
-<span>Profile</span>
-
-</a>
-
-</nav>
-
-</main>
-  <br>
-  <hr>
-  <footer>
-
-<p>
-
-© 2026 Fortune Earners.
-All Rights Reserved.
-
-</p>
-
-  </footer>
-
-<script src="js/menu.js"></script>
-
-<script type="module"
-src="js/sponsored-ads-details.js"></script>
+</script>
 
 </body>
 
