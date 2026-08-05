@@ -152,6 +152,15 @@ ${data.type || "Notification"}
 
 ${data.title}
 
+<button
+class="deleteNotificationBtn"
+
+data-id="${notification.id}">
+
+🗑️
+
+</button>
+
 </div>
 
 <div class="notification-message">
