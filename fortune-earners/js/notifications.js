@@ -194,6 +194,43 @@ ${data.createdAt?.toDate
     }
 
 }
+
+document.querySelectorAll(".deleteNotificationBtn")
+.forEach(button => {
+
+    button.addEventListener("click", async () => {
+
+        const notificationId =
+            button.dataset.id;
+
+        const confirmDelete =
+            confirm("Delete this notification?");
+
+        if (!confirmDelete) return;
+
+        try {
+
+            await deleteDoc(
+
+                doc(db, "notifications", notificationId)
+
+            );
+
+            button.closest(".notification-card").remove();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert(error.message);
+
+        }
+
+    });
+
+});
 // ======================================
 // MARK NOTIFICATION AS READ
 // ======================================
