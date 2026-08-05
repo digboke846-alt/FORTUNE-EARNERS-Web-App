@@ -203,7 +203,7 @@ Activate your membership plan to unlock Sponsored Ads and start earning.
 </div>
 
 <button
-onclick="location.href='sponsored-ad-details.html?id=${adDoc.id}'">
+onclick="location.href='sponsored-ads-details.html?id=${adDoc.id}'">
 
 📺 View Ad
 
