@@ -281,11 +281,21 @@ window.approveSubmission = async function(submissionId, type) {
 
         await updateDoc(userRef, {
 
-            taskWallet:
-                Number(userData.taskWallet || 0) +
-                Number(submission.reward || 0)
+    taskWallet:
+        Number(userData.taskWallet || 0) +
+        Number(submission.reward || 0),
 
-        });
+    earnedToday:
+        Number(userData.earnedToday || 0) +
+        Number(submission.reward || 0),
+
+    completedTasksToday:
+        Number(userData.completedTasksToday || 0) + 1,
+
+    completedTasks:
+        Number(userData.completedTasks || 0) + 1
+
+});
 
         await updateDoc(submissionRef, {
 
