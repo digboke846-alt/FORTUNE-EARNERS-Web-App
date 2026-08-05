@@ -1407,3 +1407,174 @@ transform:scale(1.08);
 
 }
 
+
+
+/* ===================================================
+   SPONSORED ADS DETAILS PAGE
+=================================================== */
+
+/* Container centering for standalone pages */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px 15px;
+}
+
+/* Primary Card Wrapper */
+.card {
+    background: var(--card, #161E35);
+    border-radius: 20px;
+    padding: 25px 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.card h1 {
+    color: var(--text, #FFFFFF);
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    letter-spacing: 0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.card h2#adTitle {
+    color: var(--accent, #FFD700);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.card p#adDescription {
+    color: var(--muted, #A0AEC0);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    word-break: break-word;
+}
+
+/* Reward Highlight Box */
+.reward-box {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(13, 71, 161, 0.2));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.reward-box h3 {
+    color: var(--muted, #A0AEC0);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.reward-box p#rewardAmount {
+    color: var(--accent, #FFD700);
+    font-size: 26px;
+    font-weight: 900;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.card hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 20px 0;
+}
+
+/* Main Action Buttons (Open Ad & Claim Reward) */
+#openAdBtn,
+#claimRewardBtn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1F5FD4, #1565C0);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(31, 95, 212, 0.35);
+    transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+#openAdBtn:hover,
+#claimRewardBtn:not(:disabled):hover {
+    background: linear-gradient(135deg, #2E73F5, #1F5FD4);
+    transform: translateY(-2px);
+}
+
+/* Disabled State for Claim Button */
+#claimRewardBtn:disabled {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--muted, #A0AEC0);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+/* Countdown Section & Card */
+#countdownSection {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#countdownSection p {
+    color: var(--muted, #A0AEC0);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.countdown-card {
+    background: #0D1325;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 14px;
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.countdown-card h2 {
+    color: var(--accent, #FFD700);
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* Already Claimed State Message Box */
+#claimedMessage {
+    background: rgba(40, 167, 69, 0.12);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#claimedMessage h2 {
+    color: #28A745;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+#claimedMessage p {
+    color: var(--text, #FFFFFF);
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Standard Utility Class for Hiding Elements */
+.hidden {
+    display: none !important;
+}
