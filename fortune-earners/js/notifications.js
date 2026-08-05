@@ -217,7 +217,7 @@ No notifications available.
 
             card.innerHTML = `
 
-<div class="notification-status">
+<div class="notification-type ${getNotificationTypeClass(data.type)}">
 
 ${data.type || "Notification"}
 
