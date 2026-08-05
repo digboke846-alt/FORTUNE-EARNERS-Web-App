@@ -10,10 +10,21 @@ import {
 
     doc,
 
-    getDoc
+    getDoc,
+
+    setDoc,
+
+    updateDoc,
+
+    serverTimestamp
 
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+import {
+
+    createNotification
+
+} from "./notification-utils.js";
 
 // ======================================
 // GET AD ID
@@ -206,6 +217,43 @@ openAdBtn.addEventListener("click", () => {
     }, 1000);
 
 });
+
+                // ======================================
+// CLAIM REWARD
+// ======================================
+
+claimRewardBtn.addEventListener("click", async () => {
+
+    claimRewardBtn.disabled = true;
+
+    claimRewardBtn.textContent =
+        "Processing...";
+
+    try {
+
+        const completedRef =
+            doc(
+
+                db,
+
+                "completedSponsoredAds",
+
+                `${user.uid}_${adId}`
+
+            );
+
+        const completedSnap =
+            await getDoc(completedRef);
+
+        if (completedSnap.exists()) {
+
+            alert(
+                "You have already claimed this reward today."
+            );
+
+            return;
+
+        }
 
         }
 
