@@ -10,7 +10,8 @@ import {
     doc,
     getDoc,
     query,
-    where
+    where,
+    documentId
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -48,6 +49,35 @@ onAuthStateChanged(auth, async (user) => {
 
         const currentPlan =
             userData.plan || "Not Activated";
+
+        // ======================================
+// USER COMPLETED ADS
+// ======================================
+
+const completedAdsRef =
+    collection(db, "completedSponsoredAds");
+
+const completedAdsQuery =
+    query(
+        completedAdsRef,
+        where("userId", "==", user.uid)
+    );
+
+const completedAdsSnap =
+    await getDocs(completedAdsQuery);
+
+const completedAds =
+    new Set();
+
+completedAdsSnap.forEach(docSnap => {
+
+    const item =
+        docSnap.data();
+
+    completedAds.add(item.adId);
+
+});
+        
                 // ======================================
         // CHECK PLAN ACTIVATION
         // ======================================
