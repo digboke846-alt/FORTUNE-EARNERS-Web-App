@@ -240,3 +240,25 @@ background:#dc2626;
 background:#6b7280;
 
 }
+
+.notification-search{
+
+margin-bottom:15px;
+
+}
+
+.notification-search input{
+
+width:100%;
+
+padding:12px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+font-size:15px;
+
+outline:none;
+
+}
