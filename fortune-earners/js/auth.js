@@ -199,8 +199,8 @@ signupForm.addEventListener("submit", async (e) => {
             phone: phone,
 
             plan: "Not Activated",
-            memberStatus: "Pending Activation",
-            accountStatus: "Active",
+            memberStatus: "🟢 Active",
+            accountStatus: "Pending Activation",
             role: "user",
 
 isAdmin: false,
@@ -215,6 +215,16 @@ isAdmin: false,
 
             referralEarnings: 0,
             taskEarnings: 0,
+
+            completedTasksToday: 0,
+
+sponsoredAdsToday: 0,
+
+referralsToday: 0,
+
+earnedToday: 0,
+
+lastDailyReset: new Date().toISOString().split("T")[0],
 
             totalWithdrawals: 0,
             totalWithdrawalRequests: 0,
@@ -269,7 +279,7 @@ await addDoc(collection(db, "notifications"), {
 
     userId: user.uid,
 
-    title: "🎉 Welcome to Fortune Earners!",
+    title: "🎉 Welcome To Fortune Earners!",
 
     message:
         "Congratulations on joining Fortune Earners.\n\nActivate a membership plan to start earning daily.\n\nWe're happy to have you! 💙💚❤️",
@@ -352,7 +362,7 @@ if (referrerUid) {
 
         commission: 0,
 
-        activatedPlan: "None",
+        activatedPlan: "Not Activated",
 
         createdAt: serverTimestamp()
 
