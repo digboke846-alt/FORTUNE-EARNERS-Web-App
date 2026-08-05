@@ -152,7 +152,42 @@ onAuthStateChanged(auth, async (user) => {
             "₦" + reward.toLocaleString();
 
 
-    
+    // ======================================
+// CHECK IF ALREADY CLAIMED TODAY
+// ======================================
+
+const completedRef =
+    doc(db, "completedSponsoredAds", `${user.uid}_${adId}`);
+
+const completedSnap =
+    await getDoc(completedRef);
+
+const today =
+    new Date().toISOString().split("T")[0];
+
+if (completedSnap.exists()) {
+
+    const completedData =
+        completedSnap.data();
+
+    if (completedData.completedDate === today) {
+
+        document.getElementById("openAdBtn").style.display = "none";
+
+        document.getElementById("claimRestriction")
+            .classList.add("hidden");
+
+        document.getElementById("claimRewardBtn")
+            .style.display = "none";
+
+        document.getElementById("claimedMessage")
+            .classList.remove("hidden");
+
+        return;
+
+    }
+
+}
 
 // ======================================
 // OPEN AD + START COUNTDOWN
