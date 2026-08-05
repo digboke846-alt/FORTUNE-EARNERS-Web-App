@@ -566,9 +566,9 @@ previousUnreadCount = unreadCount;
 
         badge.textContent =
 
-            unreadCount > 99
+            unreadCount > 9
 
-                ? "99+"
+                ? "9+"
 
                 : unreadCount;
 
