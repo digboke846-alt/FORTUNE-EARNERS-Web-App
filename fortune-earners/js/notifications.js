@@ -217,6 +217,42 @@ No notifications available.
 
             card.innerHTML = `
 
+            function getNotificationIcon(type){
+
+    switch(type){
+
+        case "Welcome":
+
+            return "🎉";
+
+        case "Referral":
+
+            return "👥";
+
+        case "Bonus":
+
+            return "💰";
+
+        case "Withdrawal":
+
+            return "💸";
+
+        case "Task":
+
+            return "📋";
+
+        case "Announcement":
+
+            return "📢";
+
+        default:
+
+            return "🔔";
+
+    }
+
+}
+
 <div class="notification-type ${getNotificationTypeClass(data.type)}">
 
 ${data.type || "Notification"}
