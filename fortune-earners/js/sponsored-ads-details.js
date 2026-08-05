@@ -141,7 +141,73 @@ onAuthStateChanged(auth, async (user) => {
             "₦" + reward.toLocaleString();
 
 
-    }
+    
+
+// ======================================
+// OPEN AD + START COUNTDOWN
+// ======================================
+
+const openAdBtn =
+    document.getElementById("openAdBtn");
+
+const claimRestriction =
+    document.getElementById("claimRestriction");
+
+const countdownElement =
+    document.getElementById("countdown");
+
+const claimRewardBtn =
+    document.getElementById("claimRewardBtn");
+
+let timerStarted = false;
+
+openAdBtn.addEventListener("click", () => {
+
+    // Prevent opening multiple times
+
+    if (timerStarted) return;
+
+    timerStarted = true;
+
+    // Open advertiser link
+
+    window.open(ad.link, "_blank");
+
+    // Hide Open button
+
+    openAdBtn.style.display = "none";
+
+    // Show countdown section
+
+    claimRestriction.classList.remove("hidden");
+
+    let seconds = 60;
+
+    countdownElement.textContent = seconds;
+
+    const countdown = setInterval(() => {
+
+        seconds--;
+
+        countdownElement.textContent = seconds;
+
+        if (seconds <= 0) {
+
+            clearInterval(countdown);
+
+            claimRestriction.classList.add("hidden");
+
+            claimRewardBtn.classList.remove("hidden");
+
+            claimRewardBtn.disabled = false;
+
+        }
+
+    }, 1000);
+
+});
+
+        }
 
     catch (error) {
 
