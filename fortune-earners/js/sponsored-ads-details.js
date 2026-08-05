@@ -313,11 +313,29 @@ await createNotification(
 
 );
 
+        // ======================================
+// SUCCESS UI
+// ======================================
+
+claimRewardBtn.style.display = "none";
+
+document.getElementById("claimedMessage")
+.classList.remove("hidden");
+
+alert(
+    `🎉 Congratulations!\n\nYou have successfully earned ₦${reward.toLocaleString()} from this Sponsored Advertisement.`
+);
+
         }
 
     catch (error) {
 
         console.error(error);
+
+        claimRewardBtn.disabled = false;
+
+claimRewardBtn.textContent =
+    "🎁 Claim Reward";
 
         alert(error.message);
 
