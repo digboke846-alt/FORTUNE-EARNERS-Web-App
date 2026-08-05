@@ -80,6 +80,41 @@ onAuthStateChanged(auth, async (user) => {
 
         const data = userSnap.data();
 
+        // ======================================
+// DAILY RESET
+// ======================================
+
+const today =
+    new Date().toISOString().split("T")[0];
+
+if (data.lastDailyReset !== today) {
+
+    await updateDoc(userRef, {
+
+        completedTasksToday: 0,
+
+        sponsoredAdsToday: 0,
+
+        referralsToday: 0,
+
+        earnedToday: 0,
+
+        lastDailyReset: today
+
+    });
+
+    data.completedTasksToday = 0;
+
+    data.sponsoredAdsToday = 0;
+
+    data.referralsToday = 0;
+
+    data.earnedToday = 0;
+
+    data.lastDailyReset = today;
+
+}
+
         const dashboardAvatar =
     document.getElementById("dashboardAvatar");
 
