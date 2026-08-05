@@ -255,6 +255,7 @@ No notifications available.
 
 <div class="notification-type ${getNotificationTypeClass(data.type)}">
 
+${getNotificationIcon(data.type)}
 ${data.type || "Notification"}
 
 </div>
