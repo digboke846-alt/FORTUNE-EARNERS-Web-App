@@ -267,7 +267,7 @@ ${data.title}
 <button
 class="deleteNotificationBtn"
 
-data-id="${notification.id}">
+data-id="${docSnap.id}"
 
 🗑️
 
@@ -283,7 +283,7 @@ ${data.message}
 
 <div class="notification-date">
 
-timeAgo(notification.createdAt)
+${timeAgo(data.createdAt)}
 
 </div>
 
