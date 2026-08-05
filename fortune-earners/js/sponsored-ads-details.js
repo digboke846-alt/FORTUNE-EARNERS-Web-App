@@ -255,6 +255,64 @@ claimRewardBtn.addEventListener("click", async () => {
 
         }
 
+        // ======================================
+// CREDIT USER
+// ======================================
+
+await updateDoc(userRef, {
+
+    taskWallet:
+        Number(userData.taskWallet || 0) +
+        Number(reward),
+
+    earnedToday:
+        Number(userData.earnedToday || 0) +
+        Number(reward),
+
+    sponsoredAdsToday:
+        Number(userData.sponsoredAdsToday || 0) + 1,
+
+    sponsoredAdsViewed:
+        Number(userData.sponsoredAdsViewed || 0) + 1
+
+});
+
+
+// ======================================
+// SAVE COMPLETED AD
+// ======================================
+
+await setDoc(completedRef, {
+
+    userId: user.uid,
+
+    adId: adId,
+
+    completedDate:
+        new Date().toISOString().split("T")[0],
+
+    createdAt:
+        serverTimestamp()
+
+});
+
+
+// ======================================
+// CREATE NOTIFICATION
+// ======================================
+
+await createNotification(
+
+    user.uid,
+
+    "Sponsored Ad Completed",
+
+    `🎉 Congratulations! You earned ₦${reward.toLocaleString()} from Sponsored Advertisement.`,
+
+    "Sponsored Ads"
+
+);
+
         }
 
     catch (error) {
