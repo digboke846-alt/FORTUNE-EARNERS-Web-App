@@ -120,6 +120,43 @@ async function markAllNotificationsAsRead(userId) {
     }
 
 }
+
+function getNotificationTypeClass(type){
+
+    switch(type){
+
+        case "Welcome":
+
+            return "type-welcome";
+
+        case "Referral":
+
+            return "type-referral";
+
+        case "Bonus":
+
+            return "type-bonus";
+
+        case "Withdrawal":
+
+            return "type-withdrawal";
+
+        case "Task":
+
+            return "type-task";
+
+        case "Announcement":
+
+            return "type-announcement";
+
+        default:
+
+            return "type-default";
+
+    }
+
+}
+
 // ======================================
 // LOAD NOTIFICATIONS
 // ======================================
