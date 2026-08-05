@@ -164,6 +164,54 @@ Activate your membership plan to unlock Sponsored Ads and start earning.
 
             }
 
+            // ======================================
+// CHECK IF USER HAS COMPLETED THIS AD
+// ======================================
+
+const completedAdsList =
+    document.getElementById("completedAdsList");
+
+if (completedAds.has(adDoc.id)) {
+
+    completedAdsList.innerHTML += `
+
+<div class="task-card">
+
+<h3>${ad.title}</h3>
+
+<p>${ad.description}</p>
+
+<div class="task-info">
+
+<span>
+
+💰 Reward:
+<strong>₦${reward.toLocaleString()}</strong>
+
+</span>
+
+<span class="task-status completed">
+
+✅ Completed
+
+</span>
+
+</div>
+
+<button disabled>
+
+🎉 Reward Claimed
+
+</button>
+
+</div>
+
+`;
+
+    return;
+
+}
+
             availableCount++;
 
             let reward = 0;
