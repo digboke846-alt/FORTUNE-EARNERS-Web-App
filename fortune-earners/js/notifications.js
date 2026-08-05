@@ -209,9 +209,7 @@ ${data.message}
 
 <div class="notification-date">
 
-${data.createdAt?.toDate
-    ? data.createdAt.toDate().toLocaleString()
-    : ""}
+timeAgo(notification.createdAt)
 
 </div>
 
