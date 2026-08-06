@@ -280,7 +280,7 @@ openAdBtn.addEventListener("click", () => {
             countdownSection.classList.remove("hidden");
 
             verificationText.textContent =
-                "Reward verification in progress...";
+                "Completion verification in progress...";
 
             startCountdown();
 
