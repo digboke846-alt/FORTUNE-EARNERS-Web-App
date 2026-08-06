@@ -190,14 +190,17 @@ if (completedSnap.exists()) {
 }
 
 // ======================================
-// OPEN AD + START COUNTDOWN
+// OPEN AD + COUNTDOWN
 // ======================================
 
 const openAdBtn =
     document.getElementById("openAdBtn");
 
-const claimRestriction =
-    document.getElementById("claimRestriction");
+const countdownSection =
+    document.getElementById("countdownSection");
+
+const verificationText =
+    document.getElementById("verificationText");
 
 const countdownElement =
     document.getElementById("countdown");
@@ -207,31 +210,20 @@ const claimRewardBtn =
 
 let timerStarted = false;
 
-openAdBtn.addEventListener("click", () => {
+let seconds = 60;
 
-    // Prevent opening multiple times
+let countdown;
 
-    if (timerStarted) return;
 
-    timerStarted = true;
+// ======================================
+// START TIMER
+// ======================================
 
-    // Open advertiser link
-
-    window.open(ad.link, "_blank");
-
-    // Hide Open button
-
-    openAdBtn.style.display = "none";
-
-    // Show countdown section
-
-    claimRestriction.classList.remove("hidden");
-
-    let seconds = 60;
+function startCountdown() {
 
     countdownElement.textContent = seconds;
 
-    const countdown = setInterval(() => {
+    countdown = setInterval(() => {
 
         seconds--;
 
@@ -241,7 +233,9 @@ openAdBtn.addEventListener("click", () => {
 
             clearInterval(countdown);
 
-            claimRestriction.classList.add("hidden");
+            countdownSection.classList.add("hidden");
+
+            openAdBtn.style.display = "none";
 
             claimRewardBtn.classList.remove("hidden");
 
@@ -250,6 +244,44 @@ openAdBtn.addEventListener("click", () => {
         }
 
     }, 1000);
+
+}
+
+
+// ======================================
+// OPEN / REOPEN AD
+// ======================================
+
+openAdBtn.addEventListener("click", () => {
+
+    window.open(ad.link, "_blank");
+
+    if (!timerStarted) {
+
+        timerStarted = true;
+
+        openAdBtn.disabled = true;
+
+        openAdBtn.textContent =
+            "🔄 Verifying...";
+
+        setTimeout(() => {
+
+            openAdBtn.disabled = false;
+
+            openAdBtn.textContent =
+                "📺 Re-open Ad";
+
+            countdownSection.classList.remove("hidden");
+
+            verificationText.textContent =
+                "Reward verification in progress...";
+
+            startCountdown();
+
+        }, 1000);
+
+    }
 
 });
 
