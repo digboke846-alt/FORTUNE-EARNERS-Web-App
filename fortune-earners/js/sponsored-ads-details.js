@@ -225,6 +225,8 @@ function startCountdown() {
 
     countdown = setInterval(() => {
 
+        console.log("Countdown:", seconds);
+
         seconds--;
 
         countdownElement.textContent = seconds;
