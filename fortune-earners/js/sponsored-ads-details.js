@@ -205,6 +205,9 @@ const verificationText =
 const countdownElement =
     document.getElementById("countdown");
 
+        const warningText =
+    document.getElementById("warningText");
+        
 const claimRewardBtn =
     document.getElementById("claimRewardBtn");
 
