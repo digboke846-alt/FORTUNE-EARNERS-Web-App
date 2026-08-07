@@ -399,14 +399,12 @@ claimedMessage.classList.remove("hidden");
 claimedMessage.textContent =
     `🎉 Reward Claimed Successfully!\n\n₦${reward.toLocaleString()} has been added to your Task Wallet.`;
 
-const redirectMessage =
-    document.getElementById("redirectMessage");
 
 
 
 
 
-        }
+        
 
     catch (error) {
 
@@ -416,6 +414,10 @@ const redirectMessage =
 
 claimRewardBtn.textContent =
     "🎁 Claim Reward";
+
+        const redirectMessage =
+    document.getElementById("redirectMessage");
+        
 
         if (redirectMessage) {
 
@@ -433,6 +435,8 @@ setTimeout(() => {
         "sponsored-ads.html";
 
 }, 2000);
+
+    }
 
         alert(error.message);
 
