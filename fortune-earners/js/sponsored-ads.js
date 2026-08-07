@@ -1,7 +1,8 @@
 import { auth, db } from "./firebase.js";
 
 import {
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 import {
@@ -11,7 +12,8 @@ import {
     getDoc,
     query,
     where,
-    documentId
+    documentId,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -318,3 +320,174 @@ onclick="location.href='sponsored-ads-details.html?id=${adDoc.id}'">
     }
 
 });
+
+// ======================================
+// LOG OUT
+// ======================================
+
+const logoutLink =
+    document.getElementById("logoutBtn");
+
+if (logoutLink) {
+
+    logoutLink.addEventListener("click", async (e) => {
+
+        e.preventDefault();
+
+        const confirmLogout = confirm(
+            "Are you sure you want to log out?"
+        );
+
+        if (!confirmLogout) return;
+
+        try {
+
+            await signOut(auth);
+
+            window.location.href = "login.html";
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert("Logout failed.");
+
+        }
+
+    });
+
+}
+// ======================================
+// LOAD NOTIFICATION BADGE
+// ======================================
+let previousUnreadCount = 0;
+
+function loadNotificationBadge(userId) {
+
+    const badge =
+        document.getElementById("notificationBadge");
+
+    if (!badge) return;
+
+    const q = query(
+
+    collection(db, "notifications"),
+
+    where("userId", "==", userId),
+
+    where("isRead", "==", false),
+
+    orderBy("createdAt", "desc")
+
+);
+
+    onSnapshot(q, (snapshot) => {
+
+        const unreadCount = snapshot.size;
+
+        if (unreadCount > previousUnreadCount && unreadCount > 0) {
+
+    const newestNotification = snapshot.docs[0]?.data();
+
+    if (newestNotification) {
+
+        showNotificationToast(
+
+            newestNotification.title,
+
+            newestNotification.message
+
+        );
+
+    }
+
+}
+
+previousUnreadCount = unreadCount;
+
+        if (unreadCount === 0) {
+
+            badge.classList.add("hidden");
+
+            return;
+
+        }
+
+        badge.classList.remove("hidden");
+
+        badge.textContent =
+
+            unreadCount > 9
+
+                ? "9+"
+
+                : unreadCount;
+
+    });
+
+}
+
+function showNotificationToast(title, message) {
+
+    const toast =
+        document.getElementById("notificationToast");
+
+    const toastTitle =
+        document.getElementById("toastTitle");
+
+    const toastMessage =
+        document.getElementById("toastMessage");
+
+    if (!toast) return;
+
+    toastTitle.textContent = title;
+
+    toastMessage.textContent = message;
+
+    toast.classList.remove("hidden");
+
+    toast.classList.add("show");
+
+    const sound =
+    document.getElementById("notificationSound");
+
+if (sound && notificationSoundUnlocked) {
+
+    sound.currentTime = 0;
+
+    sound.play();
+
+}
+    
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+
+            toast.classList.add("hidden");
+
+        }, 350);
+
+    }, 5000);
+
+}
+
+// ======================================
+// OPEN NOTIFICATIONS PAGE
+// ======================================
+
+const notificationButton =
+    document.getElementById("notificationButton");
+
+if (notificationButton) {
+
+    notificationButton.addEventListener("click", () => {
+
+        window.location.href = "notifications.html";
+
+    });
+
+}
