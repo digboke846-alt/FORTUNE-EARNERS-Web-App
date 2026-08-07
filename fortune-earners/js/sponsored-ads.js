@@ -234,7 +234,11 @@ if (completedAds.has(adDoc.id)) {
 
 </span>
 
-<span class="task-status completed">
+</div>
+
+<div class="task-status completed">
+
+<span>
 
 ✅ Completed
 
@@ -247,6 +251,8 @@ if (completedAds.has(adDoc.id)) {
 🎉 Reward Claimed
 
 </button>
+
+claimRewardBtn.style.filter = "blur(1.5px) opacity(0.6)";
 
 </div>
 
