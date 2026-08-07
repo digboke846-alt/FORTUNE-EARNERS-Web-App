@@ -303,9 +303,11 @@ if (completedAds.has(adDoc.id)) {
 
 </span>
 
-<span class="task-status available">
+</div>
 
-🟢 Available
+<div class="task-status available">
+
+📍Status: 🟢 Available
 
 </span>
 
