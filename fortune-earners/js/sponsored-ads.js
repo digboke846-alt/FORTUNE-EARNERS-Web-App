@@ -114,20 +114,7 @@ Activate your membership plan to unlock Sponsored Ads and start earning.
 
 `;
 
-            if (availableCount === 0) {
-
-    adsList.innerHTML = `
-        <div class="task-card">
-            <h3>📺 No Sponsored Ad Available</h3>
-
-            <p>
-                No Sponsored Ad available at the moment.
-                Please check back later.
-            </p>
-        </div>
-    `;
-
-            }
+            
 
             document.getElementById("availableAds").textContent = "0";
 
@@ -336,6 +323,21 @@ onclick="location.href='sponsored-ads-details.html?id=${adDoc.id}'">
 `;
 
         });
+
+        if (availableCount === 0) {
+
+    adsList.innerHTML = `
+        <div class="task-card">
+            <h3>📺 No Sponsored Ad Available</h3>
+
+            <p>
+                No Sponsored Ad available at the moment.
+                Please check back later.
+            </p>
+        </div>
+    `;
+
+        }
 
         document.getElementById("availableAds").textContent =
             availableCount;
