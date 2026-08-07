@@ -524,13 +524,30 @@ async function markAsPaid(withdrawalId, adminComment) {
         const withdrawal =
             withdrawalSnap.data();
 
+        // ======================================
+        // PREVENT DOUBLE COUNTING
+        // ======================================
+
+        if (withdrawal.status === "Successful") {
+
+            alert("This withdrawal has already been marked as Paid.");
+
+            return;
+
+        }
+
+        // ======================================
+        // MARK WITHDRAWAL AS SUCCESSFUL
+        // ======================================
+
         await updateDoc(withdrawalRef, {
 
             status: "Successful",
 
             refundStatus: "Not Applicable",
 
-            adminComment: adminComment || "",
+            adminComment:
+                adminComment || "",
 
             processedBy:
                 auth.currentUser.email,
@@ -540,18 +557,51 @@ async function markAsPaid(withdrawalId, adminComment) {
 
         });
 
-      await createNotification({
+        // ======================================
+        // UPDATE USER LIFETIME WITHDRAWALS
+        // ======================================
 
-    userId: withdrawal.userId,
+        const userRef =
+            doc(db, "users", withdrawal.userId);
 
-    title: "✅ Withdrawal Approved",
+        const userSnap =
+            await getDoc(userRef);
 
-    message:
-        `Your withdrawal of ₦${Number(withdrawal.amountRequested).toLocaleString()} has been approved successfully. The funds should reflect in your bank account shortly.`,
+        if (userSnap.exists()) {
 
-    type: "Withdrawal"
+            const userData =
+                userSnap.data();
 
-});
+            await updateDoc(userRef, {
+
+                totalWithdrawals:
+                    Number(userData.totalWithdrawals || 0) +
+                    Number(withdrawal.amountRequested || 0)
+
+            });
+
+        }
+
+        // ======================================
+        // NOTIFICATION
+        // ======================================
+
+        await createNotification({
+
+            userId: withdrawal.userId,
+
+            title:
+                "✅ Withdrawal Approved",
+
+            message:
+                `Your withdrawal of ₦${Number(
+                    withdrawal.amountRequested || 0
+                ).toLocaleString()} has been approved successfully. The funds should reflect in your bank account shortly.`,
+
+            type:
+                "Withdrawal"
+
+        });
 
         alert("✅ Withdrawal marked as Paid.");
 
