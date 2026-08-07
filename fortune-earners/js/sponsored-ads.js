@@ -114,6 +114,21 @@ Activate your membership plan to unlock Sponsored Ads and start earning.
 
 `;
 
+            if (availableCount === 0) {
+
+    adsList.innerHTML = `
+        <div class="task-card">
+            <h3>📺 No Sponsored Ad Available</h3>
+
+            <p>
+                No Sponsored Ad available at the moment.
+                Please check back later.
+            </p>
+        </div>
+    `;
+
+            }
+
             document.getElementById("availableAds").textContent = "0";
 
             return;
@@ -128,6 +143,21 @@ Activate your membership plan to unlock Sponsored Ads and start earning.
             document.getElementById("adsList");
 
         adsList.innerHTML = "";
+
+        const completedAdsList =
+    document.getElementById("completedAdsList");
+
+const noCompletedAdsMessage =
+    document.getElementById("noCompletedAdsMessage");
+
+if (completedAdsList) {
+    completedAdsList.innerHTML = "";
+}
+
+if (noCompletedAdsMessage) {
+    noCompletedAdsMessage.style.display =
+        completedAds.size > 0 ? "none" : "block";
+}
 
         const adsQuery =
             query(
