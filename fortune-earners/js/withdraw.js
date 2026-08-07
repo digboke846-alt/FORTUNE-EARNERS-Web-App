@@ -839,4 +839,4 @@ if (notificationButton) {
 
     });
 
-
+}
