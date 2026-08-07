@@ -250,10 +250,10 @@ if (completedAds.has(adDoc.id)) {
 
 </div>
 
-<button disabled>
-
-🎉 Reward Claimed
-
+<button
+    class="completed-ad-btn"
+    disabled>
+    🎉 Reward Claimed
 </button>
 
 
