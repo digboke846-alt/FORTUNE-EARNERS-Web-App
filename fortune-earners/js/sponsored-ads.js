@@ -328,7 +328,6 @@ onclick="location.href='sponsored-ads-details.html?id=${adDoc.id}'">
 
     adsList.innerHTML = `
         <div class="task-card">
-            <h3>📺 No Sponsored Ad Available</h3>
 
             <p>
                 No Sponsored Ad available at the moment.
