@@ -189,10 +189,10 @@ if (dashboardAvatar) {
         // ======================================
 
         document.getElementById("tasksCompletedToday").textContent =
-            (data.tasksCompletedToday || 0) + "/5";
+    (data.completedTasksToday || 0) + "/5";
 
         document.getElementById("adsViewedToday").textContent =
-            (data.adsViewedToday || 0) + "/5";
+    (data.sponsoredAdsToday || 0) + "/5";
 
         document.getElementById("referralsToday").textContent =
             data.referralsToday || 0;
