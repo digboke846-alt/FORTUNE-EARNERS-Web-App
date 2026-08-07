@@ -386,17 +386,39 @@ await createNotification(
 );
 
         // ======================================
-// SUCCESS UI
+// SUCCESS UI + AUTO REDIRECT
 // ======================================
 
 claimRewardBtn.style.display = "none";
 
-document.getElementById("claimedMessage")
-.classList.remove("hidden");
+const claimedMessage =
+    document.getElementById("claimedMessage");
 
-alert(
-    `🎉 Congratulations!\n\nYou have successfully earned ₦${reward.toLocaleString()} from this Sponsored Advertisement.`
-);
+claimedMessage.classList.remove("hidden");
+
+claimedMessage.textContent =
+    `🎉 Reward Claimed Successfully!\n\n₦${reward.toLocaleString()} has been added to your Task Wallet.`;
+
+const redirectMessage =
+    document.getElementById("redirectMessage");
+
+if (redirectMessage) {
+
+    redirectMessage.classList.remove("hidden");
+
+    redirectMessage.textContent =
+        "🔄 Redirecting to Sponsored Ads...";
+
+}
+
+// Redirect after 2 seconds
+
+setTimeout(() => {
+
+    window.location.href =
+        "sponsored-ads.html";
+
+}, 2000);
 
         }
 
