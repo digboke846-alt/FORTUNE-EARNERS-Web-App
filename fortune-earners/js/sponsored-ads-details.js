@@ -400,7 +400,28 @@ claimedMessage.textContent =
     `🎉 Reward Claimed Successfully!\n\n₦${reward.toLocaleString()} has been added to your Task Wallet.`;
 
 
+const redirectMessage =
+    document.getElementById("redirectMessage");
+        
 
+        if (redirectMessage) {
+
+    redirectMessage.classList.remove("hidden");
+
+    redirectMessage.textContent =
+        "🔄 Redirecting to Sponsored Ads...";
+
+        }
+        // Redirect after 2.5 seconds
+
+setTimeout(() => {
+
+    window.location.href =
+        "sponsored-ads.html";
+
+}, 2500);
+
+    }
 
 
 
@@ -414,29 +435,6 @@ claimedMessage.textContent =
 
 claimRewardBtn.textContent =
     "🎁 Claim Reward";
-
-        const redirectMessage =
-    document.getElementById("redirectMessage");
-        
-
-        if (redirectMessage) {
-
-    redirectMessage.classList.remove("hidden");
-
-    redirectMessage.textContent =
-        "🔄 Redirecting to Sponsored Ads...";
-
-        }
-        // Redirect after 2 seconds
-
-setTimeout(() => {
-
-    window.location.href =
-        "sponsored-ads.html";
-
-}, 2000);
-
-    }
 
         alert(error.message);
 
