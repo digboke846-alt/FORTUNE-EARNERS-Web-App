@@ -251,7 +251,7 @@ if (dashboardAvatar) {
             data.sponsoredAdsViewed || 0;
 
         document.getElementById("totalWithdrawals").textContent =
-            "₦" + Number(data.paidWithdrawals || 0).toLocaleString();
+            "₦" + Number(data.totalWithdrawals || 0).toLocaleString();
 
         // ======================================
         // TELEGRAM & WHATSAPP
