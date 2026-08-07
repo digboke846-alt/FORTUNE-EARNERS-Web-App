@@ -240,6 +240,8 @@ if (completedAds.has(adDoc.id)) {
 
 <span>
 
+🟢 Status:
+
 ✅ Completed
 
 </span>
@@ -252,7 +254,7 @@ if (completedAds.has(adDoc.id)) {
 
 </button>
 
-claimRewardBtn.style.filter = "blur(1.5px) opacity(0.6)";
+
 
 </div>
 
