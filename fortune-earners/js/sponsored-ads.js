@@ -165,6 +165,50 @@ Activate your membership plan to unlock Sponsored Ads and start earning.
             }
 
             // ======================================
+// CALCULATE REWARD FOR USER'S PLAN
+// ======================================
+
+let reward = 0;
+
+switch (currentPlan) {
+
+    case "NEWBIE":
+
+        reward = ad.rewardNewbie || 0;
+
+        break;
+
+    case "SILVER":
+
+        reward = ad.rewardSilver || 0;
+
+        break;
+
+    case "GOLD":
+
+        reward = ad.rewardGold || 0;
+
+        break;
+
+    case "DIAMOND":
+
+        reward = ad.rewardDiamond || 0;
+
+        break;
+
+    case "PREMIUM":
+
+        reward = ad.rewardPremium || 0;
+
+        break;
+
+    default:
+
+        reward = 0;
+
+}
+
+            // ======================================
 // CHECK IF USER HAS COMPLETED THIS AD
 // ======================================
 
@@ -213,46 +257,6 @@ if (completedAds.has(adDoc.id)) {
 }
 
             availableCount++;
-
-            let reward = 0;
-
-            switch (currentPlan) {
-
-                case "NEWBIE":
-
-                    reward = ad.rewardNewbie || 0;
-
-                    break;
-
-                case "SILVER":
-
-                    reward = ad.rewardSilver || 0;
-
-                    break;
-
-                case "GOLD":
-
-                    reward = ad.rewardGold || 0;
-
-                    break;
-
-                case "DIAMOND":
-
-                    reward = ad.rewardDiamond || 0;
-
-                    break;
-
-                case "PREMIUM":
-
-                    reward = ad.rewardPremium || 0;
-
-                    break;
-
-                default:
-
-                    reward = 0;
-
-            }
 
             adsList.innerHTML += `
 
