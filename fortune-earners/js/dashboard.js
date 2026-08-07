@@ -191,8 +191,8 @@ if (dashboardAvatar) {
         document.getElementById("tasksCompletedToday").textContent =
             (data.tasksCompletedToday || 0) + "/5";
 
-        document.getElementById("completedAdsToday").textContent =
-            (data.completedAdsToday || 0) + "/5";
+        document.getElementById("adsViewedToday").textContent =
+            (data.adsViewedToday || 0) + "/5";
 
         document.getElementById("referralsToday").textContent =
             data.referralsToday || 0;
