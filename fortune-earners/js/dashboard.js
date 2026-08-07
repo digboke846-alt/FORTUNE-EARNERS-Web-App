@@ -245,13 +245,13 @@ if (dashboardAvatar) {
             data.totalReferrals || 0;
 
         document.getElementById("tasksCompleted").textContent =
-            data.tasksCompleted || 0;
+            data.completedTasks || 0;
 
         document.getElementById("adsViewed").textContent =
             data.sponsoredAdsViewed || 0;
 
         document.getElementById("totalWithdrawals").textContent =
-            "₦" + Number(data.totalWithdrawals || 0).toLocaleString();
+            "₦" + Number(data.paidWithdrawals || 0).toLocaleString();
 
         // ======================================
         // TELEGRAM & WHATSAPP
