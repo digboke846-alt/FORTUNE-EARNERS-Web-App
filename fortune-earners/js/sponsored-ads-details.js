@@ -402,23 +402,9 @@ claimedMessage.textContent =
 const redirectMessage =
     document.getElementById("redirectMessage");
 
-if (redirectMessage) {
 
-    redirectMessage.classList.remove("hidden");
 
-    redirectMessage.textContent =
-        "🔄 Redirecting to Sponsored Ads...";
 
-}
-
-// Redirect after 2 seconds
-
-setTimeout(() => {
-
-    window.location.href =
-        "sponsored-ads.html";
-
-}, 2000);
 
         }
 
@@ -431,6 +417,23 @@ setTimeout(() => {
 claimRewardBtn.textContent =
     "🎁 Claim Reward";
 
+        if (redirectMessage) {
+
+    redirectMessage.classList.remove("hidden");
+
+    redirectMessage.textContent =
+        "🔄 Redirecting to Sponsored Ads...";
+
+        }
+        // Redirect after 2 seconds
+
+setTimeout(() => {
+
+    window.location.href =
+        "sponsored-ads.html";
+
+}, 2000);
+
         alert(error.message);
 
     }
@@ -438,6 +441,8 @@ claimRewardBtn.textContent =
 });
 
         }
+
+        
 
 catch (error) {
 
