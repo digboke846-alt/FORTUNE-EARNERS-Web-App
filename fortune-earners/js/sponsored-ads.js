@@ -330,8 +330,9 @@ onclick="location.href='sponsored-ads-details.html?id=${adDoc.id}'">
         <div class="task-card">
 
             <h3>
+            <p>
                 No Sponsored Ad available at the moment.
-                Please check back later.
+                Please check back later. </p>
             </h3>
         </div>
     `;
