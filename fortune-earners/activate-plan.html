@@ -200,7 +200,7 @@ Activate Plan
 
 <div class="dashboard-card plan-card">
 
-<h3>💎 DIAMOND PLAN</h3>
+<h3>🔷 DIAMOND PLAN</h3>
 
 <p><strong>Activation Fee:</strong> ₦5,000</p>
 
@@ -213,7 +213,7 @@ Activate Plan
 <p>👥 Referral Reward: ₦2,100</p>
 
 <button class="activatePlanBtn"
-data-plan="💎 DIAMOND"
+data-plan="🔷 DIAMOND"
 data-price="5000">
 
 Activate Plan
@@ -328,11 +328,22 @@ OPAY
 
 <strong>Account Number:</strong>
 
-<span id="accountNumber">
-
-6521053532
-
+<span id="accountNumber" style="color: #ffd700; font-weight: bold; font-size: 1.1rem; margin-right: 10px;">
+    6521053532
 </span>
+
+<button onclick="copyAcc()" style="background: #ffd700; color: #000; border: none; padding: 6px 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+    📋 Copy
+</button>
+
+<script>
+function copyAcc() {
+    const text = document.getElementById("accountNumber").innerText;
+    navigator.clipboard.writeText(text);
+    alert("Account Number Copied!");
+}
+</script>
+  
 
 </p>
 
