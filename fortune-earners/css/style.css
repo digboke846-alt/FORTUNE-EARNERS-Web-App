@@ -1082,7 +1082,7 @@ footer {
 .notification-badge {
     position: absolute;
     top: 14px;          /* Positions badge slightly overlapping the top */
-    right: 80.5px;        /* Positions badge slightly overlapping the right side */
+    right: 80.1px;        /* Positions badge slightly overlapping the right side */
     background: #DC3545; /* Vibrant red */
     color: #FFFFFF;
     font-size: 10px;
