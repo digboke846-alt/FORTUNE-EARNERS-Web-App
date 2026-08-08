@@ -6,13 +6,13 @@
     <title>Dashboard | Fortune Earners</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body class="dashboard-body">
 
 <header class="top-header">
     <button id="menuButton" class="menu-btn" aria-label="Toggle Menu">
-        <i class="fa-solid fa-bars"></i>
+        ☰
     </button>
 
     <h1 class="logo">
@@ -21,192 +21,178 @@
 
     <div class="header-right">
         <button id="notificationButton" class="icon-btn" aria-label="Notifications">
-            <i class="fa-regular fa-bell"></i>
+            🔔
             <span id="notificationBadge" class="notification-badge hidden">0</span>
         </button>
 
         <div id="dashboardAvatar" class="dashboard-avatar">
-            <i class="fa-regular fa-user"></i>
+            👤
         </div>
     </div>
 </header>
 
 <nav id="menu" class="side-menu">
-    <div class="side-menu-header">
-        <h2>Menu</h2>
-    </div>
-    <div class="side-menu-links">
-        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> Overview (Home)</a>
-        <a href="dashboard.html" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
-        <a href="activate-plan.html"><i class="fa-solid fa-rocket"></i> Activate Plan</a>
-        <a href="daily-tasks.html"><i class="fa-solid fa-list-check"></i> Daily Tasks</a>
-        <a href="sponsored-ads.html"><i class="fa-solid fa-rectangle-ad"></i> Sponsored Ads</a>
-        <a href="referrals.html"><i class="fa-solid fa-users"></i> Referrals</a>
-        <a href="withdraw.html"><i class="fa-solid fa-wallet"></i> Withdraw</a>
-        <a href="place-ads.html"><i class="fa-solid fa-bullhorn"></i> Place Ads</a>
-        <a href="profile.html"><i class="fa-solid fa-user-gear"></i> Profile</a>
-        <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
-        <a href="terms.html"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a>
-        <a href="privacy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
-        <a href="contact.html"><i class="fa-solid fa-headset"></i> Contact Support</a>
-        <a href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
-        <a href="#" id="logoutBtn" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
-    </div>
+    <h2>Menu</h2>
+    <a href="index.html">📊 Overview (Home)</a>
+    <a href="dashboard.html" class="active">🏠 Dashboard</a>
+    <a href="activate-plan.html">🚀 Activate Plan</a>
+    <a href="daily-tasks.html">📋 Daily Tasks</a>
+    <a href="sponsored-ads.html">📺 Sponsored Ads</a>
+    <a href="referrals.html">👥 Referrals</a>
+    <a href="withdraw.html">💸 Withdraw</a>
+    <a href="place-ads.html">📢 Place Ads</a>
+    <a href="profile.html">👤 Profile</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="terms.html">📄 Terms & Conditions</a>
+    <a href="privacy.html">🔒 Privacy Policy</a>
+    <a href="contact.html">📞 Contact Support</a>
+    <a href="faq.html">💡 FAQ</a>
+    <a href="#" id="logoutBtn">🚪 Log Out</a>
 </nav>
 <div id="menuOverlay" class="menu-overlay"></div>
 
 <main class="dashboard-content">
 
-    <section class="welcome-card">
-        <div class="welcome-text-container">
-            <h2>Welcome Back, <span id="dashboardUsername">Earners</span> 👋</h2>
-            <p class="welcome-subtext">Manage your earnings and daily activities</p>
-        </div>
-        <div class="account-pill-group">
-            <div class="status-pill">
-                <span class="pill-label">Plan</span>
-                <span id="currentPlan" class="pill-value">Not Activated</span>
+    <section class="db-card welcome-card">
+        <h2>👋 Welcome Back, <span id="dashboardUsername">Loading...</span></h2>
+        <p class="welcome-text">We're glad to have you back.</p>
+
+        <div class="welcome-grid">
+            <div class="welcome-box">
+                <span class="box-label">Current Plan</span>
+                <p id="currentPlan">Not Activated</p>
             </div>
-            <div class="status-pill">
-                <span class="pill-label">Status</span>
-                <span id="memberStatus" class="pill-value badge-pending">Pending</span>
+
+            <div class="welcome-box">
+                <span class="box-label">Member Status</span>
+                <p id="memberStatus">Pending Activation</p>
             </div>
         </div>
     </section>
 
     <section class="wallet-section">
-        <div class="total-balance-card">
-            <div class="card-caption">Total Balance</div>
-            <div id="totalBalance" class="total-amount">₦0</div>
-            <a href="withdraw.html" class="quick-withdraw-btn">
-                <i class="fa-solid fa-paper-plane"></i> Withdraw
-            </a>
+        <div class="db-card total-wallet">
+            <h3>💰 Total Balance</h3>
+            <p id="totalBalance" class="balance-text">₦0</p>
         </div>
 
-        <div class="wallet-sub-grid">
-            <div class="mini-wallet-card">
-                <div class="mini-wallet-icon"><i class="fa-solid fa-list-check"></i></div>
-                <div>
-                    <span class="mini-wallet-title">Task Wallet</span>
-                    <h4 id="taskWallet">₦0</h4>
-                </div>
+        <div class="wallet-grid">
+            <div class="db-card wallet-card">
+                <h3>📋 Task Wallet</h3>
+                <p id="taskWallet">₦0</p>
             </div>
 
-            <div class="mini-wallet-card">
-                <div class="mini-wallet-icon"><i class="fa-solid fa-user-plus"></i></div>
-                <div>
-                    <span class="mini-wallet-title">Affiliate Wallet</span>
-                    <h4 id="affiliateWallet">₦0</h4>
-                </div>
+            <div class="db-card wallet-card">
+                <h3>👥 Affiliate Wallet</h3>
+                <p id="affiliateWallet">₦0</p>
             </div>
         </div>
     </section>
 
-    <section class="quick-actions-section">
-        <h3 class="section-heading">Quick Actions</h3>
+    <section class="db-card">
+        <div class="card-title">
+            <h2>⚡ Quick Actions</h2>
+        </div>
         <div class="action-grid">
-            <a href="activate-plan.html" class="action-card highlight-card">
-                <i class="fa-solid fa-rocket"></i>
-                <span>Activate Plan</span>
+            <a href="activate-plan.html" class="action-link">
+                <button class="action-btn primary-action">🚀 Activate Plan</button>
             </a>
-            <a href="daily-tasks.html" class="action-card">
-                <i class="fa-solid fa-list-check"></i>
-                <span>Daily Tasks</span>
+            <a href="daily-tasks.html" class="action-link">
+                <button class="action-btn">📋 Daily Tasks</button>
             </a>
-            <a href="sponsored-ads.html" class="action-card">
-                <i class="fa-solid fa-rectangle-ad"></i>
-                <span>Sponsored Ads</span>
+            <a href="sponsored-ads.html" class="action-link">
+                <button class="action-btn">📺 Sponsored Ads</button>
             </a>
-            <a href="referrals.html" class="action-card">
-                <i class="fa-solid fa-users"></i>
-                <span>Referrals</span>
+            <a href="referrals.html" class="action-link">
+                <button class="action-btn">👥 Referrals</button>
             </a>
         </div>
     </section>
 
-    <section class="dashboard-card">
-        <div class="card-header">
-            <h3><i class="fa-solid fa-chart-line"></i> Today's Summary</h3>
+    <section class="db-card summary-card">
+        <div class="card-title">
+            <h2>📊 Today's Summary</h2>
         </div>
+
         <div class="summary-list">
-            <div class="summary-row">
-                <span>📝 Tasks Completed</span>
-                <strong id="tasksCompletedToday">0/5</strong>
+            <div class="summary-item">
+                <span>📝 Tasks Completed:</span>
+                <span id="tasksCompletedToday">0/5</span>
             </div>
-            <div class="summary-row">
-                <span>📺 Sponsored Ads</span>
-                <strong id="adsViewedToday">0/5</strong>
+            <div class="summary-item">
+                <span>📺 Sponsored Ads:</span>
+                <span id="adsViewedToday">0/5</span>
             </div>
-            <div class="summary-row">
-                <span>👥 Referrals Today</span>
-                <strong id="referralsToday">0</strong>
+            <div class="summary-item">
+                <span>👥 Referrals Today:</span>
+                <span id="referralsToday">0</span>
             </div>
-            <div class="summary-row highlight-row">
-                <span>💵 Earned Today</span>
-                <strong id="earnedToday">₦0.00</strong>
+            <div class="summary-item highlight-item">
+                <span>💵 Earned Today:</span>
+                <span id="earnedToday">₦0.00</span>
             </div>
         </div>
     </section>
 
-    <section class="dashboard-card">
-        <div class="card-header">
-            <h3><i class="fa-solid fa-link"></i> Referral Link</h3>
+    <section class="db-card referral-card">
+        <div class="card-title">
+            <h2>👥 Your Referral Link</h2>
         </div>
-        <p class="card-description">Share your unique link and earn instant affiliate rewards on plan activations.</p>
-        <div class="referral-input-group">
+        <p class="referral-desc">Invite your friends and earn referral commissions whenever they activate a plan.</p>
+
+        <div class="referral-box">
             <input type="text" id="referralLink" readonly value="https://fortunearner.netlify.app/signup?ref=USERNAME">
-            <button id="copyReferralBtn" class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+            <button id="copyReferralBtn">📋 Copy Link</button>
         </div>
     </section>
 
-    <section class="dashboard-card">
-        <div class="card-header">
-            <h3><i class="fa-solid fa-chart-pie"></i> Statistics Overview</h3>
+    <section class="db-card statistics-card">
+        <div class="card-title">
+            <h2>📈 Your Statistics</h2>
         </div>
-        <div class="compact-stats-grid">
-            <div class="compact-stat-box">
-                <span class="stat-title">Total Referrals</span>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>Total Referrals</h3>
                 <p id="totalReferrals">0</p>
             </div>
-            <div class="compact-stat-box">
-                <span class="stat-title">Tasks Done</span>
+            <div class="stat-item">
+                <h3>Tasks Completed</h3>
                 <p id="tasksCompleted">0</p>
             </div>
-            <div class="compact-stat-box">
-                <span class="stat-title">Ads Viewed</span>
+            <div class="stat-item">
+                <h3>Sponsored Ads Viewed</h3>
                 <p id="adsViewed">0</p>
             </div>
-            <div class="compact-stat-box">
-                <span class="stat-title">Total Paid Out</span>
+            <div class="stat-item">
+                <h3>Total Withdrawals</h3>
                 <p id="totalWithdrawals">₦0.00</p>
             </div>
         </div>
     </section>
 
-    <div class="grid-2-col">
-        <section class="dashboard-card">
-            <div class="card-header">
-                <h3><i class="fa-solid fa-trophy"></i> Weekly Top Earners</h3>
-            </div>
-            <p id="leaderboardMessage" class="empty-text">No leaderboard available yet.</p>
-        </section>
+    <section class="db-card leaderboard-card">
+        <div class="card-title">
+            <h2>🏆 Weekly Top Earners</h2>
+        </div>
+        <p id="leaderboardMessage">No leaderboard available yet.</p>
+    </section>
 
-        <section class="dashboard-card">
-            <div class="card-header">
-                <h3><i class="fa-solid fa-bullhorn"></i> Official Announcements</h3>
-            </div>
-            <div id="announcementBox">
-                <p class="empty-text">No announcements available.</p>
-            </div>
-        </section>
-    </div>
+    <section class="db-card announcement-card">
+        <div class="card-title">
+            <h2>📢 Announcements</h2>
+        </div>
+        <div id="announcementBox">
+            <p>No announcements available.</p>
+        </div>
+    </section>
 
-    <section class="dashboard-card">
-        <div class="card-header">
-            <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Transactions</h3>
+    <section class="db-card transactions-card">
+        <div class="card-title">
+            <h2>📜 Recent Transactions</h2>
         </div>
         <div id="transactionHistory">
-            <p class="empty-text">No transactions yet.</p>
+            <p>No transactions yet.</p>
         </div>
     </section>
 
@@ -214,78 +200,72 @@
 
 <nav class="bottom-nav">
     <a href="dashboard.html" class="active">
-        <i class="fa-solid fa-house"></i>
+        🏠
         <span>Dashboard</span>
     </a>
     <a href="place-ads.html">
-        <i class="fa-solid fa-bullhorn"></i>
+        📢
         <span>Place Ads</span>
     </a>
     <a href="withdraw.html">
-        <i class="fa-solid fa-wallet"></i>
+        💸
         <span>Withdraw</span>
     </a>
     <a href="profile.html">
-        <i class="fa-solid fa-user"></i>
+        👤
         <span>Profile</span>
     </a>
 </nav>
 
 <div id="welcomePopup" class="popup-overlay">
     <div class="popup-box">
-        <div class="popup-header">
-            <i class="fa-solid fa-gem popup-icon"></i>
-            <h2>WELCOME TO FORTUNE EARNERS</h2>
-        </div>
-        <p class="popup-sub">Welcome back, <strong id="popupUserName">Member</strong>!</p>
+        <h2>🎉 WELCOME TO FORTUNE EARNERS</h2>
+        <p>Welcome back, <strong id="popupUserName">Member</strong>!</p>
+        <p>We're glad to have you here.</p>
+        <hr>
 
-        <div class="popup-community">
-            <h4><i class="fa-solid fa-paper-plane"></i> Join Our Official Channels</h4>
-            <ul>
-                <li><i class="fa-solid fa-check"></i> Latest Updates & Alerts</li>
-                <li><i class="fa-solid fa-check"></i> Payment Proofs</li>
-                <li><i class="fa-solid fa-check"></i> Giveaways & Bonuses</li>
-            </ul>
-            <div class="channel-buttons">
-                <a id="telegramChannelBtn" href="#" target="_blank" class="btn-channel btn-tg">
-                    <i class="fa-brands fa-telegram"></i> Telegram Channel
-                </a>
-                <a id="telegramGroupBtn" href="#" target="_blank" class="btn-channel btn-tg-group">
-                    <i class="fa-solid fa-users"></i> Telegram Group
-                </a>
-                <a id="whatsappChannelBtn" href="#" target="_blank" class="btn-channel btn-wa">
-                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Channel
-                </a>
-            </div>
-        </div>
+        <h3>📢 Join Our Official Channels</h3>
+        <p><strong>To stay updated with:</strong></p>
+        <p>✅ Latest Updates</p>
+        <p>✅ Payment Proofs</p>
+        <p>✅ New Tasks Alert</p>
+        <p>✅ Giveaways & Bonuses Alert</p>
+        <p>✅ Maintenance Notices & Platform News 🗞️</p>
+        <hr>
 
-        <div class="popup-footer">
-            <label class="checkbox-container">
-                <input type="checkbox" id="hidePopup">
-                <span>Don't show this again</span>
-            </label>
-            <button id="continueDashboard" class="btn-continue">Continue to Dashboard</button>
-        </div>
+        <p>Complete your profile and activate a plan to start earning.</p>
+
+        <a id="telegramChannelBtn" href="#" target="_blank"><button>📢 Join Official Channel</button></a>
+        <a id="telegramGroupBtn" href="#" target="_blank"><button>👥 Join Official Group</button></a>
+        <a id="whatsappChannelBtn" href="#" target="_blank"><button>💬 WhatsApp Channel</button></a>
+
+        <br><br>
+        <label><input type="checkbox" id="hidePopup"> Don't show this again</label>
+        <br><br>
+        <button id="continueDashboard">➡ Continue to Dashboard</button>
     </div>
 </div>
 
 <div id="announcementPopup" class="announcement-popup-overlay">
     <div class="announcement-popup-box">
-        <div class="popup-icon-wrapper"><i class="fa-solid fa-bullhorn"></i></div>
-        <h2>Announcement</h2>
+        <h2>📢 Announcement</h2>
         <h3 id="popupAnnouncementTitle"></h3>
         <p id="popupAnnouncementMessage"></p>
-        <button id="closeAnnouncementPopup" class="btn-continue">Continue</button>
+        <button id="closeAnnouncementPopup">Continue</button>
     </div>
 </div>
 
-<footer class="app-footer">
+<footer>
     <div class="footer-links">
         <a href="about.html">About</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="contact.html">Support</a>
+        <span class="divider">|</span>
+        <a href="terms.html">Terms & Conditions</a>
+        <span class="divider">|</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <span class="divider">|</span>
+        <span class="help-text">Need Help? <a href="contact.html">Contact Support</a></span>
     </div>
+
     <p class="copyright">&copy; 2026 Fortune Earners. All Rights Reserved.</p>
 </footer>
 
@@ -303,3 +283,4 @@
 
 </body>
 </html>
+
