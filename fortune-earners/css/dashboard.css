@@ -1,19 +1,23 @@
 /* ===================================================
-   COMPACT & PROFESSIONAL DASHBOARD STYLES
+   FORTUNE EARNERS - DASHBOARD STYLES (STANDALONE)
    =================================================== */
 
-.dashboard-body {
-    background-color: var(--background, #0d1325);
-    color: var(--text, #ffffff);
-    padding-bottom: 80px;
+/* --- Base Dashboard Layout --- */
+body {
+    background-color: var(--background, #0D1325);
+    color: var(--text, #FFFFFF);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0 0 80px 0;
 }
 
+/* --- Top Header --- */
 .top-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 12px 18px;
-    background: var(--card, #161e35);
+    background: var(--card, #161E35);
     position: sticky;
     top: 0;
     z-index: 900;
@@ -21,13 +25,15 @@
 }
 
 .logo {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 800;
     letter-spacing: 0.5px;
+    margin: 0;
+    text-align: center;
 }
 
 .logo span {
-    color: var(--accent, #ffc107);
+    color: var(--accent, #FFC107);
 }
 
 .header-right {
@@ -36,7 +42,8 @@
     gap: 12px;
 }
 
-.icon-btn {
+.icon-btn, 
+#notificationButton {
     background: rgba(255, 255, 255, 0.06);
     border: none;
     color: #fff;
@@ -51,11 +58,19 @@
     font-size: 1rem;
 }
 
+.menu-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
 .dashboard-avatar {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: var(--accent, #ffc107);
+    background: var(--accent, #FFC107);
     color: #000;
     display: flex;
     align-items: center;
@@ -63,8 +78,9 @@
     font-weight: bold;
 }
 
+/* --- Main Dashboard Container --- */
 .dashboard-content {
-    max-width: 600px;
+    max-width: 500px;
     margin: 15px auto;
     padding: 0 12px;
     display: flex;
@@ -72,64 +88,95 @@
     gap: 14px;
 }
 
-/* Welcome Card */
-.welcome-card {
-    background: linear-gradient(135deg, rgba(22, 30, 53, 0.9), rgba(13, 19, 37, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.08);
+/* --- Centered Card Sections --- */
+.welcome-card,
+.total-balance-card,
+.dashboard-card,
+.quick-actions-section,
+.referral-card,
+.statistics-card,
+.summary-card,
+.leaderboard-card,
+.announcement-card,
+.transactions-card {
+    background: var(--card, #161E35);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 14px;
-    padding: 16px;
+    padding: 18px;
+    text-align: center;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* --- Welcome Card --- */
+.welcome-card {
+    background: linear-gradient(135deg, rgba(22, 30, 53, 0.95), rgba(13, 19, 37, 0.95));
+    gap: 12px;
+}
+
+.welcome-text-container {
+    text-align: center;
 }
 
 .welcome-card h2 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     margin: 0;
+    text-align: center;
 }
 
 .welcome-subtext {
-    font-size: 0.78rem;
-    color: var(--muted, #b8c0d4);
-    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: var(--muted, #B8C0D4);
+    margin: 3px 0 0;
+    text-align: center;
 }
 
 .account-pill-group {
     display: flex;
-    gap: 8px;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
 }
 
 .status-pill {
     background: rgba(255, 255, 255, 0.05);
-    padding: 6px 10px;
+    padding: 6px 14px;
     border-radius: 8px;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .pill-label {
-    color: var(--muted, #b8c0d4);
+    color: var(--muted, #B8C0D4);
     font-size: 0.65rem;
     text-transform: uppercase;
 }
 
 .pill-value {
     font-weight: bold;
-    color: var(--accent, #ffc107);
+    color: var(--accent, #FFC107);
 }
 
-/* Wallet Section */
+/* --- Total Balance Card --- */
+.wallet-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
 .total-balance-card {
-    background: linear-gradient(135deg, #0d47a1, #1565c0);
-    border-radius: 14px;
+    background: linear-gradient(135deg, #0D47A1, #1565C0);
     padding: 20px;
-    text-align: center;
-    position: relative;
     box-shadow: 0 8px 20px rgba(13, 71, 161, 0.25);
+    width: 100%;
 }
 
 .card-caption {
@@ -137,40 +184,53 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     opacity: 0.85;
+    text-align: center;
 }
 
 .total-amount {
     font-size: 2.2rem;
     font-weight: 800;
     margin: 6px 0 12px;
+    text-align: center;
 }
 
 .quick-withdraw-btn {
-    display: inline-block;
-    background: var(--accent, #ffc107);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--accent, #FFC107);
     color: #000;
-    padding: 8px 18px;
+    padding: 8px 20px;
     border-radius: 20px;
     font-weight: bold;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     text-decoration: none;
 }
 
-.wallet-sub-grid {
+/* --- Mini Wallet Grid --- */
+.wallet-sub-grid, 
+.wallet-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-top: 10px;
+    width: 100%;
+    justify-items: center;
 }
 
-.mini-wallet-card {
-    background: var(--card, #161e35);
+.mini-wallet-card, 
+.wallet-card {
+    background: var(--card, #161E35);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 12px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .mini-wallet-icon {
@@ -178,62 +238,107 @@
     height: 32px;
     border-radius: 8px;
     background: rgba(255, 193, 7, 0.12);
-    color: var(--accent, #ffc107);
+    color: var(--accent, #FFC107);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
+    margin-bottom: 6px;
 }
 
 .mini-wallet-title {
     font-size: 0.72rem;
-    color: var(--muted, #b8c0d4);
+    color: var(--muted, #B8C0D4);
     display: block;
+    text-align: center;
 }
 
-.mini-wallet-card h4 {
+.mini-wallet-card h4, 
+.wallet-card p {
     margin: 2px 0 0;
     font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
 }
 
-/* Quick Actions */
-.quick-actions-section {
-    margin-top: 5px;
+/* --- Section Headings & Card Headers --- */
+.section-heading,
+.card-header {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .section-heading {
     font-size: 0.88rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--muted, #b8c0d4);
-    margin-bottom: 8px;
+    color: var(--muted, #B8C0D4);
 }
 
+.card-header h2, 
+.card-header h3 {
+    font-size: 0.95rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.card-header h3 i, 
+.card-header h2 i {
+    color: var(--accent, #FFC107);
+}
+
+.card-description {
+    font-size: 0.78rem;
+    color: var(--muted, #B8C0D4);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+/* --- Centered Action Cards --- */
 .action-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    justify-items: center;
+}
+
+@media (min-width: 400px) {
+    .action-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .action-card {
-    background: var(--card, #161e35);
+    background: var(--card, #161E35);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 12px 6px;
     text-align: center;
     color: #fff;
     text-decoration: none;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    transition: transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .action-card i {
     font-size: 1.2rem;
-    color: var(--accent, #ffc107);
+    color: var(--accent, #FFC107);
 }
 
 .action-card.highlight-card {
@@ -241,64 +346,54 @@
     border-color: rgba(255, 193, 7, 0.3);
 }
 
-/* Dashboard Cards */
-.dashboard-card {
-    background: var(--card, #161e35);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 14px;
-    padding: 16px;
-}
-
-.card-header h3 {
-    font-size: 0.95rem;
-    margin: 0 0 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.card-header h3 i {
-    color: var(--accent, #ffc107);
-}
-
-.card-description {
-    font-size: 0.78rem;
-    color: var(--muted, #b8c0d4);
-    margin-bottom: 12px;
-}
-
-/* Summary Rows */
-.summary-list {
+/* --- Today's Summary Section --- */
+.summary-list,
+.summary-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
 }
 
-.summary-row {
+.summary-row,
+.summary-card li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    max-width: 380px;
     font-size: 0.85rem;
-    padding-bottom: 8px;
+    padding: 8px 0;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    text-align: center;
 }
 
-.summary-row:last-child {
+.summary-row:last-child,
+.summary-card li:last-child {
     border-bottom: none;
-    padding-bottom: 0;
 }
 
-.highlight-row strong {
-    color: var(--accent, #ffc107);
+.highlight-row strong,
+#earnedToday {
+    color: var(--accent, #FFC107);
     font-size: 1rem;
 }
 
-/* Referral Box */
+/* --- Centered Referral Input --- */
+.referral-box,
 .referral-input-group {
     display: flex;
     gap: 8px;
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+    align-items: center;
 }
 
+.referral-box input,
 .referral-input-group input {
     flex: 1;
     background: rgba(0, 0, 0, 0.2);
@@ -307,10 +402,12 @@
     padding: 8px 12px;
     color: #fff;
     font-size: 0.8rem;
+    text-align: center;
 }
 
-.copy-btn {
-    background: var(--accent, #ffc107);
+.copy-btn,
+#copyReferralBtn {
+    background: var(--accent, #FFC107);
     border: none;
     color: #000;
     padding: 8px 14px;
@@ -318,70 +415,78 @@
     font-weight: bold;
     font-size: 0.8rem;
     cursor: pointer;
+    white-space: nowrap;
 }
 
-/* Compact Stats Grid */
-.compact-stats-grid {
+/* --- Centered Statistics Grid --- */
+.compact-stats-grid,
+.stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    width: 100%;
+    justify-items: center;
 }
 
-.compact-stat-box {
+.compact-stat-box,
+.stat-item {
     background: rgba(0, 0, 0, 0.15);
-    padding: 10px 12px;
+    padding: 10px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.03);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
-.stat-title {
+.stat-title,
+.stat-item h3 {
     font-size: 0.7rem;
-    color: var(--muted, #b8c0d4);
+    color: var(--muted, #B8C0D4);
     text-transform: uppercase;
+    margin: 0;
+    text-align: center;
 }
 
-.compact-stat-box p {
+.compact-stat-box p,
+.stat-item p {
     margin: 4px 0 0;
     font-size: 1.1rem;
     font-weight: bold;
+    text-align: center;
 }
 
-/* Two Column Layout on Larger Screens */
-.grid-2-col {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-}
-
-@media (min-width: 600px) {
-    .grid-2-col {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-.empty-text {
+/* --- Empty States --- */
+.empty-text, 
+.empty-state {
     font-size: 0.8rem;
-    color: var(--muted, #b8c0d4);
+    color: var(--muted, #B8C0D4);
     font-style: italic;
     margin: 0;
+    text-align: center;
 }
 
-/* Bottom Navigation */
+/* --- Fixed Bottom Navigation --- */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--card, #161e35);
+    background: var(--card, #161E35);
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 8px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     z-index: 1000;
 }
 
 .bottom-nav a {
-    color: var(--muted, #b8c0d4);
+    color: var(--muted, #B8C0D4);
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -395,38 +500,43 @@
 }
 
 .bottom-nav a.active {
-    color: var(--accent, #ffc107);
+    color: var(--accent, #FFC107);
 }
 
-/* Popup Enhancements */
-.popup-box {
+/* --- Popups & Modals --- */
+.popup-overlay,
+.announcement-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.popup-box,
+.announcement-popup-box {
+    background: var(--card, #161E35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     max-width: 400px;
     width: 90%;
     border-radius: 16px;
     padding: 20px;
-}
-
-.btn-channel {
+    text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px;
-    border-radius: 8px;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-bottom: 8px;
 }
 
-.btn-tg { background: #0088cc; }
-.btn-tg-group { background: #229ed9; }
-.btn-wa { background: #25d366; color: #000; }
-
-.btn-continue {
+.btn-continue,
+#continueDashboard,
+#closeAnnouncementPopup {
     width: 100%;
-    background: var(--accent, #ffc107);
+    background: var(--accent, #FFC107);
     color: #000;
     border: none;
     padding: 10px;
@@ -434,5 +544,6 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
-  }
+    text-align: center;
+                    }
 
