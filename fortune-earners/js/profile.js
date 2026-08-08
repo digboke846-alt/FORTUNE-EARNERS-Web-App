@@ -8,7 +8,8 @@ import {
 import {
     doc,
     getDoc,
-    updateDoc
+    updateDoc,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 
