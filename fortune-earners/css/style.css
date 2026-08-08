@@ -1,8 +1,9 @@
 /* ===================================================
-   FORTUNE EARNERS - MAIN THEME
-   PART 1
-=================================================== */
+   FORTUNE EARNERS - MASTER STYLESHEET
+   PART 1 OF 5
+   =================================================== */
 
+/* === THIS IS FOR ROOT VARIABLES & COLORS === */
 :root {
     --primary: #0D47A1;
     --primary-light: #1565C0;
@@ -10,19 +11,20 @@
     --success: #28A745;
     --background: #0D1325;
     --card: #161E35;
+    --card-border: rgba(255, 255, 255, 0.08);
     --text: #FFFFFF;
     --muted: #B8C0D4;
 
-   /* Landing Page Specific Variables */
---primary-yellow: #FFD700;
---primary-blue: #0A2540;
---dark-bg: #061526;
---card-bg: #0F2A4A;
---text-white: #FFFFFF;
---text-muted: #A0AEC0;
-
+    /* Landing Page Specific Variables */
+    --primary-yellow: #FFD700;
+    --primary-blue: #0A2540;
+    --dark-bg: #061526;
+    --card-bg: #0F2A4A;
+    --text-white: #FFFFFF;
+    --text-muted: #A0AEC0;
 }
 
+/* === THIS IS FOR GLOBAL RESET & BODY STYLES === */
 * {
     margin: 0;
     padding: 0;
@@ -32,49 +34,53 @@
 body {
     background: var(--background);
     color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===================================================
-   CONTAINER
-=================================================== */
-
+/* === THIS IS FOR MAIN APP CONTAINER === */
 .container {
-    width: 90%;
-    max-width: 430px;
-    margin: 40px auto;
+    width: 92%;
+    max-width: 440px;
+    margin: 30px auto;
     background: var(--card);
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    padding: 24px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* ===================================================
-   HEADINGS
-=================================================== */
-
+/* === THIS IS FOR HEADINGS & CARD TITLES === */
 h1 {
     color: var(--accent);
     text-align: center;
-    font-size: 32px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
 }
 
 h2 {
     color: var(--text);
     text-align: center;
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 h3 {
     color: var(--accent);
-    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
 }
 
 p {
     color: var(--muted);
     line-height: 1.6;
+    font-size: 14px;
 }
 
 /* Centers all card titles and section headings */
@@ -91,99 +97,106 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Adds nice spacing between the emoji icon and text */
+    gap: 8px;
 }
 
-
-/* ===================================================
-   LINKS
-=================================================== */
-
+/* === THIS IS FOR HYPERLINKS === */
 a {
     color: var(--accent);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 a:hover {
     color: var(--text);
+    opacity: 0.9;
 }
 
-/* ===================================================
-   INPUTS
-=================================================== */
-
+/* === THIS IS FOR FORM INPUTS & LABELS === */
 label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 input {
     width: 100%;
-    padding: 13px;
-    border-radius: 10px;
-    border: 1px solid #2F6BFF;
-    background: #0D1325;
+    padding: 13px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(13, 19, 37, 0.6);
     color: var(--text);
     margin-bottom: 18px;
     font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
 }
 
-/* ===================================================
-   BUTTONS
-=================================================== */
-
+/* === THIS IS FOR BUTTONS === */
 button {
     width: 100%;
     padding: 14px;
     border: none;
-    border-radius: 10px;
-    background: var(--primary);
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
     color: var(--text);
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
-    margin: 10px 0;
-    transition: background 0.2s ease, transform 0.1s ease;
+    margin: 8px 0;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.25);
 }
 
 button:hover {
-    background: var(--primary-light);
+    background: linear-gradient(135deg, var(--primary-light), #1e70d4);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(13, 71, 161, 0.35);
 }
 
 button:active {
     transform: scale(0.98);
 }
 
-/* ===================================================
-   FIXED HEADER
-=================================================== */
 
+/* ===================================================
+   FORTUNE EARNERS - MASTER STYLESHEET
+   PART 2 OF 5
+   =================================================== */
+
+/* === THIS IS FOR TOP FIXED HEADER === */
 .top-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
-    background: var(--primary);
+    background: rgba(13, 71, 161, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    padding: 0 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
 }
 
 .logo {
     color: var(--text);
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
     margin: 0;
 }
 
@@ -192,16 +205,19 @@ button:active {
     background: none;
     border: none;
     color: var(--text);
-    font-size: 28px;
+    font-size: 26px;
     cursor: pointer;
     padding: 0;
     margin: 0;
+    box-shadow: none;
 }
 
-/* ===================================================
-   SIDE MENU
-=================================================== */
+.menu-btn:hover {
+    background: none;
+    transform: none;
+}
 
+/* === THIS IS FOR SIDE HAMBURGER MENU & OVERLAY === */
 .side-menu {
     position: fixed;
     top: 60px;
@@ -210,11 +226,12 @@ button:active {
     height: calc(100vh - 60px);
     background: var(--card);
     overflow-y: auto;
-    transition: left 0.3s ease;
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 999;
-    padding: 20px;
+    padding: 16px;
     -webkit-overflow-scrolling: touch;
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.35);
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid var(--card-border);
 }
 
 .side-menu.active {
@@ -224,14 +241,18 @@ button:active {
 .side-menu a {
     display: block;
     color: var(--text);
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    font-weight: bold;
-    transition: color 0.2s ease;
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
 .side-menu a:hover {
     color: var(--accent);
+    background: rgba(255, 193, 7, 0.08);
+    padding-left: 14px;
 }
 
 .menu-overlay {
@@ -240,7 +261,8 @@ button:active {
     left: 0;
     right: 0;
     bottom: 65px;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
     display: none;
     z-index: 998;
 }
@@ -249,112 +271,123 @@ button:active {
     display: block;
 }
 
-/* ===================================================
-   PAGE CONTENT
-=================================================== */
-
+/* === THIS IS FOR MAIN DASHBOARD WRAPPER === */
 .dashboard-content {
     margin-top: 75px;
     margin-bottom: 85px;
     padding: 15px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* ===================================================
-   PROFILE CARD
-=================================================== */
-
+/* === THIS IS FOR USER PROFILE CARD & AVATAR === */
 .profile-card {
     background: var(--card);
-    border-radius: 18px;
-    padding: 25px;
+    border-radius: 20px;
+    padding: 24px;
     text-align: center;
     margin-bottom: 20px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .profile-avatar {
-    width: 90px;
-    height: 90px;
+    width: 84px;
+    height: 84px;
     margin: 0 auto 15px;
     border-radius: 50%;
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border: 3px solid var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
+    font-size: 38px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ===================================================
-   DASHBOARD CARDS & INFO
-=================================================== */
-
+/* === THIS IS FOR DASHBOARD CARDS & INFO ITEMS === */
 .dashboard-card {
     background: var(--card);
     border-radius: 18px;
     padding: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
 }
 
 .dashboard-card h3 {
     color: var(--accent);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .info-item {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .info-item strong {
     display: block;
     color: var(--text);
-    margin-bottom: 6px;
-    font-size: 15px;
+    margin-bottom: 4px;
+    font-size: 14px;
 }
 
 .info-item p {
     color: var(--muted);
-    font-size: 15px;
+    font-size: 14px;
     word-break: break-word;
 }
 
-/* ===================================================
-   STATISTICS
-=================================================== */
 
+
+
+/* ===================================================
+   FORTUNE EARNERS - MASTER STYLESHEET
+   PART 3 OF 5
+   =================================================== */
+
+/* === THIS IS FOR STATISTICS GRID & BOXES === */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 12px;
 }
 
 .stat-box {
-    background: #0D1325;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 19, 37, 0.7);
+    border: 1px solid var(--card-border);
     border-radius: 14px;
-    padding: 18px 12px;
+    padding: 16px 10px;
     text-align: center;
 }
 
 .stat-box h4 {
     color: var(--accent);
-    font-size: 24px;
-    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
 }
 
 .stat-box p {
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
-/* ===================================================
-   REFERRAL INPUT
-=================================================== */
-
+/* === THIS IS FOR REFERRAL LINK BOX === */
 .referral-box {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .referral-box input,
@@ -362,35 +395,33 @@ button:active {
     margin: 0;
 }
 
-/* ===================================================
-   BADGES
-=================================================== */
-
+/* === THIS IS FOR BADGES & TAGS === */
 .badge {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 5px 12px;
     border-radius: 30px;
     background: var(--primary);
     color: var(--text);
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
 }
 
-/* ===================================================
-   FIXED BOTTOM NAVIGATION
-=================================================== */
-
+/* === THIS IS FOR FIXED BOTTOM NAVIGATION BAR === */
 .bottom-nav {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     height: 65px;
-    background: var(--card);
+    background: rgba(22, 30, 53, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+    border-top: 1px solid var(--card-border);
     z-index: 1000;
 }
 
@@ -402,10 +433,10 @@ button:active {
     align-items: center;
     color: var(--muted);
     text-decoration: none;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 11px;
+    font-weight: 600;
     height: 100%;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .bottom-nav a.active {
@@ -416,14 +447,12 @@ button:active {
     margin-top: 4px;
 }
 
-/* ===================================================
-   POPUP MODALS
-=================================================== */
-
+/* === THIS IS FOR WELCOME & SYSTEM POPUP MODALS === */
 .popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
     display: none;
     justify-content: center;
     align-items: center;
@@ -434,13 +463,14 @@ button:active {
 .popup-box {
     background: linear-gradient(135deg, #0D47A1, #1565C0);
     width: 90%;
-    max-width: 360px;
+    max-width: 380px;
     border-radius: 20px;
-    padding: 22px;
+    padding: 24px;
     text-align: center;
-    max-height: 65vh;
+    max-height: 75vh;
     overflow-y: auto;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.30);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .popup-box h2 {
@@ -448,24 +478,22 @@ button:active {
 }
 
 .popup-box p {
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .popup-box button {
-    margin-top: 12px;
-       }
+    margin-top: 14px;
+}
 
-/* ===================================================
-   ANNOUNCEMENT POPUP
-=================================================== */
-
+/* === THIS IS FOR DAILY ANNOUNCEMENT POPUP === */
 .announcement-popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
     display: none;
     justify-content: center;
     align-items: center;
@@ -477,13 +505,13 @@ button:active {
     background: #0D1325;
     color: var(--text);
     width: 90%;
-    max-width: 420px;
-    padding: 25px;
-    border-radius: 18px;
+    max-width: 400px;
+    padding: 24px;
+    border-radius: 20px;
     border: 2px solid #FFD700;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
     text-align: center;
-    animation: popupFade 0.25s ease;
+    animation: popupFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .announcement-popup-box h2 {
@@ -503,15 +531,16 @@ button:active {
 
 .announcement-popup-box button {
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     border: none;
     border-radius: 10px;
     background: var(--success);
     color: var(--text);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.2s ease;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
 
 .announcement-popup-box button:hover {
@@ -520,7 +549,7 @@ button:active {
 
 @keyframes popupFade {
     from {
-        transform: scale(0.9);
+        transform: scale(0.92);
         opacity: 0;
     }
     to {
@@ -529,14 +558,11 @@ button:active {
     }
 }
 
-/* ===================================================
-   RESPONSIVE DESIGN
-=================================================== */
-
+/* === THIS IS FOR RESPONSIVE TABLET / DESKTOP MEDIA QUERIES === */
 @media (min-width: 768px) {
     .dashboard-content {
-        max-width: 900px;
-        margin: 75px auto 90px;
+        max-width: 800px;
+        margin: 85px auto 90px;
     }
 
     .stats-grid {
@@ -544,56 +570,66 @@ button:active {
     }
 }
 
-/* ===================================================
-   DASHBOARD IMPROVEMENTS
-=================================================== */
 
+
+/* ===================================================
+   FORTUNE EARNERS - MASTER STYLESHEET
+   PART 4 OF 5
+   =================================================== */
+
+/* === THIS IS FOR WELCOME CARD & DASHBOARD HEADER BANNER === */
 .welcome-card {
     background: linear-gradient(135deg, #0D47A1, #1565C0);
     border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.30);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .welcome-text {
-    margin-top: 8px;
-    margin-bottom: 20px;
+    margin-top: 6px;
+    margin-bottom: 18px;
     color: #E3F2FD;
+    font-size: 14px;
+    text-align: center;
 }
 
 .welcome-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 12px;
 }
 
 .welcome-box {
     background: rgba(255, 255, 255, 0.12);
-    border-radius: 15px;
-    padding: 15px;
+    backdrop-filter: blur(6px);
+    border-radius: 14px;
+    padding: 14px 10px;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .welcome-box h3 {
     color: var(--accent);
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
 }
 
 .welcome-box p {
     color: var(--text);
-    font-size: 17px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
 }
 
-/* WALLET */
-
+/* === THIS IS FOR WALLET & BALANCE CARDS === */
 .wallet-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 15px;
+    gap: 12px;
+    margin-top: 12px;
 }
 
 .total-wallet {
@@ -603,42 +639,46 @@ button:active {
 .wallet-card {
     background: var(--card);
     border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s ease;
+    padding: 18px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .wallet-card:hover {
     transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .wallet-card h3 {
     color: var(--accent);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .wallet-card p {
     color: var(--text);
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 26px;
+    font-weight: 800;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 12px;
 }
 
-/* QUICK ACTIONS */
-
+/* === THIS IS FOR QUICK ACTIONS SECTION === */
 .quick-actions {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .quick-actions h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .action-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 12px;
 }
 
 .action-grid a {
@@ -647,15 +687,16 @@ button:active {
 
 .action-grid button {
     width: 100%;
-    padding: 16px;
+    padding: 14px 10px;
     border: none;
-    border-radius: 16px;
+    border-radius: 14px;
     background: #1F5FD4;
     color: var(--text);
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(31, 95, 212, 0.25);
 }
 
 .action-grid button:hover {
@@ -663,22 +704,19 @@ button:active {
     transform: translateY(-2px);
 }
 
-/* ===================================================
-   QUICK ACTIONS LINKS & TRANSACTIONS
-=================================================== */
-
 .action-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
-    border-radius: 16px;
+    padding: 14px 10px;
+    border-radius: 14px;
     background: #1F5FD4;
     color: var(--text);
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 700;
     text-decoration: none;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(31, 95, 212, 0.25);
 }
 
 .action-link:hover {
@@ -687,13 +725,15 @@ button:active {
     color: var(--text);
 }
 
+/* === THIS IS FOR RECENT TRANSACTIONS TABLE/BOX === */
 .recent-transactions {
     background: var(--card);
     border-radius: 18px;
     padding: 20px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
 }
 
 .recent-transactions h2 {
@@ -702,26 +742,24 @@ button:active {
     text-align: center;
 }
 
-/* ===================================================
-   NOTIFICATIONS
-=================================================== */
-
+/* === THIS IS FOR NOTIFICATION ITEMS === */
 .notification-item {
-    background: #0D1325;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 19, 37, 0.6);
+    border: 1px solid var(--card-border);
     border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
 }
 
 .notification-item h4 {
     color: var(--accent);
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    font-size: 14px;
 }
 
 .notification-item p {
     color: var(--text);
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .notification-item span {
@@ -731,34 +769,32 @@ button:active {
     margin-top: 6px;
 }
 
-/* ===================================================
-   WITHDRAWAL PAGE
-=================================================== */
-
+/* === THIS IS FOR WITHDRAWAL PAGE FORM === */
 .withdrawal-card {
     background: var(--card);
     border-radius: 18px;
-    padding: 20px;
+    padding: 22px 18px;
     margin-top: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    margin-bottom: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
 }
 
 .withdrawal-card h3 {
     color: var(--text);
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .withdrawal-field {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .withdrawal-field label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: var(--muted);
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .withdrawal-field input,
@@ -766,8 +802,8 @@ button:active {
     width: 100%;
     padding: 13px;
     border-radius: 10px;
-    border: 1px solid #2F6BFF;
-    background: #0D1325;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(13, 19, 37, 0.6);
     color: var(--text);
     font-size: 15px;
 }
@@ -780,34 +816,34 @@ button:active {
 
 .withdrawal-btn {
     width: 100%;
-    padding: 15px;
+    padding: 14px;
     border: none;
     border-radius: 12px;
     background: #1F5FD4;
     color: var(--text);
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.2s ease;
+    box-shadow: 0 4px 12px rgba(31, 95, 212, 0.3);
 }
 
 .withdrawal-btn:hover {
     background: #2E73F5;
 }
 
-/* ===================================================
-   TOAST NOTIFICATIONS
-=================================================== */
-
+/* === THIS IS FOR TOAST NOTIFICATIONS === */
 .notification-toast {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #0D47A1;
+    background: rgba(13, 71, 161, 0.95);
+    backdrop-filter: blur(8px);
     color: var(--text);
-    padding: 15px 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.30);
+    padding: 14px 18px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     z-index: 10000;
     transform: translateX(150%);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -819,9 +855,9 @@ button:active {
 }
 
 .toast-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
     color: var(--accent);
 }
 
@@ -833,12 +869,16 @@ button:active {
 
 .hidden {
     display: none !important;
-   }
+                                }
+
+
 
 /* ===================================================
-   FOOTER SECTION
-=================================================== */
+   FORTUNE EARNERS - MASTER STYLESHEET
+   PART 5 OF 5
+   =================================================== */
 
+/* === THIS IS FOR FOOTER === */
 footer {
     width: 100%;
     box-sizing: border-box;
@@ -849,10 +889,9 @@ footer {
     justify-content: center;
     text-align: center;
     background-color: var(--background);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Container for footer links */
 .footer-links {
     display: flex;
     flex-wrap: wrap;
@@ -860,10 +899,9 @@ footer {
     align-items: center;
     gap: 8px 10px;
     margin-bottom: 12px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
-/* Links inside footer */
 .footer-links a {
     color: var(--accent);
     text-decoration: none;
@@ -876,30 +914,22 @@ footer {
     text-decoration: underline;
 }
 
-/* Vertical line dividers (|) */
 .divider {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.25);
 }
 
-/* "Need Help?" text span */
 .help-text {
     color: var(--text);
 }
 
-/* Copyright text */
 .copyright {
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12px;
     margin: 0;
     text-align: center;
 }
 
-
-
-/* ===================================================
-   PASSWORD FIELD & EYE TOGGLE
-=================================================== */
-
+/* === THIS IS FOR PASSWORD FIELD & EYE TOGGLE === */
 .password-wrapper {
     position: relative;
     width: 100%;
@@ -907,13 +937,13 @@ footer {
 
 .password-wrapper input {
     width: 100%;
-    padding-right: 60px;
+    padding-right: 50px;
     box-sizing: border-box;
 }
 
 .toggle-password {
     position: absolute;
-    right: 20px;
+    right: 16px;
     top: 40%;
     transform: translateY(-60%);
     font-size: 18px;
@@ -926,11 +956,10 @@ footer {
     color: #FFD700;
 }
 
-/* Security Title */
 .security-title {
     text-align: center;
-    font-size: 26px;
-    font-weight: 900;
+    font-size: 22px;
+    font-weight: 800;
     color: #FFD700;
     margin: 25px 0 20px;
     position: relative;
@@ -941,9 +970,9 @@ footer {
     content: "";
     position: absolute;
     top: 50%;
-    width: 70px;
-    height: 2px;
-    background: rgba(255, 215, 0, 0.45);
+    width: 60px;
+    height: 1px;
+    background: rgba(255, 215, 0, 0.3);
 }
 
 .security-title::before {
@@ -954,11 +983,7 @@ footer {
     right: 10px;
 }
 
-
-/* ===================================================
-   DASHBOARD SECTION CARDS (POLISHED & COMPACT)
-=================================================== */
-
+/* === THIS IS FOR DASHBOARD SECTION CARDS === */
 .summary-card,
 .referral-card,
 .statistics-card,
@@ -966,12 +991,12 @@ footer {
 .announcement-card,
 .transactions-card {
     background: var(--card);
-    border-radius: 16px;
+    border-radius: 18px;
     padding: 18px 16px;
-    margin-top: 18px;
-    margin-bottom: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.20);
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -982,10 +1007,9 @@ footer {
 .announcement-card:hover,
 .transactions-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
 }
 
-/* Crisp & Centered Section Card Headings */
 .summary-card h2,
 .referral-card h2,
 .statistics-card h2,
@@ -993,7 +1017,7 @@ footer {
 .announcement-card h2,
 .transactions-card h2 {
     color: var(--accent);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 14px;
@@ -1005,9 +1029,9 @@ footer {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Polished Compact Lists for Summary Cards */
 .summary-card ul {
-    padding-left: 18px;
+    padding-left: 0;
+    list-style: none;
     margin: 0;
 }
 
@@ -1024,47 +1048,40 @@ footer {
     margin-bottom: 0;
 }
 
-/* ===================================================
-   WITHDRAWAL STATUS BADGES (POLISHED & CRISP)
-=================================================== */
-
+/* === THIS IS FOR WITHDRAWAL STATUS BADGES === */
 .status-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 4px 12px;
     border-radius: 50px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.4px;
     text-transform: uppercase;
     line-height: 1.4;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     -webkit-font-smoothing: antialiased;
 }
 
-/* ⏳ Pending: Yellow-Green Accent */
 .pending {
     background: rgba(162, 224, 20, 0.15);
     color: #A2E014;
     border: 1px solid rgba(162, 224, 20, 0.4);
 }
 
-/* ✅ Paid: Vibrant Green */
 .paid {
     background: rgba(40, 167, 69, 0.15);
     color: #28A745;
     border: 1px solid rgba(40, 167, 69, 0.4);
 }
 
-/* ❌ Rejected: Bright Red */
 .rejected {
     background: rgba(220, 53, 69, 0.15);
     color: #DC3545;
     border: 1px solid rgba(220, 53, 69, 0.4);
 }
 
-/* 🔄 Rejected & Refunded: Warm Gold / Yellow */
 .rejected-refunded,
 .rejected-no-refund {
     background: rgba(255, 193, 7, 0.15);
@@ -1072,27 +1089,22 @@ footer {
     border: 1px solid rgba(255, 193, 7, 0.4);
 }
 
-/* ===================================================
-   NOTIFICATION BELL & COUNTER BADGE
-=================================================== */
-
-/* Parent container holding the bell icon */
+/* === THIS IS FOR NOTIFICATION BELL & COUNTER BADGE === */
 .notification-link {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 22px;
     color: var(--text);
 }
 
-/* Red counter badge anchored to the top-right corner of the bell */
 .notification-badge {
     position: absolute;
-    top: 14px;          /* Positions badge slightly overlapping the top */
-    right: 80.1px;        /* Positions badge slightly overlapping the right side */
-    background: #DC3545; /* Vibrant red */
+    top: 14px;
+    right: 80.1px;
+    background: #DC3545;
     color: #FFFFFF;
     font-size: 10px;
     font-weight: 800;
@@ -1101,12 +1113,12 @@ footer {
     height: 17px;
     padding: 0 4px;
     border-radius: 50px;
-    border: 1px solid var(--primary); /* Outer ring matching header background */
+    border: 1px solid var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-    pointer-events: none; /* Allows clicking through directly to the bell */
+    pointer-events: none;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -1114,16 +1126,12 @@ footer {
     display: none !important;
 }
 
-/* ===================================================
-   PLAN BUTTON STATES (POLISHED & MODERN)
-=================================================== */
-
-/* Shared base styling for plan buttons */
+/* === THIS IS FOR PLAN BUTTON STATES === */
 .plan-completed,
 .plan-current,
 .plan-upgrade {
     width: 100%;
-    padding: 13px 18px;
+    padding: 12px 16px;
     border-radius: 12px;
     font-size: 14px;
     font-weight: 700;
@@ -1136,7 +1144,6 @@ footer {
     -webkit-font-smoothing: antialiased;
 }
 
-/* 🔒 Completed / Expired Plan (Clean disabled look) */
 .plan-completed {
     background: rgba(255, 255, 255, 0.08);
     color: var(--muted);
@@ -1145,19 +1152,17 @@ footer {
     opacity: 0.65;
 }
 
-/* 🌟 Current Active Plan (Frosted Blur Effect) */
 .plan-current {
-    background: rgba(13, 71, 161, 0.35); /* Translucent theme blue */
-    color: #64B5F6;                       /* Soft crisp blue text */
+    background: rgba(13, 71, 161, 0.35);
+    color: #64B5F6;
     border: 1px solid rgba(100, 181, 246, 0.4);
-    backdrop-filter: blur(6px);            /* Soft blur effect */
-    -webkit-backdrop-filter: blur(6px);    /* Safari support */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     box-shadow: inset 0 0 12px rgba(13, 71, 161, 0.25), 
-                0 4px 15px rgba(0, 0, 0, 0.20);
+                0 4px 15px rgba(0, 0, 0, 0.2);
     cursor: default;
 }
 
-/* 🚀 Upgrade Plan (High-action vibrant call-to-action) */
 .plan-upgrade {
     background: linear-gradient(135deg, #28A745, #218838);
     color: #FFFFFF;
@@ -1176,44 +1181,36 @@ footer {
     transform: translateY(0);
 }
 
-
-
-
-
-
-/* Modal backdrop/overlay */
+/* === THIS IS FOR GENERAL MODALS === */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    overflow-y: auto; /* Enables vertical scroll if content is too tall */
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
     padding: 20px 10px;
     box-sizing: border-box;
 }
 
-/* Modal box content */
 .modal-content {
     background-color: #0D1325;
     margin: 5% auto;
-    padding: 20px;
-    border-radius: 8px;
-    
-    /* Screen width constraints */
+    padding: 22px;
+    border-radius: 18px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 500px; /* Adjust max width as needed */
+    max-width: 480px;
     box-sizing: border-box;
-    
-    /* Prevents horizontal overflow */
     word-wrap: break-word;
     overflow-x: hidden; 
 }
 
-/* Ensure all inputs fit nicely inside the modal container */
 .modal-content input,
 .modal-content textarea,
 .modal-content select,
@@ -1223,219 +1220,144 @@ footer {
     margin-bottom: 12px;
 }
 
-
+/* === THIS IS FOR FAQ ACCORDION === */
 .faq-container {
     max-width: 600px;
     margin: 0 auto;
-    font-family: Arial, sans-serif;
+    font-family: inherit;
 }
 
 .faq-item {
-    background-color: var(--accent);
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    background-color: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
     margin-bottom: 12px;
-    padding: 10px 14px;
-    transition: background-color 0.2s ease;
+    padding: 12px 16px;
+    transition: all 0.2s ease;
 }
 
 .faq-item[open] {
-    background-color: yellow;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    background-color: rgba(22, 30, 53, 0.95);
+    border-color: rgba(255, 193, 7, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .faq-question {
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
-    color: black;
+    color: var(--text);
     outline: none;
 }
 
 .faq-question:hover {
-    color: 4F46E5;
+    color: var(--accent);
 }
 
 .faq-answer {
-    margin-top: 8px;
-    color: #555;
-    line-height: 1.3;
+    margin-top: 10px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-size: 14px;
 }
 
 .password-strength {
-
-    font-size: 13px;
-
-    margin-top: 6px;
-
-    margin-bottom: 12px;
-
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 14px;
     font-weight: bold;
-
 }
 
-.profile-actions{
-
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
-
-margin:15px 0;
-
+/* === THIS IS FOR PROFILE AVATARS & SELECTION MODAL === */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
 }
 
-.profile-actions button{
-
-width:100%;
-
+.profile-actions button {
+    width: 100%;
 }
 
-#profileAvatar{
-
-font-size:60px;
-
-cursor:pointer;
-
-user-select:none;
-
-transition:0.25s;
-
+#profileAvatar {
+    font-size: 52px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.25s ease;
 }
 
-#profileAvatar:hover{
-
-transform:scale(1.08);
-
+#profileAvatar:hover {
+    transform: scale(1.08);
 }
 
-.avatar-modal{
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-width:100%;
-
-height:100%;
-
-background:rgba(0,0,0,.6);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-z-index:9999;
-
+.avatar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-.hidden{
-
-display:none;
-
+.avatar-box {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    padding: 24px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.avatar-box{
-
-background:#fff;
-
-padding:20px;
-
-border-radius:15px;
-
-width:90%;
-
-max-width:350px;
-
-text-align:center;
-
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 28px;
 }
 
-.avatar-grid{
-
-display:grid;
-
-grid-template-columns:repeat(6,1fr);
-
-gap:12px;
-
-margin:20px 0;
-
-font-size:32px;
-
+.avatar-grid span {
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.avatar-grid span{
-
-cursor:pointer;
-
-transition:.2s;
-
+.avatar-grid span:hover {
+    transform: scale(1.25);
 }
 
-.avatar-grid span:hover{
-
-transform:scale(1.25);
-
+.dashboard-avatar {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.25s ease;
 }
 
-
-
-.dashboard-avatar{
-
-width:38px;
-
-height:38px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:26px;
-
-cursor:pointer;
-
-border-radius:50%;
-
-background:#ffffff20;
-
-transition:.25s;
-
+.dashboard-avatar:hover {
+    transform: scale(1.08);
 }
 
-.dashboard-avatar:hover{
-
-transform:scale(1.08);
-
-}
-
-
-
-/* ===================================================
-   SPONSORED ADS DETAILS PAGE
-=================================================== */
-
-/* Container centering for standalone pages */
-.container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px 15px;
-}
-
-/* Primary Card Wrapper */
+/* === THIS IS FOR SPONSORED ADS DETAILS PAGE === */
 .card {
     background: var(--card, #161E35);
     border-radius: 20px;
     padding: 25px 20px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--card-border);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
     margin-top: 10px;
     margin-bottom: 30px;
@@ -1466,7 +1388,6 @@ transform:scale(1.08);
     word-break: break-word;
 }
 
-/* Reward Highlight Box */
 .reward-box {
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(13, 71, 161, 0.2));
     border: 1px solid rgba(255, 215, 0, 0.3);
@@ -1498,16 +1419,15 @@ transform:scale(1.08);
     margin: 20px 0;
 }
 
-/* Main Action Buttons (Open Ad & Claim Reward) */
 #openAdBtn,
 #claimRewardBtn {
     width: 100%;
-    padding: 15px;
+    padding: 14px;
     border: none;
     border-radius: 12px;
     background: linear-gradient(135deg, #1F5FD4, #1565C0);
     color: #FFFFFF;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.3px;
     cursor: pointer;
@@ -1522,7 +1442,6 @@ transform:scale(1.08);
     transform: translateY(-2px);
 }
 
-/* Disabled State for Claim Button */
 #claimRewardBtn:disabled {
     background: rgba(255, 255, 255, 0.12);
     color: var(--muted, #A0AEC0);
@@ -1531,7 +1450,6 @@ transform:scale(1.08);
     opacity: 0.6;
 }
 
-/* Countdown Section & Card */
 #countdownSection {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -1560,7 +1478,6 @@ transform:scale(1.08);
     margin: 0;
 }
 
-/* Already Claimed State Message Box */
 #claimedMessage {
     background: rgba(40, 167, 69, 0.12);
     border: 1px solid rgba(40, 167, 69, 0.3);
@@ -1583,20 +1500,13 @@ transform:scale(1.08);
     opacity: 0.9;
 }
 
-/* Standard Utility Class for Hiding Elements */
-.hidden {
-    display: none !important;
-}
-
-
 .completed-ad-btn {
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
 }
 
-
-/* Container pushing details left and button to extreme right */
+/* === THIS IS FOR PAYMENT DETAILS & COPY BUTTON === */
 .payment-row {
     display: flex;
     justify-content: space-between;
@@ -1605,7 +1515,6 @@ transform:scale(1.08);
     gap: 10px;
 }
 
-/* Label & details text styling */
 .payment-label {
     margin: 0;
     font-size: 0.95rem;
@@ -1634,43 +1543,42 @@ transform:scale(1.08);
     margin-top: 2px;
 }
 
-/* Compact Copy Button (Uniform size for all 3 buttons) */
 .copy-btn {
     background: #FFD700;
     color: #000000;
     border: none;
-    padding: 4px 10px;
-    border-radius: 4px;
+    padding: 6px 10px;
+    border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
     font-size: 0.8rem;
     white-space: nowrap;
     flex-shrink: 0;
-    transition: transform 0.1s ease, background 0.2s;
-
-/* 👈 ADD THIS TO CONTROL THE EXACT LENGTH (WIDTH) */
-width: 60px;
-text-align: center; /* Center the "Copy" text inside the button */
+    transition: transform 0.1s ease, background 0.2s ease;
+    width: 60px;
+    text-align: center;
+    box-shadow: none;
+    margin: 0;
 }
 
+.copy-btn:hover {
+    background: #FFC107;
+    box-shadow: none;
+}
 
 .copy-btn:active {
     transform: scale(0.95);
     background: #E6C200;
 }
 
-/* ===================================================
-   LANDING PAGE SPECIFIC STYLES
-
-
-/* Header & Nav */
+/* === THIS IS FOR LANDING PAGE SPECIFIC STYLES === */
 .landing-header {
     background: var(--primary-blue);
     padding: 15px 5%;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -1702,7 +1610,6 @@ text-align: center; /* Center the "Copy" text inside the button */
     display: inline-block;
 }
 
-/* Button Classes */
 .btn-primary {
     background: var(--primary-yellow);
     color: #000;
@@ -1733,7 +1640,6 @@ text-align: center; /* Center the "Copy" text inside the button */
     text-decoration: none;
 }
 
-/* Hero Section */
 .hero-section {
     padding: 80px 5% 60px;
     text-align: center;
@@ -1743,15 +1649,6 @@ text-align: center; /* Center the "Copy" text inside the button */
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
-}
-
-.badge {
-    background: rgba(255, 215, 0, 0.15);
-    color: var(--primary-yellow);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: bold;
 }
 
 .hero-section h1 {
@@ -1779,7 +1676,7 @@ text-align: center; /* Center the "Copy" text inside the button */
     justify-content: space-around;
     background: var(--card-bg);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -1794,7 +1691,6 @@ text-align: center; /* Center the "Copy" text inside the button */
     font-size: 0.85rem;
 }
 
-/* Grid Sections */
 .section-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -1824,7 +1720,7 @@ text-align: center; /* Center the "Copy" text inside the button */
 .step-card, .feature-box, .plan-box {
     background: var(--card-bg);
     padding: 25px;
-    border-radius: 12px;
+    border-radius: 16px;
     text-align: center;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -1851,7 +1747,6 @@ text-align: center; /* Center the "Copy" text inside the button */
     margin-bottom: 15px;
 }
 
-/* Plan Box Clean Styling */
 .plan-badge {
     color: var(--text-muted);
     font-size: 0.85rem;
@@ -1884,8 +1779,8 @@ text-align: center; /* Center the "Copy" text inside the button */
     width: 100%;
     display: block;
     box-sizing: border-box;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 12px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
     background: rgba(255, 255, 255, 0.08);
@@ -1898,15 +1793,16 @@ text-align: center; /* Center the "Copy" text inside the button */
     color: #000;
 }
 
-/* Call to Action Banner */
 .cta-banner {
     text-align: center;
     background: linear-gradient(135deg, var(--primary-blue), var(--card-bg));
     padding: 60px 5%;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .cta-banner h2 {
     font-size: 2rem;
-}
+   }
+
+
 
