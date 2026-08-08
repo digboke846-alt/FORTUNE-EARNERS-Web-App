@@ -13,6 +13,14 @@
     --text: #FFFFFF;
     --muted: #B8C0D4;
 
+      /* Landing Page Specific Variables */
+--primary-yellow: #FFD700;
+--primary-blue: #0A2540;
+--dark-bg: #061526;
+--card-bg: #0F2A4A;
+--text-white: #FFFFFF;
+--text-muted: #A0AEC0;
+
 }
 
 * {
