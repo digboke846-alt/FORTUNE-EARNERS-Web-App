@@ -1910,4 +1910,33 @@ text-align: center; /* Center the "Copy" text inside the button */
     font-size: 2rem;
 }
 
+/* * Footer */
+.landing-footer {
+    background: #030C16;
+    padding: 40px 5% 20px;
+    text-align: center;
+}
+
+.footer-links {
+    margin: 20px 0;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-yellow);
+}
+
+.footer-bottom {
+    font-size: 0.8rem;
+    color: #607080;
+    margin-top: 20px;
+}
+
+
 
