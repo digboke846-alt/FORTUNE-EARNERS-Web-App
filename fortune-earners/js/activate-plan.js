@@ -163,7 +163,7 @@ onAuthStateChanged(auth, async (user) => {
 
             if (request.status === "Pending" && submitPaymentBtn) {
                 submitPaymentBtn.disabled = true;
-                submitPaymentBtn.textContent = "Activation Request Pending";
+                submitPaymentBtn.textContent = "Submit Activation Request";
                 
                 const proofStatus = document.getElementById("proofStatus");
                 if (proofStatus) proofStatus.textContent = "Your activation request is awaiting admin approval.";
