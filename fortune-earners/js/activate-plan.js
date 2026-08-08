@@ -67,6 +67,11 @@ onAuthStateChanged(auth, async (user) => {
 
         const userData = userSnap.data();
 
+
+        // 🟢 CALL NOTIFICATION BADGE LISTENER HERE
+        loadNotificationBadge(user.uid);
+        
+
         // ======================================
         // MEMBERSHIP PAGE MODE
         // ======================================
