@@ -169,7 +169,7 @@ if (document.getElementById("profileReferrals")) {
 if (document.getElementById("profileTasks")) {
 
     document.getElementById("profileTasks").textContent =
-        data.tasksCompleted || 0;
+        data.completedTasks || 0;
 
 }
 
