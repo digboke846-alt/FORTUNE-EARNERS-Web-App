@@ -1638,7 +1638,12 @@ transform:scale(1.08);
     white-space: nowrap;
     flex-shrink: 0;
     transition: transform 0.1s ease, background 0.2s;
+
+/* 👈 ADD THIS TO CONTROL THE EXACT LENGTH (WIDTH) */
+width: 65px;
+text-align: center; /* Center the "Copy" text inside the button */
 }
+
 
 .copy-btn:active {
     transform: scale(0.95);
