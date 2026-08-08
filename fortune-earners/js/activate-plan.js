@@ -10,7 +10,11 @@ import {
     getDoc,
     setDoc,
     serverTimestamp,
-    onSnapshot
+    onSnapshot,
+    collection,
+    query,
+    where,
+    orderBy
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // ======================================
@@ -376,52 +380,8 @@ previousUnreadCount = unreadCount;
 
 }
 
-function showNotificationToast(title, message) {
 
-    const toast =
-        document.getElementById("notificationToast");
-
-    const toastTitle =
-        document.getElementById("toastTitle");
-
-    const toastMessage =
-        document.getElementById("toastMessage");
-
-    if (!toast) return;
-
-    toastTitle.textContent = title;
-
-    toastMessage.textContent = message;
-
-    toast.classList.remove("hidden");
-
-    toast.classList.add("show");
-
-    const sound =
-    document.getElementById("notificationSound");
-
-if (sound && notificationSoundUnlocked) {
-
-    sound.currentTime = 0;
-
-    sound.play();
-
-}
     
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-        setTimeout(() => {
-
-            toast.classList.add("hidden");
-
-        }, 350);
-
-    }, 5000);
-
-}
-
 // ======================================
 // OPEN NOTIFICATIONS PAGE
 // ======================================
