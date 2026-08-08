@@ -1585,3 +1585,62 @@ transform:scale(1.08);
     cursor: not-allowed;
     pointer-events: none;
 }
+
+
+/* Container pushing details left and button to extreme right */
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px 0;
+    gap: 10px;
+}
+
+/* Label & details text styling */
+.payment-label {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #A0AEC0;
+}
+
+.bank-value {
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-left: 4px;
+}
+
+.acc-number-value {
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-left: 4px;
+}
+
+.acc-name-value {
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Compact Copy Button (Uniform size for all 3 buttons) */
+.copy-btn {
+    background: #FFD700;
+    color: #000000;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: transform 0.1s ease, background 0.2s;
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+    background: #E6C200;
+}
