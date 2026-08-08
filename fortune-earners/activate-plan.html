@@ -316,11 +316,7 @@ Amount:
 
 <strong>Bank:</strong>
 
-<span id="bankName">
-
-OPAY
-
-</span>
+<span id="bankName" style="color: #ffffff;">OPAY</span>
 
 </p>
 
@@ -328,21 +324,16 @@ OPAY
 
 <strong>Account Number:</strong>
 
-<span id="accountNumber" style="color: #ffd700; font-weight: bold; font-size: 1.1rem; margin-right: 10px;">
-    6521053532
-</span>
-
-<button onclick="copyAcc()" style="background: #ffd700; color: #000; border: none; padding: 6px 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">
-    📋 Copy
-</button>
+<span id="account" style="color: #ffffff; font-weight: bold; font-size: 1.1rem; margin-right: 8px;">6521053532</span><button onclick="copyAcc()" style="background: #ffd700; color: #000; border: none; padding: 4px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; vertical-align: middle;">📋 Copy</button>
 
 <script>
 function copyAcc() {
-    const text = document.getElementById("accountNumber").innerText;
+    const text = document.getElementById("account").innerText;
     navigator.clipboard.writeText(text);
     alert("Account Number Copied!");
 }
 </script>
+  
   
 
 </p>
@@ -351,7 +342,7 @@ function copyAcc() {
 
 <strong>Account Name:</strong>
 
-<span id="accountName">
+<span id="accountName" style="color: #ffffff;">
 
 FORTUNE EARNERS (SANDRA CHIDINMA O.)
 
