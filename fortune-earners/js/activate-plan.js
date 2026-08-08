@@ -248,3 +248,22 @@ if (logoutBtn) {
 }
 
 
+
+function copyBank() {
+    const text = document.getElementById("bankName").innerText;
+    navigator.clipboard.writeText(text);
+    alert("Bank Name Copied!");
+}
+
+function copyAcc() {
+    const text = document.getElementById("accountNumber").innerText;
+    navigator.clipboard.writeText(text);
+    alert("Account Number Copied!");
+}
+
+function copyAccName() {
+    const text = document.getElementById("accountName").innerText;
+    navigator.clipboard.writeText(text);
+    alert("Account Name Copied!");
+}
+
