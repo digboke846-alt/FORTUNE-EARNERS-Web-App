@@ -68,7 +68,7 @@ onAuthStateChanged(auth, async (user) => {
         const currentPlanDisplay = document.getElementById("currentPlanDisplay");
 
         const planIcons = {
-            "🟢 NEWBIE": "🟢 NEWBIE",
+            "NEWBIE": "🟢 NEWBIE",
             "⚪ SILVER": "⚪ SILVER",
             "🟡 GOLD": "🟡 GOLD",
             "🔷 DIAMOND": "🔷 DIAMOND",
@@ -90,7 +90,7 @@ onAuthStateChanged(auth, async (user) => {
         // MEMBERSHIP LADDER
         // ======================================
 
-        const planOrder = ["🟢 NEWBIE", "⚪ SILVER", "🟡 GOLD", "🔷 DIAMOND", "👑 PREMIUM"];
+        const planOrder = ["NEWBIE", "⚪ SILVER", "🟡 GOLD", "🔷 DIAMOND", "👑 PREMIUM"];
         const currentIndex = planOrder.indexOf(userData.plan);
 
         planOrder.forEach((plan, index) => {
@@ -163,7 +163,7 @@ onAuthStateChanged(auth, async (user) => {
 
             if (request.status === "Pending" && submitPaymentBtn) {
                 submitPaymentBtn.disabled = true;
-                submitPaymentBtn.textContent = "Submit Activation Request";
+                submitPaymentBtn.textContent = "Activation Request Pending";
                 
                 const proofStatus = document.getElementById("proofStatus");
                 if (proofStatus) proofStatus.textContent = "Your activation request is awaiting admin approval.";
