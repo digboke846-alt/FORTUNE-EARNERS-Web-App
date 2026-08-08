@@ -12,6 +12,15 @@
     --card: #161E35;
     --text: #FFFFFF;
     --muted: #B8C0D4;
+
+   /* Landing Page Specific Variables */
+--primary-yellow: #FFD700;
+--primary-blue: #0A2540;
+--dark-bg: #061526;
+--card-bg: #0F2A4A;
+--text-white: #FFFFFF;
+--text-muted: #A0AEC0;
+
 }
 
 * {
@@ -1652,25 +1661,7 @@ text-align: center; /* Center the "Copy" text inside the button */
 
 /* ===================================================
    LANDING PAGE SPECIFIC STYLES
-   =================================================== */
 
-:root {
-    --primary-yellow: #FFD700;
-    --primary-blue: #0A2540;
-    --dark-bg: #061526;
-    --card-bg: #0F2A4A;
-    --text-white: #FFFFFF;
-    --text-muted: #A0AEC0;
-}
-
-/* Base Body Override */
-body {
-    background-color: var(--dark-bg);
-    color: var(--text-white);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-}
 
 /* Header & Nav */
 .landing-header {
@@ -1917,34 +1908,6 @@ body {
 
 .cta-banner h2 {
     font-size: 2rem;
-}
-
-/* Footer */
-.landing-footer {
-    background: #030C16;
-    padding: 40px 5% 20px;
-    text-align: center;
-}
-
-.footer-links {
-    margin: 20px 0;
-}
-
-.footer-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 0.9rem;
-}
-
-.footer-links a:hover {
-    color: var(--primary-yellow);
-}
-
-.footer-bottom {
-    font-size: 0.8rem;
-    color: #607080;
-    margin-top: 20px;
 }
 
 
