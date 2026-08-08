@@ -256,7 +256,7 @@ function copyBank() {
     copyText("bankName", "Bank Name");
 }
 
-function copyAcc() {
+function copyAccNumber() {
     copyText("accountNumber", "Account Number");
 }
 
