@@ -68,7 +68,7 @@ onAuthStateChanged(auth, async (user) => {
         const currentPlanDisplay = document.getElementById("currentPlanDisplay");
 
         const planIcons = {
-            "NEWBIE": "🟢 NEWBIE",
+            "🟢 NEWBIE": "🟢 NEWBIE",
             "⚪ SILVER": "⚪ SILVER",
             "🟡 GOLD": "🟡 GOLD",
             "🔷 DIAMOND": "🔷 DIAMOND",
@@ -90,7 +90,7 @@ onAuthStateChanged(auth, async (user) => {
         // MEMBERSHIP LADDER
         // ======================================
 
-        const planOrder = ["NEWBIE", "⚪ SILVER", "🟡 GOLD", "🔷 DIAMOND", "👑 PREMIUM"];
+        const planOrder = ["🟢 NEWBIE", "⚪ SILVER", "🟡 GOLD", "🔷 DIAMOND", "👑 PREMIUM"];
         const currentIndex = planOrder.indexOf(userData.plan);
 
         planOrder.forEach((plan, index) => {
@@ -163,7 +163,7 @@ onAuthStateChanged(auth, async (user) => {
 
             if (request.status === "Pending" && submitPaymentBtn) {
                 submitPaymentBtn.disabled = true;
-                submitPaymentBtn.textContent = "Activation Request Pending";
+                submitPaymentBtn.textContent = "Submit Activation Request";
                 
                 const proofStatus = document.getElementById("proofStatus");
                 if (proofStatus) proofStatus.textContent = "Your activation request is awaiting admin approval.";
@@ -248,22 +248,59 @@ if (logoutBtn) {
 }
 
 
+// ======================================
+// BULLETPROOF COPY FUNCTIONS
+// ======================================
 
 function copyBank() {
-    const text = document.getElementById("bankName").innerText;
-    navigator.clipboard.writeText(text);
-    alert("Bank Name Copied!");
+    copyText("bankName", "Bank Name");
 }
 
 function copyAcc() {
-    const text = document.getElementById("accountNumber").innerText;
-    navigator.clipboard.writeText(text);
-    alert("Account Number Copied!");
+    copyText("accountNumber", "Account Number");
 }
 
 function copyAccName() {
-    const text = document.getElementById("accountName").innerText;
-    navigator.clipboard.writeText(text);
-    alert("Account Name Copied!");
+    copyText("accountName", "Account Name");
 }
+
+function copyText(elementId, labelName) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const text = el.innerText.trim();
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert(`${labelName} Copied!`);
+        }).catch(() => {
+            fallbackCopy(text, labelName);
+        });
+    } else {
+        fallbackCopy(text, labelName);
+    }
+}
+
+function fallbackCopy(text, labelName) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        document.execCommand('copy');
+        alert(`${labelName} Copied!`);
+    } catch (err) {
+        alert(`Failed to copy. Please copy manually: ${text}`);
+    }
+
+    document.body.removeChild(textArea);
+}
+
+// ⚠️ REQUIRED FOR ES MODULES: Expose to window so HTML onclick="..." can find them
+window.copyBank = copyBank;
+window.copyAccNumber = copyAccNumber;
+window.copyAccName = copyAccName;
 
