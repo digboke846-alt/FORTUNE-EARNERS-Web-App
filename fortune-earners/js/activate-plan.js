@@ -282,38 +282,46 @@ onAuthStateChanged(auth, async (user) => {
                     submitPaymentBtn.textContent = "Submitting...";
 
                     // 1. Create a permanent record in activationHistory collection first
-                    const historyDocRef = await addDoc(collection(db, "activationHistory"), {
-                        userId: user.uid,
-                        plan: chosenPlan,
-                        amount: chosenAmount,
-                        paymentMethod: "Manual Payment",
-                        status: "Pending",
-                        createdAt: serverTimestamp()
-                    });
+                    const requestType = userData.memberStatus === "Pending Activation" ? "First Activation" : "Plan Upgrade";
 
-                    // 2. Create/Update activationRequest including historyDocId
-                    await setDoc(activationRef, {
-                        userId: user.uid,
-                        fullname: userData.fullname || "",
-                        username: userData.username || "",
-                        email: userData.email || "",
-                        selectedPlan: chosenPlan,
-                        amount: chosenAmount,
-                        paymentMethod: "Manual",
-                        paymentStatus: "Pending",
-                        paymentReference: "",
-                        bankName: document.getElementById("bankName")?.textContent || "",
-                        accountNumber: document.getElementById("accountNumber")?.textContent || "",
-                        accountName: document.getElementById("accountName")?.textContent || "",
-                        virtualAccountExpiresAt: null,
-                        paymentProofUploaded: true,
-                        status: "Pending",
-                        reviewedBy: "",
-                        reviewedAt: null,
-                        rejectionReason: "",
-                        submittedAt: serverTimestamp(),
-                        historyDocId: historyDocRef.id
-                    });
+await addDoc(collection(db, "activationHistory"), {
+    userId: user.uid,
+    fullname: userData.fullname || "",
+    username: userData.username || "",
+    email: userData.email || "",
+    selectedPlan: chosenPlan,
+    plan: chosenPlan,
+    type: requestType,
+    amount: chosenAmount,
+    paymentMethod: "Manual",
+    paymentStatus: "Pending",
+    status: "Pending",
+    createdAt: serverTimestamp()
+});
+
+await setDoc(activationRef, {
+    userId: user.uid,
+    fullname: userData.fullname || "",
+    username: userData.username || "",
+    email: userData.email || "",
+    selectedPlan: chosenPlan,
+    amount: chosenAmount,
+    paymentMethod: "Manual",
+    paymentStatus: "Pending",
+    paymentReference: "",
+    bankName: document.getElementById("bankName")?.textContent || "",
+    accountNumber: document.getElementById("accountNumber")?.textContent || "",
+    accountName: document.getElementById("accountName")?.textContent || "",
+    virtualAccountExpiresAt: null,
+    paymentProofUploaded: true,
+    status: "Pending",
+    type: requestType,
+    reviewedBy: "",
+    reviewedAt: null,
+    rejectionReason: "",
+    submittedAt: serverTimestamp()
+});
+                    
 
                     alert("✅ Your activation request has been submitted successfully.\n\nOur admin will review your payment and activate your account.");
 
