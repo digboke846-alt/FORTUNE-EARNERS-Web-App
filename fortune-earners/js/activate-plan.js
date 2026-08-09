@@ -53,10 +53,10 @@ function loadActivationHistory(userId) {
     const historyContainer = document.getElementById("activationHistoryList");
     if (!historyContainer) return;
 
+    // Filter by userId
     const q = query(
         collection(db, "activationHistory"),
-        where("userId", "==", userId),
-        orderBy("createdAt", "desc")
+        where("userId", "==", userId)
     );
 
     onSnapshot(q, (snapshot) => {
@@ -65,18 +65,24 @@ function loadActivationHistory(userId) {
             return;
         }
 
-        let html = "";
-        snapshot.docs.forEach((docSnap) => {
-            const data = docSnap.data();
+        // Sort locally by date descending
+        const docs = snapshot.docs.map(docSnap => ({
+            id: docSnap.id,
+            ...docSnap.data()
+        })).sort((a, b) => {
+            const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : Date.now();
+            const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : Date.now();
+            return timeB - timeA;
+        });
 
-            // Format timestamp
+        let html = "";
+        docs.forEach((data) => {
             const dateStr = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
                 year: "numeric"
             }) : "Just now";
 
-            // Map status with requested symbols & colors
             let statusBadge = "";
             const status = (data.status || "Pending").toLowerCase();
 
