@@ -46,14 +46,13 @@ function setPaymentMode(mode) {
 }
 
 // ======================================
-// LOAD & RENDER ACTIVATION HISTORY
+// LOAD & RENDER DETAILED ACTIVATION HISTORY
 // ======================================
 
 function loadActivationHistory(userId) {
     const historyContainer = document.getElementById("activationHistoryList");
     if (!historyContainer) return;
 
-    // Filter by userId
     const q = query(
         collection(db, "activationHistory"),
         where("userId", "==", userId)
@@ -65,7 +64,6 @@ function loadActivationHistory(userId) {
             return;
         }
 
-        // Sort locally by date descending
         const docs = snapshot.docs.map(docSnap => ({
             id: docSnap.id,
             ...docSnap.data()
@@ -77,36 +75,58 @@ function loadActivationHistory(userId) {
 
         let html = "";
         docs.forEach((data) => {
-            const dateStr = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric"
-            }) : "Just now";
+            // Precise Date & Time with Seconds
+            let dateStr = "Just now";
+            if (data.createdAt?.toDate) {
+                const dateObj = data.createdAt.toDate();
+                dateStr = dateObj.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                }) + " at " + dateObj.toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: true
+                });
+            }
 
+            // Real-time Status Badge
             let statusBadge = "";
             const status = (data.status || "Pending").toLowerCase();
 
             if (status === "pending") {
                 statusBadge = `<span style="color: #FFC107; font-weight: bold;">🟡 Pending</span>`;
             } else if (status === "successful" || status === "approved" || status === "paid") {
-                statusBadge = `<span style="color: #28A745; font-weight: bold;">🟢 Successful</span>`;
+                statusBadge = `<span style="color: #28A745; font-weight: bold;">🟢 Approved</span>`;
             } else if (status === "unsuccessful" || status === "rejected" || status === "failed") {
-                statusBadge = `<span style="color: #DC3545; font-weight: bold;">🔴 Unsuccessful</span>`;
+                statusBadge = `<span style="color: #DC3545; font-weight: bold;">🔴 Rejected</span>`;
             } else {
                 statusBadge = `<span style="color: #FFC107; font-weight: bold;">🟡 ${data.status}</span>`;
             }
 
+            // Record Type Badge (First Activation vs Upgrade)
+            const recordType = data.type || "Plan Request";
+            const typeColor = recordType === "First Activation" ? "#17A2B8" : "#9B59B6";
+
             const amountFormatted = typeof data.amount === "number" ? "₦" + data.amount.toLocaleString() : (data.amount || "₦0");
 
             html += `
-                <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h4 style="margin: 0 0 4px 0; color: #FFFFFF; font-size: 15px;">${data.plan || data.selectedPlan || "Plan Activation"}</h4>
-                        <p style="margin: 0; font-size: 12px; color: var(--muted);">${data.paymentMethod || "Manual Payment"} • ${dateStr}</p>
+                <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <div>
+                            <span style="background: ${typeColor}; color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 12px; font-weight: bold; text-transform: uppercase;">${recordType}</span>
+                            <h4 style="margin: 6px 0 0 0; color: #FFFFFF; font-size: 16px;">${data.plan || data.selectedPlan || "Plan Activation"}</h4>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong style="color: var(--accent, #FFD700); font-size: 16px; display: block;">${amountFormatted}</strong>
+                            <div style="font-size: 13px; margin-top: 4px;">${statusBadge}</div>
+                        </div>
                     </div>
-                    <div style="text-align: right;">
-                        <strong style="color: var(--accent); font-size: 15px; display: block; margin-bottom: 4px;">${amountFormatted}</strong>
-                        <div style="font-size: 13px;">${statusBadge}</div>
+                    <hr style="border: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 8px 0;">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--muted, #AAAAAA);">
+                        <span>Method: <strong>${data.paymentMethod || "Manual Payment"}</strong></span>
+                        <span>⏱ ${dateStr}</span>
                     </div>
                 </div>
             `;
@@ -118,6 +138,8 @@ function loadActivationHistory(userId) {
         historyContainer.innerHTML = `<p style="text-align: center; color: #DC3545; padding: 10px;">Failed to load activation history.</p>`;
     });
 }
+
+  
 
 // ======================================
 // CHECK LOGIN & INITIALIZE
