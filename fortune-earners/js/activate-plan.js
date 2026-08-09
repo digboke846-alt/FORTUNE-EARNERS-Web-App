@@ -15,9 +15,7 @@ import {
     query,
     where,
     orderBy,
-    updateDoc,
-    addDoc,
-    getDocs
+    addDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 import { createNotification } from "./notification-utils.js";
@@ -48,6 +46,74 @@ function setPaymentMode(mode) {
 }
 
 // ======================================
+// LOAD & RENDER ACTIVATION HISTORY
+// ======================================
+
+function loadActivationHistory(userId) {
+    const historyContainer = document.getElementById("activationHistoryList");
+    if (!historyContainer) return;
+
+    const q = query(
+        collection(db, "activationHistory"),
+        where("userId", "==", userId),
+        orderBy("createdAt", "desc")
+    );
+
+    onSnapshot(q, (snapshot) => {
+        if (snapshot.empty) {
+            historyContainer.innerHTML = `<p style="text-align: center; color: var(--muted); padding: 15px 0;">No activation history records yet.</p>`;
+            return;
+        }
+
+        let html = "";
+        snapshot.docs.forEach((docSnap) => {
+            const data = docSnap.data();
+
+            // Format timestamp
+            const dateStr = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            }) : "Just now";
+
+            // Map status with requested symbols & colors
+            let statusBadge = "";
+            const status = (data.status || "Pending").toLowerCase();
+
+            if (status === "pending") {
+                statusBadge = `<span style="color: #FFC107; font-weight: bold;">🟡 Pending</span>`;
+            } else if (status === "successful" || status === "approved" || status === "paid") {
+                statusBadge = `<span style="color: #28A745; font-weight: bold;">🟢 Successful</span>`;
+            } else if (status === "unsuccessful" || status === "rejected" || status === "failed") {
+                statusBadge = `<span style="color: #DC3545; font-weight: bold;">🔴 Unsuccessful</span>`;
+            } else {
+                statusBadge = `<span style="color: #FFC107; font-weight: bold;">🟡 ${data.status}</span>`;
+            }
+
+            const amountFormatted = typeof data.amount === "number" ? "₦" + data.amount.toLocaleString() : (data.amount || "₦0");
+
+            html += `
+                <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="margin: 0 0 4px 0; color: #FFFFFF; font-size: 15px;">${data.plan || data.selectedPlan || "Plan Activation"}</h4>
+                        <p style="margin: 0; font-size: 12px; color: var(--muted);">${data.paymentMethod || "Manual Payment"} • ${dateStr}</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <strong style="color: var(--accent); font-size: 15px; display: block; margin-bottom: 4px;">${amountFormatted}</strong>
+                        <div style="font-size: 13px;">${statusBadge}</div>
+                    </div>
+                </div>
+            `;
+        });
+
+        historyContainer.innerHTML = html;
+    }, (error) => {
+        console.error("Error loading activation history:", error);
+        historyContainer.innerHTML = `<p style="text-align: center; color: #DC3545; padding: 10px;">Failed to load activation history.</p>`;
+    });
+}
+
+// ======================================
 // CHECK LOGIN & INITIALIZE
 // ======================================
 
@@ -68,10 +134,11 @@ onAuthStateChanged(auth, async (user) => {
 
         const userData = userSnap.data();
 
-
-        // 🟢 CALL NOTIFICATION BADGE LISTENER HERE
+        // 🟢 CALL NOTIFICATION BADGE LISTENER
         loadNotificationBadge(user.uid);
-        
+
+        // 📜 CALL ACTIVATION HISTORY LISTENER
+        loadActivationHistory(user.uid);
 
         // ======================================
         // MEMBERSHIP PAGE MODE
@@ -179,7 +246,7 @@ onAuthStateChanged(auth, async (user) => {
             if (request.status === "Pending" && submitPaymentBtn) {
                 submitPaymentBtn.disabled = true;
                 submitPaymentBtn.textContent = "Submit Activation Request";
-                
+
                 const proofStatus = document.getElementById("proofStatus");
                 if (proofStatus) proofStatus.textContent = "Your activation request is awaiting admin approval.";
             }
@@ -204,32 +271,53 @@ onAuthStateChanged(auth, async (user) => {
                     return;
                 }
 
-                await setDoc(activationRef, {
-                    userId: user.uid,
-                    fullname: userData.fullname || "",
-                    username: userData.username || "",
-                    email: userData.email || "",
-                    selectedPlan: chosenPlan,
-                    amount: chosenAmount,
-                    paymentMethod: "Manual",
-                    paymentStatus: "Pending",
-                    paymentReference: "",
-                    bankName: document.getElementById("bankName")?.textContent || "",
-                    accountNumber: document.getElementById("accountNumber")?.textContent || "",
-                    accountName: document.getElementById("accountName")?.textContent || "",
-                    virtualAccountExpiresAt: null,
-                    paymentProofUploaded: true,
-                    status: "Pending",
-                    reviewedBy: "",
-                    reviewedAt: null,
-                    rejectionReason: "",
-                    submittedAt: serverTimestamp()
-                });
+                try {
+                    submitPaymentBtn.disabled = true;
+                    submitPaymentBtn.textContent = "Submitting...";
 
-                alert("✅ Your activation request has been submitted successfully.\n\nOur admin will review your payment and activate your account.");
+                    // 1. Create a permanent record in activationHistory collection first
+                    const historyDocRef = await addDoc(collection(db, "activationHistory"), {
+                        userId: user.uid,
+                        plan: chosenPlan,
+                        amount: chosenAmount,
+                        paymentMethod: "Manual Payment",
+                        status: "Pending",
+                        createdAt: serverTimestamp()
+                    });
 
-                submitPaymentBtn.disabled = true;
-                submitPaymentBtn.textContent = "Request Submitted";
+                    // 2. Create/Update activationRequest including historyDocId
+                    await setDoc(activationRef, {
+                        userId: user.uid,
+                        fullname: userData.fullname || "",
+                        username: userData.username || "",
+                        email: userData.email || "",
+                        selectedPlan: chosenPlan,
+                        amount: chosenAmount,
+                        paymentMethod: "Manual",
+                        paymentStatus: "Pending",
+                        paymentReference: "",
+                        bankName: document.getElementById("bankName")?.textContent || "",
+                        accountNumber: document.getElementById("accountNumber")?.textContent || "",
+                        accountName: document.getElementById("accountName")?.textContent || "",
+                        virtualAccountExpiresAt: null,
+                        paymentProofUploaded: true,
+                        status: "Pending",
+                        reviewedBy: "",
+                        reviewedAt: null,
+                        rejectionReason: "",
+                        submittedAt: serverTimestamp(),
+                        historyDocId: historyDocRef.id
+                    });
+
+                    alert("✅ Your activation request has been submitted successfully.\n\nOur admin will review your payment and activate your account.");
+
+                    submitPaymentBtn.textContent = "Request Submitted";
+                } catch (err) {
+                    console.error("Submission Error:", err);
+                    alert("Failed to submit request: " + err.message);
+                    submitPaymentBtn.disabled = false;
+                    submitPaymentBtn.textContent = "Submit Payment";
+                }
             });
         }
 
@@ -261,7 +349,6 @@ if (logoutBtn) {
         }
     });
 }
-
 
 // ======================================
 // BULLETPROOF COPY FUNCTIONS
@@ -314,98 +401,63 @@ function fallbackCopy(text, labelName) {
     document.body.removeChild(textArea);
 }
 
-// ⚠️ REQUIRED FOR ES MODULES: Expose to window so HTML onclick="..." can find them
+// Expose to window for inline onclick attributes
 window.copyBank = copyBank;
 window.copyAccNumber = copyAccNumber;
 window.copyAccName = copyAccName;
 
-
 // ======================================
 // LOAD NOTIFICATION BADGE
 // ======================================
+
 let previousUnreadCount = 0;
 
 function loadNotificationBadge(userId) {
-
-    const badge =
-        document.getElementById("notificationBadge");
-
+    const badge = document.getElementById("notificationBadge");
     if (!badge) return;
 
     const q = query(
-
-    collection(db, "notifications"),
-
-    where("userId", "==", userId),
-
-    where("isRead", "==", false),
-
-    orderBy("createdAt", "desc")
-
-);
+        collection(db, "notifications"),
+        where("userId", "==", userId),
+        where("isRead", "==", false),
+        orderBy("createdAt", "desc")
+    );
 
     onSnapshot(q, (snapshot) => {
-
         const unreadCount = snapshot.size;
 
         if (unreadCount > previousUnreadCount && unreadCount > 0) {
+            const newestNotification = snapshot.docs[0]?.data();
+            if (newestNotification) {
+                showNotificationToast(
+                    newestNotification.title,
+                    newestNotification.message
+                );
+            }
+        }
 
-    const newestNotification = snapshot.docs[0]?.data();
-
-    if (newestNotification) {
-
-        showNotificationToast(
-
-            newestNotification.title,
-
-            newestNotification.message
-
-        );
-
-    }
-
-}
-
-previousUnreadCount = unreadCount;
+        previousUnreadCount = unreadCount;
 
         if (unreadCount === 0) {
-
             badge.classList.add("hidden");
-
             return;
-
         }
 
         badge.classList.remove("hidden");
-
-        badge.textContent =
-
-            unreadCount > 9
-
-                ? "9+"
-
-                : unreadCount;
-
+        badge.textContent = unreadCount > 9 ? "9+" : unreadCount;
     });
-
 }
 
-
-    
 // ======================================
 // OPEN NOTIFICATIONS PAGE
 // ======================================
 
-const notificationButton =
-    document.getElementById("notificationButton");
+const notificationButton = document.getElementById("notificationButton");
 
 if (notificationButton) {
-
     notificationButton.addEventListener("click", () => {
-
         window.location.href = "notifications.html";
-
     });
+            }
 
-}
 
