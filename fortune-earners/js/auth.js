@@ -124,11 +124,135 @@ signupForm.addEventListener("submit", async (e) => {
         .getElementById("terms")
         .checked;
 
-    // Validation
-    if (!terms) {
-        alert("You must agree to the Terms & Conditions and Privacy Policy.");
-        return;
+    // ======================================
+// TERMS & CONDITIONS VALIDATION
+// ======================================
+
+if (!terms) {
+
+    const termsCheckbox =
+        document.getElementById("terms");
+
+    // Show clear message
+    alert(
+        "You must agree to our Terms & Conditions and Privacy Policy."
+    );
+
+    if (termsCheckbox) {
+
+        // Scroll directly to the checkbox
+        termsCheckbox.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        // Focus the checkbox
+        termsCheckbox.focus();
+
+        // Highlight the checkbox
+        termsCheckbox.style.outline =
+            "3px solid #FFD700";
+
+        termsCheckbox.style.outlineOffset =
+            "6px";
+
+        termsCheckbox.style.borderRadius =
+            "5px";
+
+        // Make it gently shake/pulse
+        termsCheckbox.animate(
+            [
+                {
+                    transform: "scale(1)"
+                },
+                {
+                    transform: "scale(1.35)"
+                },
+                {
+                    transform: "scale(1)"
+                },
+                {
+                    transform: "scale(1.25)"
+                },
+                {
+                    transform: "scale(1)"
+                }
+            ],
+            {
+                duration: 700,
+                iterations: 2
+            }
+        );
+
+        // ======================================
+        // CREATE ON-PAGE WARNING
+        // ======================================
+
+        let termsError =
+            document.getElementById("termsError");
+
+        if (!termsError) {
+
+            termsError =
+                document.createElement("p");
+
+            termsError.id =
+                "termsError";
+
+            termsError.textContent =
+                "⚠️ You must agree to our Terms & Conditions and Privacy Policy.";
+
+            termsError.style.color =
+                "#FFD700";
+
+            termsError.style.fontWeight =
+                "bold";
+
+            termsError.style.marginTop =
+                "10px";
+
+            termsError.style.textAlign =
+                "left";
+
+            termsCheckbox.parentElement
+                .appendChild(termsError);
+        }
+
+        // ======================================
+        // REMOVE HIGHLIGHT AFTER USER AGREES
+        // ======================================
+
+        const removeTermsWarning =
+            () => {
+
+                if (termsCheckbox.checked) {
+
+                    termsCheckbox.style.outline =
+                        "";
+
+                    termsCheckbox.style.outlineOffset =
+                        "";
+
+                    if (termsError) {
+                        termsError.remove();
+                    }
+
+                    termsCheckbox.removeEventListener(
+                        "change",
+                        removeTermsWarning
+                    );
+                }
+            };
+
+        termsCheckbox.addEventListener(
+            "change",
+            removeTermsWarning
+        );
+
     }
+
+    return;
+}
 
     if (fullname.length < 3) {
         alert("Please enter your full name.");
