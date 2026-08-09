@@ -2,509 +2,210 @@
 <html lang="en">
 
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Activate Plan | Fortune Earners</title>
-
-<link rel="stylesheet"
-href="css/style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activate Plan | Fortune Earners</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<!-- ========================= -->
-<!-- HEADER -->
-<!-- ========================= -->
-
-<header class="top-header">
-
-<button id="menuButton"
-class="menu-btn">
-
-☰
-
-</button>
-
-<h1 class="logo">
-
-ACTIVATE PLAN
-
-</h1>
-
-  <div class="header-icons">
-
-    <button id="notificationButton">
-
+  <header class="top-header">
+    <button id="menuButton" class="menu-btn">☰</button>
+    <h1 class="logo">ACTIVATE PLAN</h1>
+    <div class="header-icons">
+      <button id="notificationButton">
         🔔
-
-        <span id="notificationBadge" class="notification-badge hidden">
-
-            0
-
-        </span>
-
-    </button>
-
-  </div>
-
-<div class="header-icons">
-
-<a href="profile.html">
-
-👤
-
-</a>
-
-</div>
-
-</header>
-
-<!-- ========================= -->
-<!-- SIDE MENU -->
-<!-- ========================= -->
-
-<nav id="menu"
-class="side-menu">
-
-<h2>Menu</h2>
-
-<a href="dashboard.html">🏠 Dashboard</a>
-
-<a href="daily-tasks.html">📋 Daily Tasks</a>
-
-<a href="sponsored-ads.html">📺 Sponsored Ads</a>
-
-<a href="activate-plan.html">💎 Activate Plan</a>
-
-<a href="withdraw.html">💸 Withdraw</a>
-
-<a href="profile.html">👤 Profile</a>
-
-<a href="#" id="logoutBtn">🚪 Log Out</a>
-
-</nav>
-
-<div id="menuOverlay"
-class="menu-overlay"></div>
-
-<!-- ========================= -->
-<!-- MAIN CONTENT -->
-<!-- ========================= -->
-
-<main class="dashboard-content">
-
-<h2 id="pageTitle">
-
-💎 Choose Your Membership Plan
-
-</h2>
-
-<div id="currentPlanContainer" style="display:none;">
-
-<p>
-
-Current Plan:
-<strong id="currentPlanDisplay">
-
-Not Activated
-
-</strong>
-
-</p>
-
-</div>
-
-<p id="pageDescription">
-
-Activate a membership plan to start earning from Daily Tasks, Sponsored Ads, Referral Commissions and Withdrawals.
-
-</p>
-
-<div id="plansContainer">
-  <!-- ========================= -->
-<!-- NEWBIE PLAN -->
-<!-- ========================= -->
-
-<div class="dashboard-card plan-card">
-
-<h3>🟢 NEWBIE PLAN</h3>
-
-<p><strong>Activation Fee:</strong> ₦750</p>
-
-<p>✅ 5 Daily Tasks</p>
-
-<p>✅ ₦100 per Daily Task</p>
-
-<p>✅ ₦200 per Sponsored Ad</p>
-
-<p>👥 Referral Reward: ₦400</p>
-
-<button class="activatePlanBtn"
-data-plan="🟢 NEWBIE"
-data-price="750">
-
-Activate Plan
-
-</button>
-
-</div>
-
-<!-- ========================= -->
-<!-- SILVER PLAN -->
-<!-- ========================= -->
-
-<div class="dashboard-card plan-card">
-
-<h3>⚪ SILVER PLAN</h3>
-
-<p><strong>Activation Fee:</strong> ₦1,500</p>
-
-<p>✅ 5 Daily Tasks</p>
-
-<p>✅ ₦150 per Daily Task</p>
-
-<p>✅ ₦300 per Sponsored Ad</p>
-
-<p>👥 Referral Reward: ₦700</p>
-
-<button class="activatePlanBtn"
-data-plan="⚪ SILVER"
-data-price="1500">
-
-Activate Plan
-
-</button>
-
-</div>
-
-<!-- ========================= -->
-<!-- GOLD PLAN -->
-<!-- ========================= -->
-
-<div class="dashboard-card plan-card">
-
-<h3>🟡 GOLD PLAN</h3>
-
-<p><strong>Activation Fee:</strong> ₦3,000</p>
-
-<p>✅ 5 Daily Tasks</p>
-
-<p>✅ ₦200 per Daily Task</p>
-
-<p>✅ ₦400 per Sponsored Ad</p>
-
-<p>👥 Referral Reward: ₦1,050</p>
-
-<button class="activatePlanBtn"
-data-plan="🟡 GOLD"
-data-price="3000">
-
-Activate Plan
-
-</button>
-
-</div>
-
-<!-- ========================= -->
-<!-- DIAMOND PLAN -->
-<!-- ========================= -->
-
-<div class="dashboard-card plan-card">
-
-<h3>🔷 DIAMOND PLAN</h3>
-
-<p><strong>Activation Fee:</strong> ₦5,000</p>
-
-<p>✅ 5 Daily Tasks</p>
-
-<p>✅ ₦300 per Daily Task</p>
-
-<p>✅ ₦600 per Sponsored Ad</p>
-
-<p>👥 Referral Reward: ₦2,100</p>
-
-<button class="activatePlanBtn"
-data-plan="🔷 DIAMOND"
-data-price="5000">
-
-Activate Plan
-
-</button>
-
-</div>
-
-<!-- ========================= -->
-<!-- PREMIUM PLAN -->
-<!-- ========================= -->
-
-<div class="dashboard-card plan-card">
-
-<h3>👑 PREMIUM PLAN</h3>
-
-<p><strong>Activation Fee:</strong> ₦7,000</p>
-
-<p>✅ 5 Daily Tasks</p>
-
-<p>✅ ₦400 per Daily Task</p>
-
-<p>✅ ₦800 per Sponsored Ad</p>
-
-<p>👥 Referral Reward: ₦3,300</p>
-
-<button class="activatePlanBtn"
-data-plan="👑 PREMIUM"
-data-price="7000">
-
-Activate Plan
-
-</button>
-
-</div>
-  <div class="dashboard-card plan-card">
-     <p><strong>🏦 Affiliate Minimum Withdrawal — For All Plans: ₦1,000.</strong></p>
-  </div>
-</div>
-
-<!-- ========================= -->
-<!-- PAYMENT SECTION -->
-<!-- ========================= -->
-
-<div class="dashboard-card" id="paymentSection" style="display:none;">
-
-<h2>
-
-💳 Complete Your Payment
-
-</h2>
-
-<p>
-
-Selected Plan:
-<strong id="selectedPlan">
-
-None
-
-</strong>
-
-</p>
-
-<p>
-
-Amount:
-<strong id="selectedAmount">
-
-₦0
-
-</strong>
-
-</p>
-
-  <br>
-
-<hr>
-
-<br> 
-  
-<h3>
-
-🏦 Payment Details
-
-</h3>
-
-  <p id="paymentMode">
-
-🟡 Manual Payment Mode
-
-  </p>
-
-  <div id="paymentNotice" class="payment-notice">
-
-⚠️ <strong>Manual Payment:</strong> Send payment only to the account details below and upload your payment proof after a successful transfer.
-
-  </div>
-
-<div class="payment-row">
-    <p class="payment-label">
-        <strong>Bank:</strong>
-        <span id="bankName" class="bank-value">OPAY</span>
-    </p>
-    <button class="copy-btn" onclick="copyBank()">📋 Copy</button>
-</div>
-
-<div class="payment-row">
-    <p class="payment-label">
-        <strong>Account Number:</strong>
-        <span id="accountNumber" class="acc-number-value">6521053532</span>
-    </p>
-    <button class="copy-btn" onclick="copyAccNumber()">📋 Copy</button>
-</div>
-
-<div class="payment-row">
-    <p class="payment-label">
-        <strong>Account Name:</strong>
-        <span id="accountName" class="acc-name-value">FORTUNE EARNERS (SANDRA CHIDINMA O.)</span>
-    </p>
-    <button class="copy-btn" onclick="copyAccName()">📋 Copy</button>
-</div>
-
-  <p id="accountExpiry" style="display:none;">
-
-⏰ Account expires in:
-
-<strong id="countdownTimer">
-
---:--:--
-
-</strong>
-
-  </p>
-
-  <p id="paymentReference" style="display:none;">
-
-Reference:
-
-<strong id="paymentReferenceValue">
-
--
-
-</strong>
-
-  </p>
-
-  <br>
-
-<hr>
-
-  <br>
-
-<h3>
-
-📷 Upload Payment Proof
-
-</h3>
-
-<input
-type="file"
-id="paymentProof"
-accept="image/*">
-
-<p id="proofStatus">
-
-</p>
-
-<button id="submitPaymentBtn">
-
-Submit Payment
-
-</button>
-
-</div>    
-
-  <!-- ========================= -->
-<!-- ACTIVATION HISTORY -->
-<!-- ========================= -->
-
-<section class="dashboard-card" id="activationHistorySection">
-
-    <h2>
-        📜 Activation History
-    </h2>
-
-    <p class="history-description">
-        Your previous membership activation requests and their status.
-    </p>
-
-    <div id="activationHistoryList">
-
-        <!-- Activation history will be loaded here -->
-
-        <div id="activationHistoryEmpty" class="history-empty">
-
-            <p>
-                📜 No activation history yet.
-            </p>
-
-        </div>
-
+        <span id="notificationBadge" class="notification-badge hidden">0</span>
+      </button>
+    </div>
+    <div class="header-icons">
+      <a href="profile.html">👤</a>
+    </div>
+  </header>
+
+  <nav id="menu" class="side-menu">
+    <h2>Menu</h2>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="daily-tasks.html">📋 Daily Tasks</a>
+    <a href="sponsored-ads.html">📺 Sponsored Ads</a>
+    <a href="activate-plan.html">💎 Activate Plan</a>
+    <a href="withdraw.html">💸 Withdraw</a>
+    <a href="profile.html">👤 Profile</a>
+    <a href="#" id="logoutBtn">🚪 Log Out</a>
+  </nav>
+
+  <div id="menuOverlay" class="menu-overlay"></div>
+
+  <main class="dashboard-content">
+
+    <h2 id="pageTitle">💎 Choose Your Membership Plan</h2>
+
+    <div id="currentPlanContainer" style="display:none;">
+      <p>
+        Current Plan:
+        <strong id="currentPlanDisplay">Not Activated</strong>
+      </p>
     </div>
 
-</section>
-  
-</main>
+    <p id="pageDescription">
+      Activate a membership plan to start earning from Daily Tasks, Sponsored Ads, Referral Commissions and Withdrawals.
+    </p>
 
-<!-- ========================= -->
-<!-- BOTTOM NAVIGATION -->
-<!-- ========================= -->
+    <div id="plansContainer">
+      <div class="dashboard-card plan-card">
+        <h3>🟢 NEWBIE PLAN</h3>
+        <p><strong>Activation Fee:</strong> ₦750</p>
+        <p>✅ 5 Daily Tasks</p>
+        <p>✅ ₦100 per Daily Task</p>
+        <p>✅ ₦200 per Sponsored Ad</p>
+        <p>👥 Referral Reward: ₦400</p>
+        <button class="activatePlanBtn" data-plan="🟢 NEWBIE" data-price="750">Activate Plan</button>
+      </div>
 
-<nav class="bottom-nav">
+      <div class="dashboard-card plan-card">
+        <h3>⚪ SILVER PLAN</h3>
+        <p><strong>Activation Fee:</strong> ₦1,500</p>
+        <p>✅ 5 Daily Tasks</p>
+        <p>✅ ₦150 per Daily Task</p>
+        <p>✅ ₦300 per Sponsored Ad</p>
+        <p>👥 Referral Reward: ₦700</p>
+        <button class="activatePlanBtn" data-plan="⚪ SILVER" data-price="1500">Activate Plan</button>
+      </div>
 
-<a href="dashboard.html">
+      <div class="dashboard-card plan-card">
+        <h3>🟡 GOLD PLAN</h3>
+        <p><strong>Activation Fee:</strong> ₦3,000</p>
+        <p>✅ 5 Daily Tasks</p>
+        <p>✅ ₦200 per Daily Task</p>
+        <p>✅ ₦400 per Sponsored Ad</p>
+        <p>👥 Referral Reward: ₦1,050</p>
+        <button class="activatePlanBtn" data-plan="🟡 GOLD" data-price="3000">Activate Plan</button>
+      </div>
 
-🏠
+      <div class="dashboard-card plan-card">
+        <h3>🔷 DIAMOND PLAN</h3>
+        <p><strong>Activation Fee:</strong> ₦5,000</p>
+        <p>✅ 5 Daily Tasks</p>
+        <p>✅ ₦300 per Daily Task</p>
+        <p>✅ ₦600 per Sponsored Ad</p>
+        <p>👥 Referral Reward: ₦2,100</p>
+        <button class="activatePlanBtn" data-plan="🔷 DIAMOND" data-price="5000">Activate Plan</button>
+      </div>
 
-<span>Dashboard</span>
+      <div class="dashboard-card plan-card">
+        <h3>👑 PREMIUM PLAN</h3>
+        <p><strong>Activation Fee:</strong> ₦7,000</p>
+        <p>✅ 5 Daily Tasks</p>
+        <p>✅ ₦400 per Daily Task</p>
+        <p>✅ ₦800 per Sponsored Ad</p>
+        <p>👥 Referral Reward: ₦3,300</p>
+        <button class="activatePlanBtn" data-plan="👑 PREMIUM" data-price="7000">Activate Plan</button>
+      </div>
 
-</a>
+      <div class="dashboard-card plan-card">
+        <p><strong>🏦 Affiliate Minimum Withdrawal — For All Plans: ₦1,000.</strong></p>
+      </div>
+    </div>
 
-<a href="daily-tasks.html">
+    <div class="dashboard-card" id="paymentSection" style="display:none;">
+      <h2>💳 Complete Your Payment</h2>
+      <p>Selected Plan: <strong id="selectedPlan">None</strong></p>
+      <p>Amount: <strong id="selectedAmount">₦0</strong></p>
 
-📋
+      <br><hr><br>
 
-<span>Tasks</span>
+      <h3>🏦 Payment Details</h3>
+      <p id="paymentMode">🟡 Manual Payment Mode</p>
 
-</a>
+      <div id="paymentNotice" class="payment-notice">
+        ⚠️ <strong>Manual Payment:</strong> Send payment only to the account details below and upload your payment proof after a successful transfer.
+      </div>
 
-<a href="activate-plan.html" class="active">
+      <div class="payment-row">
+        <p class="payment-label">
+          <strong>Bank:</strong>
+          <span id="bankName" class="bank-value">OPAY</span>
+        </p>
+        <button class="copy-btn" onclick="copyBank()">📋 Copy</button>
+      </div>
 
-💎
+      <div class="payment-row">
+        <p class="payment-label">
+          <strong>Account Number:</strong>
+          <span id="accountNumber" class="acc-number-value">6521053532</span>
+        </p>
+        <button class="copy-btn" onclick="copyAccNumber()">📋 Copy</button>
+      </div>
 
-<span>Plans</span>
+      <div class="payment-row">
+        <p class="payment-label">
+          <strong>Account Name:</strong>
+          <span id="accountName" class="acc-name-value">FORTUNE EARNERS (SANDRA CHIDINMA O.)</span>
+        </p>
+        <button class="copy-btn" onclick="copyAccName()">📋 Copy</button>
+      </div>
 
-</a>
+      <p id="accountExpiry" style="display:none;">
+        ⏰ Account expires in: <strong id="countdownTimer">--:--:--</strong>
+      </p>
 
-<a href="profile.html">
+      <p id="paymentReference" style="display:none;">
+        Reference: <strong id="paymentReferenceValue">-</strong>
+      </p>
 
-👤
+      <br><hr><br>
 
-<span>Profile</span>
+      <h3>📷 Upload Payment Proof</h3>
+      <input type="file" id="paymentProof" accept="image/*">
+      <p id="proofStatus"></p>
+      <button id="submitPaymentBtn">Submit Payment</button>
+    </div>
 
-</a>
+    <div class="dashboard-card" id="activationHistorySection" style="margin-top: 25px;">
+      <h2>📜 Activation History</h2>
+      <p style="text-align: center; margin-bottom: 18px; font-size: 13px; color: var(--muted);">
+        Your permanent plan activation and upgrade records.
+      </p>
 
-</nav>
+      <div id="activationHistoryList">
+        <p style="text-align: center; color: var(--muted); padding: 15px 0;">Loading activation history...</p>
+      </div>
+    </div>
 
-        <br>
-<hr>
-<!-- ===================== -->
-<!-- FOOTER -->
-<!-- ===================== -->
+  </main>
 
-<footer>
-  <div class="footer-links">
-    <a href="about.html">About</a>
-    <span class="divider">|</span>
-    <a href="terms.html">Terms & Conditions</a>
-    <span class="divider">|</span>
-    <a href="privacy.html">Privacy Policy</a>
-    <span class="divider">|</span>
-    <span class="help-text">Need Help? <a href="https://t.me/Dani_Tech01">Contact Support</a></span>
-  </div>
+  <nav class="bottom-nav">
+    <a href="dashboard.html">🏠<span>Dashboard</span></a>
+    <a href="daily-tasks.html">📋<span>Tasks</span></a>
+    <a href="activate-plan.html" class="active">💎<span>Plans</span></a>
+    <a href="profile.html">👤<span>Profile</span></a>
+  </nav>
 
-  <p class="copyright">
-    &copy; 2026 Fortune Earners. All Rights Reserved.
-  </p>
-</footer>
-    
-    <br><br>
-  
-<script src="js/menu.js"></script>
+  <br><hr>
 
-<script type="module" src="js/activate-plan.js"></script>
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <span class="divider">|</span>
+      <a href="terms.html">Terms & Conditions</a>
+      <span class="divider">|</span>
+      <a href="privacy.html">Privacy Policy</a>
+      <span class="divider">|</span>
+      <span class="help-text">Need Help? <a href="https://t.me/Dani_Tech01">Contact Support</a></span>
+    </div>
+
+    <p class="copyright">
+      &copy; 2026 Fortune Earners. All Rights Reserved.
+    </p>
+  </footer>
+
+  <br><br>
+
+  <script src="js/menu.js"></script>
+  <script type="module" src="js/activate-plan.js"></script>
 
 </body>
 
 </html>
+
