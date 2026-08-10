@@ -575,8 +575,8 @@ button:active {
 .welcome-card {
     background: linear-gradient(135deg, #0D47A1, #1565C0);
     border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 25px;
+    padding: 20px;
+    margin-bottom: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.30);
 }
 
@@ -595,7 +595,7 @@ button:active {
 .welcome-box {
     background: rgba(255, 255, 255, 0.12);
     border-radius: 15px;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -627,7 +627,7 @@ button:active {
 .wallet-card {
     background: var(--card);
     border-radius: 16px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     transition: transform 0.3s ease;
 }
@@ -642,10 +642,10 @@ button:active {
 
 .wallet-card p {
     color: var(--text);
-    font-size: 30px;
+    font-size: 27px;
     font-weight: bold;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 /* QUICK ACTIONS */
