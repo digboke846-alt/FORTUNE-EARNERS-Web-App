@@ -15,7 +15,8 @@ import {
     query,
     where,
     orderBy,
-    addDoc
+    addDoc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 import { createNotification } from "./notification-utils.js";
