@@ -1,58 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Task Details | Fortune Earners</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details |  Fortune Earners</title>
 
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 <body>
 
 <!-- ========================= -->
-<!-- HEADER -->
+<!-- FIXED HEADER -->
 <!-- ========================= -->
 
 <header class="top-header">
 
-    <button id="menuButton"
-            class="menu-btn">
-
+    <button id="menuButton" class="menu-btn">
         ☰
-
     </button>
 
     <h1 class="logo">
-
-        TASK DETAILS
-
+        TASK DETAILS 
     </h1>
+    
+<div class="header-icons">
+    
+        <a href="profile.html">
+            👤
+        </a>
+
+    </div>
 
 </header>
 
 <!-- ========================= -->
-<!-- SIDE MENU -->
+<!-- HAMBURGER MENU -->
 <!-- ========================= -->
 
-<nav id="menu"
-     class="side-menu">
+<nav id="menu" class="side-menu">
 
-    <a href="dashboard.html">🏠 Dashboard</a>
+<h2>Menu</h2>
 
-    <a href="daily-tasks.html">📋 Daily Tasks</a>
+<a href="dashboard.html">🏠 Dashboard</a>
 
-    <a href="withdraw.html">💸 Withdraw</a>
+<a href="activate-plan.html">🚀 Activate Plan</a>
 
-    <a href="profile.html">👤 Profile</a>
+<a href="daily-tasks.html">📋 Daily Tasks</a>
 
-    <a href="#" id="logoutBtn">🚪 Log Out</a>
+<a href="sponsored-ads.html">📺 Sponsored Ads</a>
+
+<a href="referrals.html">👥 Referrals</a>
+
+<a href="place-ads.html">📢 Place Ads</a>
+
+<a href="profile.html">👤 Profile</a>
+
+<a href="terms.html">📄 Terms & Conditions</a>
+
+<a href="privacy.html">🔒 Privacy Policy</a>
+
+<a href="contact.html">📞 Contact Support</a>
+
+<a href="#" id="logoutBtn">🚪 Log Out</a>
 
 </nav>
 
@@ -70,10 +79,24 @@
 
 <section class="dashboard-card">
 
-    <h2 id="taskTitle">
+    <section class="summary-card">
+
+    <h2>
+
+        📋 Task Information
+
+    </h2>
+
+    <ul>
+
+        <li>
+
+         <h2> 📍Title:
+
+<p id="taskTitle">
 
         Loading Task...
-
+</p>
     </h2>
 
     <p id="taskDescription">
@@ -88,19 +111,9 @@
 <!-- TASK INFORMATION -->
 <!-- ========================= -->
 
-<section class="summary-card">
 
-    <h2>
 
-        📋 Task Information
-
-    </h2>
-
-    <ul>
-
-        <li>
-
-            💰 Reward
+            💰 Reward:
 
             <span id="taskReward">
 
@@ -112,7 +125,7 @@
 
         <li>
 
-            📌 Status
+            📌 Status:
 
             <span id="taskStatus">
 
