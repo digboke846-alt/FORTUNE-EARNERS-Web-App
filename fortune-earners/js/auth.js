@@ -183,8 +183,11 @@ function showSignupError(fieldId, message) {
     error.style.textAlign =
         "left";
 
-    // Put message after field
-    field.parentElement.appendChild(error);
+ // Put warning directly above the field
+field.insertAdjacentElement(
+    "beforebegin",
+    error
+);
 
     // Remove warning when user starts correcting it
     const clearError = () => {
