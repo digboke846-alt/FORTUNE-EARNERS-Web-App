@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Earners Leaderboard - Fortune Earners</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header class="top-header">
+        <button class="menu-btn" id="openMenuBtn">☰</button>
+        <div class="logo">🏆 TOP EARNERS</div>
+        <a href="notifications.html" class="notification-link">
+            🔔
+            <span class="notification-badge hidden" id="headerNotificationBadge">0</span>
+        </a>
+    </header>
+
+    <div class="side-menu" id="sideMenu">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="activate-plan.html">⚡ Activate / Upgrade Plan</a>
+        <a href="tasks.html">📋 Daily Tasks</a>
+        <a href="place-ads.html">📢 Place Ads</a>
+        <a href="withdraw.html">💸 Withdraw Funds</a>
+        <a href="leaderboard.html" class="active">🏆 Top Earners</a>
+        <a href="history.html">📜 Transaction History</a>
+        <a href="profile.html">👤 My Profile</a>
+        <a href="#" id="logoutBtn" style="color: #DC3545;">🚪 Logout</a>
+    </div>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <main class="dashboard-content">
+
+        <div class="dashboard-card" style="text-align: center; margin-bottom: 20px;">
+            <h2>🏆 LEADERBOARD</h2>
+            <p style="color: var(--accent); font-weight: bold; margin-top: 6px;" id="contestDateRange">
+                📅 Current Contest: Loading dates...
+            </p>
+        </div>
+
+        <div class="leaderboard-card">
+            <h2>🏆 Weekly Top Earners</h2>
+            <p style="text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 15px;">
+                Top 10 highest overall earners for this active week
+            </p>
+            <div id="weeklyTopEarnersList" class="leaderboard-list">
+                <p style="text-align: center; color: var(--muted);">Loading top earners...</p>
+            </div>
+        </div>
+
+        <div class="leaderboard-card">
+            <h2>🤝 Weekly Top Affiliate Earners</h2>
+            <p style="text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 15px;">
+                Top 10 referral earners for this active week
+            </p>
+            <div id="weeklyAffiliateEarnersList" class="leaderboard-list">
+                <p style="text-align: center; color: var(--muted);">Loading affiliate leaders...</p>
+            </div>
+        </div>
+
+        <div class="leaderboard-card">
+            <h2>👑 Overall Lifetime Earners</h2>
+            <p style="text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 15px;">
+                Top 10 all-time cumulative platform earners
+            </p>
+            <div id="lifetimeTopEarnersList" class="leaderboard-list">
+                <p style="text-align: center; color: var(--muted);">Loading lifetime leaders...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <span class="divider">|</span>
+            <a href="terms.html">Terms of Service</a>
+            <span class="divider">|</span>
+            <a href="contact.html">Support</a>
+        </div>
+        <p class="copyright">© 2026 Fortune Earners. All rights reserved.</p>
+    </footer>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html">
+            🏠
+            <span>Dashboard</span>
+        </a>
+        <a href="place-ads.html">
+            📢
+            <span>Place Ads</span>
+        </a>
+        <a href="withdraw.html">
+            💸
+            <span>Withdraw</span>
+        </a>
+        <a href="profile.html">
+            👤
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script type="module" src="js/leaderboard.js"></script>
+    <script>
+        // Side menu toggle handler
+        const openMenuBtn = document.getElementById('openMenuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        if (openMenuBtn) {
+            openMenuBtn.addEventListener('click', () => {
+                sideMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+            });
+        }
+
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', () => {
+                sideMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>
