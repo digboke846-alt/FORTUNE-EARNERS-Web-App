@@ -580,13 +580,13 @@ button:active {
 .welcome-card {
     background: linear-gradient(135deg, #0D47A1, #1565C0);
     border-radius: 15px;
-    padding: 15px;
+    padding: 18px;
     margin-bottom: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.30);
 }
 
 .welcome-text {
-    margin-top: 6px;
+    margin-top: 8px;
     margin-bottom: 15px;
     color: #E3F2FD;
 }
@@ -628,7 +628,7 @@ button:active {
     background: var(--card);
     border-radius: 14px;
     padding: 14px 12px;    /* Reduced from 20px */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
     transition: transform 0.3s ease;
 }
 
