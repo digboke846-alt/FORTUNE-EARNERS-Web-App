@@ -1,0 +1,44 @@
+/* ===================================================
+   LEADERBOARD STYLES
+=================================================== */
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0D1325;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 12px 15px;
+}
+
+.rank-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rank-badge {
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 28px;
+    text-align: center;
+}
+
+.user-name {
+    color: var(--text);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.earned-amount {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 15px;
+}
