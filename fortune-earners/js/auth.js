@@ -488,7 +488,7 @@ if (!terms) {
             phone: phone,
 
             plan: "Not Activated",
-            memberStatus: "🟢 Active",
+            memberStatus: "Pending Activation",
             accountStatus: "Pending Activation",
             role: "user",
 
