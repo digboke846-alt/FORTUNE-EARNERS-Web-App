@@ -679,85 +679,85 @@ if (notificationButton) {
 }
 
 
-// ======================================\r
-// DASHBOARD TOP EARNERS PREVIEW (TOP 3)\r
-// ======================================\r
-\r
-// Helper: Calculate Active Week Date Range (Monday to Sunday)\r
-function getActiveWeekDateRange() {\r
-    const now = new Date();\r
-    const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday...\r
-\r
-    // Calculate Monday of current week\r
-    const distanceToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;\r
-    const monday = new Date(now);\r
-    monday.setDate(now.getDate() + distanceToMonday);\r
-\r
-    // Calculate Sunday of current week\r
-    const sunday = new Date(monday);\r
-    sunday.setDate(monday.getDate() + 6);\r
-\r
-    const options = { month: 'short', day: 'numeric' };\r
-    const mondayStr = monday.toLocaleDateString('en-US', options);\r
-    const sundayStr = sunday.toLocaleDateString('en-US', options);\r
-\r
-    return `${mondayStr} – ${sundayStr}`;\r
-}\r
-\r
-async function loadDashboardLeaderboard() {\r
-    const dateRangeEl = document.getElementById("widgetDateRange");\r
-    const container = document.getElementById("dashboardLeaderboardPreview");\r
-\r
-    // Set date range text if container exists\r
-    if (dateRangeEl) {\r
-        dateRangeEl.textContent = getActiveWeekDateRange();\r
-    }\r
-\r
-    if (!container) return;\r
-\r
-    try {\r
-        const usersRef = collection(db, "users");\r
-\r
-        // Query Top 3 users ordered by weeklyEarnings descending\r
-        const q = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(3));\r
-        const snapshot = await getDocs(q);\r
-\r
-        if (snapshot.empty) {\r
-            container.innerHTML = `<p style="text-align: center; color: var(--muted); font-size: 13px;">No earnings recorded this week yet.</p>`;\r
-            return;\r
-        }\r
-\r
-        let html = "";\r
-        let rank = 1;\r
-\r
-        snapshot.forEach((docSnap) => {\r
-            const data = docSnap.data();\r
-            const username = data.username || "Anonymous";\r
-            const amount = data.weeklyEarnings || 0;\r
-\r
-            let rankBadge = `#${rank}`;\r
-            if (rank === 1) rankBadge = "🥇";\r
-            else if (rank === 2) rankBadge = "🥈";\r
-            else if (rank === 3) rankBadge = "🥉";\r
-\r
-            html += `\r
-                <div class="leaderboard-item">\r
-                    <div class="rank-user">\r
-                        <span class="rank-badge">${rankBadge}</span>\r
-                        <span class="user-name">@${username}</span>\r
-                    </div>\r
-                    <div class="earned-amount">₦${Number(amount).toLocaleString()}</div>\r
-                </div>\r
-            `;\r
-            rank++;\r
-        });\r
-\r
-        container.innerHTML = html;\r
-\r
-    } catch (error) {\r
-        console.error("Error loading dashboard leaderboard:", error);\r
-        container.innerHTML = `<p style="text-align: center; color: var(--muted); font-size: 13px;">Unable to load leaderboard.</p>`;\r
-    }\r
-}\r
+// ======================================
+// DASHBOARD TOP EARNERS PREVIEW (TOP 3)
+// ======================================
+
+// Helper: Calculate Active Week Date Range (Monday to Sunday)
+function getActiveWeekDateRange() {
+    const now = new Date();
+    const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday...
+
+    // Calculate Monday of current week
+    const distanceToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+    const monday = new Date(now);
+    monday.setDate(now.getDate() + distanceToMonday);
+
+    // Calculate Sunday of current week
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+
+    const options = { month: 'short', day: 'numeric' };
+    const mondayStr = monday.toLocaleDateString('en-US', options);
+    const sundayStr = sunday.toLocaleDateString('en-US', options);
+
+    return `${mondayStr} – ${sundayStr}`;
+}
+
+async function loadDashboardLeaderboard() {
+    const dateRangeEl = document.getElementById("widgetDateRange");
+    const container = document.getElementById("dashboardLeaderboardPreview");
+
+    // Set date range text if container exists
+    if (dateRangeEl) {
+        dateRangeEl.textContent = getActiveWeekDateRange();
+    }
+
+    if (!container) return;
+
+    try {
+        const usersRef = collection(db, "users");
+
+        // Query Top 3 users ordered by weeklyEarnings descending
+        const q = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(3));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+            container.innerHTML = `<p style="text-align: center; color: var(--muted); font-size: 13px;">No earnings recorded this week yet.</p>`;
+            return;
+        }
+
+        let html = "";
+        let rank = 1;
+
+        snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const username = data.username || "Anonymous";
+            const amount = data.weeklyEarnings || 0;
+
+            let rankBadge = `#${rank}`;
+            if (rank === 1) rankBadge = "🥇";
+            else if (rank === 2) rankBadge = "🥈";
+            else if (rank === 3) rankBadge = "🥉";
+
+            html += `
+                <div class="leaderboard-item">
+                    <div class="rank-user">
+                        <span class="rank-badge">${rankBadge}</span>
+                        <span class="user-name">@${username}</span>
+                    </div>
+                    <div class="earned-amount">₦${Number(amount).toLocaleString()}</div>
+                </div>
+            `;
+            rank++;
+        });
+
+        container.innerHTML = html;
+
+    } catch (error) {
+        console.error("Error loading dashboard leaderboard:", error);
+        container.innerHTML = `<p style="text-align: center; color: var(--muted); font-size: 13px;">Unable to load leaderboard.</p>`;
+    }
+}
 
 
