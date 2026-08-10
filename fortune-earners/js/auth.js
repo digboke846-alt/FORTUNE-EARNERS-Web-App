@@ -125,7 +125,269 @@ signupForm.addEventListener("submit", async (e) => {
         .checked;
 
     // ======================================
-// TERMS & CONDITIONS VALIDATION
+// CUSTOM SIGNUP VALIDATION
+// ======================================
+
+function showSignupError(fieldId, message) {
+
+    const field = document.getElementById(fieldId);
+
+    if (!field) return false;
+
+    // Remove previous error for this field
+    const oldError =
+        document.getElementById(fieldId + "Error");
+
+    if (oldError) {
+        oldError.remove();
+    }
+
+    // Highlight field
+    field.style.border =
+        "2px solid #FFD700";
+
+    field.style.boxShadow =
+        "0 0 12px rgba(255, 215, 0, 0.35)";
+
+    // Scroll to field
+    field.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    // Focus field
+    field.focus();
+
+    // Create error message
+    const error =
+        document.createElement("div");
+
+    error.id =
+        fieldId + "Error";
+
+    error.textContent =
+        "⚠️ " + message;
+
+    error.style.color =
+        "#FFD700";
+
+    error.style.fontWeight =
+        "bold";
+
+    error.style.marginTop =
+        "8px";
+
+    error.style.marginBottom =
+        "10px";
+
+    error.style.textAlign =
+        "left";
+
+    // Put message after field
+    field.parentElement.appendChild(error);
+
+    // Remove warning when user starts correcting it
+    const clearError = () => {
+
+        field.style.border = "";
+        field.style.boxShadow = "";
+
+        const currentError =
+            document.getElementById(fieldId + "Error");
+
+        if (currentError) {
+            currentError.remove();
+        }
+
+        field.removeEventListener(
+            "input",
+            clearError
+        );
+    };
+
+    field.addEventListener(
+        "input",
+        clearError
+    );
+
+    return true;
+}
+
+
+// ======================================
+// FULL NAME
+// ======================================
+
+if (!fullname) {
+
+    showSignupError(
+        "fullname",
+        "Please enter your full name."
+    );
+
+    return;
+}
+
+if (fullname.length < 3) {
+
+    showSignupError(
+        "fullname",
+        "Your full name must be at least 3 characters."
+    );
+
+    return;
+}
+
+
+// ======================================
+// USERNAME
+// ======================================
+
+if (!username) {
+
+    showSignupError(
+        "username",
+        "Please choose a username."
+    );
+
+    return;
+}
+
+if (
+    username.length < 4 ||
+    username.length > 20
+) {
+
+    showSignupError(
+        "username",
+        "Username must be between 4 and 20 characters."
+    );
+
+    return;
+}
+
+const usernamePattern =
+    /^[a-z0-9_]+$/;
+
+if (!usernamePattern.test(username)) {
+
+    showSignupError(
+        "username",
+        "Username can only contain lowercase letters, numbers and underscores (_)."
+    );
+
+    return;
+}
+
+
+// ======================================
+// EMAIL
+// ======================================
+
+if (!email) {
+
+    showSignupError(
+        "email",
+        "Please enter your email address."
+    );
+
+    return;
+}
+
+const emailPattern =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailPattern.test(email)) {
+
+    showSignupError(
+        "email",
+        "Please enter a valid email address."
+    );
+
+    return;
+}
+
+
+// ======================================
+// PHONE
+// ======================================
+
+if (!phone) {
+
+    showSignupError(
+        "phone",
+        "Please enter your phone number."
+    );
+
+    return;
+}
+
+const phonePattern =
+    /^(070|080|081|090|091)\d{8}$/;
+
+if (!phonePattern.test(phone)) {
+
+    showSignupError(
+        "phone",
+        "Please enter a valid Nigerian phone number."
+    );
+
+    return;
+}
+
+
+// ======================================
+// PASSWORD
+// ======================================
+
+if (!password) {
+
+    showSignupError(
+        "password",
+        "Please create a password."
+    );
+
+    return;
+}
+
+if (password.length < 6) {
+
+    showSignupError(
+        "password",
+        "Password must be at least 6 characters."
+    );
+
+    return;
+}
+
+
+// ======================================
+// CONFIRM PASSWORD
+// ======================================
+
+if (!confirmPassword) {
+
+    showSignupError(
+        "confirmPassword",
+        "Please confirm your password."
+    );
+
+    return;
+}
+
+if (password !== confirmPassword) {
+
+    showSignupError(
+        "confirmPassword",
+        "Passwords do not match."
+    );
+
+    return;
+}
+
+
+// ======================================
+// TERMS & CONDITIONS
 // ======================================
 
 if (!terms) {
@@ -133,160 +395,60 @@ if (!terms) {
     const termsCheckbox =
         document.getElementById("terms");
 
-    // Show clear message
     alert(
         "You must agree to our Terms & Conditions and Privacy Policy."
     );
 
     if (termsCheckbox) {
 
-        // Scroll directly to the checkbox
         termsCheckbox.scrollIntoView({
             behavior: "smooth",
             block: "center"
         });
 
-        // Focus the checkbox
         termsCheckbox.focus();
 
-        // Highlight the checkbox
         termsCheckbox.style.outline =
             "3px solid #FFD700";
 
         termsCheckbox.style.outlineOffset =
             "6px";
 
-        termsCheckbox.style.borderRadius =
-            "5px";
-
-        // Make it gently shake/pulse
         termsCheckbox.animate(
             [
-                {
-                    transform: "scale(1)"
-                },
-                {
-                    transform: "scale(1.35)"
-                },
-                {
-                    transform: "scale(1)"
-                },
-                {
-                    transform: "scale(1.25)"
-                },
-                {
-                    transform: "scale(1)"
-                }
+                { transform: "scale(1)" },
+                { transform: "scale(1.3)" },
+                { transform: "scale(1)" }
             ],
             {
-                duration: 700,
-                iterations: 2
+                duration: 500,
+                iterations: 3
             }
         );
 
-        // ======================================
-        // CREATE ON-PAGE WARNING
-        // ======================================
-
-        let termsError =
-            document.getElementById("termsError");
-
-        if (!termsError) {
-
-            termsError =
-                document.createElement("p");
-
-            termsError.id =
-                "termsError";
-
-            termsError.textContent =
-                "⚠️ You must agree to our Terms & Conditions and Privacy Policy.";
-
-            termsError.style.color =
-                "#FFD700";
-
-            termsError.style.fontWeight =
-                "bold";
-
-            termsError.style.marginTop =
-                "10px";
-
-            termsError.style.textAlign =
-                "left";
-
-            termsCheckbox.parentElement
-                .appendChild(termsError);
-        }
-
-        // ======================================
-        // REMOVE HIGHLIGHT AFTER USER AGREES
-        // ======================================
-
-        const removeTermsWarning =
+        const removeHighlight =
             () => {
 
                 if (termsCheckbox.checked) {
 
-                    termsCheckbox.style.outline =
-                        "";
-
-                    termsCheckbox.style.outlineOffset =
-                        "";
-
-                    if (termsError) {
-                        termsError.remove();
-                    }
+                    termsCheckbox.style.outline = "";
+                    termsCheckbox.style.outlineOffset = "";
 
                     termsCheckbox.removeEventListener(
                         "change",
-                        removeTermsWarning
+                        removeHighlight
                     );
                 }
             };
 
         termsCheckbox.addEventListener(
             "change",
-            removeTermsWarning
+            removeHighlight
         );
-
     }
 
     return;
 }
-
-    if (fullname.length < 3) {
-        alert("Please enter your full name.");
-        return;
-    }
-
-    if (username.length < 4 || username.length > 20) {
-        alert("Username must be between 4 and 20 characters.");
-        return;
-    }
-
-    const usernamePattern = /^[a-z0-9_]+$/;
-
-    if (!usernamePattern.test(username)) {
-        alert("Username can only contain lowercase letters, numbers and underscores (_).");
-        return;
-    }
-
-    const phonePattern = /^(070|080|081|090|091)\d{8}$/;
-
-    if (!phonePattern.test(phone)) {
-        alert("Please enter a valid Nigerian phone number.");
-        return;
-    }
-
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters.");
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return;
-    }
 
     try {
 
