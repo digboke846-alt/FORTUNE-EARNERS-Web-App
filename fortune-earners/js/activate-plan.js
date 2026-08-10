@@ -481,9 +481,17 @@ function loadNotificationBadge(userId) {
 
         badge.classList.remove("hidden");
         badge.textContent = unreadCount > 9 ? "9+" : unreadCount;
+  
+    
+    
+    },
+    (error) => {
+        console.error(
+            "❌ Notification badge listener failed:",
+            error
+        );
     });
 }
-
 // ======================================
 // OPEN NOTIFICATIONS PAGE
 // ======================================
