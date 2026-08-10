@@ -163,31 +163,31 @@ taskSnapshot.forEach((taskDoc) => {
 
 switch(currentPlan){
 
-    case "NEWBIE":
+    case "🟢 NEWBIE":
 
         reward = task.rewardNewbie || 0;
 
         break;
 
-    case "SILVER":
+    case "⚪ SILVER":
 
         reward = task.rewardSilver || 0;
 
         break;
 
-    case "GOLD":
+    case "🟡 GOLD":
 
         reward = task.rewardGold || 0;
 
         break;
 
-    case "DIAMOND":
+    case "🔷 DIAMOND":
 
         reward = task.rewardDiamond || 0;
 
         break;
 
-    case "PREMIUM":
+    case "👑 PREMIUM":
 
         reward = task.rewardPremium || 0;
 
