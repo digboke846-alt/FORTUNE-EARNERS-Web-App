@@ -718,19 +718,28 @@ async function loadDashboardLeaderboard() {
     try {
         const usersRef = collection(db, "users");
 
-        // Query Top 3 users ordered by weeklyEarnings descending
+                // Query Top 3 users ordered by weeklyEarnings descending
         const q = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(3));
         const snapshot = await getDocs(q);
 
-        if (snapshot.empty) {
+        // Filter out users with 0 earnings
+        const validDocs = snapshot.docs.filter(docSnap => (docSnap.data().weeklyEarnings || 0) > 0);
+
+        if (validDocs.length === 0) {
             container.innerHTML = `<p style="text-align: center; color: var(--muted); font-size: 13px;">No earnings recorded this week yet.</p>`;
             return;
         }
 
-        let html = "";
+        // Header section aligned Left and Right
+        let html = `
+            <div class="leaderboard-header">
+                <span class="col-user">RANK</span>
+                <span class="col-amount">EARNINGS</span>
+            </div>
+        `;
         let rank = 1;
 
-        snapshot.forEach((docSnap) => {
+        validDocs.forEach((docSnap) => {
             const data = docSnap.data();
             const username = data.username || "Anonymous";
             const amount = data.weeklyEarnings || 0;
@@ -753,17 +762,6 @@ async function loadDashboardLeaderboard() {
         });
 
         container.innerHTML = html;
-
-        // 1. Fetch Weekly Top Earners (Total)
-        const weeklyQuery = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(3));
-        const weeklySnap = await getDocs(weeklyQuery);
-        renderLeaderboardList(
-            "weeklyTopEarnersList", 
-            weeklySnap, 
-            "weeklyEarnings", 
-            "RANK", 
-            "EARNINGS"
-        );
 
     } catch (error) {
         console.error("Error loading dashboard leaderboard:", error);
