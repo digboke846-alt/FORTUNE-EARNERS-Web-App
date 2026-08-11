@@ -13,6 +13,7 @@ import {
     query,
     where,
     updateDoc,
+    increment,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
@@ -609,19 +610,26 @@ async function activatePlan(userId, selectedPlan) {
 
                 await updateDoc(referrerDoc.ref, {
 
-                    affiliateWallet:
+    affiliateWallet:
+        increment(commission),
 
-                        Number(referrerData.affiliateWallet || 0) + commission,
+    referralEarnings:
+        increment(commission),
 
-                    referralEarnings:
+    validReferrals:
+        increment(1),
 
-                        Number(referrerData.referralEarnings || 0) + commission,
+    // 🏆 LEADERBOARD TRACKERS
+    weeklyAffiliateEarnings:
+        increment(commission), // Feeds Top Weekly Affiliate Earners
 
-                    validReferrals:
+    weeklyEarnings:
+        increment(commission), // Feeds Top Weekly Earners
 
-                        Number(referrerData.validReferrals || 0) + 1
-
-                });
+    totalEarnings:
+        increment(commission)  // Feeds Lifetime Top Earners
+             
+            });
 
                 // ======================================
                 // CREATE REFERRAL NOTIFICATION
