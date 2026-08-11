@@ -346,6 +346,9 @@ await updateDoc(userRef, {
     weeklyEarnings: Number(userData.earnedToday || 0) +
         Number(reward),
 
+    totalEarnings: Number(userData.earnedToday || 0) +
+        Number(reward),
+
     sponsoredAdsToday:
         Number(userData.sponsoredAdsToday || 0) + 1,
 
