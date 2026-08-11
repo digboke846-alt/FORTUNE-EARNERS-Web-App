@@ -336,24 +336,26 @@ claimRewardBtn.addEventListener("click", async () => {
 await updateDoc(userRef, {
 
     taskWallet:
-        Number(userData.taskWallet || 0) +
-        Number(reward),
+        increment(reward),
+
+    weeklyEarnings:
+        increment(reward),
+
+    totalEarnings:
+        increment(reward),
 
     earnedToday:
         Number(userData.earnedToday || 0) +
-        Number(reward),
-
-    weeklyEarnings: Number(userData.earnedToday || 0) +
-        Number(reward),
-
-    totalEarnings: Number(userData.earnedToday || 0) +
         Number(reward),
 
     sponsoredAdsToday:
         Number(userData.sponsoredAdsToday || 0) + 1,
 
     sponsoredAdsViewed:
-        Number(userData.sponsoredAdsViewed || 0) + 1
+        Number(userData.sponsoredAdsViewed || 0) + 1,
+
+    lastAdEarnedDate:
+        new Date().toISOString().split("T")[0]
 
 });
 
