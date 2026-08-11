@@ -754,6 +754,17 @@ async function loadDashboardLeaderboard() {
 
         container.innerHTML = html;
 
+        // 1. Fetch Weekly Top Earners (Total)
+        const weeklyQuery = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(3));
+        const weeklySnap = await getDocs(weeklyQuery);
+        renderLeaderboardList(
+            "weeklyTopEarnersList", 
+            weeklySnap, 
+            "weeklyEarnings", 
+            "RANK", 
+            "EARNINGS"
+        );
+
     } catch (error) {
         console.error("Error loading dashboard leaderboard:", error);
         container.innerHTML = `<p style="text-align: center; color: var(--muted); font-size: 13px;">Unable to load leaderboard.</p>`;
