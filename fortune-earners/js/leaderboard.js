@@ -38,20 +38,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Generic Renderer for Leaderboard Lists
-function renderLeaderboardList(containerId, docs, earningsKey) {
+// Render Leaderboard List with Custom Headers
+function renderLeaderboardList(containerId, docs, earningsKey, userHeader, amountHeader) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    if (docs.empty) {
-        container.innerHTML = `<p style="text-align:center; color: var(--muted);">No records found for this period.</p>`;
+    // Filter out users with 0 or missing earnings
+    const validDocs = docs.docs.filter(docSnap => (docSnap.data()[earningsKey] || 0) > 0);
+
+    // If no records exist, show empty state message
+    if (validDocs.length === 0) {
+        container.innerHTML = `<p style="text-align: center; color: var(--muted); padding: 15px 0;">No records found for this week.</p>`;
         return;
     }
 
-    let html = "";
+    // Records exist -> Render Custom Table Headers first
+    let html = `
+        <div class="leaderboard-header">
+            <span class="col-user">${userHeader}</span>
+            <span class="col-amount">${amountHeader}</span>
+        </div>
+    `;
+
     let rank = 1;
 
-    docs.forEach((docSnap) => {
+    validDocs.forEach((docSnap) => {
         const data = docSnap.data();
         const username = data.username || "Anonymous";
         const amount = data[earningsKey] || 0;
@@ -89,17 +100,35 @@ onAuthStateChanged(auth, async (user) => {
         // 1. Fetch Weekly Top Earners (Total)
         const weeklyQuery = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(10));
         const weeklySnap = await getDocs(weeklyQuery);
-        renderLeaderboardList("weeklyTopEarnersList", weeklySnap, "weeklyEarnings");
+        renderLeaderboardList(
+            "weeklyTopEarnersList", 
+            weeklySnap, 
+            "weeklyEarnings", 
+            "TOP EARNERS", 
+            "EARNINGS"
+        );
 
         // 2. Fetch Weekly Top Affiliate Earners
         const affiliateQuery = query(usersRef, orderBy("weeklyAffiliateEarnings", "desc"), limit(10));
         const affiliateSnap = await getDocs(affiliateQuery);
-        renderLeaderboardList("weeklyAffiliateEarnersList", affiliateSnap, "weeklyAffiliateEarnings");
+        renderLeaderboardList(
+            "weeklyAffiliateEarnersList", 
+            affiliateSnap, 
+            "weeklyAffiliateEarnings", 
+            "RANK & USER", 
+            "REWARD EARNED"
+        );
 
         // 3. Fetch Overall Lifetime Earners
         const lifetimeQuery = query(usersRef, orderBy("totalEarnings", "desc"), limit(10));
         const lifetimeSnap = await getDocs(lifetimeQuery);
-        renderLeaderboardList("lifetimeTopEarnersList", lifetimeSnap, "totalEarnings");
+        renderLeaderboardList(
+            "lifetimeTopEarnersList", 
+            lifetimeSnap, 
+            "totalEarnings", 
+            "TOP EARNERS", 
+            "LIFETIME EARNINGS"
+        );
 
     } catch (error) {
         console.error("Error loading leaderboards:", error);
