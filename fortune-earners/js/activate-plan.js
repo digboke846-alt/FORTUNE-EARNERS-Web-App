@@ -179,11 +179,11 @@ onAuthStateChanged(auth, async (user) => {
         const currentPlanDisplay = document.getElementById("currentPlanDisplay");
 
         const planIcons = {
-            "🟢 NEWBIE": "🟢 NEWBIE",
-            "⚪ SILVER": "⚪ SILVER",
-            "🟡 GOLD": "🟡 GOLD",
-            "🔷 DIAMOND": "🔷 DIAMOND",
-            "👑 PREMIUM": "👑 PREMIUM"
+            "NEWBIE": "🟢 NEWBIE",
+            "SILVER": "⚪ SILVER",
+            "GOLD": "🟡 GOLD",
+            "DIAMOND": "🔷 DIAMOND",
+            "PREMIUM": "👑 PREMIUM"
         };
 
         if (userData.memberStatus === "Pending Activation") {
@@ -201,7 +201,7 @@ onAuthStateChanged(auth, async (user) => {
         // MEMBERSHIP LADDER
         // ======================================
 
-        const planOrder = ["🟢 NEWBIE", "⚪ SILVER", "🟡 GOLD", "🔷 DIAMOND", "👑 PREMIUM"];
+        const planOrder = ["NEWBIE", "SILVER", "GOLD", "DIAMOND", "PREMIUM"];
         const currentIndex = planOrder.indexOf(userData.plan);
 
         planOrder.forEach((plan, index) => {
