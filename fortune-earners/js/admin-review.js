@@ -280,11 +280,16 @@ window.approveSubmission = async function(submissionId, type) {
         const userData =
             userSnap.data();
 
-        await updateDoc(userRef, {
+        await updateDoc(userRef, { 
 
-    taskWallet:
-        Number(userData.taskWallet || 0) +
-        Number(submission.reward || 0),
+   taskWallet:
+        increment(reward),
+
+    weeklyEarnings:
+        increment(reward),
+
+    totalEarnings:
+        increment(reward),
 
     earnedToday:
         Number(userData.earnedToday || 0) +
@@ -294,7 +299,10 @@ window.approveSubmission = async function(submissionId, type) {
         Number(userData.completedTasksToday || 0) + 1,
 
     completedTasks:
-        Number(userData.completedTasks || 0) + 1
+        Number(userData.completedTasks || 0) + 1,
+
+    lastTaskEarnedDate:
+        new Date().toISOString().split("T")[0]
 
 });
 
