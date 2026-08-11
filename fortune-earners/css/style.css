@@ -214,7 +214,7 @@ button:active {
     overflow-y: auto;
     transition: left 0.3s ease;
     z-index: 999;
-    padding: 20px;
+    padding: 20px 20px 60px 20px; /* 👈 Increased bottom padding so the last links/Log Out button can be scrolled cleanly into view */
     -webkit-overflow-scrolling: touch;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.35);
 }
@@ -241,7 +241,7 @@ button:active {
     top: 60px;
     left: 0;
     right: 0;
-    bottom: 65px;
+    bottom: 0; /* 👈 Changed from 65px to 0 to cover the full height of the viewport */
     background: rgba(0, 0, 0, 0.45);
     display: none;
     z-index: 998;
@@ -250,6 +250,7 @@ button:active {
 .menu-overlay.active {
     display: block;
 }
+
 
 /* ===================================================
    PAGE CONTENT
