@@ -129,31 +129,31 @@ async function loadDashboard() {
 
             switch (user.plan) {
 
-                case "🟢 NEWBIE":
+                case "NEWBIE":
 
                     totalRevenue += 750;
 
                     break;
 
-                case "⚪ SILVER":
+                case "SILVER":
 
                     totalRevenue += 1500;
 
                     break;
 
-                case "🟡 GOLD":
+                case "GOLD":
 
                     totalRevenue += 3000;
 
                     break;
 
-                case "🔷 DIAMOND":
+                case "DIAMOND":
 
                     totalRevenue += 5000;
 
                     break;
 
-                case "👑 PREMIUM":
+                case "PREMIUM":
 
                     totalRevenue += 7000;
 
@@ -585,23 +585,23 @@ async function activatePlan(userId, selectedPlan) {
 
                 switch (selectedPlan) {
 
-                    case "🟢 NEWBIE":
+                    case "NEWBIE":
                         commission = 400;
                         break;
 
-                    case "⚪ SILVER":
+                    case "SILVER":
                         commission = 700;
                         break;
 
-                    case "🟡 GOLD":
+                    case "GOLD":
                         commission = 1050;
                         break;
 
-                    case "🔷 DIAMOND":
+                    case "DIAMOND":
                         commission = 2100;
                         break;
 
-                    case "👑 PREMIUM":
+                    case "PREMIUM":
                         commission = 3300;
                         break;
 
