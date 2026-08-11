@@ -1935,6 +1935,61 @@ text-align: center; /* Center the "Copy" text inside the button */
 
 
 
+/* Leaderboard Header Row */
+.leaderboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted, #8e8e93);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 8px;
+}
+
+.col-user {
+    text-align: left;
+}
+
+.col-amount {
+    text-align: right;
+}
+
+/* Leaderboard Single Line Row */
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+}
+
+.rank-user {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* space between icon and username */
+}
+
+.rank-badge {
+    font-size: 14px;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.earned-amount {
+    font-weight: 700;
+    font-size: 14px;
+    color: #2ed573; /* or your theme green color */
+    text-align: right;
+}
 
 
 
