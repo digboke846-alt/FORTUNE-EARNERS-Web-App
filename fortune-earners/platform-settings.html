@@ -10,7 +10,7 @@
 
 <header class="top-header">
     <button id="menuButton" class="menu-btn">☰</button>
-    <h1 class="logo">💎 FORTUNE <span>ADMIN</span></h1>
+    <h1 class="logo">💎 FORTUNE <span>🛡️ ADMIN</span></h1>
 </header>
 
 <main class="dashboard-content">
@@ -43,16 +43,37 @@
         </section>
 
         <section class="section-card" style="margin-top: 20px;">
-            <h3>💰 Dynamic Limits & Pricing</h3>
+            <h3>💰 Task Wallet Minimum Withdrawals per Plan</h3>
+            <p style="color: var(--muted); font-size: 13px; margin-bottom: 15px;">Set minimum task wallet withdrawal limits based on the user's active membership plan.</p>
             <hr><br>
 
-            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Minimum Task Wallet Withdrawal (₦)</label>
-            <input type="number" id="minTaskWithdrawal" placeholder="e.g. 3000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">NEWBIE Plan Task Minimum (₦)</label>
+            <input type="number" id="minTaskNewbie" placeholder="e.g. 5000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
 
-            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Minimum Affiliate Wallet Withdrawal (₦)</label>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">SILVER Plan Task Minimum (₦)</label>
+            <input type="number" id="minTaskSilver" placeholder="e.g. 4000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">GOLD Plan Task Minimum (₦)</label>
+            <input type="number" id="minTaskGold" placeholder="e.g. 3000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">DIAMOND Plan Task Minimum (₦)</label>
+            <input type="number" id="minTaskDiamond" placeholder="e.g. 2000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">PREMIUM Plan Task Minimum (₦)</label>
+            <input type="number" id="minTaskPremium" placeholder="e.g. 1000" style="width: 100%; padding: 10px; margin-bottom: 20px;">
+
+            <h3>💸 Affiliate Wallet Minimum Withdrawal</h3>
+            <hr><br>
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">General Affiliate Wallet Minimum (₦)</label>
             <input type="number" id="minAffiliateWithdrawal" placeholder="e.g. 1000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+        </section>
 
-            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Plan Activation Cost (₦)</label>
+        <section class="section-card" style="margin-top: 20px;">
+            <h3>🏷️ Plan Pricing & Commission Settings</h3>
+            <hr><br>
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Default Plan Activation Price (₦)</label>
             <input type="number" id="planPriceInput" placeholder="e.g. 3000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
 
             <label style="display: block; font-weight: bold; margin-bottom: 5px;">Direct Referral Commission (₦)</label>
