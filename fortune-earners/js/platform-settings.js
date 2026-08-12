@@ -8,13 +8,20 @@ import {
 
 const settingsRef = doc(db, "settings", "global");
 
-// UI Elements
+// UI Elements - Toggles
 const withdrawalToggle = document.getElementById("withdrawalToggle");
 const registrationToggle = document.getElementById("registrationToggle");
 const referralToggle = document.getElementById("referralToggle");
 const maintenanceToggle = document.getElementById("maintenanceToggle");
 
-const minTaskWithdrawal = document.getElementById("minTaskWithdrawal");
+// UI Elements - Task Wallet Minimums per Plan
+const minTaskNewbie = document.getElementById("minTaskNewbie");
+const minTaskSilver = document.getElementById("minTaskSilver");
+const minTaskGold = document.getElementById("minTaskGold");
+const minTaskDiamond = document.getElementById("minTaskDiamond");
+const minTaskPremium = document.getElementById("minTaskPremium");
+
+// UI Elements - Affiliate & Pricing Settings
 const minAffiliateWithdrawal = document.getElementById("minAffiliateWithdrawal");
 const planPriceInput = document.getElementById("planPriceInput");
 const referralBonusInput = document.getElementById("referralBonusInput");
@@ -41,15 +48,23 @@ onAuthStateChanged(auth, async (user) => {
         if (settingsSnap.exists()) {
             const data = settingsSnap.data();
 
+            // Toggles
             withdrawalToggle.checked = data.allowWithdrawals ?? true;
             registrationToggle.checked = data.allowRegistration ?? true;
             referralToggle.checked = data.allowReferrals ?? true;
             maintenanceToggle.checked = data.maintenanceMode ?? false;
 
-            minTaskWithdrawal.value = data.minTaskWithdrawal || 3000;
-            minAffiliateWithdrawal.value = data.minAffiliateWithdrawal || 1000;
-            planPriceInput.value = data.planActivationCost || 3000;
-            referralBonusInput.value = data.referralCommission || 1000;
+            // Task Wallet Minimum Limits per Plan
+            minTaskNewbie.value = data.minTaskNewbie ?? 5000;
+            minTaskSilver.value = data.minTaskSilver ?? 4000;
+            minTaskGold.value = data.minTaskGold ?? 3000;
+            minTaskDiamond.value = data.minTaskDiamond ?? 2000;
+            minTaskPremium.value = data.minTaskPremium ?? 1000;
+
+            // Affiliate Minimum & Pricing Settings
+            minAffiliateWithdrawal.value = data.minAffiliateWithdrawal ?? 1000;
+            planPriceInput.value = data.planActivationCost ?? 3000;
+            referralBonusInput.value = data.referralCommission ?? 1000;
             announcementInput.value = data.announcementText || "";
         }
     } catch (error) {
@@ -65,15 +80,25 @@ saveSettingsBtn.addEventListener("click", async () => {
 
     try {
         await setDoc(settingsRef, {
+            // Toggles
             allowWithdrawals: withdrawalToggle.checked,
             allowRegistration: registrationToggle.checked,
             allowReferrals: referralToggle.checked,
             maintenanceMode: maintenanceToggle.checked,
 
-            minTaskWithdrawal: Number(minTaskWithdrawal.value) || 0,
+            // Minimum Task Wallet Limits by Plan
+            minTaskNewbie: Number(minTaskNewbie.value) || 0,
+            minTaskSilver: Number(minTaskSilver.value) || 0,
+            minTaskGold: Number(minTaskGold.value) || 0,
+            minTaskDiamond: Number(minTaskDiamond.value) || 0,
+            minTaskPremium: Number(minTaskPremium.value) || 0,
+
+            // General Affiliate Wallet Minimum & Pricing
             minAffiliateWithdrawal: Number(minAffiliateWithdrawal.value) || 0,
             planActivationCost: Number(planPriceInput.value) || 0,
             referralCommission: Number(referralBonusInput.value) || 0,
+
+            // Announcements
             announcementText: announcementInput.value.trim()
         }, { merge: true });
 
