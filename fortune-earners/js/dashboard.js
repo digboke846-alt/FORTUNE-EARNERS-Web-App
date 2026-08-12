@@ -51,6 +51,33 @@ document.addEventListener("click", () => {
 
 onAuthStateChanged(auth, async (user) => {
 
+
+
+    // Check Global Maintenance Mode & System Announcement
+try {
+    const settingsSnap = await getDoc(doc(db, "settings", "global"));
+    if (settingsSnap.exists()) {
+        const settings = settingsSnap.data();
+
+        // 1. Maintenance Mode Redirect (Skip for Admins)
+        if (settings.maintenanceMode && !userData.isAdmin) {
+            window.location.href = "maintenance.html";
+            return;
+        }
+
+        // 2. Display System Announcement Banner
+        const announcementEl = document.getElementById("systemAnnouncementBanner");
+        if (announcementEl && settings.announcementText) {
+            announcementEl.textContent = settings.announcementText;
+            announcementEl.style.display = "block";
+        }
+    }
+} catch (err) {
+    console.error("Settings check error:", err);
+}
+
+    
+
     if (!user) {
 
         window.location.href = "login.html";
