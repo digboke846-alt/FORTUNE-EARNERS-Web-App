@@ -48,6 +48,21 @@ onAuthStateChanged(auth, async (user) => {
         const userData =
             userSnap.data();
 
+        const settingsSnap = await getDoc(doc(db, "settings", "global"));
+if (settingsSnap.exists()) {
+    const settings = settingsSnap.data();
+
+    if (!settings.allowReferrals) {
+        const copyBtn = document.getElementById("copyReferralBtn");
+        const shareBtn = document.getElementById("shareReferralBtn");
+        if (copyBtn) copyBtn.disabled = true;
+        if (shareBtn) shareBtn.disabled = true;
+
+        alert("⚠️ The Referral System is currently paused.");
+    }
+}
+        
+
         // ======================================
         // LOAD REFERRAL STATISTICS
         // ======================================
