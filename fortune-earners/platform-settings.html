@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Settings | Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="top-header">
+    <button id="menuButton" class="menu-btn">☰</button>
+    <h1 class="logo">💎 FORTUNE <span>ADMIN</span></h1>
+</header>
+
+<main class="dashboard-content">
+    <div class="container">
+        <h2>⚙️ Platform Settings</h2>
+
+        <section class="section-card">
+            <h3>⚡ Feature Toggles</h3>
+            <hr><br>
+            
+            <div class="setting-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <label for="withdrawalToggle" style="font-weight: bold;">Enable Withdrawal Portal</label>
+                <input type="checkbox" id="withdrawalToggle" style="width: 20px; height: 20px;">
+            </div>
+            
+            <div class="setting-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <label for="registrationToggle" style="font-weight: bold;">Allow New User Registrations</label>
+                <input type="checkbox" id="registrationToggle" style="width: 20px; height: 20px;">
+            </div>
+
+            <div class="setting-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <label for="referralToggle" style="font-weight: bold;">Enable Referral System</label>
+                <input type="checkbox" id="referralToggle" style="width: 20px; height: 20px;">
+            </div>
+
+            <div class="setting-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <label for="maintenanceToggle" style="font-weight: bold; color: #ff4757;">🚨 Maintenance Mode</label>
+                <input type="checkbox" id="maintenanceToggle" style="width: 20px; height: 20px;">
+            </div>
+        </section>
+
+        <section class="section-card" style="margin-top: 20px;">
+            <h3>💰 Dynamic Limits & Pricing</h3>
+            <hr><br>
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Minimum Task Wallet Withdrawal (₦)</label>
+            <input type="number" id="minTaskWithdrawal" placeholder="e.g. 3000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Minimum Affiliate Wallet Withdrawal (₦)</label>
+            <input type="number" id="minAffiliateWithdrawal" placeholder="e.g. 1000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Plan Activation Cost (₦)</label>
+            <input type="number" id="planPriceInput" placeholder="e.g. 3000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Direct Referral Commission (₦)</label>
+            <input type="number" id="referralBonusInput" placeholder="e.g. 1000" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+        </section>
+
+        <section class="section-card" style="margin-top: 20px;">
+            <h3>📢 Dashboard Announcement Banner</h3>
+            <hr><br>
+
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">Announcement Text (Leave empty to hide)</label>
+            <input type="text" id="announcementInput" placeholder="e.g. Withdrawals open every Friday at 12 PM!" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+        </section>
+
+        <br>
+        <button type="button" id="saveSettingsBtn" class="btn btn-primary" style="width: 100%; padding: 14px; font-weight: bold; font-size: 16px;">
+            💾 Save Settings
+        </button>
+    </div>
+</main>
+
+<script type="module" src="js/platform-settings.js"></script>
+</body>
+</html>
+
+
