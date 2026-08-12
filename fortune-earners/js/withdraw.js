@@ -152,58 +152,56 @@ onAuthStateChanged(auth, async (user) => {
 // UPDATE WITHDRAWAL SETTINGS
 // ======================================
 
-function updateWithdrawalSettings() {
+async function loadUserDataAndSettings() {
+    try {
+        const settingsSnap = await getDoc(doc(db, "settings", "global"));
 
-    selectedWallet =
-        withdrawType.value;
+        let settings = {};
+        if (settingsSnap.exists()) {
+            settings = settingsSnap.data();
 
-    if (selectedWallet === "task") {
-
-        feePercentage = 10;
-
-        switch (currentUserData.plan) {
-
-            case "NEWBIE":
-                minimumWithdrawal = 9000;
-                break;
-
-            case "SILVER":
-                minimumWithdrawal = 15000;
-                break;
-
-            case "GOLD":
-                minimumWithdrawal = 25000;
-                break;
-
-            case "DIAMOND":
-                minimumWithdrawal = 35000;
-                break;
-
-            case "PREMIUM":
-                minimumWithdrawal = 50000;
-                break;
-
-            default:
-                minimumWithdrawal = 0;
-
+            // 1. CHECK WITHDRAWAL PORTAL TOGGLE
+            if (settings.allowWithdrawals === false) {
+                alert("🔒 The Withdrawal portal is currently closed. Please check back later");
+                const withdrawBtn = document.getElementById("submitWithdrawalBtn");
+                if (withdrawBtn) {
+                    withdrawBtn.disabled = true;
+                    withdrawBtn.textContent = "Withdrawals Closed";
+                }
+                return;
+            }
         }
 
+        // 2. DETERMINE DYNAMIC MINIMUM WITHDRAWAL BY WALLET & USER PLAN
+        if (selectedWallet === "task") {
+            const userPlan = (currentUserData.plan || "").toUpperCase();
+
+            if (userPlan === "NEWBIE") {
+                minimumWithdrawal = settings.minTaskNewbie ?? 5000;
+            } else if (userPlan === "SILVER") {
+                minimumWithdrawal = settings.minTaskSilver ?? 4000;
+            } else if (userPlan === "GOLD") {
+                minimumWithdrawal = settings.minTaskGold ?? 3000;
+            } else if (userPlan === "DIAMOND") {
+                minimumWithdrawal = settings.minTaskDiamond ?? 2000;
+            } else if (userPlan === "PREMIUM") {
+                minimumWithdrawal = settings.minTaskPremium ?? 1000;
+            } else {
+                // Fallback for default or unassigned plan
+                minimumWithdrawal = settings.minTaskNewbie ?? 5000;
+            }
+        } else {
+            // General Affiliate Wallet Minimum for all plans
+            minimumWithdrawal = settings.minAffiliateWithdrawal ?? 1000;
+        }
+
+        minimumDisplay.textContent = "₦" + minimumWithdrawal.toLocaleString();
+
+    } catch (error) {
+        console.error("Error loading withdrawal settings:", error);
     }
-
-    else {
-
-        feePercentage = 7;
-
-        minimumWithdrawal = 1000;
-
-    }
-
-    minimumDisplay.textContent =
-        "₦" + minimumWithdrawal.toLocaleString();
-
-    calculateWithdrawal();
-
 }
+
 
 // ======================================
 // CALCULATE WITHDRAWAL
