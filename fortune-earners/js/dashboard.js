@@ -52,32 +52,6 @@ document.addEventListener("click", () => {
 onAuthStateChanged(auth, async (user) => {
 
 
-
-    // Check Global Maintenance Mode & System Announcement
-try {
-    const settingsSnap = await getDoc(doc(db, "settings", "global"));
-    if (settingsSnap.exists()) {
-        const settings = settingsSnap.data();
-
-        // 1. Maintenance Mode Redirect (Skip for Admins)
-        if (settings.maintenanceMode && !userData.isAdmin) {
-            window.location.href = "maintenance.html";
-            return;
-        }
-
-        // 2. Display System Announcement Banner
-        const announcementEl = document.getElementById("systemAnnouncementBanner");
-        if (announcementEl && settings.announcementText) {
-            announcementEl.textContent = settings.announcementText;
-            announcementEl.style.display = "block";
-        }
-    }
-} catch (err) {
-    console.error("Settings check error:", err);
-}
-
-    
-
     if (!user) {
 
         window.location.href = "login.html";
@@ -106,6 +80,38 @@ try {
         loadNotificationBadge(user.uid);
 
         const data = userSnap.data();
+
+        
+
+        // ======================================
+        // 🚨 PLATFORM SETTINGS CHECK (NEW)
+        // ======================================
+        try {
+            const settingsSnap = await getDoc(doc(db, "settings", "global"));
+            if (settingsSnap.exists()) {
+                const settings = settingsSnap.data();
+
+                // 1. Check Maintenance Mode (Admins bypass maintenance)
+                if (settings.maintenanceMode === true && !userData.isAdmin) {
+                    window.location.href = "maintenance.html";
+                    return;
+                }
+
+                // 2. Display Announcement Banner
+                const announcementEl = document.getElementById("systemAnnouncementBanner");
+                if (announcementEl && settings.announcementText) {
+                    announcementEl.textContent = settings.announcementText;
+                    announcementEl.parentElement.style.display = "block";
+                }
+            }
+        } catch (settingsErr) {
+            console.error("Error checking platform settings:", settingsErr);
+        }
+
+        // ... continue with your existing loadDashboard logic ...
+
+
+        
 
         // Add this line inside onAuthStateChanged (e.g. right after loading user balances):
 loadDashboardLeaderboard();
