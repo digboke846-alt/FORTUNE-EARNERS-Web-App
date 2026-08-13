@@ -84,7 +84,8 @@ onAuthStateChanged(auth, async (user) => {
         
 
         // ======================================
-        // 🚨 PLATFORM SETTINGS CHECK (NEW)
+               // ======================================
+        // 🚨 PLATFORM SETTINGS CHECK
         // ======================================
         try {
             const settingsSnap = await getDoc(doc(db, "settings", "global"));
@@ -92,7 +93,7 @@ onAuthStateChanged(auth, async (user) => {
                 const settings = settingsSnap.data();
 
                 // 1. Check Maintenance Mode (Admins bypass maintenance)
-                if (settings.maintenanceMode === true && !userData.isAdmin) {
+                if (settings.maintenanceMode === true && !data.isAdmin) {
                     window.location.href = "maintenance.html";
                     return;
                 }
@@ -101,22 +102,21 @@ onAuthStateChanged(auth, async (user) => {
                 const announcementEl = document.getElementById("systemAnnouncementBanner");
                 if (announcementEl && settings.announcementText) {
                     announcementEl.textContent = settings.announcementText;
-                    announcementEl.parentElement.style.display = "block";
+                    if (announcementEl.parentElement) {
+                        announcementEl.parentElement.style.display = "block";
+                    }
                 }
             }
         } catch (settingsErr) {
             console.error("Error checking platform settings:", settingsErr);
         }
 
-        // ... continue with your existing loadDashboard logic ...
+        // Load Leaderboard Preview
+        loadDashboardLeaderboard();
 
-
+    
+        // ... continue with your existing loadDashboard
         
-
-        // Add this line inside onAuthStateChanged (e.g. right after loading user balances):
-loadDashboardLeaderboard();
-        
-
         // ======================================
 // DAILY RESET
 // ======================================
