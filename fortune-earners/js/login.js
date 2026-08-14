@@ -17,6 +17,46 @@ import {
 // Get the login form
 const loginForm = document.getElementById("loginForm");
 
+
+// ======================================
+// REMEMBER ME (EMAIL & PASSWORD)
+// ======================================
+
+// 1. Auto-fill saved email and password when the login page loads
+document.addEventListener("DOMContentLoaded", () => {
+    const savedEmail = localStorage.getItem("rememberedEmail");
+    const savedPassword = localStorage.getItem("rememberedPassword");
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const rememberCheckbox = document.getElementById("rememberMe");
+
+    if (savedEmail && emailInput) {
+        emailInput.value = savedEmail;
+    }
+
+    if (savedPassword && passwordInput) {
+        passwordInput.value = savedPassword;
+    }
+
+    if (savedEmail && savedPassword && rememberCheckbox) {
+        rememberCheckbox.checked = true;
+    }
+});
+
+// 2. Call this function inside your login form submission handler
+function handleRememberMe(email, password, isChecked) {
+    if (isChecked) {
+        localStorage.setItem("rememberedEmail", email);
+        localStorage.setItem("rememberedPassword", password);
+    } else {
+        localStorage.removeItem("rememberedEmail");
+        localStorage.removeItem("rememberedPassword");
+    }
+}
+
+
+
 // Listen for login
 loginForm.addEventListener("submit", async (e) => {
 
