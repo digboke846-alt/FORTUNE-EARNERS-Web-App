@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Login | Fortune Earners</title>
+    <title>Login — Fortune Earners</title>
     
     <link rel="stylesheet" href="css/style.css">
 
@@ -19,7 +19,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         <div class="container">
             <div class="auth-card">
 
-    <h1>FORTUNE EARNERS</h1>
+    <h1>💎 FORTUNE <span>EARNERS</h1></span>
 
     <h2>Welcome Back!</h2>
 
@@ -35,7 +35,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     <br><br>
 
-    <label for="password">🔑 Password</label>
+    <label for="password">🔑 Password</label> <p>
+    <a href="forgot-password.html"><strong>Forgot Password?</strong></a>
+    </p>
 
                     <div class="password-wrapper">
 
@@ -51,12 +53,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         class="fa-regular fa-eye-slash toggle-password"
         onclick="togglePassword('password', this)">
     </i>    
-        </div>      
+        </div>    
+
+                    <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+    <input type="checkbox" id="rememberMe" style="width: 18px; height: 18px; cursor: pointer;">
+    <label for="rememberMe" style="cursor: pointer; font-size: 14px;">Remember Me</label>
+                    </div>      
 
     <br>
-<p>
-    <a href="forgot-password.html"><strong>Forgot Password?</strong></a>
-</p>
+
 <button type="submit">Log In</button>
 <p>
     Don't have an account yet?
@@ -101,18 +106,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             <br><br>
 
             <div class="container">
-<!-- ===================== -->
-<!-- FOOTER -->
-<!-- ===================== -->
 
 <footer>
   <p class="copyright">
     &copy; 2026 Fortune Earners. All Rights Reserved.
   </p>
-</footer>
-
-
-            
+</footer> </div>
+      
         </form>
     <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/login.js"></script>
