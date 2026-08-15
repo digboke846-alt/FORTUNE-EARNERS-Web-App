@@ -8,6 +8,7 @@ import {
 import {
     doc,
     getDoc,
+    addDoc,
     collection,
     getDocs,
     query,
@@ -15,7 +16,8 @@ import {
     orderBy,
     limit,
     updateDoc,
-    onSnapshot
+    onSnapshot,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 let notificationSoundUnlocked = false;
@@ -90,6 +92,10 @@ onAuthStateChanged(auth, async (user) => {
 
         // Load Leaderboard Preview
         loadDashboardLeaderboard();
+
+         // 📜 Load Recent Transactions for logged-in user
+        loadRecentTransactions(user.uid);
+        
 
         // ======================================
         // DAILY RESET
@@ -523,5 +529,76 @@ async function loadDashboardLeaderboard() {
         }
     }
 }
+
+
+
+// ======================================
+// RECENT TRANSACTIONS
+// ======================================
+
+async function loadRecentTransactions(userId) {
+    const container = document.getElementById("recentTransactionsList");
+    if (!container) return;
+
+    try {
+        const q = query(
+            collection(db, "transactions"),
+            where("userId", "==", userId),
+            orderBy("createdAt", "desc"),
+            limit(5)
+        );
+
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+            container.innerHTML = `<p style="text-align: center; color: var(--muted, #8a99ad); font-size: 13px;">No transactions yet.</p>`;
+            return;
+        }
+
+        let html = "";
+        snapshot.forEach((docSnap) => {
+            const tx = docSnap.data();
+            const isCredit = tx.type === "credit";
+            const amountPrefix = isCredit ? "+" : "-";
+            const amountClass = isCredit ? "credit" : "debit";
+            const formattedDate = tx.createdAt?.toDate 
+                ? tx.createdAt.toDate().toLocaleDateString("en-US", { month: "short", day: "numeric" }) 
+                : "Today";
+
+            html += `
+                <div class="transaction-item">
+                    <div class="transaction-details">
+                        <span class="transaction-title">${tx.title}</span>
+                        <span class="transaction-date">${formattedDate}</span>
+                    </div>
+                    <div class="transaction-amount ${amountClass}">
+                        ${amountPrefix}₦${Number(tx.amount).toLocaleString()}
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    } catch (error) {
+        console.error("Error loading transactions:", error);
+        container.innerHTML = `<p style="text-align: center; color: var(--muted, #8a99ad); font-size: 13px;">Unable to load transactions.</p>`;
+    }
+}
+
+// Global Helper to Log Transactions
+export async function recordTransaction(userId, title, amount, type) {
+    try {
+        await addDoc(collection(db, "transactions"), {
+            userId: userId,
+            title: title,
+            amount: Number(amount),
+            type: type,
+            createdAt: serverTimestamp()
+        });
+    } catch (error) {
+        console.error("Failed to record transaction:", error);
+    }
+}
+
 
 
