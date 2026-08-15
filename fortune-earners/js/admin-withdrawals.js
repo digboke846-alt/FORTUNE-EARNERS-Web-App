@@ -582,6 +582,16 @@ async function markAsPaid(withdrawalId, adminComment) {
 
         }
 
+
+        await addDoc(collection(db, "transactions"), {
+    userId: withdrawalUserId, // Target user ID receiving/requesting the withdrawal
+    title: "Withdrawal Approved",
+    amount: Number(withdrawalAmount),
+    type: "debit",
+    createdAt: serverTimestamp()
+});
+
+        
         // ======================================
         // NOTIFICATION
         // ======================================
