@@ -583,52 +583,76 @@ async function markAsPaid(withdrawalId, adminComment) {
 
         }
 
+// ======================================
+// MARK AS PAID
+// ======================================
 
+async function markAsPaid(withdrawalId, adminComment) {
+    try {
+        const withdrawalRef = doc(db, "withdrawals", withdrawalId);
+        const withdrawalSnap = await getDoc(withdrawalRef);
+
+        if (!withdrawalSnap.exists()) {
+            alert("Withdrawal not found.");
+            return;
+        }
+
+        const withdrawal = withdrawalSnap.data();
+
+        if (withdrawal.status === "Paid") {
+            alert("This withdrawal has already been marked as Paid.");
+            return;
+        }
+
+        // 1. Mark withdrawal as successful
+        await updateDoc(withdrawalRef, {
+            status: "Paid",
+            refundStatus: "Not Applicable",
+            adminComment: adminComment || "",
+            processedBy: auth.currentUser?.email || "Admin",
+            processedAt: serverTimestamp()
+        });
+
+        // 2. Update user lifetime withdrawals
+        const userRef = doc(db, "users", withdrawal.userId);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            const userData = userSnap.data();
+            await updateDoc(userRef, {
+                totalWithdrawals:
+                    Number(userData.totalWithdrawals || 0) +
+                    Number(withdrawal.amountRequested || 0)
+            });
+        }
+
+        // 3. Record transaction for user's recent transactions widget
         await addDoc(collection(db, "transactions"), {
-    userId: withdrawalUserId, // Target user ID receiving/requesting the withdrawal
-    title: "Withdrawal Approved",
-    amount: Number(withdrawalAmount),
-    type: "debit",
-    createdAt: serverTimestamp()
-});
-
-        
-        // ======================================
-        // NOTIFICATION
-        // ======================================
-
-        await createNotification({
-
             userId: withdrawal.userId,
+            title: "Withdrawal Approved",
+            amount: Number(withdrawal.amountRequested || 0),
+            type: "debit",
+            createdAt: serverTimestamp()
+        });
 
-            title:
-                "✅ Withdrawal Approved",
-
-            message:
-                `Your withdrawal of ₦${Number(
-                    withdrawal.amountRequested || 0
-                ).toLocaleString()} has been approved successfully. The funds should reflect in your bank account shortly.`,
-
-            type:
-                "Withdrawal"
-
+        // 4. Send Notification
+        await createNotification({
+            userId: withdrawal.userId,
+            title: "✅ Withdrawal Approved",
+            message: `Your withdrawal of ₦${Number(withdrawal.amountRequested || 0).toLocaleString()} has been approved successfully. The funds should reflect in your bank account shortly.`,
+            type: "Withdrawal"
         });
 
         alert("✅ Withdrawal marked as Paid.");
-
         loadWithdrawals();
 
-    }
-
-    catch (error) {
-
+    } catch (error) {
         console.error(error);
-
         alert(error.message);
-
     }
-
 }
+        
+
 // ======================================
 // REJECT & REFUND
 // ======================================
@@ -727,59 +751,43 @@ refundStatus: "Refunded",
 // ======================================
 // REJECT PERMANENTLY
 // ======================================
-
 async function rejectPermanent(withdrawalId, comment) {
-
     try {
+        const adminEmail = auth.currentUser?.email || "Admin";
+        const withdrawRef = doc(db, "withdrawals", withdrawalId);
+        const withdrawSnap = await getDoc(withdrawRef);
 
-        const adminEmail =
-            auth.currentUser?.email || "Admin";
+        if (!withdrawSnap.exists()) {
+            alert("Withdrawal not found.");
+            return;
+        }
 
-        const withdrawRef =
-            doc(db, "withdrawals", withdrawalId);
+        const withdraw = withdrawSnap.data();
 
         await updateDoc(withdrawRef, {
-
             status: "Rejected - No Refund",
-
-refundStatus: "Not Refunded",
-
+            refundStatus: "Not Refunded",
             adminComment: comment || "",
-
             processedBy: adminEmail,
-
             processedAt: serverTimestamp()
-
         });
 
         await createNotification({
-
-    userId: withdraw.userId,
-
-    title: "❌ Withdrawal Rejected",
-
-    message:
-        `Your withdrawal request of ₦${Number(withdraw.amountRequested).toLocaleString()} has been permanently rejected.\n\nReason: ${comment || "No reason provided."}`,
-
-    type: "Withdrawal"
-
-});
+            userId: withdraw.userId,
+            title: "❌ Withdrawal Rejected",
+            message: `Your withdrawal request of ₦${Number(withdraw.amountRequested || 0).toLocaleString()} has been permanently rejected.\n\nReason: ${comment || "No reason provided."}`,
+            type: "Withdrawal"
+        });
 
         alert("❌ Withdrawal permanently rejected.");
-
         loadWithdrawals();
 
-    }
-
-    catch (error) {
-
+    } catch (error) {
         console.error(error);
-
         alert(error.message);
-
     }
-
 }
+        
 // ======================================
 // SEARCH BAR
 // ======================================
