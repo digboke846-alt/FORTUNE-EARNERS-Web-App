@@ -96,7 +96,7 @@ async function loadWithdrawals() {
 
         let total = 0;
         let pending = 0;
-        let paid = 0;
+        let successful = 0;
         let rejected = 0;
 
         const searchValue =
@@ -162,7 +162,7 @@ if (
 
             if (withdraw.status === "Pending") pending++;
 
-            if (withdraw.status === "Paid") paid++;
+            if (withdraw.status === "Successful") successful++;
 
             if (
                 withdraw.status === "Rejected" ||
@@ -543,7 +543,7 @@ async function markAsPaid(withdrawalId, adminComment) {
 
         await updateDoc(withdrawalRef, {
 
-            status: "Successful",
+            status: "Paid",
 
             refundStatus: "Not Applicable",
 
