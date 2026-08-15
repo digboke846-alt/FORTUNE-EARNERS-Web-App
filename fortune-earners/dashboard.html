@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Fortune Earners</title>
+    <title>Dashboard — Fortune Earners</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -86,7 +86,7 @@
 
 <a href="faq.html">💡 FAQs</a>
 
-<a href="#" id="logoutBtn">🚪 Log Out</a>
+ <span style="color: red;"> <a href="#" id="logoutBtn">🚪 Log Out</a></span>
 
 </nav>
 
@@ -122,7 +122,7 @@
 
     <div class="dashboard-card" style="margin-bottom: 24px;">
     <div style="text-align: center; margin-bottom: 10px;">
-        <h3 style="color: var(--accent); font-size: 20px; margin: 0;">🏆 WEEKLY TOP EARNERS</h3></div>
+        <a href="leaderboard.html"><h3 style="color: var(--accent); font-size: 20px; margin: 0;">🏆 WEEKLY TOP EARNERS</h3></a></div>
         <div style="font-size: 15px; text-align: center; color: var(--muted);" id="widgetDateRange">Loading...</div>
 
     <div id="dashboardLeaderboardPreview" class="leaderboard-list">
@@ -255,7 +255,6 @@
 
 </section>
 
-<!-- Referral Section Starts Here -->
     <!-- ========================= -->
 <!-- REFERRAL SECTION -->
 <!-- ========================= -->
@@ -360,19 +359,12 @@ No announcements available.
 <!-- RECENT TRANSACTIONS -->
 <!-- ========================= -->
 
-<section class="transactions-card">
-
-<h2>📜 Recent Transactions</h2>
-
-<div id="transactionHistory">
-
-<p>
-No transactions yet.
-</p>
-
+<div class="dashboard-card">
+    <h3>📜 Recent Transactions</h3>
+    <div id="recentTransactionsList" class="transactions-list">
+        <p class="loading-text">Loading transactions...</p>
+    </div>
 </div>
-
-</section>
 
 <!-- Bottom Navigation Starts Here -->
     <!-- ========================= -->
@@ -430,9 +422,9 @@ No transactions yet.
         <a id="telegramGroupBtn" href="#" target="_blank"><button>👥 Join Official Group</button></a>
         <a id="whatsappChannelBtn" href="#" target="_blank"><button>💬 WhatsApp Channel</button></a>
 
-        <br><br>
+        <br>
         <label><input type="checkbox" id="hidePopup"> Don't show this again</label>
-        <br><br>
+        <br>
         <button id="continueDashboard">➡ Continue to Dashboard</button>
     </div>
 </div>
@@ -474,7 +466,7 @@ No transactions yet.
             <br>
 
             <div class="footer-links">
-                <a href="about.html">About Us</a>
+                <a href="about.html">About</a>
                 <span class="divider">|</span>
                 <a href="terms.html">Terms & Conditions</a>
                 <span class="divider">|</span>
