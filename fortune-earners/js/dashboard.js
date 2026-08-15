@@ -536,28 +536,31 @@ async function loadDashboardLeaderboard() {
 // RECENT TRANSACTIONS
 // ======================================
 
-async function loadRecentTransactions(userId) {
+function loadRecentTransactions(userId) {
     const container = document.getElementById("recentTransactionsList");
     if (!container) return;
 
-    try {
-        const q = query(
-            collection(db, "transactions"),
-            where("userId", "==", userId),
-            orderBy("createdAt", "desc"),
-            limit(5)
-        );
+    const q = query(
+        collection(db, "transactions"),
+        where("userId", "==", userId)
+    );
 
-        const snapshot = await getDocs(q);
-
+    // Live Real-Time Listener
+    onSnapshot(q, (snapshot) => {
         if (snapshot.empty) {
-            container.innerHTML = `<p style="text-align: center; color: var(--muted, #8a99ad); font-size: 13px;">No transactions yet.</p>`;
+            container.innerHTML = `<p style="text-align: center; color: var(--muted, #8a99ad); font-size: 14px;">No transactions yet.</p>`;
             return;
         }
 
+        const docsArray = snapshot.docs.map(doc => doc.data());
+        
+        // Sort newest first
+        docsArray.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+
+        const recentFive = docsArray.slice(0, 5);
+
         let html = "";
-        snapshot.forEach((docSnap) => {
-            const tx = docSnap.data();
+        recentFive.forEach((tx) => {
             const isCredit = tx.type === "credit";
             const amountPrefix = isCredit ? "+" : "-";
             const amountClass = isCredit ? "credit" : "debit";
@@ -579,25 +582,10 @@ async function loadRecentTransactions(userId) {
         });
 
         container.innerHTML = html;
-    } catch (error) {
+    }, (error) => {
         console.error("Error loading transactions:", error);
         container.innerHTML = `<p style="text-align: center; color: var(--muted, #8a99ad); font-size: 13px;">Unable to load transactions.</p>`;
-    }
-}
-
-// Global Helper to Log Transactions
-export async function recordTransaction(userId, title, amount, type) {
-    try {
-        await addDoc(collection(db, "transactions"), {
-            userId: userId,
-            title: title,
-            amount: Number(amount),
-            type: type,
-            createdAt: serverTimestamp()
-        });
-    } catch (error) {
-        console.error("Failed to record transaction:", error);
-    }
+    });
 }
 
 
