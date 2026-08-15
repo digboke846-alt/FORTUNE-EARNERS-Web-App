@@ -11,6 +11,7 @@ import {
     orderBy,
     doc,
     getDoc,
+    addDoc,
     updateDoc,
     increment,
     serverTimestamp
