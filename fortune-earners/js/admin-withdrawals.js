@@ -500,88 +500,6 @@ document.getElementById("confirmActionBtn")
     }
 
 });
-// ======================================
-// MARK AS PAID
-// ======================================
-
-async function markAsPaid(withdrawalId, adminComment) {
-
-    try {
-
-        const withdrawalRef =
-            doc(db, "withdrawals", withdrawalId);
-
-        const withdrawalSnap =
-            await getDoc(withdrawalRef);
-
-        if (!withdrawalSnap.exists()) {
-
-            alert("Withdrawal not found.");
-
-            return;
-
-        }
-
-        const withdrawal =
-            withdrawalSnap.data();
-
-        // ======================================
-        // PREVENT DOUBLE COUNTING
-        // ======================================
-
-        if (withdrawal.status === "Paid") {
-
-            alert("This withdrawal has already been marked as Paid.");
-
-            return;
-
-        }
-
-        // ======================================
-        // MARK WITHDRAWAL AS SUCCESSFUL
-        // ======================================
-
-        await updateDoc(withdrawalRef, {
-
-            status: "Paid",
-
-            refundStatus: "Not Applicable",
-
-            adminComment:
-                adminComment || "",
-
-            processedBy:
-                auth.currentUser.email,
-
-            processedAt:
-                serverTimestamp()
-
-        });
-
-        // ======================================
-        // UPDATE USER LIFETIME WITHDRAWALS
-        // ======================================
-
-        const userRef =
-            doc(db, "users", withdrawal.userId);
-
-        const userSnap =
-            await getDoc(userRef);
-
-        if (userSnap.exists()) {
-
-            const userData =
-                userSnap.data();
-
-            await updateDoc(userRef, {
-
-                totalWithdrawals:
-                    Number(userData.totalWithdrawals || 0) +
-                    Number(withdrawal.amountRequested || 0)
-
-            });
-
-        }
 
 // ======================================
 // MARK AS PAID
@@ -604,7 +522,7 @@ async function markAsPaid(withdrawalId, adminComment) {
             return;
         }
 
-        // 1. Mark withdrawal as successful
+        // 1. Mark withdrawal as Paid
         await updateDoc(withdrawalRef, {
             status: "Paid",
             refundStatus: "Not Applicable",
@@ -613,16 +531,14 @@ async function markAsPaid(withdrawalId, adminComment) {
             processedAt: serverTimestamp()
         });
 
-        // 2. Update user lifetime withdrawals
+        // 2. Update user total lifetime withdrawals
         const userRef = doc(db, "users", withdrawal.userId);
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
             const userData = userSnap.data();
             await updateDoc(userRef, {
-                totalWithdrawals:
-                    Number(userData.totalWithdrawals || 0) +
-                    Number(withdrawal.amountRequested || 0)
+                totalWithdrawals: Number(userData.totalWithdrawals || 0) + Number(withdrawal.amountRequested || 0)
             });
         }
 
@@ -635,7 +551,7 @@ async function markAsPaid(withdrawalId, adminComment) {
             createdAt: serverTimestamp()
         });
 
-        // 4. Send Notification
+        // 4. Create Notification
         await createNotification({
             userId: withdrawal.userId,
             title: "✅ Withdrawal Approved",
@@ -650,8 +566,7 @@ async function markAsPaid(withdrawalId, adminComment) {
         console.error(error);
         alert(error.message);
     }
-}
-        
+}        
 
 // ======================================
 // REJECT & REFUND
