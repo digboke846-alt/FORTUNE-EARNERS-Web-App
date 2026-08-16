@@ -707,48 +707,27 @@ async function rejectPermanent(withdrawalId, comment) {
 // SEARCH BAR
 // ======================================
 
-document.getElementById("withdrawSearch")
-.addEventListener("input", () => {
-
+document.getElementById("withdrawSearch")?.addEventListener("input", () => {
     loadWithdrawals();
-
 });
-// ======================================
-// FILTER BUTTONS
-// ======================================
 
-document.getElementById("filterAll")
-.addEventListener("click", () => {
-
+document.getElementById("filterAll")?.addEventListener("click", () => {
     currentFilter = "All";
-
     loadWithdrawals();
-
 });
 
-document.getElementById("filterPending")
-.addEventListener("click", () => {
-
+document.getElementById("filterPending")?.addEventListener("click", () => {
     currentFilter = "Pending";
-
     loadWithdrawals();
-
 });
 
-document.getElementById("filterPaid")
-.addEventListener("click", () => {
-
+document.getElementById("filterPaid")?.addEventListener("click", () => {
     currentFilter = "Paid";
-
     loadWithdrawals();
-
 });
 
-document.getElementById("filterRejected")
-.addEventListener("click", () => {
-
+document.getElementById("filterRejected")?.addEventListener("click", () => {
     currentFilter = "Rejected";
-
     loadWithdrawals();
-
 });
+
