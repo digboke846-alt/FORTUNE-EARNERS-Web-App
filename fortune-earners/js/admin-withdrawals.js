@@ -545,7 +545,7 @@ async function markAsPaid(withdrawalId, adminComment) {
         // 3. Record transaction for user's recent transactions widget
         await addDoc(collection(db, "transactions"), {
             userId: withdrawal.userId,
-            title: "Withdrawal Approved",
+            title: "Withdrawal",
             amount: Number(withdrawal.amountRequested || 0),
             type: "debit",
             createdAt: serverTimestamp()
