@@ -14,6 +14,8 @@ import {
 
     setDoc,
 
+    collection,
+
     updateDoc,
 
     increment,
@@ -358,6 +360,15 @@ await updateDoc(userRef, {
         new Date().toISOString().split("T")[0]
 
 });
+
+        await addDoc(collection(db, "transactions"), {
+    userId: user.uid,
+    title: task.title || "Ad Reward",
+    amount: Number(taskRewardAmount), // Uses the dynamic reward amount from your task logic
+    type: "credit",
+    createdAt: serverTimestamp()
+});
+        
 
 
 // ======================================
