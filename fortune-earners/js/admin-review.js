@@ -305,6 +305,14 @@ window.approveSubmission = async function(submissionId, type) {
         new Date().toISOString().split("T")[0]
 
 });
+        await addDoc(collection(db, "transactions"), {
+    userId: user.uid,
+    title: "Task Completed",
+    amount: 500,
+    type: "credit", // Shows in green with a '+'
+    createdAt: serverTimestamp()
+});
+        
 
         await updateDoc(submissionRef, {
 
