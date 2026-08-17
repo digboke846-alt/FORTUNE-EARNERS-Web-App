@@ -3,22 +3,31 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/f
 import {
     collection,
     query,
+    where,
     orderBy,
     limit,
     getDocs
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+// Helper: Get Current Monday's Date String (YYYY-MM-DD)
+function getCurrentMonday() {
+    const now = new Date();
+    const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday...
+    const distanceToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+    const monday = new Date(now);
+    monday.setDate(now.getDate() + distanceToMonday);
+    return monday.toISOString().split("T")[0];
+}
+
 // Helper: Calculate Active Week Date Range (Monday to Sunday)
 function getActiveWeekDateRange() {
     const now = new Date();
-    const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday...
+    const dayOfWeek = now.getDay();
     
-    // Calculate Monday of current week
     const distanceToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
     const monday = new Date(now);
     monday.setDate(now.getDate() + distanceToMonday);
 
-    // Calculate Sunday of current week
     const sunday = new Date(monday);
     sunday.setDate(monday.getDate() + 6);
 
@@ -52,7 +61,6 @@ function renderLeaderboardList(containerId, docs, earningsKey, userHeader, amoun
         return;
     }
 
-    // Records exist -> Render Custom Table Headers first
     let html = `
         <div class="leaderboard-header">
             <span class="col-user">${userHeader}</span>
@@ -96,9 +104,15 @@ onAuthStateChanged(auth, async (user) => {
 
     try {
         const usersRef = collection(db, "users");
+        const activeMonday = getCurrentMonday();
 
-        // 1. Fetch Weekly Top Earners (Total)
-        const weeklyQuery = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(10));
+        // 1. Fetch Weekly Top Earners (Active Week Only)
+        const weeklyQuery = query(
+            usersRef,
+            where("lastWeeklyReset", "==", activeMonday),
+            orderBy("weeklyEarnings", "desc"),
+            limit(10)
+        );
         const weeklySnap = await getDocs(weeklyQuery);
         renderLeaderboardList(
             "weeklyTopEarnersList", 
@@ -108,8 +122,13 @@ onAuthStateChanged(auth, async (user) => {
             "EARNINGS"
         );
 
-        // 2. Fetch Weekly Top Affiliate Earners
-        const affiliateQuery = query(usersRef, orderBy("weeklyAffiliateEarnings", "desc"), limit(10));
+        // 2. Fetch Weekly Top Affiliate Earners (Active Week Only)
+        const affiliateQuery = query(
+            usersRef,
+            where("lastWeeklyReset", "==", activeMonday),
+            orderBy("weeklyAffiliateEarnings", "desc"),
+            limit(10)
+        );
         const affiliateSnap = await getDocs(affiliateQuery);
         renderLeaderboardList(
             "weeklyAffiliateEarnersList", 
@@ -119,8 +138,12 @@ onAuthStateChanged(auth, async (user) => {
             "REWARD EARNED"
         );
 
-        // 3. Fetch Overall Lifetime Earners
-        const lifetimeQuery = query(usersRef, orderBy("totalEarnings", "desc"), limit(10));
+        // 3. Fetch Overall Lifetime Earners (Unfiltered)
+        const lifetimeQuery = query(
+            usersRef,
+            orderBy("totalEarnings", "desc"),
+            limit(10)
+        );
         const lifetimeSnap = await getDocs(lifetimeQuery);
         renderLeaderboardList(
             "lifetimeTopEarnersList", 
@@ -134,5 +157,4 @@ onAuthStateChanged(auth, async (user) => {
         console.error("Error loading leaderboards:", error);
     }
 });
-
 
