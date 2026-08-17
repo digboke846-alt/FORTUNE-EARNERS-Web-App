@@ -119,6 +119,26 @@ onAuthStateChanged(auth, async (user) => {
             data.lastDailyReset = today;
         }
 
+        ======================================
+        // WEEKLY RESET
+        // ======================================
+
+        const currentMonday = getCurrentMonday();
+
+        if (data.lastWeeklyReset !== currentMonday) {
+            await updateDoc(userRef, {
+                weeklyEarnings: 0,
+                weeklyAffiliateEarnings: 0,
+                lastWeeklyReset: currentMonday
+            });
+
+            data.weeklyEarnings = 0;
+            data.weeklyAffiliateEarnings = 0;
+            data.lastWeeklyReset = currentMonday;
+        }
+
+
+
         const dashboardAvatar = document.getElementById("dashboardAvatar");
         if (dashboardAvatar) {
             dashboardAvatar.textContent = data.profileAvatar || "👤";
@@ -588,5 +608,14 @@ function loadRecentTransactions(userId) {
     });
 }
 
+
+function getCurrentMonday() {
+    const now = new Date();
+    const day = now.getDay();
+    const distanceToMonday = day === 0 ? -6 : 1 - day;
+    const monday = new Date(now);
+    monday.setDate(now.getDate() + distanceToMonday);
+    return monday.toISOString().split("T")[0];
+}
 
 
