@@ -307,13 +307,12 @@ window.approveSubmission = async function(submissionId, type) {
 });
         await addDoc(collection(db, "transactions"), {
     userId: user.uid,
-    title: "Task Completed",
-    amount: 500,
-    type: "credit", // Shows in green with a '+'
+    title: task.title || "Task Reward",
+    amount: Number(taskRewardAmount), // Uses the dynamic reward amount from your task logic
+    type: "credit",
     createdAt: serverTimestamp()
 });
         
-
         await updateDoc(submissionRef, {
 
             status: "Approved"
