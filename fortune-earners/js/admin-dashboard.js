@@ -638,6 +638,15 @@ async function activatePlan(userId, selectedPlan) {
     type: "debit",
     createdAt: serverTimestamp()
 });
+
+                await addDoc(collection(db, "transactions"), {
+    userId: referrerId,
+    title: `Referral Bonus (@${newMemberUsername})`,
+    amount: Number(referralCommissionAmount), // Uses the dynamic commission amount calculated for that plan
+    type: "credit",
+    createdAt: serverTimestamp()
+});
+                
                 
 
                 // ======================================
