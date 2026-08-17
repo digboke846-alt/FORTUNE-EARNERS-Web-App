@@ -631,6 +631,15 @@ async function activatePlan(userId, selectedPlan) {
              
             });
 
+                await addDoc(collection(db, "transactions"), {
+    userId: user.uid,
+    title: `Activated ${selectedPlanName} Plan`,
+    amount: Number(planPrice), // Uses the actual price of the plan selected
+    type: "debit",
+    createdAt: serverTimestamp()
+});
+                
+
                 // ======================================
                 // CREATE REFERRAL NOTIFICATION
                 // ======================================
