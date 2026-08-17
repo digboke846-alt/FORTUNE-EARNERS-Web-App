@@ -119,7 +119,7 @@ onAuthStateChanged(auth, async (user) => {
             data.lastDailyReset = today;
         }
 
-        ======================================
+         // ======================================
         // WEEKLY RESET
         // ======================================
 
@@ -499,10 +499,18 @@ async function loadDashboardLeaderboard() {
     if (!container) return;
 
     try {
-        const usersRef = collection(db, "users");
-        const q = query(usersRef, orderBy("weeklyEarnings", "desc"), limit(3));
+                const usersRef = collection(db, "users");
+        const activeMonday = getCurrentMonday();
+
+        const q = query(
+            usersRef,
+            where("lastWeeklyReset", "==", activeMonday),
+            orderBy("weeklyEarnings", "desc"),
+            limit(3)
+        );
         const snapshot = await getDocs(q);
 
+        
         const validDocs = snapshot.docs.filter(docSnap => (docSnap.data().weeklyEarnings || 0) > 0);
 
         if (validDocs.length === 0) {
